@@ -8,6 +8,7 @@
 namespace Cloudflare\API\Adapter;
 
 use Cloudflare\API\Auth\Auth;
+use Psr\Http\Message\ResponseInterface;
 
 /**
  * Interface Adapter
@@ -34,7 +35,7 @@ interface Adapter
      *
      * @return mixed
      */
-    public function get(String $uri, array $headers);
+    public function get(String $uri, array $headers): ResponseInterface;
 
     /**
      * @param String $uri
@@ -43,7 +44,7 @@ interface Adapter
      *
      * @return mixed
      */
-    public function post(String $uri, array $headers, array $body);
+    public function post(String $uri, array $headers, array $body): ResponseInterface;
 
     /**
      * @param String $uri
@@ -52,7 +53,7 @@ interface Adapter
      *
      * @return mixed
      */
-    public function put(String $uri, array $headers, array $body);
+    public function put(String $uri, array $headers, array $body): ResponseInterface;
 
     /**
      * @param String $uri
@@ -61,5 +62,14 @@ interface Adapter
      *
      * @return mixed
      */
-    public function delete(String $uri, array $headers, array $body);
+    public function patch(String $uri, array $headers, array $body): ResponseInterface;
+
+    /**
+     * @param String $uri
+     * @param array $headers
+     * @param array $body
+     *
+     * @return mixed
+     */
+    public function delete(String $uri, array $headers, array $body): ResponseInterface;
 }
