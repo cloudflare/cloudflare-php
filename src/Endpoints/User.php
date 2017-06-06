@@ -19,10 +19,26 @@ class User implements API
         $this->adapter = $adapter;
     }
 
-    public function getUserDetails()
+    public function getUserDetails(): \stdClass
     {
         $user = $this->adapter->get('user', []);
         $body = json_decode($user->getBody());
-        var_dump($body);
+        return $body->result;
+    }
+
+    public function getUserID(): string
+    {
+        return ($this->getUserDetails())->id;
+    }
+
+    public function getUserEmail(): string
+    {
+        return ($this->getUserDetails())->email;
+    }
+
+    public function updateUserDetails(array $details): \stdClass
+    {
+        $response = $this->adapter->patch("user", [], $details);
+        return json_decode($response->getBody());
     }
 }

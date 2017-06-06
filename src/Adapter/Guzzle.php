@@ -25,8 +25,8 @@ class Guzzle implements Adapter
 
         $this->client = new Client([
             'base_uri' => $baseURI,
-            'headers'  => $headers,
-            'Accept'   => 'application/json'
+            'headers' => $headers,
+            'Accept' => 'application/json'
         ]);
     }
 
@@ -38,6 +38,7 @@ class Guzzle implements Adapter
     {
         $response = $this->client->get($uri, ['headers' => $headers]);
 
+        $this->checkError($response);
         return $response;
 
     }
@@ -48,11 +49,12 @@ class Guzzle implements Adapter
     public function post(String $uri, array $headers = array(), array $body = array()): ResponseInterface
     {
         $response = $this->client->post($uri, [
-                'headers'     => $headers,
+                'headers' => $headers,
                 'form_params' => $body
             ]
         );
 
+        $this->checkError($response);
         return $response;
     }
 
@@ -65,10 +67,11 @@ class Guzzle implements Adapter
 
         $response = $this->client->put($uri, [
                 'headers' => $headers,
-                'body'    => $jsonBody
+                'body' => $jsonBody
             ]
         );
 
+        $this->checkError($response);
         return $response;
     }
 
@@ -81,10 +84,11 @@ class Guzzle implements Adapter
 
         $response = $this->client->patch($uri, [
                 'headers' => $headers,
-                'body'    => $jsonBody
+                'body' => $jsonBody
             ]
         );
 
+        $this->checkError($response);
         return $response;
     }
 
@@ -94,11 +98,31 @@ class Guzzle implements Adapter
     public function delete(String $uri, array $headers = array(), array $body = array()): ResponseInterface
     {
         $response = $this->client->delete($uri, [
-                'headers'     => $headers,
+                'headers' => $headers,
                 'form_params' => $body
             ]
         );
 
+        $this->checkError($response);
         return $response;
+    }
+
+    private function checkError(ResponseInterface $response)
+    {
+        $json = json_decode($response->getBody());
+
+        if (json_last_error() !== JSON_ERROR_NONE) {
+            throw new JSONException();
+        }
+
+        if (isset($json->errors)) {
+            foreach ($json->errors as $error) {
+                throw new ResponseException($error->message, $error->code);
+            }
+        }
+
+        if (isset($json->success) && ($json->success === false)) {
+            throw new ResponseException("Request was unsuccessful.");
+        }
     }
 }
