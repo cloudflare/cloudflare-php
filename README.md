@@ -7,7 +7,21 @@ The recommended way to install this package is via the Packagist Dependency Mana
 ## Cloudflare API version 4
 
 The Cloudflare API can be found [here](https://api.cloudflare.com/).
-Each API call is provided via a similarly named function within the **CloudFlare** class.
+Each API call is provided via a similarly named function within various classes in the **Cloudflare\API\Endpoints** namespace:
+
+
+- [x] DNS Records
+- [x] Zones
+- [x] User Administration (partial)
+- [ ] Cloudflare IPs
+- [ ] Page Rules
+- [ ] Web Application Firewall (WAF)
+- [ ] Virtual DNS Management
+- [ ] Custom hostnames
+- [ ] Organization Administration
+- [ ] [Railgun](https://www.cloudflare.com/railgun/) administration
+- [ ] [Keyless SSL](https://blog.cloudflare.com/keyless-ssl-the-nitty-gritty-technical-details/)
+- [ ] [Origin CA](https://blog.cloudflare.com/universal-ssl-encryption-all-the-way-to-the-origin-for-free/)
 
 ## Getting Started
 
