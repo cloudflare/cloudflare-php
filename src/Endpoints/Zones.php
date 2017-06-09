@@ -9,7 +9,6 @@
 namespace Cloudflare\API\Endpoints;
 
 use Cloudflare\API\Adapter\Adapter;
-use Symfony\Component\Config\Definition\Exception\Exception;
 
 class Zones implements API
 {
@@ -123,7 +122,7 @@ class Zones implements API
     public function purge(string $zoneID, array $files = [], array $tags = []): bool
     {
         if (empty($files) && empty($tags)) {
-            throw new Exception("No files or tags to purge.");
+            throw new EndpointException("No files or tags to purge.");
         }
 
         $options = [
