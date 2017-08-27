@@ -50,7 +50,7 @@ class Guzzle implements Adapter
     {
         $response = $this->client->post($uri, [
                 'headers' => $headers,
-                'form_params' => $body
+                'json' => $body
             ]
         );
 
