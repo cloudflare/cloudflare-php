@@ -22,5 +22,8 @@
     "psr-4": {
       "Cloudflare\\API\\": "src/"
     }
+  },
+  "scripts": {
+    "test": "phpunit"
   }
 }
