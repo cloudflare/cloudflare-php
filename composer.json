@@ -11,7 +11,7 @@
     "phpunit/phpunit": "5.7.5",
     "phpmd/phpmd" : "@stable"
   },
-  "license": "MIT",
+  "license": "BSD-3-Clause",
   "authors": [
     {
       "name": "Junade Ali",
