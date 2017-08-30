@@ -47,7 +47,7 @@ class GuzzleTest extends PHPUnit_Framework_TestCase
         $this->assertEquals("application/json", $headers["Content-Type"][0]);
 
         $body = json_decode($response->getBody());
-        $this->assertEquals("Testing a POST request.", $body->form->{"X-Post-Test"});
+        $this->assertEquals("Testing a POST request.", $body->json->{"X-Post-Test"});
     }
 
     public function testPut()
