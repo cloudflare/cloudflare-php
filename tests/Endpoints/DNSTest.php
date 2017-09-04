@@ -1,13 +1,11 @@
 <?php
+
 /**
  * Created by PhpStorm.
  * User: junade
  * Date: 09/06/2017
  * Time: 15:31
  */
-
-use Cloudflare\API\Endpoints\DNS;
-
 class DNSTest extends PHPUnit_Framework_TestCase
 {
     public function testAddRecord()
@@ -40,7 +38,13 @@ class DNSTest extends PHPUnit_Framework_TestCase
         $mock->expects($this->once())
             ->method('post')
             ->with($this->equalTo('zones/023e105f4ecef8ad9ca31a8372d0c353/dns_records'), $this->equalTo([]),
-                $this->equalTo(['type' => 'A', 'name' => 'example.com', 'content' => '127.0.0.1', 'ttl' => 120, 'proxied' => false])
+                $this->equalTo([
+                    'type' => 'A',
+                    'name' => 'example.com',
+                    'content' => '127.0.0.1',
+                    'ttl' => 120,
+                    'proxied' => false
+                ])
             );
 
         $dns = new \Cloudflare\API\Endpoints\DNS($mock);
@@ -77,28 +81,19 @@ class DNSTest extends PHPUnit_Framework_TestCase
     "total_count": 2000
   }
 }');
-        
+
         $response = new GuzzleHttp\Psr7\Response(200, ['Content-Type' => 'application/json'], $stream);
         $mock = $this->getMockBuilder(\Cloudflare\API\Adapter\Adapter::class)->getMock();
         $mock->method('get')->willReturn($response);
 
         $mock->expects($this->once())
             ->method('get')
-            ->with($this->equalTo('zones'),
-                $this->equalTo([]),
-                $this->equalTo([
-                        'page' => 1,
-                        'per_page' => 20,
-                        'match' => 'all',
-                        'name' => 'example.com',
-                        'status' => 'active',
-                        'order' => 'status',
-                        'direction' => 'desc'
-                    ]
-                ));
+            ->with($this->equalTo('zones/023e105f4ecef8ad9ca31a8372d0c353/dns_records?page=1&per_page=20&match=all&type=A&name=example.com&content=127.0.0.1&order=type&direction=desc'),
+                $this->equalTo([])
+            );
 
-        $zones = new \Cloudflare\API\Endpoints\Zones($mock);
-        $result = $zones->listZones("example.com", "active", 1, 20, "status", "desc", "all");
+        $zones = new \Cloudflare\API\Endpoints\DNS($mock);
+        $result = $zones->listRecords("023e105f4ecef8ad9ca31a8372d0c353","A", "example.com", "127.0.0.1", 1, 20, "type", "desc", "all");
 
         $this->assertObjectHasAttribute('result', $result);
         $this->assertObjectHasAttribute('result_info', $result);

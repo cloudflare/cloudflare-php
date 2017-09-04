@@ -26,5 +26,4 @@ class IPs implements API
 
         return $body->result;
     }
-
 }

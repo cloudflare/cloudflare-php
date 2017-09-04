@@ -19,8 +19,14 @@ class DNS implements API
         $this->adapter = $adapter;
     }
 
-    public function addRecord(string $zoneID, string $type, string $name, string $content, int $ttl = 0, bool $proxied = true): bool
-    {
+    public function addRecord(
+        string $zoneID,
+        string $type,
+        string $name,
+        string $content,
+        int $ttl = 0,
+        bool $proxied = true
+    ): bool {
         $options = [
             'type' => $type,
             'name' => $name,
@@ -46,6 +52,7 @@ class DNS implements API
     public function listRecords(
         string $zoneID,
         string $type = "",
+        string $name = "",
         string $content = "",
         int $page = 1,
         int $perPage = 20,
@@ -79,7 +86,9 @@ class DNS implements API
             $options['direction'] = $direction;
         }
 
-        $user = $this->adapter->get('zones/'.$zoneID.'/dns_records', [], $options);
+        $query = http_build_query($options);
+
+        $user = $this->adapter->get('zones/' . $zoneID . '/dns_records?' . $query, []);
         $body = json_decode($user->getBody());
 
         $result = new \stdClass();
@@ -91,20 +100,20 @@ class DNS implements API
 
     public function getRecordDetails(string $zoneID, string $recordID): \stdClass
     {
-        $user = $this->adapter->get('zones/'.$zoneID.'/dns_records/'.$recordID, []);
+        $user = $this->adapter->get('zones/' . $zoneID . '/dns_records/' . $recordID, []);
         $body = json_decode($user->getBody());
         return $body->result;
     }
 
     public function updateRecordDetails(string $zoneID, string $recordID, array $details): \stdClass
     {
-        $response = $this->adapter->put('zones/'.$zoneID.'/dns_records/'.$recordID, [], $details);
+        $response = $this->adapter->put('zones/' . $zoneID . '/dns_records/' . $recordID, [], $details);
         return json_decode($response->getBody());
     }
 
     public function deleteRecord(string $zoneID, string $recordID): bool
     {
-        $user = $this->adapter->delete('zones/'.$zoneID.'/dns_records/'.$recordID, [], []);
+        $user = $this->adapter->delete('zones/' . $zoneID . '/dns_records/' . $recordID, [], []);
 
         $body = json_decode($user->getBody());
 
