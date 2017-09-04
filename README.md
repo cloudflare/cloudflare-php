@@ -15,11 +15,12 @@ Each API call is provided via a similarly named function within various classes 
 - [x] DNS Records
 - [x] Zones
 - [x] User Administration (partial)
-- [ ] Cloudflare IPs
+- [x] Cloudflare IPs
 - [ ] Page Rules
 - [ ] Web Application Firewall (WAF)
 - [ ] Virtual DNS Management
 - [ ] Custom hostnames
+- [ ] Zone Lockdown and User-Agent Block rules
 - [ ] Organization Administration
 - [ ] [Railgun](https://www.cloudflare.com/railgun/) administration
 - [ ] [Keyless SSL](https://blog.cloudflare.com/keyless-ssl-the-nitty-gritty-technical-details/)

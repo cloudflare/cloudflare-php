@@ -10,7 +10,7 @@ use Cloudflare\API\Endpoints\IPs;
 
 class IPsTest extends PHPUnit_Framework_TestCase
 {
-    public function testGet() {
+    public function testListIPs() {
         $stream = GuzzleHttp\Psr7\stream_for('
 {
   "success": true,
@@ -35,7 +35,7 @@ class IPsTest extends PHPUnit_Framework_TestCase
             );
 
         $ips = new \Cloudflare\API\Endpoints\IPs($mock);
-        $ips = $ips->get();
+        $ips = $ips->listIPs();
         $this->assertObjectHasAttribute("ipv4_cidrs", $ips);
         $this->assertObjectHasAttribute("ipv6_cidrs", $ips);
     }

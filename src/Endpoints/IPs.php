@@ -20,7 +20,7 @@ class IPs implements API
         $this->adapter = $adapter;
     }
 
-    public function get(): \stdClass {
+    public function listIPs(): \stdClass {
         $ips = $this->adapter->get('ips', []);
         $body = json_decode($ips->getBody());
 
