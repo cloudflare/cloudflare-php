@@ -1,13 +1,11 @@
 <?php
+
 /**
  * Created by PhpStorm.
  * User: junade
  * Date: 06/06/2017
  * Time: 16:01
  */
-
-use Cloudflare\API\Endpoints\Zones;
-
 class ZonesTest extends PHPUnit_Framework_TestCase
 {
     public function testAddZone()
@@ -198,18 +196,9 @@ class ZonesTest extends PHPUnit_Framework_TestCase
 
         $mock->expects($this->once())
             ->method('get')
-            ->with($this->equalTo('zones'),
-                $this->equalTo([]),
-                $this->equalTo([
-                        'page' => 1,
-                        'per_page' => 20,
-                        'match' => 'all',
-                        'name' => 'example.com',
-                        'status' => 'active',
-                        'order' => 'status',
-                        'direction' => 'desc'
-                    ]
-                ));
+            ->with($this->equalTo('zones?page=1&per_page=20&match=all&name=example.com&status=active&order=status&direction=desc'),
+                $this->equalTo([])
+            );
 
         $zones = new \Cloudflare\API\Endpoints\Zones($mock);
         $result = $zones->listZones("example.com", "active", 1, 20, "status", "desc", "all");
@@ -291,15 +280,9 @@ class ZonesTest extends PHPUnit_Framework_TestCase
 
         $mock->expects($this->once())
             ->method('get')
-            ->with($this->equalTo('zones'),
-                $this->equalTo([]),
-                $this->equalTo([
-                        'name' => 'example.com',
-                        'page' => 1,
-                        'per_page' => 20,
-                        'match' => 'all'
-                    ]
-                ));
+            ->with($this->equalTo('zones?page=1&per_page=20&match=all&name=example.com'),
+                $this->equalTo([])
+            );
 
         $zones = new \Cloudflare\API\Endpoints\Zones($mock);
         $result = $zones->getZoneID("example.com");

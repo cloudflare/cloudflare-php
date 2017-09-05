@@ -80,7 +80,9 @@ class Zones implements API
             $options['direction'] = $direction;
         }
 
-        $user = $this->adapter->get('zones', [], $options);
+        $query = http_build_query($options);
+
+        $user = $this->adapter->get('zones?' . $query, []);
         $body = json_decode($user->getBody());
 
         $result = new \stdClass();
