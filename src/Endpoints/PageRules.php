@@ -77,16 +77,14 @@ class PageRules implements API
             throw new EndpointException('Match can only be any or all.');
         }
 
-        $options = [
+        $query = [
             'status' => $status,
             'order' => $order,
             'direction' => $direction,
             'match' => $match
         ];
 
-        $query = http_build_query($options);
-
-        $user = $this->adapter->get('zones/' . $zoneID . '/pagerules?' . $query, []);
+        $user = $this->adapter->get('zones/' . $zoneID . '/pagerules', $query, []);
         $body = json_decode($user->getBody());
 
         $result = new \stdClass();
@@ -98,7 +96,7 @@ class PageRules implements API
 
     public function getPageRuleDetails(string $zoneID, string $ruleID): \stdClass
     {
-        $user = $this->adapter->get('zones/' . $zoneID . '/pagerules/' . $ruleID, []);
+        $user = $this->adapter->get('zones/' . $zoneID . '/pagerules/' . $ruleID, [], []);
         $body = json_decode($user->getBody());
         return $body->result;
     }

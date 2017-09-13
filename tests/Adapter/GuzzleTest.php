@@ -34,7 +34,7 @@ class GuzzleTest extends PHPUnit_Framework_TestCase
         $body = json_decode($response->getBody());
         $this->assertEquals("Test", $body->headers->{"X-Testing"});
 
-        $response = $this->client->get('https://httpbin.org/get', ['X-Another-Test' => 'Test2']);
+        $response = $this->client->get('https://httpbin.org/get', [], ['X-Another-Test' => 'Test2']);
         $body = json_decode($response->getBody());
         $this->assertEquals("Test2", $body->headers->{"X-Another-Test"});
     }

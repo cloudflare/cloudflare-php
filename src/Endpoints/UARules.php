@@ -24,14 +24,12 @@ class UARules implements API
         int $page = 1,
         int $perPage = 20
     ): \stdClass {
-        $options = [
+        $query = [
             'page' => $page,
             'per_page' => $perPage
         ];
 
-        $query = http_build_query($options);
-
-        $user = $this->adapter->get('zones/' . $zoneID . '/firewall/ua_rules?' . $query, []);
+        $user = $this->adapter->get('zones/' . $zoneID . '/firewall/ua_rules', $query, []);
         $body = json_decode($user->getBody());
 
         $result = new \stdClass();

@@ -60,35 +60,33 @@ class DNS implements API
         string $direction = "",
         string $match = "all"
     ): \stdClass {
-        $options = [
+        $query = [
             'page' => $page,
             'per_page' => $perPage,
             'match' => $match
         ];
 
         if (!empty($type)) {
-            $options['type'] = $type;
+            $query['type'] = $type;
         }
 
         if (!empty($name)) {
-            $options['name'] = $name;
+            $query['name'] = $name;
         }
 
         if (!empty($content)) {
-            $options['content'] = $content;
+            $query['content'] = $content;
         }
 
         if (!empty($order)) {
-            $options['order'] = $order;
+            $query['order'] = $order;
         }
 
         if (!empty($direction)) {
-            $options['direction'] = $direction;
+            $query['direction'] = $direction;
         }
 
-        $query = http_build_query($options);
-
-        $user = $this->adapter->get('zones/' . $zoneID . '/dns_records?' . $query, []);
+        $user = $this->adapter->get('zones/' . $zoneID . '/dns_records', $query, []);
         $body = json_decode($user->getBody());
 
         $result = new \stdClass();
@@ -100,7 +98,7 @@ class DNS implements API
 
     public function getRecordDetails(string $zoneID, string $recordID): \stdClass
     {
-        $user = $this->adapter->get('zones/' . $zoneID . '/dns_records/' . $recordID, []);
+        $user = $this->adapter->get('zones/' . $zoneID . '/dns_records/' . $recordID, [], []);
         $body = json_decode($user->getBody());
         return $body->result;
     }

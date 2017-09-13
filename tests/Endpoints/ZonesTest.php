@@ -196,7 +196,16 @@ class ZonesTest extends PHPUnit_Framework_TestCase
 
         $mock->expects($this->once())
             ->method('get')
-            ->with($this->equalTo('zones?page=1&per_page=20&match=all&name=example.com&status=active&order=status&direction=desc'),
+            ->with($this->equalTo('zones'),
+              $this->equalTo([
+                'page' => 1,
+                'per_page' => 20,
+                'match' => 'all',
+                'name' => 'example.com',
+                'status' => 'active',
+                'order' => 'status',
+                'direction' => 'desc'
+              ]),
                 $this->equalTo([])
             );
 
@@ -280,8 +289,14 @@ class ZonesTest extends PHPUnit_Framework_TestCase
 
         $mock->expects($this->once())
             ->method('get')
-            ->with($this->equalTo('zones?page=1&per_page=20&match=all&name=example.com'),
-                $this->equalTo([])
+            ->with($this->equalTo('zones'),
+              $this->equalTo([
+                'page' => 1,
+                'per_page' => 20,
+                'match' => 'all',
+                'name' => 'example.com',
+                ]),
+              $this->equalTo([])
             );
 
         $zones = new \Cloudflare\API\Endpoints\Zones($mock);
