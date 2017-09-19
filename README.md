@@ -12,15 +12,15 @@ The Cloudflare API can be found [here](https://api.cloudflare.com/).
 Each API call is provided via a similarly named function within various classes in the **Cloudflare\API\Endpoints** namespace:
 
 
-- [x] DNS Records
+- [x] [DNS Records](https://www.cloudflare.com/dns/)
 - [x] Zones
 - [x] User Administration (partial)
-- [x] Cloudflare IPs
-- [ ] Page Rules
-- [ ] Web Application Firewall (WAF)
+- [x] [Cloudflare IPs](https://www.cloudflare.com/ips/)
+- [ ] [Page Rules](https://support.cloudflare.com/hc/en-us/articles/200168306-Is-there-a-tutorial-for-Page-Rules-)
+- [ ] [Web Application Firewall (WAF)](https://www.cloudflare.com/waf/)
 - [ ] Virtual DNS Management
 - [ ] Custom hostnames
-- [ ] Zone Lockdown and User-Agent Block rules
+- [x] Zone Lockdown and User-Agent Block rules
 - [ ] Organization Administration
 - [ ] [Railgun](https://www.cloudflare.com/railgun/) administration
 - [ ] [Keyless SSL](https://blog.cloudflare.com/keyless-ssl-the-nitty-gritty-technical-details/)
