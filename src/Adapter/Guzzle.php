@@ -71,7 +71,7 @@ class Guzzle implements Adapter
 
         $response = $this->client->put($uri, [
                 'headers' => $headers,
-                'body' => $jsonBody
+                'json' => $jsonBody
             ]
         );
 
@@ -88,7 +88,7 @@ class Guzzle implements Adapter
 
         $response = $this->client->patch($uri, [
                 'headers' => $headers,
-                'body' => $jsonBody
+                'json' => $jsonBody
             ]
         );
 
@@ -103,7 +103,7 @@ class Guzzle implements Adapter
     {
         $response = $this->client->delete($uri, [
                 'headers' => $headers,
-                'form_params' => $body
+                'json' => $body
             ]
         );
 
