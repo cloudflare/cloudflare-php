@@ -35,7 +35,7 @@ class PageRules implements API
         ];
 
         if ($active !== null) {
-            $options['active'] = $active == true ? 'active' : 'disabled';
+            $options['status'] = $active == true ? 'active' : 'disabled';
         }
 
         if ($priority !== null) {
@@ -117,7 +117,7 @@ class PageRules implements API
         }
 
         if ($active !== null) {
-            $options['active'] = $active == true ? 'active' : 'disabled';
+            $options['status'] = $active == true ? 'active' : 'disabled';
         }
 
         if ($priority !== null) {
