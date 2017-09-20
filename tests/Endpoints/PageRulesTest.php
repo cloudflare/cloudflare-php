@@ -57,8 +57,8 @@ class PageRulesTest extends PHPUnit_Framework_TestCase
                 $this->equalTo([
                     'targets' => $target->getArray(),
                     'actions' => $action->getArray(),
-                    'active' => 'active',
-                    'priority' => '1'
+                    'status' => 'active',
+                    'priority' => 1
                 ])
             );
 
@@ -217,8 +217,8 @@ class PageRulesTest extends PHPUnit_Framework_TestCase
                 $this->equalTo([
                     'targets' => $target->getArray(),
                     'actions' => $action->getArray(),
-                    'active' => 'active',
-                    'priority' => '1'
+                    'status' => 'active',
+                    'priority' => 1
                 ])
             );
 
