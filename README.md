@@ -16,7 +16,7 @@ Each API call is provided via a similarly named function within various classes 
 - [x] Zones
 - [x] User Administration (partial)
 - [x] [Cloudflare IPs](https://www.cloudflare.com/ips/)
-- [ ] [Page Rules](https://support.cloudflare.com/hc/en-us/articles/200168306-Is-there-a-tutorial-for-Page-Rules-)
+- [x] [Page Rules](https://support.cloudflare.com/hc/en-us/articles/200168306-Is-there-a-tutorial-for-Page-Rules-)
 - [ ] [Web Application Firewall (WAF)](https://www.cloudflare.com/waf/)
 - [ ] Virtual DNS Management
 - [ ] Custom hostnames
