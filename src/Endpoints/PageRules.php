@@ -6,10 +6,12 @@
  * Time: 16:17
  */
 
-namespace Cloudflare\API\Adapter;
+namespace Cloudflare\API\Endpoints;
 
 
-use Cloudflare\API\Endpoints\API;
+use Cloudflare\API\Adapter\Adapter;
+use Cloudflare\API\Configurations\PageRulesActions;
+use Cloudflare\API\Configurations\PageRulesTargets;
 
 class PageRules implements API
 {
@@ -18,5 +20,136 @@ class PageRules implements API
     public function __construct(Adapter $adapter)
     {
         $this->adapter = $adapter;
+    }
+
+    public function createPageRule(
+        string $zoneID,
+        PageRulesTargets $target,
+        PageRulesActions $actions,
+        bool $active = true,
+        int $priority = null
+    ): bool {
+        $options = [
+            'targets' => $target->getArray(),
+            'actions' => $actions->getArray()
+        ];
+
+        if ($active !== null) {
+            $options['active'] = $active == true ? 'active' : 'disabled';
+        }
+
+        if ($priority !== null) {
+            $options['priority'] = $priority;
+        }
+
+
+        $query = $this->adapter->post('zones/' . $zoneID . '/pagerules', [], $options);
+
+        $body = json_decode($query->getBody());
+
+        if (isset($body->result->id)) {
+            return true;
+        }
+
+        return false;
+    }
+
+    public function listPageRules(
+        string $zoneID,
+        string $status = null,
+        string $order = null,
+        string $direction = null,
+        string $match = null
+    ): \stdClass {
+        if (is_null($status) && !in_array($status, ['active', 'disabled'])) {
+            throw new EndpointException('Page Rules can only be listed by status of active or disabled.');
+        }
+
+        if (is_null($order) && !in_array($order, ['status', 'priority'])) {
+            throw new EndpointException('Page Rules can only be ordered by status or priority.');
+        }
+
+        if (is_null($direction) && !in_array($direction, ['asc', 'desc'])) {
+            throw new EndpointException('Direction of Page Rule ordering can only be asc or desc.');
+        }
+
+        if (is_null($match) && !in_array($match, ['all', 'any'])) {
+            throw new EndpointException('Match can only be any or all.');
+        }
+
+        $options = [
+            'status' => $status,
+            'order' => $order,
+            'direction' => $direction,
+            'match' => $match
+        ];
+
+        $query = http_build_query($options);
+
+        $user = $this->adapter->get('zones/' . $zoneID . '/pagerules?' . $query, []);
+        $body = json_decode($user->getBody());
+
+        $result = new \stdClass();
+        $result->result = $body->result;
+        $result->result_info = $body->result_info;
+
+        return $result;
+    }
+
+    public function getPageRuleDetails(string $zoneID, string $ruleID): \stdClass
+    {
+        $user = $this->adapter->get('zones/' . $zoneID . '/pagerules/' . $ruleID, []);
+        $body = json_decode($user->getBody());
+        return $body->result;
+    }
+
+    public function updatePageRule(
+        string $zoneID,
+        PageRulesTargets $target = null,
+        PageRulesActions $actions = null,
+        bool $active = null,
+        int $priority = null
+    ): bool {
+        $options = [];
+
+        if ($active !== null) {
+            $options['targets'] = $target->getArray();
+        }
+
+        if ($actions !== null) {
+            $options['actions'] = $actions->getArray();
+        }
+
+        if ($active !== null) {
+            $options['active'] = $active == true ? 'active' : 'disabled';
+        }
+
+        if ($priority !== null) {
+            $options['priority'] = $priority;
+        }
+
+
+        $query = $this->adapter->patch('zones/' . $zoneID . '/pagerules', [], $options);
+
+        $body = json_decode($query->getBody());
+
+        if (isset($body->result->id)) {
+            return true;
+        }
+
+        return false;
+    }
+
+    public function deletePageRule(string $zoneID, string $ruleID): bool
+    {
+        $user = $this->adapter->delete('zones/' . $zoneID . '/pagerules/' . $ruleID, [], []);
+
+        $body = json_decode($user->getBody());
+
+        if (isset($body->result->id)) {
+            return true;
+        }
+
+        return false;
     }
 }
