@@ -108,7 +108,7 @@ class Zones implements API
      * @param string $zoneID
      * @return bool
      */
-    public function purgeAll(string $zoneID): bool
+    public function cachePurgeEverything(string $zoneID): bool
     {
         $user = $this->adapter->delete('zones/' . $zoneID . '/purge_cache', [], ["purge_everything" => true]);
 
@@ -121,7 +121,7 @@ class Zones implements API
         return false;
     }
 
-    public function purge(string $zoneID, array $files = [], array $tags = []): bool
+    public function cachePurge(string $zoneID, array $files = [], array $tags = []): bool
     {
         if (empty($files) && empty($tags)) {
             throw new EndpointException("No files or tags to purge.");
