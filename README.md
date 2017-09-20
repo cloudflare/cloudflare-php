@@ -4,7 +4,7 @@
 
 ## Installation
 
-The recommended way to install this package is via the Packagist Dependency Manager. 
+The recommended way to install this package is via the Packagist Dependency Manager ([cloudflare/sdk](https://packagist.org/packages/cloudflare/sdk)). You can specific usage examples on the Cloudflare Knowledge Base under: [Cloudflare PHP API Binding](https://support.cloudflare.com/hc/en-us/articles/115001661191)
 
 ## Cloudflare API version 4
 
