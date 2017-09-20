@@ -290,7 +290,7 @@ class ZonesTest extends PHPUnit_Framework_TestCase
         $this->assertEquals("023e105f4ecef8ad9ca31a8372d0c353", $result);
     }
 
-    public function testPurgeAll()
+    public function testCachePurgeEverything()
     {
         $stream = GuzzleHttp\Psr7\stream_for('{
   "success": true,
@@ -312,7 +312,7 @@ class ZonesTest extends PHPUnit_Framework_TestCase
             );
 
         $zones = new \Cloudflare\API\Endpoints\Zones($mock);
-        $result = $zones->purgeAll("c2547eb745079dac9320b638f5e225cf483cc5cfdda41");
+        $result = $zones->cachePurgeEverything("c2547eb745079dac9320b638f5e225cf483cc5cfdda41");
 
         $this->assertTrue($result);
     }
