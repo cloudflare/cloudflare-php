@@ -60,7 +60,7 @@ class PageRules implements API
         string $order = null,
         string $direction = null,
         string $match = null
-    ): \stdClass {
+    ): array {
         if (is_null($status) && !in_array($status, ['active', 'disabled'])) {
             throw new EndpointException('Page Rules can only be listed by status of active or disabled.');
         }
@@ -89,11 +89,7 @@ class PageRules implements API
         $user = $this->adapter->get('zones/' . $zoneID . '/pagerules?' . $query, []);
         $body = json_decode($user->getBody());
 
-        $result = new \stdClass();
-        $result->result = $body->result;
-        $result->result_info = $body->result_info;
-
-        return $result;
+        return $body->result;
     }
 
     public function getPageRuleDetails(string $zoneID, string $ruleID): \stdClass
