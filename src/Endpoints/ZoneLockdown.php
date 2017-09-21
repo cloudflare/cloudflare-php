@@ -24,14 +24,12 @@ class ZoneLockdown implements API
         int $page = 1,
         int $perPage = 20
     ): \stdClass {
-        $options = [
+        $query = [
             'page' => $page,
             'per_page' => $perPage
         ];
 
-        $query = http_build_query($options);
-
-        $user = $this->adapter->get('zones/' . $zoneID . '/firewall/lockdowns?' . $query, []);
+        $user = $this->adapter->get('zones/' . $zoneID . '/firewall/lockdowns', $query, []);
         $body = json_decode($user->getBody());
 
         $result = new \stdClass();
@@ -75,7 +73,7 @@ class ZoneLockdown implements API
 
     public function getLockdownDetails(string $zoneID, string $lockdownID): \stdClass
     {
-        $user = $this->adapter->get('zones/' . $zoneID . '/firewall/lockdowns/' . $lockdownID, []);
+        $user = $this->adapter->get('zones/' . $zoneID . '/firewall/lockdowns/' . $lockdownID, [], []);
         $body = json_decode($user->getBody());
         return $body->result;
     }

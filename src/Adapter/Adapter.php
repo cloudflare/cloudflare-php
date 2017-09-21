@@ -35,7 +35,7 @@ interface Adapter
      *
      * @return mixed
      */
-    public function get(String $uri, array $headers): ResponseInterface;
+    public function get(String $uri, array $query, array $headers): ResponseInterface;
 
     /**
      * @param String $uri

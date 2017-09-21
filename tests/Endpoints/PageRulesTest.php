@@ -116,7 +116,14 @@ class PageRulesTest extends PHPUnit_Framework_TestCase
 
         $mock->expects($this->once())
             ->method('get')
-            ->with($this->equalTo('zones/023e105f4ecef8ad9ca31a8372d0c353/pagerules?status=active&order=status&direction=desc&match=all'), $this->equalTo([])
+            ->with($this->equalTo('zones/023e105f4ecef8ad9ca31a8372d0c353/pagerules'),
+              $this->equalTo([
+                'status' => 'active',
+                'order' => 'status',
+                'direction' => 'desc',
+                'match' => 'all'
+              ]),
+              $this->equalTo([])
             );
 
         $pr = new \Cloudflare\API\Endpoints\PageRules($mock);

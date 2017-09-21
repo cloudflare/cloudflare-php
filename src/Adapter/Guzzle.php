@@ -38,9 +38,9 @@ class Guzzle implements Adapter
     /**
      * @inheritDoc
      */
-    public function get(String $uri, array $headers = array()): ResponseInterface
+    public function get(String $uri, array $query = array(), array $headers = array()): ResponseInterface
     {
-        $response = $this->client->get($uri, ['headers' => $headers]);
+        $response = $this->client->get($uri, ['query' => $query, 'headers' => $headers]);
 
         $this->checkError($response);
         return $response;

@@ -45,8 +45,12 @@ class UARulesTest extends PHPUnit_Framework_TestCase
 
         $mock->expects($this->once())
             ->method('get')
-            ->with($this->equalTo('zones/023e105f4ecef8ad9ca31a8372d0c353/firewall/ua_rules?page=1&per_page=20'),
-                $this->equalTo([])
+            ->with($this->equalTo('zones/023e105f4ecef8ad9ca31a8372d0c353/firewall/ua_rules'),
+              $this->equalTo([
+                'page' => 1,
+                'per_page' => 20
+              ]),
+              $this->equalTo([])
             );
 
         $zones = new \Cloudflare\API\Endpoints\UARules($mock);

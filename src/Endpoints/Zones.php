@@ -58,31 +58,29 @@ class Zones implements API
         string $direction = "",
         string $match = "all"
     ): \stdClass {
-        $options = [
+        $query = [
             'page' => $page,
             'per_page' => $perPage,
             'match' => $match
         ];
 
         if (!empty($name)) {
-            $options['name'] = $name;
+            $query['name'] = $name;
         }
 
         if (!empty($status)) {
-            $options['status'] = $status;
+            $query['status'] = $status;
         }
 
         if (!empty($order)) {
-            $options['order'] = $order;
+            $query['order'] = $order;
         }
 
         if (!empty($direction)) {
-            $options['direction'] = $direction;
+            $query['direction'] = $direction;
         }
 
-        $query = http_build_query($options);
-
-        $user = $this->adapter->get('zones?' . $query, []);
+        $user = $this->adapter->get('zones', $query, []);
         $body = json_decode($user->getBody());
 
         $result = new \stdClass();
