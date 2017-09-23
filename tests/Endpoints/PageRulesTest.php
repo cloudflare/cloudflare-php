@@ -53,7 +53,9 @@ class PageRulesTest extends PHPUnit_Framework_TestCase
 
         $mock->expects($this->once())
             ->method('post')
-            ->with($this->equalTo('zones/023e105f4ecef8ad9ca31a8372d0c353/pagerules'), $this->equalTo([]),
+            ->with(
+                $this->equalTo('zones/023e105f4ecef8ad9ca31a8372d0c353/pagerules'),
+                $this->equalTo([]),
                 $this->equalTo([
                     'targets' => $target->getArray(),
                     'actions' => $action->getArray(),
@@ -116,7 +118,8 @@ class PageRulesTest extends PHPUnit_Framework_TestCase
 
         $mock->expects($this->once())
             ->method('get')
-            ->with($this->equalTo('zones/023e105f4ecef8ad9ca31a8372d0c353/pagerules'),
+            ->with(
+                $this->equalTo('zones/023e105f4ecef8ad9ca31a8372d0c353/pagerules'),
               $this->equalTo([
                 'status' => 'active',
                 'order' => 'status',
@@ -170,7 +173,9 @@ class PageRulesTest extends PHPUnit_Framework_TestCase
 
         $mock->expects($this->once())
             ->method('get')
-            ->with($this->equalTo('zones/023e105f4ecef8ad9ca31a8372d0c353/pagerules/9a7806061c88ada191ed06f989cc3dac'), $this->equalTo([])
+            ->with(
+                $this->equalTo('zones/023e105f4ecef8ad9ca31a8372d0c353/pagerules/9a7806061c88ada191ed06f989cc3dac'),
+                $this->equalTo([])
             );
 
         $pr = new \Cloudflare\API\Endpoints\PageRules($mock);
@@ -220,7 +225,9 @@ class PageRulesTest extends PHPUnit_Framework_TestCase
 
         $mock->expects($this->once())
             ->method('patch')
-            ->with($this->equalTo('zones/023e105f4ecef8ad9ca31a8372d0c353/pagerules'), $this->equalTo([]),
+            ->with(
+                $this->equalTo('zones/023e105f4ecef8ad9ca31a8372d0c353/pagerules'),
+                $this->equalTo([]),
                 $this->equalTo([
                     'targets' => $target->getArray(),
                     'actions' => $action->getArray(),
@@ -256,7 +263,9 @@ class PageRulesTest extends PHPUnit_Framework_TestCase
 
         $mock->expects($this->once())
             ->method('delete')
-            ->with($this->equalTo('zones/023e105f4ecef8ad9ca31a8372d0c353/pagerules/9a7806061c88ada191ed06f989cc3dac'), $this->equalTo([]),
+            ->with(
+                $this->equalTo('zones/023e105f4ecef8ad9ca31a8372d0c353/pagerules/9a7806061c88ada191ed06f989cc3dac'),
+                $this->equalTo([]),
                 $this->equalTo([])
             );
 

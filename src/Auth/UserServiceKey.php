@@ -7,7 +7,6 @@
 
 namespace Cloudflare\API\Auth;
 
-
 class UserServiceKey implements Auth
 {
     private $userServiceKey;

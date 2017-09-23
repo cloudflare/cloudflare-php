@@ -19,6 +19,5 @@ class APIKeyTest extends PHPUnit_Framework_TestCase
         $this->assertEquals('1234567893feefc5f0q5000bfo0c38d90bbeb', $headers['X-Auth-Key']);
 
         $this->assertEquals(2, sizeof($headers));
-
     }
 }

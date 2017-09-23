@@ -37,7 +37,9 @@ class DNSTest extends PHPUnit_Framework_TestCase
 
         $mock->expects($this->once())
             ->method('post')
-            ->with($this->equalTo('zones/023e105f4ecef8ad9ca31a8372d0c353/dns_records'), $this->equalTo([]),
+            ->with(
+                $this->equalTo('zones/023e105f4ecef8ad9ca31a8372d0c353/dns_records'),
+                $this->equalTo([]),
                 $this->equalTo([
                     'type' => 'A',
                     'name' => 'example.com',
@@ -88,7 +90,8 @@ class DNSTest extends PHPUnit_Framework_TestCase
 
         $mock->expects($this->once())
             ->method('get')
-            ->with($this->equalTo('zones/023e105f4ecef8ad9ca31a8372d0c353/dns_records'),
+            ->with(
+                $this->equalTo('zones/023e105f4ecef8ad9ca31a8372d0c353/dns_records'),
               $this->equalTo([
                 'page' => 1,
                 'per_page' => 20,
@@ -102,7 +105,7 @@ class DNSTest extends PHPUnit_Framework_TestCase
             );
 
         $zones = new \Cloudflare\API\Endpoints\DNS($mock);
-        $result = $zones->listRecords("023e105f4ecef8ad9ca31a8372d0c353","A", "example.com", "127.0.0.1", 1, 20, "type", "desc", "all");
+        $result = $zones->listRecords("023e105f4ecef8ad9ca31a8372d0c353", "A", "example.com", "127.0.0.1", 1, 20, "type", "desc", "all");
 
         $this->assertObjectHasAttribute('result', $result);
         $this->assertObjectHasAttribute('result_info', $result);
@@ -140,7 +143,8 @@ class DNSTest extends PHPUnit_Framework_TestCase
 
         $mock->expects($this->once())
             ->method('get')
-            ->with($this->equalTo('zones/023e105f4ecef8ad9ca31a8372d0c353/dns_records/372e67954025e0ba6aaa6d586b9e0b59'),
+            ->with(
+                $this->equalTo('zones/023e105f4ecef8ad9ca31a8372d0c353/dns_records/372e67954025e0ba6aaa6d586b9e0b59'),
                 $this->equalTo([])
             );
 

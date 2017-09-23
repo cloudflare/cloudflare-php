@@ -10,7 +10,8 @@ use Cloudflare\API\Configurations\PageRulesTargets;
 
 class PageRulesTargetTest extends PHPUnit_Framework_TestCase
 {
-    public function testGetArray() {
+    public function testGetArray()
+    {
         $targets = new PageRulesTargets('junade.com/*');
         $array = $targets->getArray();
 

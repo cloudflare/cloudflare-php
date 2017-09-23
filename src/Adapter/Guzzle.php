@@ -7,7 +7,6 @@
 
 namespace Cloudflare\API\Adapter;
 
-
 use Cloudflare\API\Auth\Auth;
 use GuzzleHttp\Client;
 use Psr\Http\Message\ResponseInterface;
@@ -44,7 +43,6 @@ class Guzzle implements Adapter
 
         $this->checkError($response);
         return $response;
-
     }
 
     /**
@@ -52,7 +50,9 @@ class Guzzle implements Adapter
      */
     public function post(String $uri, array $headers = array(), array $body = array()): ResponseInterface
     {
-        $response = $this->client->post($uri, [
+        $response = $this->client->post(
+            $uri,
+            [
                 'headers' => $headers,
                 'json' => $body
             ]
@@ -69,7 +69,9 @@ class Guzzle implements Adapter
     {
         $jsonBody = json_encode($body);
 
-        $response = $this->client->put($uri, [
+        $response = $this->client->put(
+            $uri,
+            [
                 'headers' => $headers,
                 'json' => $jsonBody
             ]
@@ -86,7 +88,9 @@ class Guzzle implements Adapter
     {
         $jsonBody = json_encode($body);
 
-        $response = $this->client->patch($uri, [
+        $response = $this->client->patch(
+            $uri,
+            [
                 'headers' => $headers,
                 'json' => $jsonBody
             ]
@@ -101,7 +105,9 @@ class Guzzle implements Adapter
      */
     public function delete(String $uri, array $headers = array(), array $body = array()): ResponseInterface
     {
-        $response = $this->client->delete($uri, [
+        $response = $this->client->delete(
+            $uri,
+            [
                 'headers' => $headers,
                 'json' => $body
             ]

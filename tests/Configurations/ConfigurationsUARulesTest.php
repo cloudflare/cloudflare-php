@@ -19,7 +19,9 @@ class ConfigurationsUARulesTest extends PHPUnit_Framework_TestCase
         $this->assertObjectHasAttribute('target', $array[0]);
         $this->assertEquals('ua', $array[0]->target);
         $this->assertObjectHasAttribute('value', $array[0]);
-        $this->assertEquals('Mozilla/5.0 (Macintosh; Intel Mac OS X 10_12_5) AppleWebKit/603.2.4 (KHTML, like Gecko) Version/10.1.1 Safari/603.2.4',
-            $array[0]->value);
+        $this->assertEquals(
+            'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_12_5) AppleWebKit/603.2.4 (KHTML, like Gecko) Version/10.1.1 Safari/603.2.4',
+            $array[0]->value
+        );
     }
 }

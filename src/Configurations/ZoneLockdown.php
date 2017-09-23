@@ -8,7 +8,6 @@
 
 namespace Cloudflare\API\Configurations;
 
-
 class ZoneLockdown implements Configurations
 {
     private $configs = array();

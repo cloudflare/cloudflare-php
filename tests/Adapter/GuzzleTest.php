@@ -63,8 +63,11 @@ class GuzzleTest extends PHPUnit_Framework_TestCase
 
     public function testPatch()
     {
-        $response = $this->client->patch('https://httpbin.org/patch', [],
-            ['X-Patch-Test' => 'Testing a PATCH request.']);
+        $response = $this->client->patch(
+            'https://httpbin.org/patch',
+            [],
+            ['X-Patch-Test' => 'Testing a PATCH request.']
+        );
 
         $headers = $response->getHeaders();
         $this->assertEquals("application/json", $headers["Content-Type"][0]);
@@ -75,8 +78,11 @@ class GuzzleTest extends PHPUnit_Framework_TestCase
 
     public function testDelete()
     {
-        $response = $this->client->delete('https://httpbin.org/delete', [],
-            ['X-Delete-Test' => 'Testing a DELETE request.']);
+        $response = $this->client->delete(
+            'https://httpbin.org/delete',
+            [],
+            ['X-Delete-Test' => 'Testing a DELETE request.']
+        );
 
         $headers = $response->getHeaders();
         $this->assertEquals("application/json", $headers["Content-Type"][0]);
@@ -124,9 +130,9 @@ class GuzzleTest extends PHPUnit_Framework_TestCase
         $method->invokeArgs($this->client, [$response]);
     }
 
-    public function testNotFound() {
+    public function testNotFound()
+    {
         $this->expectException(\GuzzleHttp\Exception\RequestException::class);
         $response = $this->client->get('https://httpbin.org/status/404');
-
     }
 }

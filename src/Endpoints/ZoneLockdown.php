@@ -46,7 +46,6 @@ class ZoneLockdown implements API
         string $id = null,
         string $description = null
     ): bool {
-
         $options = [
             'urls' => $urls,
             'configurations' => $configuration->getArray()
@@ -85,7 +84,6 @@ class ZoneLockdown implements API
         \Cloudflare\API\Configurations\ZoneLockdown $configuration,
         string $description = null
     ): bool {
-
         $options = [
             'urls' => $urls,
             'id' => $lockdownID,
