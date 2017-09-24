@@ -7,7 +7,6 @@
 
 namespace Cloudflare\API\Auth;
 
-
 class APIKey implements Auth
 {
     private $email;

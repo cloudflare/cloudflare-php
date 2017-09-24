@@ -8,7 +8,6 @@
 
 namespace Cloudflare\API\Configurations;
 
-
 class PageRulesTargets implements Configurations
 {
     private $targets;

@@ -8,7 +8,6 @@
 
 namespace Cloudflare\API\Endpoints;
 
-
 use Cloudflare\API\Adapter\Adapter;
 
 class IPs implements API
@@ -20,7 +19,8 @@ class IPs implements API
         $this->adapter = $adapter;
     }
 
-    public function listIPs(): \stdClass {
+    public function listIPs(): \stdClass
+    {
         $ips = $this->adapter->get('ips', [], []);
         $body = json_decode($ips->getBody());
 

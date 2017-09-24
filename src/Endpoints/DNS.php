@@ -121,5 +121,4 @@ class DNS implements API
 
         return false;
     }
-
 }

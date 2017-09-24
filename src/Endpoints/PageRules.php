@@ -8,7 +8,6 @@
 
 namespace Cloudflare\API\Endpoints;
 
-
 use Cloudflare\API\Adapter\Adapter;
 use Cloudflare\API\Configurations\PageRulesActions;
 use Cloudflare\API\Configurations\PageRulesTargets;

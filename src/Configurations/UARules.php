@@ -8,7 +8,6 @@
 
 namespace Cloudflare\API\Configurations;
 
-
 class UARules implements Configurations
 {
     private $configs = array();

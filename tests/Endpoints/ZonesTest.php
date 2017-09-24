@@ -70,7 +70,8 @@ class ZonesTest extends PHPUnit_Framework_TestCase
 
         $mock->expects($this->once())
             ->method('post')
-            ->with($this->equalTo('zones'),
+            ->with(
+                $this->equalTo('zones'),
                 $this->equalTo([]),
                 $this->equalTo(['name' => 'example.com', 'jumpstart' => false])
             );
@@ -90,7 +91,8 @@ class ZonesTest extends PHPUnit_Framework_TestCase
 
         $mock->expects($this->once())
             ->method('post')
-            ->with($this->equalTo('zones'),
+            ->with(
+                $this->equalTo('zones'),
                 $this->equalTo([]),
                 $this->equalTo(['name' => 'example.com', 'jumpstart' => true, 'organization' => $org])
             );
@@ -115,7 +117,8 @@ class ZonesTest extends PHPUnit_Framework_TestCase
 
         $mock->expects($this->once())
             ->method('put')
-            ->with($this->equalTo('zones/c2547eb745079dac9320b638f5e225cf483cc5cfdda41/activation_check'),
+            ->with(
+                $this->equalTo('zones/c2547eb745079dac9320b638f5e225cf483cc5cfdda41/activation_check'),
                 $this->equalTo([]),
                 $this->equalTo([])
             );
@@ -196,7 +199,8 @@ class ZonesTest extends PHPUnit_Framework_TestCase
 
         $mock->expects($this->once())
             ->method('get')
-            ->with($this->equalTo('zones'),
+            ->with(
+                $this->equalTo('zones'),
               $this->equalTo([
                 'page' => 1,
                 'per_page' => 20,
@@ -289,7 +293,8 @@ class ZonesTest extends PHPUnit_Framework_TestCase
 
         $mock->expects($this->once())
             ->method('get')
-            ->with($this->equalTo('zones'),
+            ->with(
+                $this->equalTo('zones'),
               $this->equalTo([
                 'page' => 1,
                 'per_page' => 20,
@@ -321,7 +326,8 @@ class ZonesTest extends PHPUnit_Framework_TestCase
 
         $mock->expects($this->once())
             ->method('delete')
-            ->with($this->equalTo('zones/c2547eb745079dac9320b638f5e225cf483cc5cfdda41/purge_cache'),
+            ->with(
+                $this->equalTo('zones/c2547eb745079dac9320b638f5e225cf483cc5cfdda41/purge_cache'),
                 $this->equalTo([]),
                 $this->equalTo(["purge_everything" => true])
             );

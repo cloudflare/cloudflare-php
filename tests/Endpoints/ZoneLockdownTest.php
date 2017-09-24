@@ -43,7 +43,8 @@ class ZoneLockdownTest extends PHPUnit_Framework_TestCase
 
         $mock->expects($this->once())
             ->method('get')
-            ->with($this->equalTo('zones/023e105f4ecef8ad9ca31a8372d0c353/firewall/lockdowns'),
+            ->with(
+                $this->equalTo('zones/023e105f4ecef8ad9ca31a8372d0c353/firewall/lockdowns'),
               $this->equalTo([
                 'page' => 1,
                 'per_page' => 20,
@@ -91,7 +92,9 @@ class ZoneLockdownTest extends PHPUnit_Framework_TestCase
 
         $mock->expects($this->once())
             ->method('post')
-            ->with($this->equalTo('zones/023e105f4ecef8ad9ca31a8372d0c353/firewall/lockdowns'), $this->equalTo([]),
+            ->with(
+                $this->equalTo('zones/023e105f4ecef8ad9ca31a8372d0c353/firewall/lockdowns'),
+                $this->equalTo([]),
                 $this->equalTo([
                     'urls' => ["api.mysite.com/some/endpoint*"],
                     'id' => '372e67954025e0ba6aaa6d586b9e0b59',
@@ -101,9 +104,13 @@ class ZoneLockdownTest extends PHPUnit_Framework_TestCase
             );
 
         $ld = new \Cloudflare\API\Endpoints\ZoneLockdown($mock);
-        $ld->createLockdown('023e105f4ecef8ad9ca31a8372d0c353', ["api.mysite.com/some/endpoint*"], $config,
+        $ld->createLockdown(
+            '023e105f4ecef8ad9ca31a8372d0c353',
+            ["api.mysite.com/some/endpoint*"],
+            $config,
             '372e67954025e0ba6aaa6d586b9e0b59',
-            'Restrict access to these endpoints to requests from a known IP address');
+            'Restrict access to these endpoints to requests from a known IP address'
+        );
     }
 
     public function testGetRecordDetails()
@@ -137,7 +144,8 @@ class ZoneLockdownTest extends PHPUnit_Framework_TestCase
 
         $mock->expects($this->once())
             ->method('get')
-            ->with($this->equalTo('zones/023e105f4ecef8ad9ca31a8372d0c353/firewall/lockdowns/372e67954025e0ba6aaa6d586b9e0b59'),
+            ->with(
+                $this->equalTo('zones/023e105f4ecef8ad9ca31a8372d0c353/firewall/lockdowns/372e67954025e0ba6aaa6d586b9e0b59'),
                 $this->equalTo([])
             );
 
@@ -181,7 +189,8 @@ class ZoneLockdownTest extends PHPUnit_Framework_TestCase
 
         $mock->expects($this->once())
             ->method('put')
-            ->with($this->equalTo('zones/023e105f4ecef8ad9ca31a8372d0c353/firewall/lockdowns/372e67954025e0ba6aaa6d586b9e0b59'),
+            ->with(
+                $this->equalTo('zones/023e105f4ecef8ad9ca31a8372d0c353/firewall/lockdowns/372e67954025e0ba6aaa6d586b9e0b59'),
                 $this->equalTo([]),
                 $this->equalTo([
                     'urls' => ["api.mysite.com/some/endpoint*"],
@@ -192,9 +201,13 @@ class ZoneLockdownTest extends PHPUnit_Framework_TestCase
             );
 
         $ld = new \Cloudflare\API\Endpoints\ZoneLockdown($mock);
-        $ld->updateLockdown('023e105f4ecef8ad9ca31a8372d0c353', '372e67954025e0ba6aaa6d586b9e0b59',
-            ["api.mysite.com/some/endpoint*"], $config,
-            'Restrict access to these endpoints to requests from a known IP address');
+        $ld->updateLockdown(
+            '023e105f4ecef8ad9ca31a8372d0c353',
+            '372e67954025e0ba6aaa6d586b9e0b59',
+            ["api.mysite.com/some/endpoint*"],
+            $config,
+            'Restrict access to these endpoints to requests from a known IP address'
+        );
     }
 
     public function testDeleteLockdown()
@@ -221,7 +234,8 @@ class ZoneLockdownTest extends PHPUnit_Framework_TestCase
 
         $mock->expects($this->once())
             ->method('delete')
-            ->with($this->equalTo('zones/023e105f4ecef8ad9ca31a8372d0c353/firewall/lockdowns/372e67954025e0ba6aaa6d586b9e0b59'),
+            ->with(
+                $this->equalTo('zones/023e105f4ecef8ad9ca31a8372d0c353/firewall/lockdowns/372e67954025e0ba6aaa6d586b9e0b59'),
                 $this->equalTo([]),
                 $this->equalTo([])
             );

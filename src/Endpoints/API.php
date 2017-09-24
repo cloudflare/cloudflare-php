@@ -7,7 +7,6 @@
 
 namespace Cloudflare\API\Endpoints;
 
-
 use Cloudflare\API\Adapter\Adapter;
 
 interface API

@@ -46,7 +46,6 @@ class UARules implements API
         string $id = null,
         string $description = null
     ): bool {
-
         $options = [
             'mode' => $mode,
             'configurations' => $configuration->getArray()
@@ -85,7 +84,6 @@ class UARules implements API
         \Cloudflare\API\Configurations\UARules $configuration,
         string $description = null
     ): bool {
-
         $options = [
             'mode' => $mode,
             'id' => $ruleID,

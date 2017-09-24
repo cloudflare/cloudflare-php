@@ -10,7 +10,8 @@ use Cloudflare\API\Endpoints\IPs;
 
 class IPsTest extends PHPUnit_Framework_TestCase
 {
-    public function testListIPs() {
+    public function testListIPs()
+    {
         $stream = GuzzleHttp\Psr7\stream_for('
 {
   "success": true,
@@ -31,7 +32,9 @@ class IPsTest extends PHPUnit_Framework_TestCase
 
         $mock->expects($this->once())
             ->method('get')
-            ->with($this->equalTo('ips'), $this->equalTo([])
+            ->with(
+                $this->equalTo('ips'),
+                $this->equalTo([])
             );
 
         $ips = new \Cloudflare\API\Endpoints\IPs($mock);

@@ -45,7 +45,8 @@ class UARulesTest extends PHPUnit_Framework_TestCase
 
         $mock->expects($this->once())
             ->method('get')
-            ->with($this->equalTo('zones/023e105f4ecef8ad9ca31a8372d0c353/firewall/ua_rules'),
+            ->with(
+                $this->equalTo('zones/023e105f4ecef8ad9ca31a8372d0c353/firewall/ua_rules'),
               $this->equalTo([
                 'page' => 1,
                 'per_page' => 20
@@ -93,7 +94,9 @@ class UARulesTest extends PHPUnit_Framework_TestCase
 
         $mock->expects($this->once())
             ->method('post')
-            ->with($this->equalTo('zones/023e105f4ecef8ad9ca31a8372d0c353/firewall/ua_rules'), $this->equalTo([]),
+            ->with(
+                $this->equalTo('zones/023e105f4ecef8ad9ca31a8372d0c353/firewall/ua_rules'),
+                $this->equalTo([]),
                 $this->equalTo([
                     'mode' => 'js_challenge',
                     'id' => '372e67954025e0ba6aaa6d586b9e0b59',
@@ -103,9 +106,13 @@ class UARulesTest extends PHPUnit_Framework_TestCase
             );
 
         $ld = new \Cloudflare\API\Endpoints\UARules($mock);
-        $ld->createRule('023e105f4ecef8ad9ca31a8372d0c353', 'js_challenge', $config,
+        $ld->createRule(
+            '023e105f4ecef8ad9ca31a8372d0c353',
+            'js_challenge',
+            $config,
             '372e67954025e0ba6aaa6d586b9e0b59',
-            'Prevent access from abusive clients identified by this UserAgent to mitigate DDoS attack');
+            'Prevent access from abusive clients identified by this UserAgent to mitigate DDoS attack'
+        );
     }
 
     public function getRuleDetails()
@@ -135,7 +142,8 @@ class UARulesTest extends PHPUnit_Framework_TestCase
 
         $mock->expects($this->once())
             ->method('get')
-            ->with($this->equalTo('zones/023e105f4ecef8ad9ca31a8372d0c353/firewall/ua_rules/372e67954025e0ba6aaa6d586b9e0b59'),
+            ->with(
+                $this->equalTo('zones/023e105f4ecef8ad9ca31a8372d0c353/firewall/ua_rules/372e67954025e0ba6aaa6d586b9e0b59'),
                 $this->equalTo([])
             );
 
@@ -175,7 +183,8 @@ class UARulesTest extends PHPUnit_Framework_TestCase
 
         $mock->expects($this->once())
             ->method('put')
-            ->with($this->equalTo('zones/023e105f4ecef8ad9ca31a8372d0c353/firewall/ua_rules/372e67954025e0ba6aaa6d586b9e0b59'),
+            ->with(
+                $this->equalTo('zones/023e105f4ecef8ad9ca31a8372d0c353/firewall/ua_rules/372e67954025e0ba6aaa6d586b9e0b59'),
                 $this->equalTo([]),
                 $this->equalTo([
                     'mode' => 'js_challenge',
@@ -186,9 +195,13 @@ class UARulesTest extends PHPUnit_Framework_TestCase
             );
 
         $ld = new \Cloudflare\API\Endpoints\UARules($mock);
-        $ld->updateRule('023e105f4ecef8ad9ca31a8372d0c353', '372e67954025e0ba6aaa6d586b9e0b59',
-            'js_challenge', $config,
-            'Restrict access to these endpoints to requests from a known IP address');
+        $ld->updateRule(
+            '023e105f4ecef8ad9ca31a8372d0c353',
+            '372e67954025e0ba6aaa6d586b9e0b59',
+            'js_challenge',
+            $config,
+            'Restrict access to these endpoints to requests from a known IP address'
+        );
     }
 
     public function testDeleteRule()
@@ -211,7 +224,8 @@ class UARulesTest extends PHPUnit_Framework_TestCase
 
         $mock->expects($this->once())
             ->method('delete')
-            ->with($this->equalTo('zones/023e105f4ecef8ad9ca31a8372d0c353/firewall/ua_rules/372e67954025e0ba6aaa6d586b9e0b59'),
+            ->with(
+                $this->equalTo('zones/023e105f4ecef8ad9ca31a8372d0c353/firewall/ua_rules/372e67954025e0ba6aaa6d586b9e0b59'),
                 $this->equalTo([]),
                 $this->equalTo([])
             );
