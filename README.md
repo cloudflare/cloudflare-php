@@ -31,9 +31,9 @@ Note that this repository is currently under development, additional classes and
 ## Getting Started
 
 ```php
-$key     = new \Cloudflare\API\Auth\APIKey('user@example.com', 'apiKey');
+$key     = new Cloudflare\API\Auth\APIKey('user@example.com', 'apiKey');
 $adapter = new Cloudflare\API\Adapter\Guzzle($key);
-$user    = new \Cloudflare\API\Endpoints\User($adapter);
+$user    = new Cloudflare\API\Endpoints\User($adapter);
     
 echo $user->getUserID();
 ```
