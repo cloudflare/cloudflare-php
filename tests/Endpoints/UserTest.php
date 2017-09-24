@@ -5,30 +5,12 @@
  * Date: 01/02/2017
  * Time: 12:50
  */
-class UserTest extends PHPUnit_Framework_TestCase
+class UserTest extends TestCase
 {
     public function testGetUserDetails()
     {
-        $stream = GuzzleHttp\Psr7\stream_for('
-{
-  "success": true,
-  "errors": [],
-  "messages": [],
-  "result": {
-    "id": "7c5dae5552338874e5053f2534d2767a",
-    "email": "user@example.com",
-    "first_name": "John",
-    "last_name": "Appleseed",
-    "username": "cfuser12345",
-    "telephone": "+1 123-123-1234",
-    "country": "US",
-    "zipcode": "12345",
-    "created_on": "2014-01-01T05:20:00Z",
-    "modified_on": "2014-01-01T05:20:00Z",
-    "two_factor_authentication_enabled": false
-  }
-}');
-        $response = new GuzzleHttp\Psr7\Response(200, ['Content-Type' => 'application/json'], $stream);
+        $response = $this->getPsr7JsonResponseForFixture('Endpoints/getUserDetails.json');
+
         $mock = $this->getMockBuilder(\Cloudflare\API\Adapter\Adapter::class)->getMock();
         $mock->method('get')->willReturn($response);
 
@@ -43,26 +25,8 @@ class UserTest extends PHPUnit_Framework_TestCase
 
     public function testGetUserID()
     {
-        $stream = GuzzleHttp\Psr7\stream_for('
-{
-  "success": true,
-  "errors": [],
-  "messages": [],
-  "result": {
-    "id": "7c5dae5552338874e5053f2534d2767a",
-    "email": "user@example.com",
-    "first_name": "John",
-    "last_name": "Appleseed",
-    "username": "cfuser12345",
-    "telephone": "+1 123-123-1234",
-    "country": "US",
-    "zipcode": "12345",
-    "created_on": "2014-01-01T05:20:00Z",
-    "modified_on": "2014-01-01T05:20:00Z",
-    "two_factor_authentication_enabled": false
-  }
-}');
-        $response = new GuzzleHttp\Psr7\Response(200, ['Content-Type' => 'application/json'], $stream);
+        $response = $this->getPsr7JsonResponseForFixture('Endpoints/getUserId.json');
+
         $mock = $this->getMockBuilder(\Cloudflare\API\Adapter\Adapter::class)->getMock();
         $mock->method('get')->willReturn($response);
 
@@ -72,26 +36,8 @@ class UserTest extends PHPUnit_Framework_TestCase
 
     public function testGetUserEmail()
     {
-        $stream = GuzzleHttp\Psr7\stream_for('
-{
-  "success": true,
-  "errors": [],
-  "messages": [],
-  "result": {
-    "id": "7c5dae5552338874e5053f2534d2767a",
-    "email": "user@example.com",
-    "first_name": "John",
-    "last_name": "Appleseed",
-    "username": "cfuser12345",
-    "telephone": "+1 123-123-1234",
-    "country": "US",
-    "zipcode": "12345",
-    "created_on": "2014-01-01T05:20:00Z",
-    "modified_on": "2014-01-01T05:20:00Z",
-    "two_factor_authentication_enabled": false
-  }
-}');
-        $response = new GuzzleHttp\Psr7\Response(200, ['Content-Type' => 'application/json'], $stream);
+        $response = $this->getPsr7JsonResponseForFixture('Endpoints/getUserEmail.json');
+
         $mock = $this->getMockBuilder(\Cloudflare\API\Adapter\Adapter::class)->getMock();
         $mock->method('get')->willReturn($response);
 
@@ -103,26 +49,8 @@ class UserTest extends PHPUnit_Framework_TestCase
 
     public function testUpdateUserDetails()
     {
-        $stream = GuzzleHttp\Psr7\stream_for('
-{
-  "success": true,
-  "errors": [],
-  "messages": [],
-  "result": {
-    "id": "7c5dae5552338874e5053f2534d2767a",
-    "email": "user@example.com",
-    "first_name": "John",
-    "last_name": "Appleseed",
-    "username": "cfuser12345",
-    "telephone": "+1 123-123-1234",
-    "country": "US",
-    "zipcode": "12345",
-    "created_on": "2014-01-01T05:20:00Z",
-    "modified_on": "2014-01-01T05:20:00Z",
-    "two_factor_authentication_enabled": false
-  }
-}');
-        $response = new GuzzleHttp\Psr7\Response(200, ['Content-Type' => 'application/json'], $stream);
+        $response = $this->getPsr7JsonResponseForFixture('Endpoints/updateUserDetails.json');
+
         $mock = $this->getMockBuilder(\Cloudflare\API\Adapter\Adapter::class)->getMock();
         $mock->method('patch')->willReturn($response);
 

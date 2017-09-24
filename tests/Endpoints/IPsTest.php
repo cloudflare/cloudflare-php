@@ -8,25 +8,12 @@
 
 use Cloudflare\API\Endpoints\IPs;
 
-class IPsTest extends PHPUnit_Framework_TestCase
+class IPsTest extends TestCase
 {
     public function testListIPs()
     {
-        $stream = GuzzleHttp\Psr7\stream_for('
-{
-  "success": true,
-  "errors": [],
-  "messages": [],
-  "result": {
-    "ipv4_cidrs": [
-      "199.27.128.0/21"
-    ],
-    "ipv6_cidrs": [
-      "2400:cb00::/32"
-    ]
-  }
-}');
-        $response = new GuzzleHttp\Psr7\Response(200, ['Content-Type' => 'application/json'], $stream);
+        $response = $this->getPsr7JsonResponseForFixture('Endpoints/listIPs.json');
+
         $mock = $this->getMockBuilder(\Cloudflare\API\Adapter\Adapter::class)->getMock();
         $mock->method('get')->willReturn($response);
 

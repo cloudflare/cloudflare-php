@@ -6,38 +6,12 @@
  * Date: 04/09/2017
  * Time: 21:23
  */
-class ZoneLockdownTest extends PHPUnit_Framework_TestCase
+class ZoneLockdownTest extends TestCase
 {
     public function testListLockdowns()
     {
-        $stream = GuzzleHttp\Psr7\stream_for('{
-  "success": true,
-  "errors": [],
-  "messages": [],
-  "result": [
-    {
-      "id": "372e67954025e0ba6aaa6d586b9e0b59",
-      "description": "Restrict access to these endpoints to requests from a known IP address",
-      "urls": [
-        "api.mysite.com/some/endpoint*"
-      ],
-      "configurations": [
-        {
-          "target": "ip",
-          "value": "1.2.3.4"
-        }
-      ]
-    }
-  ],
-  "result_info": {
-    "page": 1,
-    "per_page": 20,
-    "count": 1,
-    "total_count": 2000
-  }
-}');
+        $response = $this->getPsr7JsonResponseForFixture('Endpoints/listLockdowns.json');
 
-        $response = new GuzzleHttp\Psr7\Response(200, ['Content-Type' => 'application/json'], $stream);
         $mock = $this->getMockBuilder(\Cloudflare\API\Adapter\Adapter::class)->getMock();
         $mock->method('get')->willReturn($response);
 
@@ -67,26 +41,8 @@ class ZoneLockdownTest extends PHPUnit_Framework_TestCase
         $config = new \Cloudflare\API\Configurations\ZoneLockdown();
         $config->addIP('1.2.3.4');
 
-        $stream = GuzzleHttp\Psr7\stream_for('
-{
-  "success": true,
-  "errors": [],
-  "messages": [],
-  "result": {
-    "id": "372e67954025e0ba6aaa6d586b9e0b59",
-    "description": "Restrict access to these endpoints to requests from a known IP address",
-    "urls": [
-      "api.mysite.com/some/endpoint*"
-    ],
-    "configurations": [
-      {
-        "target": "ip",
-        "value": "1.2.3.4"
-      }
-    ]
-  }
-}');
-        $response = new GuzzleHttp\Psr7\Response(200, ['Content-Type' => 'application/json'], $stream);
+        $response = $this->getPsr7JsonResponseForFixture('Endpoints/addLockdown.json');
+
         $mock = $this->getMockBuilder(\Cloudflare\API\Adapter\Adapter::class)->getMock();
         $mock->method('post')->willReturn($response);
 
@@ -115,30 +71,8 @@ class ZoneLockdownTest extends PHPUnit_Framework_TestCase
 
     public function testGetRecordDetails()
     {
-        $stream = GuzzleHttp\Psr7\stream_for('{
-  "success": true,
-  "errors": [
-    {}
-  ],
-  "messages": [
-    {}
-  ],
-  "result": {
-    "id": "372e67954025e0ba6aaa6d586b9e0b59",
-    "description": "Restrict access to these endpoints to requests from a known IP address",
-    "urls": [
-      "api.mysite.com/some/endpoint*"
-    ],
-    "configurations": [
-      {
-        "target": "ip",
-        "value": "1.2.3.4"
-      }
-    ]
-  }
-}');
+        $response = $this->getPsr7JsonResponseForFixture('Endpoints/getRecordDetails.json');
 
-        $response = new GuzzleHttp\Psr7\Response(200, ['Content-Type' => 'application/json'], $stream);
         $mock = $this->getMockBuilder(\Cloudflare\API\Adapter\Adapter::class)->getMock();
         $mock->method('get')->willReturn($response);
 
@@ -160,30 +94,8 @@ class ZoneLockdownTest extends PHPUnit_Framework_TestCase
         $config = new \Cloudflare\API\Configurations\ZoneLockdown();
         $config->addIP('1.2.3.4');
 
-        $stream = GuzzleHttp\Psr7\stream_for('
-{
-  "success": true,
-  "errors": [
-    {}
-  ],
-  "messages": [
-    {}
-  ],
-  "result": {
-    "id": "372e67954025e0ba6aaa6d586b9e0b59",
-    "description": "Restrict access to these endpoints to requests from a known IP address",
-    "urls": [
-      "api.mysite.com/some/endpoint*"
-    ],
-    "configurations": [
-      {
-        "target": "ip",
-        "value": "1.2.3.4"
-      }
-    ]
-  }
-}');
-        $response = new GuzzleHttp\Psr7\Response(200, ['Content-Type' => 'application/json'], $stream);
+        $response = $this->getPsr7JsonResponseForFixture('Endpoints/updateLockdown.json');
+
         $mock = $this->getMockBuilder(\Cloudflare\API\Adapter\Adapter::class)->getMock();
         $mock->method('put')->willReturn($response);
 
@@ -215,20 +127,8 @@ class ZoneLockdownTest extends PHPUnit_Framework_TestCase
         $config = new \Cloudflare\API\Configurations\ZoneLockdown();
         $config->addIP('1.2.3.4');
 
-        $stream = GuzzleHttp\Psr7\stream_for('
-{
-  "success": true,
-  "errors": [
-    {}
-  ],
-  "messages": [
-    {}
-  ],
-  "result": {
-    "id": "372e67954025e0ba6aaa6d586b9e0b59"
-  }
-}');
-        $response = new GuzzleHttp\Psr7\Response(200, ['Content-Type' => 'application/json'], $stream);
+        $response = $this->getPsr7JsonResponseForFixture('Endpoints/deleteLockdown.json');
+
         $mock = $this->getMockBuilder(\Cloudflare\API\Adapter\Adapter::class)->getMock();
         $mock->method('delete')->willReturn($response);
 
