@@ -5,7 +5,7 @@
  * Date: 13/01/2017
  * Time: 18:03
  */
-class UserServiceKeyTest extends PHPUnit_Framework_TestCase
+class UserServiceKeyTest extends TestCase
 {
     public function testGetHeaders()
     {

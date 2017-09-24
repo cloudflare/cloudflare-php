@@ -8,7 +8,7 @@
 
 use GuzzleHttp\Psr7\Response;
 
-class GuzzleTest extends PHPUnit_Framework_TestCase
+class GuzzleTest extends TestCase
 {
     private $client;
 

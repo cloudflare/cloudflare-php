@@ -8,46 +8,16 @@
 
 use Cloudflare\API\Adapter\PageRules;
 
-class PageRulesTest extends PHPUnit_Framework_TestCase
+class PageRulesTest extends TestCase
 {
     public function testCreatePageRule()
     {
-        $stream = GuzzleHttp\Psr7\stream_for('{
-  "success": true,
-  "errors": [
-    {}
-  ],
-  "messages": [
-    {}
-  ],
-  "result": {
-    "id": "9a7806061c88ada191ed06f989cc3dac",
-    "targets": [
-      {
-        "target": "url",
-        "constraint": {
-          "operator": "matches",
-          "value": "*example.com/images/*"
-        }
-      }
-    ],
-    "actions": [
-      {
-        "id": "always_online",
-        "value": "on"
-      }
-    ],
-    "priority": 1,
-    "status": "active",
-    "modified_on": "2014-01-01T05:20:00.12345Z",
-    "created_on": "2014-01-01T05:20:00.12345Z"
-  }
-}');
         $target = new \Cloudflare\API\Configurations\PageRulesTargets('*example.com/images/*');
         $action = new \Cloudflare\API\Configurations\PageRulesActions();
         $action->setAlwaysOnline(true);
 
-        $response = new GuzzleHttp\Psr7\Response(200, ['Content-Type' => 'application/json'], $stream);
+        $response = $this->getPsr7JsonResponseForFixture('Endpoints/createPageRule.json');
+
         $mock = $this->getMockBuilder(\Cloudflare\API\Adapter\Adapter::class)->getMock();
         $mock->method('post')->willReturn($response);
 
@@ -72,47 +42,8 @@ class PageRulesTest extends PHPUnit_Framework_TestCase
 
     public function testListPageRules()
     {
-        $stream = GuzzleHttp\Psr7\stream_for('{
-  "success": true,
-  "errors": [
-    {}
-  ],
-  "messages": [
-    {}
-  ],
-  "result": [
-    {
-      "id": "9a7806061c88ada191ed06f989cc3dac",
-      "targets": [
-        {
-          "target": "url",
-          "constraint": {
-            "operator": "matches",
-            "value": "*example.com/images/*"
-          }
-        }
-      ],
-      "actions": [
-        {
-          "id": "always_online",
-          "value": "on"
-        }
-      ],
-      "priority": 1,
-      "status": "active",
-      "modified_on": "2014-01-01T05:20:00.12345Z",
-      "created_on": "2014-01-01T05:20:00.12345Z"
-    }
-  ],
-  "result_info": {
-    "page": 1,
-    "per_page": 20,
-    "count": 1,
-    "total_count": 2000
-  }
-}');
+        $response = $this->getPsr7JsonResponseForFixture('Endpoints/listPageRules.json');
 
-        $response = new GuzzleHttp\Psr7\Response(200, ['Content-Type' => 'application/json'], $stream);
         $mock = $this->getMockBuilder(\Cloudflare\API\Adapter\Adapter::class)->getMock();
         $mock->method('get')->willReturn($response);
 
@@ -135,39 +66,8 @@ class PageRulesTest extends PHPUnit_Framework_TestCase
 
     public function testGetPageRuleDetails()
     {
-        $stream = GuzzleHttp\Psr7\stream_for('{
-  "success": true,
-  "errors": [
-    {}
-  ],
-  "messages": [
-    {}
-  ],
-  "result": {
-    "id": "9a7806061c88ada191ed06f989cc3dac",
-    "targets": [
-      {
-        "target": "url",
-        "constraint": {
-          "operator": "matches",
-          "value": "*example.com/images/*"
-        }
-      }
-    ],
-    "actions": [
-      {
-        "id": "always_online",
-        "value": "on"
-      }
-    ],
-    "priority": 1,
-    "status": "active",
-    "modified_on": "2014-01-01T05:20:00.12345Z",
-    "created_on": "2014-01-01T05:20:00.12345Z"
-  }
-}');
+        $response = $this->getPsr7JsonResponseForFixture('Endpoints/getPageRuleDetails.json');
 
-        $response = new GuzzleHttp\Psr7\Response(200, ['Content-Type' => 'application/json'], $stream);
         $mock = $this->getMockBuilder(\Cloudflare\API\Adapter\Adapter::class)->getMock();
         $mock->method('get')->willReturn($response);
 
@@ -184,42 +84,12 @@ class PageRulesTest extends PHPUnit_Framework_TestCase
 
     public function testUpdatePageRule()
     {
-        $stream = GuzzleHttp\Psr7\stream_for('{
-  "success": true,
-  "errors": [
-    {}
-  ],
-  "messages": [
-    {}
-  ],
-  "result": {
-    "id": "9a7806061c88ada191ed06f989cc3dac",
-    "targets": [
-      {
-        "target": "url",
-        "constraint": {
-          "operator": "matches",
-          "value": "*example.com/images/*"
-        }
-      }
-    ],
-    "actions": [
-      {
-        "id": "always_online",
-        "value": "on"
-      }
-    ],
-    "priority": 1,
-    "status": "active",
-    "modified_on": "2014-01-01T05:20:00.12345Z",
-    "created_on": "2014-01-01T05:20:00.12345Z"
-  }
-}');
         $target = new \Cloudflare\API\Configurations\PageRulesTargets('*example.com/images/*');
         $action = new \Cloudflare\API\Configurations\PageRulesActions();
         $action->setAlwaysOnline(true);
 
-        $response = new GuzzleHttp\Psr7\Response(200, ['Content-Type' => 'application/json'], $stream);
+        $response = $this->getPsr7JsonResponseForFixture('Endpoints/updatePageRule.json');
+
         $mock = $this->getMockBuilder(\Cloudflare\API\Adapter\Adapter::class)->getMock();
         $mock->method('patch')->willReturn($response);
 
@@ -244,20 +114,8 @@ class PageRulesTest extends PHPUnit_Framework_TestCase
 
     public function testDeletePageRule()
     {
-        $stream = GuzzleHttp\Psr7\stream_for('{
-  "success": true,
-  "errors": [
-    {}
-  ],
-  "messages": [
-    {}
-  ],
-  "result": {
-    "id": "9a7806061c88ada191ed06f989cc3dac"
-  }
-}');
+        $response = $this->getPsr7JsonResponseForFixture('Endpoints/deletePageRule.json');
 
-        $response = new GuzzleHttp\Psr7\Response(200, ['Content-Type' => 'application/json'], $stream);
         $mock = $this->getMockBuilder(\Cloudflare\API\Adapter\Adapter::class)->getMock();
         $mock->method('delete')->willReturn($response);
 

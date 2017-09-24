@@ -8,38 +8,12 @@
 
 use Cloudflare\API\Endpoints\UARules;
 
-class UARulesTest extends PHPUnit_Framework_TestCase
+class UARulesTest extends TestCase
 {
     public function testListRules()
     {
-        $stream = GuzzleHttp\Psr7\stream_for('{
-  "success": true,
-  "errors": [
-    {}
-  ],
-  "messages": [
-    {}
-  ],
-  "result": [
-    {
-      "id": "372e67954025e0ba6aaa6d586b9e0b59",
-      "description": "Prevent access from abusive clients identified by this UserAgent to mitigate DDoS attack",
-      "mode": "js_challenge",
-      "configuration": {
-        "target": "ua",
-        "value": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_12_5) AppleWebKit/603.2.4 (KHTML, like Gecko) Version/10.1.1 Safari/603.2.4"
-      }
-    }
-  ],
-  "result_info": {
-    "page": 1,
-    "per_page": 20,
-    "count": 1,
-    "total_count": 2000
-  }
-}');
+        $response = $this->getPsr7JsonResponseForFixture('Endpoints/listRules.json');
 
-        $response = new GuzzleHttp\Psr7\Response(200, ['Content-Type' => 'application/json'], $stream);
         $mock = $this->getMockBuilder(\Cloudflare\API\Adapter\Adapter::class)->getMock();
         $mock->method('get')->willReturn($response);
 
@@ -69,26 +43,8 @@ class UARulesTest extends PHPUnit_Framework_TestCase
         $config = new \Cloudflare\API\Configurations\UARules();
         $config->addUA('Mozilla/5.0 (Macintosh; Intel Mac OS X 10_12_5) AppleWebKit/603.2.4 (KHTML, like Gecko) Version/10.1.1 Safari/603.2.4');
 
-        $stream = GuzzleHttp\Psr7\stream_for('
-{
-  "success": true,
-  "errors": [
-    {}
-  ],
-  "messages": [
-    {}
-  ],
-  "result": {
-    "id": "372e67954025e0ba6aaa6d586b9e0b59",
-    "description": "Prevent access from abusive clients identified by this UserAgent to mitigate DDoS attack",
-    "mode": "js_challenge",
-    "configuration": {
-      "target": "ua",
-      "value": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_12_5) AppleWebKit/603.2.4 (KHTML, like Gecko) Version/10.1.1 Safari/603.2.4"
-    }
-  }
-}');
-        $response = new GuzzleHttp\Psr7\Response(200, ['Content-Type' => 'application/json'], $stream);
+        $response = $this->getPsr7JsonResponseForFixture('Endpoints/createRule.json');
+
         $mock = $this->getMockBuilder(\Cloudflare\API\Adapter\Adapter::class)->getMock();
         $mock->method('post')->willReturn($response);
 
@@ -117,26 +73,8 @@ class UARulesTest extends PHPUnit_Framework_TestCase
 
     public function getRuleDetails()
     {
-        $stream = GuzzleHttp\Psr7\stream_for('{
-  "success": true,
-  "errors": [
-    {}
-  ],
-  "messages": [
-    {}
-  ],
-  "result": {
-    "id": "372e67954025e0ba6aaa6d586b9e0b59",
-    "description": "Prevent access from abusive clients identified by this UserAgent to mitigate DDoS attack",
-    "mode": "js_challenge",
-    "configuration": {
-      "target": "ua",
-      "value": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_12_5) AppleWebKit/603.2.4 (KHTML, like Gecko) Version/10.1.1 Safari/603.2.4"
-    }
-  }
-}');
+        $response = $this->getPsr7JsonResponseForFixture('Endpoints/getRuleDetails.json');
 
-        $response = new GuzzleHttp\Psr7\Response(200, ['Content-Type' => 'application/json'], $stream);
         $mock = $this->getMockBuilder(\Cloudflare\API\Adapter\Adapter::class)->getMock();
         $mock->method('get')->willReturn($response);
 
@@ -158,26 +96,8 @@ class UARulesTest extends PHPUnit_Framework_TestCase
         $config = new \Cloudflare\API\Configurations\UARules();
         $config->addUA('Mozilla/5.0 (Macintosh; Intel Mac OS X 10_12_5) AppleWebKit/603.2.4 (KHTML, like Gecko) Version/10.1.1 Safari/603.2.4');
 
-        $stream = GuzzleHttp\Psr7\stream_for('
-{
-  "success": true,
-  "errors": [
-    {}
-  ],
-  "messages": [
-    {}
-  ],
-  "result": {
-    "id": "372e67954025e0ba6aaa6d586b9e0b59",
-    "description": "Prevent access from abusive clients identified by this UserAgent to mitigate DDoS attack",
-    "mode": "js_challenge",
-    "configuration": {
-      "target": "ua",
-      "value": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_12_5) AppleWebKit/603.2.4 (KHTML, like Gecko) Version/10.1.1 Safari/603.2.4"
-    }
-  }
-}');
-        $response = new GuzzleHttp\Psr7\Response(200, ['Content-Type' => 'application/json'], $stream);
+        $response = $this->getPsr7JsonResponseForFixture('Endpoints/updateRule.json');
+
         $mock = $this->getMockBuilder(\Cloudflare\API\Adapter\Adapter::class)->getMock();
         $mock->method('put')->willReturn($response);
 
@@ -206,19 +126,8 @@ class UARulesTest extends PHPUnit_Framework_TestCase
 
     public function testDeleteRule()
     {
-        $stream = GuzzleHttp\Psr7\stream_for('{
-  "success": true,
-  "errors": [
-    {}
-  ],
-  "messages": [
-    {}
-  ],
-  "result": {
-    "id": "372e67954025e0ba6aaa6d586b9e0b59"
-  }
-}');
-        $response = new GuzzleHttp\Psr7\Response(200, ['Content-Type' => 'application/json'], $stream);
+        $response = $this->getPsr7JsonResponseForFixture('Endpoints/deleteRule.json');
+
         $mock = $this->getMockBuilder(\Cloudflare\API\Adapter\Adapter::class)->getMock();
         $mock->method('delete')->willReturn($response);
 
