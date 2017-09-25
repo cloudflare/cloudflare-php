@@ -5,12 +5,12 @@
   "require": {
     "guzzlehttp/guzzle": "^6.2.2",
     "php": ">=7.0.0",
-    "psr/http-message": "~1.0",
-    "friendsofphp/php-cs-fixer": "^2.6"
+    "psr/http-message": "~1.0"
   },
   "require-dev": {
     "phpunit/phpunit": "5.7.5",
-    "phpmd/phpmd" : "@stable"
+    "phpmd/phpmd" : "@stable",
+    "friendsofphp/php-cs-fixer": "^2.6"
   },
   "license": "BSD-3-Clause",
   "authors": [
