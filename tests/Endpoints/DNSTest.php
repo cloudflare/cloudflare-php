@@ -85,4 +85,37 @@ class DNSTest extends TestCase
 
         $this->assertEquals("372e67954025e0ba6aaa6d586b9e0b59", $result->id);
     }
+
+    public function testUpdateDNSRecord()
+    {
+        $response = $this->getPsr7JsonResponseForFixture('Endpoints/updateDNSRecord.json');
+
+        $mock = $this->getMockBuilder(\Cloudflare\API\Adapter\Adapter::class)->getMock();
+        $mock->method('put')->willReturn($response);
+
+        $details = array(
+            'type' => 'A',
+            'name' => "example.com",
+            'content' => "1.2.3.4",
+            'ttl' => 120,
+            'proxied' => false,
+        );
+
+        $mock->expects($this->once())
+            ->method('put')
+            ->with(
+                $this->equalTo('zones/023e105f4ecef8ad9ca31a8372d0c353/dns_records/372e67954025e0ba6aaa6d586b9e0b59'),
+                $this->equalTo([]),
+                $this->equalTo($details)
+            );
+
+        $dns = new \Cloudflare\API\Endpoints\DNS($mock);
+        $result = $dns->updateRecordDetails("023e105f4ecef8ad9ca31a8372d0c353", "372e67954025e0ba6aaa6d586b9e0b59", $details);
+
+        $this->assertEquals("372e67954025e0ba6aaa6d586b9e0b59", $result->result->id);
+
+        foreach ($details as $property => $value) {
+            $this->assertEquals($result->result->{ $property }, $value);
+        }
+    }
 }
