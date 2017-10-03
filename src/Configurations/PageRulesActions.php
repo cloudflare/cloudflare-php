@@ -10,7 +10,7 @@ namespace Cloudflare\API\Configurations;
 
 class PageRulesActions implements Configurations
 {
-    private $configs = array();
+    private $configs = [];
 
     public function setAlwaysOnline(bool $active)
     {

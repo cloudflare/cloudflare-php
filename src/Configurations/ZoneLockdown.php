@@ -10,7 +10,7 @@ namespace Cloudflare\API\Configurations;
 
 class ZoneLockdown implements Configurations
 {
-    private $configs = array();
+    private $configs = [];
 
     public function addIP(string $value)
     {

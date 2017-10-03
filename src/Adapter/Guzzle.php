@@ -37,7 +37,7 @@ class Guzzle implements Adapter
     /**
      * @inheritDoc
      */
-    public function get(String $uri, array $query = array(), array $headers = array()): ResponseInterface
+    public function get(String $uri, array $query = [], array $headers = []): ResponseInterface
     {
         $response = $this->client->get($uri, ['query' => $query, 'headers' => $headers]);
 
@@ -48,7 +48,7 @@ class Guzzle implements Adapter
     /**
      * @inheritDoc
      */
-    public function post(String $uri, array $headers = array(), array $body = array()): ResponseInterface
+    public function post(String $uri, array $headers = [], array $body = []): ResponseInterface
     {
         $response = $this->client->post(
             $uri,
@@ -65,7 +65,7 @@ class Guzzle implements Adapter
     /**
      * @inheritDoc
      */
-    public function put(String $uri, array $headers = array(), array $body = array()): ResponseInterface
+    public function put(String $uri, array $headers = [], array $body = []): ResponseInterface
     {
         $jsonBody = json_encode($body);
 
@@ -84,7 +84,7 @@ class Guzzle implements Adapter
     /**
      * @inheritDoc
      */
-    public function patch(String $uri, array $headers = array(), array $body = array()): ResponseInterface
+    public function patch(String $uri, array $headers = [], array $body = []): ResponseInterface
     {
         $jsonBody = json_encode($body);
 
@@ -103,7 +103,7 @@ class Guzzle implements Adapter
     /**
      * @inheritDoc
      */
-    public function delete(String $uri, array $headers = array(), array $body = array()): ResponseInterface
+    public function delete(String $uri, array $headers = [], array $body = []): ResponseInterface
     {
         $response = $this->client->delete(
             $uri,

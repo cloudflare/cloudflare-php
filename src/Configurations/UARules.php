@@ -10,7 +10,7 @@ namespace Cloudflare\API\Configurations;
 
 class UARules implements Configurations
 {
-    private $configs = array();
+    private $configs = [];
 
     public function addUA(string $value)
     {
