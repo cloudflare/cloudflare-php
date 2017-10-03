@@ -14,38 +14,30 @@ class PageRulesActions implements Configurations
 
     public function setAlwaysOnline(bool $active)
     {
-        $object = new \stdClass();
-        $object->id = "always_online";
-        $object->value = $active === true ? "on" : "off";
-
-        array_push($this->configs, $object);
+        $this->addConfigurationOption("always_online", [
+            'value' => $this->getBoolAsOnOrOff($active)
+        ]);
     }
 
     public function setAlwaysUseHTTPS(bool $active)
     {
-        $object = new \stdClass();
-        $object->id = "always_use_https";
-        $object->value = $active === true ? "on" : "off";
-
-        array_push($this->configs, $object);
+        $this->addConfigurationOption("always_use_https", [
+            'value' => $this->getBoolAsOnOrOff($active)
+        ]);
     }
 
     public function setBrowserCacheTTL(int $ttl)
     {
-        $object = new \stdClass();
-        $object->id = "browser_cache_ttl";
-        $object->value = $ttl;
-
-        array_push($this->configs, $object);
+        $this->addConfigurationOption("browser_cache_ttl", [
+            'value' => $ttl
+        ]);
     }
 
     public function setBrowserIntegrityCheck(bool $active)
     {
-        $object = new \stdClass();
-        $object->id = "browser_check";
-        $object->value = $active === true ? "on" : "off";
-
-        array_push($this->configs, $object);
+        $this->addConfigurationOption("browser_check", [
+            'value' => $this->getBoolAsOnOrOff($active)
+        ]);
     }
 
     public function setBypassCacheOnCookie(bool $value)
@@ -54,29 +46,23 @@ class PageRulesActions implements Configurations
             throw new ConfigurationsException("Invalid cookie string.");
         }
 
-        $object = new \stdClass();
-        $object->id = "bypass_cache_on_cookie";
-        $object->value = $value;
-
-        array_push($this->configs, $object);
+        $this->addConfigurationOption("bypass_cache_on_cookie", [
+            'value' => $value
+        ]);
     }
 
     public function setCacheByDeviceType(bool $active)
     {
-        $object = new \stdClass();
-        $object->id = "cache_by_device_type";
-        $object->value = $active === true ? "on" : "off";
-
-        array_push($this->configs, $object);
+        $this->addConfigurationOption("cache_by_device_type", [
+            'value' => $this->getBoolAsOnOrOff($active)
+        ]);
     }
 
     public function setCacheKey(string $value)
     {
-        $object = new \stdClass();
-        $object->id = "cache_key";
-        $object->value = $value;
-
-        array_push($this->configs, $object);
+        $this->addConfigurationOption("cache_key", [
+            'value' => $value
+        ]);
     }
 
     public function setCacheLevel(string $value)
@@ -85,11 +71,9 @@ class PageRulesActions implements Configurations
             throw new ConfigurationsException("Invalid cache level");
         }
 
-        $object = new \stdClass();
-        $object->id = "cache_level";
-        $object->value = $value;
-
-        array_push($this->configs, $object);
+        $this->addConfigurationOption("cache_level", [
+            'value' => $value
+        ]);
     }
 
     public function setCacheOnCookie(bool $value)
@@ -98,38 +82,30 @@ class PageRulesActions implements Configurations
             throw new ConfigurationsException("Invalid cookie string.");
         }
 
-        $object = new \stdClass();
-        $object->id = "cache_on_cookie";
-        $object->value = $value;
-
-        array_push($this->configs, $object);
+        $this->addConfigurationOption("cache_on_cookie", [
+            'value' => $value
+        ]);
     }
 
     public function setDisableApps(bool $active)
     {
-        $object = new \stdClass();
-        $object->id = "disable_apps";
-        $object->value = $active === true ? "on" : "off";
-
-        array_push($this->configs, $object);
+        $this->addConfigurationOption("disable_apps", [
+            'value' => $this->getBoolAsOnOrOff($active)
+        ]);
     }
 
     public function setDisablePerformance(bool $active)
     {
-        $object = new \stdClass();
-        $object->id = "disable_performance";
-        $object->value = $active === true ? "on" : "off";
-
-        array_push($this->configs, $object);
+        $this->addConfigurationOption("disable_performance", [
+            'value' => $this->getBoolAsOnOrOff($active)
+        ]);
     }
 
     public function setDisableSecurity(bool $active)
     {
-        $object = new \stdClass();
-        $object->id = "disable_security";
-        $object->value = $active === true ? "on" : "off";
-
-        array_push($this->configs, $object);
+        $this->addConfigurationOption("disable_security", [
+            'value' => $this->getBoolAsOnOrOff($active)
+        ]);
     }
 
     public function setEdgeCacheTTL(int $value)
@@ -138,135 +114,107 @@ class PageRulesActions implements Configurations
             throw new ConfigurationsException("Edge Cache TTL too high.");
         }
 
-        $object = new \stdClass();
-        $object->id = "edge_cache_ttl";
-        $object->value = $value;
-
-        array_push($this->configs, $object);
+        $this->addConfigurationOption("edge_cache_ttl", [
+            'value' => $value
+        ]);
     }
 
     public function setEmailObfuscation(bool $active)
     {
-        $object = new \stdClass();
-        $object->id = "disable_security";
-        $object->value = $active === true ? "on" : "off";
-
-        array_push($this->configs, $object);
+        $this->addConfigurationOption("disable_security", [
+            'value' => $this->getBoolAsOnOrOff($active)
+        ]);
     }
 
     public function setForwardingURL(int $statusCode, string $forwardingUrl)
     {
-        if (in_array($statusCode, ['301', '302'])) {
+        if (!in_array($statusCode, ['301', '302'])) {
             throw new ConfigurationsException('Status Codes can only be 301 or 302.');
         }
 
-        $object = new \stdClass();
-        $object->id = "forwarding_url";
-        $object->status_code = $statusCode;
-        $object->url = $forwardingUrl;
-
-        array_push($this->configs, $object);
+        $this->addConfigurationOption("forwarding_url", [
+            'status_code' => $statusCode,
+            'url' => $forwardingUrl,
+        ]);
     }
 
     public function setHostHeaderOverride(bool $active)
     {
-        $object = new \stdClass();
-        $object->id = "host_header_override";
-        $object->value = $active === true ? "on" : "off";
-
-        array_push($this->configs, $object);
+        $this->addConfigurationOption("host_header_override", [
+            'value' => $this->getBoolAsOnOrOff($active)
+        ]);
     }
 
     public function setHotlinkProtection(bool $active)
     {
-        $object = new \stdClass();
-        $object->id = "hotlink_protection";
-        $object->value = $active === true ? "on" : "off";
-
-        array_push($this->configs, $object);
+        $this->addConfigurationOption("hotlink_protection", [
+            'value' => $this->getBoolAsOnOrOff($active)
+        ]);
     }
 
     public function setIPGeoLocationHeader(bool $active)
     {
-        $object = new \stdClass();
-        $object->id = "ip_geolocation";
-        $object->value = $active === true ? "on" : "off";
-
-        array_push($this->configs, $object);
+        $this->addConfigurationOption("ip_geolocation", [
+            'value' => $this->getBoolAsOnOrOff($active)
+        ]);
     }
 
     public function setMinification(bool $html, bool $css, bool $js)
     {
-        $object = new \stdClass();
-        $object->id = "minification";
-        $object->html = $html === true ? "on" : "off";
-        $object->css = $css === true ? "on" : "off";
-        $object->js = $js === true ? "on" : "off";
-
-        array_push($this->configs, $object);
+        $this->addConfigurationOption("minification", [
+            'html' => $this->getBoolAsOnOrOff($html),
+            'css' => $this->getBoolAsOnOrOff($css),
+            'js' => $this->getBoolAsOnOrOff($js),
+        ]);
     }
 
     public function setMirage(bool $active)
     {
-        $object = new \stdClass();
-        $object->id = "mirage";
-        $object->value = $active === true ? "on" : "off";
-
-        array_push($this->configs, $object);
+        $this->addConfigurationOption("mirage", [
+            'value' => $this->getBoolAsOnOrOff($active)
+        ]);
     }
 
     public function setOriginErrorPagePassthru(bool $active)
     {
-        $object = new \stdClass();
-        $object->id = "origin_error_page_pass_thru";
-        $object->value = $active === true ? "on" : "off";
-
-        array_push($this->configs, $object);
+        $this->addConfigurationOption("origin_error_page_pass_thru", [
+            'value' => $this->getBoolAsOnOrOff($active)
+        ]);
     }
 
     public function setQueryStringSort(bool $active)
     {
-        $object = new \stdClass();
-        $object->id = "sort_query_string_for_cache";
-        $object->value = $active === true ? "on" : "off";
-
-        array_push($this->configs, $object);
+        $this->addConfigurationOption("sort_query_string_for_cache", [
+            'value' => $this->getBoolAsOnOrOff($active)
+        ]);
     }
 
     public function setDisableRailgun(bool $active)
     {
-        $object = new \stdClass();
-        $object->id = "disable_railgun";
-        $object->value = $active === true ? "on" : "off";
-
-        array_push($this->configs, $object);
+        $this->addConfigurationOption("disable_railgun", [
+            'value' => $this->getBoolAsOnOrOff($active)
+        ]);
     }
 
     public function setResolveOverride(bool $value)
     {
-        $object = new \stdClass();
-        $object->id = "resolve_override";
-        $object->value = $value;
-
-        array_push($this->configs, $object);
+        $this->addConfigurationOption("resolve_override", [
+            'value' => $value
+        ]);
     }
 
     public function setRespectStrongEtag(bool $active)
     {
-        $object = new \stdClass();
-        $object->id = "respect_strong_etag";
-        $object->value = $active === true ? "on" : "off";
-
-        array_push($this->configs, $object);
+        $this->addConfigurationOption("respect_strong_etag", [
+            'value' => $this->getBoolAsOnOrOff($active)
+        ]);
     }
 
     public function setResponseBuffering(bool $active)
     {
-        $object = new \stdClass();
-        $object->id = "response_buffering";
-        $object->value = $active === true ? "on" : "off";
-
-        array_push($this->configs, $object);
+        $this->addConfigurationOption("response_buffering", [
+            'value' => $this->getBoolAsOnOrOff($active)
+        ]);
     }
 
     public function setRocketLoader(string $value)
@@ -275,11 +223,9 @@ class PageRulesActions implements Configurations
             throw new ConfigurationsException('Rocket Loader can only be off, automatic, or manual.');
         }
 
-        $object = new \stdClass();
-        $object->id = "rocket_loader";
-        $object->value = $value;
-
-        array_push($this->configs, $object);
+        $this->addConfigurationOption("rocket_loader", [
+            'value' => $value
+        ]);
     }
 
     public function setSecurityLevel(string $value)
@@ -288,29 +234,23 @@ class PageRulesActions implements Configurations
             throw new ConfigurationsException('Can only be set to off, essentially_off, low, medium, high or under_attack.');
         }
 
-        $object = new \stdClass();
-        $object->id = "security_level";
-        $object->value = $value;
-
-        array_push($this->configs, $object);
+        $this->addConfigurationOption("security_level", [
+            'value' => $value
+        ]);
     }
 
     public function setServerSideExcludes(bool $active)
     {
-        $object = new \stdClass();
-        $object->id = "server_side_exclude";
-        $object->value = $active === true ? "on" : "off";
-
-        array_push($this->configs, $object);
+        $this->addConfigurationOption("server_side_exclude", [
+            'value' => $this->getBoolAsOnOrOff($active)
+        ]);
     }
 
     public function setSmartErrors(bool $active)
     {
-        $object = new \stdClass();
-        $object->id = "smart_errors";
-        $object->value = $active === true ? "on" : "off";
-
-        array_push($this->configs, $object);
+        $this->addConfigurationOption("smart_errors", [
+            'value' => $this->getBoolAsOnOrOff($active)
+        ]);
     }
 
     public function setSSL(string $value)
@@ -319,51 +259,53 @@ class PageRulesActions implements Configurations
             throw new ConfigurationsException('Can only be set to off, flexible, full, strict, origin_pull.');
         }
 
-        $object = new \stdClass();
-        $object->id = "smart_errors";
-        $object->value = $value;
-
-        array_push($this->configs, $object);
+        $this->addConfigurationOption("smart_errors", [
+            'value' => $value
+        ]);
     }
 
     public function setTrueClientIpHeader(bool $active)
     {
-        $object = new \stdClass();
-        $object->id = "true_client_ip_header";
-        $object->value = $active === true ? "on" : "off";
-
-        array_push($this->configs, $object);
+        $this->addConfigurationOption("true_client_ip_header", [
+            'value' => $this->getBoolAsOnOrOff($active)
+        ]);
     }
 
     public function setWAF(bool $active)
     {
-        $object = new \stdClass();
-        $object->id = "waf";
-        $object->value = $active === true ? "on" : "off";
-
-        array_push($this->configs, $object);
+        $this->addConfigurationOption("waf", [
+            'value' => $this->getBoolAsOnOrOff($active)
+        ]);
     }
 
     public function setAutomatedHTTPSRewrites(bool $active)
     {
-        $object = new \stdClass();
-        $object->id = "automatic_https_rewrites";
-        $object->value = $active === true ? "on" : "off";
-
-        array_push($this->configs, $object);
+        $this->addConfigurationOption("automatic_https_rewrites", [
+            'value' => $this->getBoolAsOnOrOff($active)
+        ]);
     }
 
     public function setOpportunisticEncryption(bool $active)
     {
-        $object = new \stdClass();
-        $object->id = "opportunistic_encryption";
-        $object->value = $active === true ? "on" : "off";
-
-        array_push($this->configs, $object);
+        $this->addConfigurationOption("opportunistic_encryption", [
+            'value' => $this->getBoolAsOnOrOff($active)
+        ]);
     }
 
     public function getArray(): array
     {
         return $this->configs;
+    }
+
+    private function addConfigurationOption($id, array $configuration)
+    {
+        $configuration['id'] = $id;
+
+        array_push($this->configs, (object) $configuration);
+    }
+
+    private function getBoolAsOnOrOff(bool $value): string
+    {
+        return true === $value ? 'on' : 'off';
     }
 }
