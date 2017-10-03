@@ -93,13 +93,13 @@ class DNSTest extends TestCase
         $mock = $this->getMockBuilder(\Cloudflare\API\Adapter\Adapter::class)->getMock();
         $mock->method('put')->willReturn($response);
 
-        $details = array(
+        $details = [
             'type' => 'A',
             'name' => "example.com",
             'content' => "1.2.3.4",
             'ttl' => 120,
             'proxied' => false,
-        );
+        ];
 
         $mock->expects($this->once())
             ->method('put')
