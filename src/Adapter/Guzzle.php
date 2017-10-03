@@ -67,13 +67,11 @@ class Guzzle implements Adapter
      */
     public function put(String $uri, array $headers = [], array $body = []): ResponseInterface
     {
-        $jsonBody = json_encode($body);
-
         $response = $this->client->put(
             $uri,
             [
                 'headers' => $headers,
-                'json' => $jsonBody
+                'json' => $body
             ]
         );
 
@@ -86,13 +84,11 @@ class Guzzle implements Adapter
      */
     public function patch(String $uri, array $headers = [], array $body = []): ResponseInterface
     {
-        $jsonBody = json_encode($body);
-
         $response = $this->client->patch(
             $uri,
             [
                 'headers' => $headers,
-                'json' => $jsonBody
+                'json' => $body
             ]
         );
 
