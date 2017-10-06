@@ -58,7 +58,7 @@ class GuzzleTest extends TestCase
         $this->assertEquals("application/json", $headers["Content-Type"][0]);
 
         $body = json_decode($response->getBody());
-        $this->assertEquals("Testing a PUT request.", json_decode($body->json)->{"X-Put-Test"});
+        $this->assertEquals("Testing a PUT request.", $body->json->{"X-Put-Test"});
     }
 
     public function testPatch()
@@ -73,7 +73,7 @@ class GuzzleTest extends TestCase
         $this->assertEquals("application/json", $headers["Content-Type"][0]);
 
         $body = json_decode($response->getBody());
-        $this->assertEquals("Testing a PATCH request.", json_decode($body->json)->{"X-Patch-Test"});
+        $this->assertEquals("Testing a PATCH request.", $body->json->{"X-Patch-Test"});
     }
 
     public function testDelete()
