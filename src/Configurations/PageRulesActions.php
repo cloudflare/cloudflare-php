@@ -40,7 +40,7 @@ class PageRulesActions implements Configurations
         ]);
     }
 
-    public function setBypassCacheOnCookie(bool $value)
+    public function setBypassCacheOnCookie(string $value)
     {
         if (preg_match('/^([a-zA-Z0-9\.=|_*-]+)$/i', $value) < 1) {
             throw new ConfigurationsException("Invalid cookie string.");
@@ -76,7 +76,7 @@ class PageRulesActions implements Configurations
         ]);
     }
 
-    public function setCacheOnCookie(bool $value)
+    public function setCacheOnCookie(string $value)
     {
         if (preg_match('/^([a-zA-Z0-9\.=|_*-]+)$/i', $value) < 1) {
             throw new ConfigurationsException("Invalid cookie string.");

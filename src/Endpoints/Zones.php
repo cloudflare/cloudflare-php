@@ -119,9 +119,9 @@ class Zones implements API
         return false;
     }
 
-    public function cachePurge(string $zoneID, array $files = [], array $tags = []): bool
+    public function cachePurge(string $zoneID, array $files = null, array $tags = null): bool
     {
-        if (empty($files) && empty($tags)) {
+        if (is_null($files) && is_null($tags)) {
             throw new EndpointException("No files or tags to purge.");
         }
 
