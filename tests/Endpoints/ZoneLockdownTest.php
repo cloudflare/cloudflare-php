@@ -59,8 +59,8 @@ class ZoneLockdownTest extends TestCase
                 ])
             );
 
-        $ld = new \Cloudflare\API\Endpoints\ZoneLockdown($mock);
-        $ld->createLockdown(
+        $zoneLockdown = new \Cloudflare\API\Endpoints\ZoneLockdown($mock);
+        $zoneLockdown->createLockdown(
             '023e105f4ecef8ad9ca31a8372d0c353',
             ["api.mysite.com/some/endpoint*"],
             $config,
@@ -112,8 +112,8 @@ class ZoneLockdownTest extends TestCase
                 ])
             );
 
-        $ld = new \Cloudflare\API\Endpoints\ZoneLockdown($mock);
-        $ld->updateLockdown(
+        $zoneLockdown = new \Cloudflare\API\Endpoints\ZoneLockdown($mock);
+        $zoneLockdown->updateLockdown(
             '023e105f4ecef8ad9ca31a8372d0c353',
             '372e67954025e0ba6aaa6d586b9e0b59',
             ["api.mysite.com/some/endpoint*"],
@@ -140,7 +140,7 @@ class ZoneLockdownTest extends TestCase
                 $this->equalTo([])
             );
 
-        $ld = new \Cloudflare\API\Endpoints\ZoneLockdown($mock);
-        $ld->deleteLockdown('023e105f4ecef8ad9ca31a8372d0c353', '372e67954025e0ba6aaa6d586b9e0b59');
+        $zoneLockdown = new \Cloudflare\API\Endpoints\ZoneLockdown($mock);
+        $zoneLockdown->deleteLockdown('023e105f4ecef8ad9ca31a8372d0c353', '372e67954025e0ba6aaa6d586b9e0b59');
     }
 }
