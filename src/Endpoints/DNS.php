@@ -19,6 +19,17 @@ class DNS implements API
         $this->adapter = $adapter;
     }
 
+    /**
+     * @SuppressWarnings(PHPMD.BooleanArgumentFlag)
+     *
+     * @param string $zoneID
+     * @param string $type
+     * @param string $name
+     * @param string $content
+     * @param int $ttl
+     * @param bool $proxied
+     * @return bool
+     */
     public function addRecord(
         string $zoneID,
         string $type,

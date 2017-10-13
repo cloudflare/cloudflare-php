@@ -133,6 +133,6 @@ class GuzzleTest extends TestCase
     public function testNotFound()
     {
         $this->expectException(\GuzzleHttp\Exception\RequestException::class);
-        $response = $this->client->get('https://httpbin.org/status/404');
+        $this->client->get('https://httpbin.org/status/404');
     }
 }

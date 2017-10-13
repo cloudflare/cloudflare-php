@@ -159,12 +159,12 @@ class PageRulesActions implements Configurations
         ]);
     }
 
-    public function setMinification(bool $html, bool $css, bool $js)
+    public function setMinification(bool $html, bool $css, bool $javascript)
     {
         $this->addConfigurationOption("minification", [
             'html' => $this->getBoolAsOnOrOff($html),
             'css' => $this->getBoolAsOnOrOff($css),
-            'js' => $this->getBoolAsOnOrOff($js),
+            'js' => $this->getBoolAsOnOrOff($javascript),
         ]);
     }
 
@@ -297,9 +297,9 @@ class PageRulesActions implements Configurations
         return $this->configs;
     }
 
-    private function addConfigurationOption($id, array $configuration)
+    private function addConfigurationOption(string $setting, array $configuration)
     {
-        $configuration['id'] = $id;
+        $configuration['id'] = $setting;
 
         array_push($this->configs, (object) $configuration);
     }

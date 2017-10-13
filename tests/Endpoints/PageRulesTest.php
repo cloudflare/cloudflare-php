@@ -34,8 +34,8 @@ class PageRulesTest extends TestCase
                 ])
             );
 
-        $pr = new \Cloudflare\API\Endpoints\PageRules($mock);
-        $result = $pr->createPageRule('023e105f4ecef8ad9ca31a8372d0c353', $target, $action, true, 1);
+        $pageRules = new \Cloudflare\API\Endpoints\PageRules($mock);
+        $result = $pageRules->createPageRule('023e105f4ecef8ad9ca31a8372d0c353', $target, $action, true, 1);
 
         $this->assertTrue($result);
     }
@@ -60,8 +60,8 @@ class PageRulesTest extends TestCase
               $this->equalTo([])
             );
 
-        $pr = new \Cloudflare\API\Endpoints\PageRules($mock);
-        $pr->listPageRules('023e105f4ecef8ad9ca31a8372d0c353', 'active', 'status', 'desc', 'all');
+        $pageRules = new \Cloudflare\API\Endpoints\PageRules($mock);
+        $pageRules->listPageRules('023e105f4ecef8ad9ca31a8372d0c353', 'active', 'status', 'desc', 'all');
     }
 
     public function testGetPageRuleDetails()
@@ -78,8 +78,8 @@ class PageRulesTest extends TestCase
                 $this->equalTo([])
             );
 
-        $pr = new \Cloudflare\API\Endpoints\PageRules($mock);
-        $pr->getPageRuleDetails('023e105f4ecef8ad9ca31a8372d0c353', '9a7806061c88ada191ed06f989cc3dac');
+        $pageRules = new \Cloudflare\API\Endpoints\PageRules($mock);
+        $pageRules->getPageRuleDetails('023e105f4ecef8ad9ca31a8372d0c353', '9a7806061c88ada191ed06f989cc3dac');
     }
 
     public function testUpdatePageRule()
@@ -106,8 +106,8 @@ class PageRulesTest extends TestCase
                 ])
             );
 
-        $pr = new \Cloudflare\API\Endpoints\PageRules($mock);
-        $result = $pr->updatePageRule('023e105f4ecef8ad9ca31a8372d0c353', $target, $action, true, 1);
+        $pageRules = new \Cloudflare\API\Endpoints\PageRules($mock);
+        $result = $pageRules->updatePageRule('023e105f4ecef8ad9ca31a8372d0c353', $target, $action, true, 1);
 
         $this->assertTrue($result);
     }
@@ -127,8 +127,8 @@ class PageRulesTest extends TestCase
                 $this->equalTo([])
             );
 
-        $pr = new \Cloudflare\API\Endpoints\PageRules($mock);
-        $result = $pr->deletePageRule('023e105f4ecef8ad9ca31a8372d0c353', '9a7806061c88ada191ed06f989cc3dac');
+        $pageRules = new \Cloudflare\API\Endpoints\PageRules($mock);
+        $result = $pageRules->deletePageRule('023e105f4ecef8ad9ca31a8372d0c353', '9a7806061c88ada191ed06f989cc3dac');
 
         $this->assertTrue($result);
     }

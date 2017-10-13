@@ -6,8 +6,6 @@
  * Time: 15:19
  */
 
-use Cloudflare\API\Endpoints\UARules;
-
 class UARulesTest extends TestCase
 {
     public function testListRules()
@@ -61,8 +59,8 @@ class UARulesTest extends TestCase
                 ])
             );
 
-        $ld = new \Cloudflare\API\Endpoints\UARules($mock);
-        $ld->createRule(
+        $rules = new \Cloudflare\API\Endpoints\UARules($mock);
+        $rules->createRule(
             '023e105f4ecef8ad9ca31a8372d0c353',
             'js_challenge',
             $config,
@@ -114,8 +112,8 @@ class UARulesTest extends TestCase
                 ])
             );
 
-        $ld = new \Cloudflare\API\Endpoints\UARules($mock);
-        $ld->updateRule(
+        $rules = new \Cloudflare\API\Endpoints\UARules($mock);
+        $rules->updateRule(
             '023e105f4ecef8ad9ca31a8372d0c353',
             '372e67954025e0ba6aaa6d586b9e0b59',
             'js_challenge',
@@ -139,7 +137,7 @@ class UARulesTest extends TestCase
                 $this->equalTo([])
             );
 
-        $ld = new \Cloudflare\API\Endpoints\UARules($mock);
-        $ld->deleteRule('023e105f4ecef8ad9ca31a8372d0c353', '372e67954025e0ba6aaa6d586b9e0b59');
+        $rules = new \Cloudflare\API\Endpoints\UARules($mock);
+        $rules->deleteRule('023e105f4ecef8ad9ca31a8372d0c353', '372e67954025e0ba6aaa6d586b9e0b59');
     }
 }
