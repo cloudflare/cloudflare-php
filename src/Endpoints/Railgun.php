@@ -21,7 +21,7 @@ class Railgun implements API
     }
 
     public function create(
-        string $name = ""
+        string $name
     ): \stdClass {
         $query = [
         'name' => $name,
@@ -30,7 +30,7 @@ class Railgun implements API
         $user = $this->adapter->post('railguns', [], $query);
         $body = json_decode($user->getBody());
         
-        return $body->result;
+        return $body;
     }
 
     public function list(
