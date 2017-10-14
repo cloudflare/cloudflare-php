@@ -18,14 +18,9 @@ class Railgun implements \Cloudflare\API\Endpoints\API
         $this->adapter = $adapter;
     }
 
-    /**
-     * Create Railgun
-     * @return object
-     */
     public function create(
-        string $name = "",
+        string $name = ""
     ): \stdClass {
-		
         $query = [
         'name' => $name,
         ];
@@ -35,15 +30,11 @@ class Railgun implements \Cloudflare\API\Endpoints\API
         
         return $body->result;
     }
-	
-    /**
-     * List Railguns
-     * @return object
-     */
+
     public function list(
         int $page = 1,
         int $perPage = 20,
-        string $direction = "",
+        string $direction = ""
     ): \stdClass {
         $query = [
         'page' => $page,
@@ -63,66 +54,47 @@ class Railgun implements \Cloudflare\API\Endpoints\API
         
         return $result;
     }
-	
-    /**
-     * Get Railgun detail
-     * @return object
-     */
+
     public function get(
-        string $id,
-	): \stdClass {
-            
-        $user = $this->adapter->get('railguns/'.$id, [], []);
+        string $railID
+    ): \stdClass {
+        $user = $this->adapter->get('railguns/'.$railID, [], []);
         $body = json_decode($user->getBody());
         
         return $body->result;
     }
-	
-    /**
-     * Get Railgun Zones
-     * @return object
-     */
+    
     public function getZones(
-        string $id,
-	): \stdClass {
-            
-        $user = $this->adapter->get('railguns/'.$id.'/zones', [], []);
+        string $railID
+    ): \stdClass {
+        $user = $this->adapter->get('railguns/'.$railID.'/zones', [], []);
         $body = json_decode($user->getBody());
        
         $result = new \stdClass();
         $result->result = $body->result;
         $result->result_info =  $body->result_info;
-		
+        
         return $result;
     }
 
-    /**
-     * Set Railgun Status
-     * @return object
-     */
     public function update(
-        string $id,
-		boolean $status,
+        string $railID,
+        boolean $status
     ): \stdClass {
         $query = [
         'enabled' => $status
         ];
         
-        $user = $this->adapter->patch('railguns/'.$id, [], $query);
+        $user = $this->adapter->patch('railguns/'.$railID, [], $query);
         $body = json_decode($user->getBody());
         
         return $body->result;
     }
 
-    /**
-     * Delete Railgun
-     * @return object
-     */
     public function delete(
-        string $id,
+        string $railID
     ): \stdClass {
-        
-        $user = $this->adapter->delete('railguns/'.$id, [], []);
+        $user = $this->adapter->delete('railguns/'.$railID, [], []);
         $body = json_decode($user->getBody());
         
         if (isset($body->result->id)) {
@@ -130,6 +102,5 @@ class Railgun implements \Cloudflare\API\Endpoints\API
         }
 
         return false;
-	}
-
+    }
 }
