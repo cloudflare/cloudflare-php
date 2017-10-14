@@ -25,7 +25,7 @@ class DNS implements API
         string $name,
         string $content,
         int $ttl = 0,
-        bool $proxied
+        bool $proxied = null
     ): bool {
         $options = [
             'type' => $type,
