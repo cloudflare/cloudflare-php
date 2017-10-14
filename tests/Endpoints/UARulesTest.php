@@ -5,12 +5,13 @@
  * Date: 19/09/2017
  * Time: 15:19
  */
-
-class UARulesTest extends TestCase
+use \Helpers\Guzzle as Guzzle;
+use PHPUnit_Framework_TestCase as TestBase;
+class UARulesTest extends TestBase
 {
     public function testListRules()
     {
-        $response = $this->getPsr7JsonResponseForFixture('Endpoints/listRules.json');
+        $response = (new Guzzle())->getPsr7JsonResponseForFixture('Endpoints/listRules.json');
 
         $mock = $this->getMockBuilder(\Cloudflare\API\Adapter\Adapter::class)->getMock();
         $mock->method('get')->willReturn($response);
@@ -41,7 +42,7 @@ class UARulesTest extends TestCase
         $config = new \Cloudflare\API\Configurations\UARules();
         $config->addUA('Mozilla/5.0 (Macintosh; Intel Mac OS X 10_12_5) AppleWebKit/603.2.4 (KHTML, like Gecko) Version/10.1.1 Safari/603.2.4');
 
-        $response = $this->getPsr7JsonResponseForFixture('Endpoints/createRule.json');
+        $response = (new Guzzle())->getPsr7JsonResponseForFixture('Endpoints/createRule.json');
 
         $mock = $this->getMockBuilder(\Cloudflare\API\Adapter\Adapter::class)->getMock();
         $mock->method('post')->willReturn($response);
@@ -71,7 +72,7 @@ class UARulesTest extends TestCase
 
     public function getRuleDetails()
     {
-        $response = $this->getPsr7JsonResponseForFixture('Endpoints/getRuleDetails.json');
+        $response = (new Guzzle())->getPsr7JsonResponseForFixture('Endpoints/getRuleDetails.json');
 
         $mock = $this->getMockBuilder(\Cloudflare\API\Adapter\Adapter::class)->getMock();
         $mock->method('get')->willReturn($response);
@@ -94,7 +95,7 @@ class UARulesTest extends TestCase
         $config = new \Cloudflare\API\Configurations\UARules();
         $config->addUA('Mozilla/5.0 (Macintosh; Intel Mac OS X 10_12_5) AppleWebKit/603.2.4 (KHTML, like Gecko) Version/10.1.1 Safari/603.2.4');
 
-        $response = $this->getPsr7JsonResponseForFixture('Endpoints/updateRule.json');
+        $response = (new Guzzle())->getPsr7JsonResponseForFixture('Endpoints/updateRule.json');
 
         $mock = $this->getMockBuilder(\Cloudflare\API\Adapter\Adapter::class)->getMock();
         $mock->method('put')->willReturn($response);
@@ -124,7 +125,7 @@ class UARulesTest extends TestCase
 
     public function testDeleteRule()
     {
-        $response = $this->getPsr7JsonResponseForFixture('Endpoints/deleteRule.json');
+        $response = (new Guzzle())->getPsr7JsonResponseForFixture('Endpoints/deleteRule.json');
 
         $mock = $this->getMockBuilder(\Cloudflare\API\Adapter\Adapter::class)->getMock();
         $mock->method('delete')->willReturn($response);

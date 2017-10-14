@@ -6,7 +6,8 @@
  * Date: 19/09/2017
  * Time: 15:24
  */
-class ConfigurationsUARulesTest extends TestCase
+use PHPUnit_Framework_TestCase as TestBase;
+class ConfigurationsUARulesTest extends TestBase
 {
     public function testGetArray()
     {

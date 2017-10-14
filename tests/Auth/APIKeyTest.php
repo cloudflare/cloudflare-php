@@ -5,7 +5,9 @@
  * Date: 13/01/2017
  * Time: 17:15
  */
-class APIKeyTest extends TestCase
+ 
+use PHPUnit_Framework_TestCase as TestBase;
+class APIKeyTest extends TestBase
 {
     public function testGetHeaders()
     {

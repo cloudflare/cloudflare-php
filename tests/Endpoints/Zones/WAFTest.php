@@ -6,11 +6,13 @@
 * Time: 02:32
 */
 
-class WAFTest extends TestCase
+use \Helpers\Guzzle as Guzzle;
+use PHPUnit_Framework_TestCase as TestBase;
+class WAFTest extends TestBase
 {
-    public function testPackages()
+    public function testgetPackages()
     {
-        $response = $this->getPsr7JsonResponseForFixture('Endpoints/listPackages.json');
+        $response = (new Guzzle())->getPsr7JsonResponseForFixture('Endpoints/listPackages.json');
         
         $mock = $this->getMockBuilder(\Cloudflare\API\Adapter\Adapter::class)->getMock();
         $mock->method('get')->willReturn($response);
@@ -30,7 +32,7 @@ class WAFTest extends TestCase
             );
             
         $waf = new \Cloudflare\API\Endpoints\Zones\WAF($mock);
-        $result = $waf->Packages("023e105f4ecef8ad9ca31a8372d0c353", 1, 20, "status", "desc", "all");
+        $result = $waf->getPackages("023e105f4ecef8ad9ca31a8372d0c353", 1, 20, "status", "desc", "all");
 
         $this->assertObjectHasAttribute('result', $result);
         $this->assertObjectHasAttribute('result_info', $result);
@@ -41,7 +43,7 @@ class WAFTest extends TestCase
     
     public function testgetPackageInfo()
     {
-        $response = $this->getPsr7JsonResponseForFixture('Endpoints/getPackageInfo.json');
+        $response = (new Guzzle())->getPsr7JsonResponseForFixture('Endpoints/getPackageInfo.json');
 
         $mock = $this->getMockBuilder(\Cloudflare\API\Adapter\Adapter::class)->getMock();
         $mock->method('get')->willReturn($response);
@@ -59,9 +61,9 @@ class WAFTest extends TestCase
         $this->assertEquals("a25a9a7e9c00afc1fb2e0245519d725b", $result->id);
     }
 
-    public function testRules()
+    public function testgetRules()
     {
-        $response = $this->getPsr7JsonResponseForFixture('Endpoints/listPackageRules.json');
+        $response = (new Guzzle())->getPsr7JsonResponseForFixture('Endpoints/listPackageRules.json');
         
         $mock = $this->getMockBuilder(\Cloudflare\API\Adapter\Adapter::class)->getMock();
         $mock->method('get')->willReturn($response);
@@ -81,7 +83,7 @@ class WAFTest extends TestCase
             );
             
         $waf = new \Cloudflare\API\Endpoints\Zones\WAF($mock);
-        $result = $waf->Rules("023e105f4ecef8ad9ca31a8372d0c353", "a25a9a7e9c00afc1fb2e0245519d725b", 1, 20, "status", "desc", "all");
+        $result = $waf->getRules("023e105f4ecef8ad9ca31a8372d0c353", "a25a9a7e9c00afc1fb2e0245519d725b", 1, 20, "status", "desc", "all");
 
         $this->assertObjectHasAttribute('result', $result);
         $this->assertObjectHasAttribute('result_info', $result);
@@ -92,7 +94,7 @@ class WAFTest extends TestCase
     
     public function testgetRuleInfo()
     {
-        $response = $this->getPsr7JsonResponseForFixture('Endpoints/getPackageRuleInfo.json');
+        $response = (new Guzzle())->getPsr7JsonResponseForFixture('Endpoints/getPackageRuleInfo.json');
 
         $mock = $this->getMockBuilder(\Cloudflare\API\Adapter\Adapter::class)->getMock();
         $mock->method('get')->willReturn($response);
@@ -112,7 +114,7 @@ class WAFTest extends TestCase
 
     public function testupdateRule()
     {
-        $response = $this->getPsr7JsonResponseForFixture('Endpoints/updatePackageRule.json');
+        $response = (new Guzzle())->getPsr7JsonResponseForFixture('Endpoints/updatePackageRule.json');
 
         $mock = $this->getMockBuilder(\Cloudflare\API\Adapter\Adapter::class)->getMock();
         $mock->method('patch')->willReturn($response);
@@ -139,9 +141,9 @@ class WAFTest extends TestCase
         }
     }
 
-    public function Groups()
+    public function getGroups()
     {
-        $response = $this->getPsr7JsonResponseForFixture('Endpoints/listPackageGroups.json');
+        $response = (new Guzzle())->getPsr7JsonResponseForFixture('Endpoints/listPackageGroups.json');
         
         $mock = $this->getMockBuilder(\Cloudflare\API\Adapter\Adapter::class)->getMock();
         $mock->method('get')->willReturn($response);
@@ -161,7 +163,7 @@ class WAFTest extends TestCase
             );
             
         $waf = new \Cloudflare\API\Endpoints\Zones\WAF($mock);
-        $result = $waf->Groups("023e105f4ecef8ad9ca31a8372d0c353", "a25a9a7e9c00afc1fb2e0245519d725b", 1, 20, "status", "desc", "all");
+        $result = $waf->getGroups("023e105f4ecef8ad9ca31a8372d0c353", "a25a9a7e9c00afc1fb2e0245519d725b", 1, 20, "status", "desc", "all");
 
         $this->assertObjectHasAttribute('result', $result);
         $this->assertObjectHasAttribute('result_info', $result);
@@ -172,7 +174,7 @@ class WAFTest extends TestCase
 
     public function testgetGroupInfo()
     {
-        $response = $this->getPsr7JsonResponseForFixture('Endpoints/getPackageGroupInfo.json');
+        $response = (new Guzzle())->getPsr7JsonResponseForFixture('Endpoints/getPackageGroupInfo.json');
 
         $mock = $this->getMockBuilder(\Cloudflare\API\Adapter\Adapter::class)->getMock();
         $mock->method('get')->willReturn($response);
@@ -192,7 +194,7 @@ class WAFTest extends TestCase
 
     public function testupdateGroup()
     {
-        $response = $this->getPsr7JsonResponseForFixture('Endpoints/updatePackageGroup.json');
+        $response = (new Guzzle())->getPsr7JsonResponseForFixture('Endpoints/updatePackageGroup.json');
 
         $mock = $this->getMockBuilder(\Cloudflare\API\Adapter\Adapter::class)->getMock();
         $mock->method('patch')->willReturn($response);
@@ -217,5 +219,5 @@ class WAFTest extends TestCase
         foreach ($details as $property => $value) {
             $this->assertEquals($result->{ $property }, $value);
         }
-    }
+	}
 }

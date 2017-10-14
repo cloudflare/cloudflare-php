@@ -6,11 +6,13 @@
  * Date: 09/06/2017
  * Time: 15:31
  */
-class DNSTest extends TestCase
+use \Helpers\Guzzle as Guzzle;
+use PHPUnit_Framework_TestCase as TestBase;
+class DNSTest extends TestBase
 {
     public function testAddRecord()
     {
-        $response = $this->getPsr7JsonResponseForFixture('Endpoints/addRecord.json');
+        $response = (new Guzzle())->getPsr7JsonResponseForFixture('Endpoints/addRecord.json');
 
         $mock = $this->getMockBuilder(\Cloudflare\API\Adapter\Adapter::class)->getMock();
         $mock->method('post')->willReturn($response);
@@ -35,7 +37,7 @@ class DNSTest extends TestCase
 
     public function testListRecords()
     {
-        $response = $this->getPsr7JsonResponseForFixture('Endpoints/listRecords.json');
+        $response = (new Guzzle())->getPsr7JsonResponseForFixture('Endpoints/listRecords.json');
 
         $mock = $this->getMockBuilder(\Cloudflare\API\Adapter\Adapter::class)->getMock();
         $mock->method('get')->willReturn($response);
@@ -68,7 +70,7 @@ class DNSTest extends TestCase
 
     public function testGetDNSRecordDetails()
     {
-        $response = $this->getPsr7JsonResponseForFixture('Endpoints/getDNSRecordDetails.json');
+        $response = (new Guzzle())->getPsr7JsonResponseForFixture('Endpoints/getDNSRecordDetails.json');
 
         $mock = $this->getMockBuilder(\Cloudflare\API\Adapter\Adapter::class)->getMock();
         $mock->method('get')->willReturn($response);
@@ -88,7 +90,7 @@ class DNSTest extends TestCase
 
     public function testUpdateDNSRecord()
     {
-        $response = $this->getPsr7JsonResponseForFixture('Endpoints/updateDNSRecord.json');
+        $response = (new Guzzle())->getPsr7JsonResponseForFixture('Endpoints/updateDNSRecord.json');
 
         $mock = $this->getMockBuilder(\Cloudflare\API\Adapter\Adapter::class)->getMock();
         $mock->method('put')->willReturn($response);

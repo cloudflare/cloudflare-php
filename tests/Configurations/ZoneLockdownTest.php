@@ -6,7 +6,9 @@
  * Date: 05/09/2017
  * Time: 13:50
  */
-class ConfigurationZoneLockdownTest extends TestCase
+ 
+use PHPUnit_Framework_TestCase as TestBase;
+class ConfigurationZoneLockdownTest extends TestBase
 {
     public function testGetArray()
     {
