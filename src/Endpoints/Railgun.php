@@ -7,9 +7,11 @@
 */
 
 
+namespace Cloudflare\API\Endpoints;
+
 use Cloudflare\API\Adapter\Adapter;
 
-class Railgun implements \Cloudflare\API\Endpoints\API
+class Railgun implements API
 {
     private $adapter;
 
