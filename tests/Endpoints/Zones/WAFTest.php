@@ -8,7 +8,7 @@
 
 class WAFTest extends TestCase
 {
-    public function testPackages()
+    public function testgetPackages()
     {
         $response = $this->getPsr7JsonResponseForFixture('Endpoints/listPackages.json');
         
@@ -30,7 +30,7 @@ class WAFTest extends TestCase
             );
             
         $waf = new \Cloudflare\API\Endpoints\Zones\WAF($mock);
-        $result = $waf->Packages("023e105f4ecef8ad9ca31a8372d0c353", 1, 20, "status", "desc", "all");
+        $result = $waf->getPackages("023e105f4ecef8ad9ca31a8372d0c353", 1, 20, "status", "desc", "all");
 
         $this->assertObjectHasAttribute('result', $result);
         $this->assertObjectHasAttribute('result_info', $result);
@@ -59,7 +59,7 @@ class WAFTest extends TestCase
         $this->assertEquals("a25a9a7e9c00afc1fb2e0245519d725b", $result->id);
     }
 
-    public function testRules()
+    public function testgetRules()
     {
         $response = $this->getPsr7JsonResponseForFixture('Endpoints/listPackageRules.json');
         
@@ -81,7 +81,7 @@ class WAFTest extends TestCase
             );
             
         $waf = new \Cloudflare\API\Endpoints\Zones\WAF($mock);
-        $result = $waf->Rules("023e105f4ecef8ad9ca31a8372d0c353", "a25a9a7e9c00afc1fb2e0245519d725b", 1, 20, "status", "desc", "all");
+        $result = $waf->getRules("023e105f4ecef8ad9ca31a8372d0c353", "a25a9a7e9c00afc1fb2e0245519d725b", 1, 20, "status", "desc", "all");
 
         $this->assertObjectHasAttribute('result', $result);
         $this->assertObjectHasAttribute('result_info', $result);
@@ -139,7 +139,7 @@ class WAFTest extends TestCase
         }
     }
 
-    public function Groups()
+    public function getGroups()
     {
         $response = $this->getPsr7JsonResponseForFixture('Endpoints/listPackageGroups.json');
         
@@ -161,7 +161,7 @@ class WAFTest extends TestCase
             );
             
         $waf = new \Cloudflare\API\Endpoints\Zones\WAF($mock);
-        $result = $waf->Groups("023e105f4ecef8ad9ca31a8372d0c353", "a25a9a7e9c00afc1fb2e0245519d725b", 1, 20, "status", "desc", "all");
+        $result = $waf->getGroups("023e105f4ecef8ad9ca31a8372d0c353", "a25a9a7e9c00afc1fb2e0245519d725b", 1, 20, "status", "desc", "all");
 
         $this->assertObjectHasAttribute('result', $result);
         $this->assertObjectHasAttribute('result_info', $result);
