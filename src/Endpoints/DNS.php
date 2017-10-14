@@ -25,15 +25,15 @@ class DNS implements API
         string $name,
         string $content,
         int $ttl = 0,
-        bool $proxied = true
+        bool $proxied
     ): bool {
         $options = [
             'type' => $type,
             'name' => $name,
             'content' => $content,
-            'proxied' => $proxied
+            'proxied' => $proxied ?? true
         ];
-
+        
         if ($ttl > 0) {
             $options['ttl'] = $ttl;
         }

@@ -19,11 +19,11 @@ class Zones implements API
         $this->adapter = $adapter;
     }
 
-    public function addZone(string $name, bool $jumpstart = false, string $organizationID = ''): \stdClass
+    public function addZone(string $name, bool $jumpstart = null, string $organizationID = ''): \stdClass
     {
         $options = [
             'name' => $name,
-            'jumpstart' => $jumpstart
+            'jumpstart' => $jumpstart ?? false
         ];
 
         if (!empty($organizationID)) {

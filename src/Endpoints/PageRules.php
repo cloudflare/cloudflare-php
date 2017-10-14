@@ -25,7 +25,7 @@ class PageRules implements API
         string $zoneID,
         PageRulesTargets $target,
         PageRulesActions $actions,
-        bool $active = true,
+        bool $active = null,
         int $priority = null
     ): bool {
         $options = [
