@@ -27,7 +27,7 @@ class WAF implements \Cloudflare\API\Endpoints\API
      * List Web Application Firewall Packages
      * @return object
      */
-    public function Packages(
+    public function getPackages(
         string $zoneID,
         int $page = 1,
         int $perPage = 20,
@@ -82,7 +82,7 @@ class WAF implements \Cloudflare\API\Endpoints\API
      * List Web Application Firewall Package Rules
      * @return object
      */
-    public function Rules(
+    public function getRules(
         string $zoneID,
         string $packageID,
         int $page = 1,
@@ -158,7 +158,7 @@ class WAF implements \Cloudflare\API\Endpoints\API
      * List Web Application Firewall Package Groups
      * @return object
      */
-    public function Groups(
+    public function getGroups(
         string $zoneID,
         string $packageID,
         int $page = 1,
