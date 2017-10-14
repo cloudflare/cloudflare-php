@@ -6,11 +6,15 @@
  * Date: 06/06/2017
  * Time: 16:01
  */
-class ZonesTest extends TestCase
+ 
+use \Helpers\Guzzle as Guzzle;
+use PHPUnit_Framework_TestCase as TestBase;
+
+class ZonesTest extends TestBase
 {
     public function testAddZone()
     {
-        $response = $this->getPsr7JsonResponseForFixture('Endpoints/addZone.json');
+        $response = (new Guzzle())->getPsr7JsonResponseForFixture('Endpoints/addZone.json');
 
         $mock = $this->getMockBuilder(\Cloudflare\API\Adapter\Adapter::class)->getMock();
         $mock->method('post')->willReturn($response);
@@ -29,7 +33,7 @@ class ZonesTest extends TestCase
         $this->assertObjectHasAttribute("id", $result);
         $this->assertEquals("023e105f4ecef8ad9ca31a8372d0c353", $result->id);
 
-        $response = $this->getPsr7JsonResponseForFixture('Endpoints/createPageRule.json');
+        $response = (new Guzzle())->getPsr7JsonResponseForFixture('Endpoints/createPageRule.json');
 
         $mock = $this->getMockBuilder(\Cloudflare\API\Adapter\Adapter::class)->getMock();
         $mock->method('post')->willReturn($response);
@@ -51,7 +55,7 @@ class ZonesTest extends TestCase
 
     public function testActivationTest()
     {
-        $response = $this->getPsr7JsonResponseForFixture('Endpoints/activationTest.json');
+        $response = (new Guzzle())->getPsr7JsonResponseForFixture('Endpoints/activationTest.json');
 
         $mock = $this->getMockBuilder(\Cloudflare\API\Adapter\Adapter::class)->getMock();
         $mock->method('put')->willReturn($response);
@@ -72,7 +76,7 @@ class ZonesTest extends TestCase
 
     public function testListZones()
     {
-        $response = $this->getPsr7JsonResponseForFixture('Endpoints/listZones.json');
+        $response = (new Guzzle())->getPsr7JsonResponseForFixture('Endpoints/listZones.json');
 
         $mock = $this->getMockBuilder(\Cloudflare\API\Adapter\Adapter::class)->getMock();
         $mock->method('get')->willReturn($response);
@@ -105,7 +109,7 @@ class ZonesTest extends TestCase
 
     public function testGetZoneID()
     {
-        $response = $this->getPsr7JsonResponseForFixture('Endpoints/getZoneId.json');
+        $response = (new Guzzle())->getPsr7JsonResponseForFixture('Endpoints/getZoneId.json');
 
         $mock = $this->getMockBuilder(\Cloudflare\API\Adapter\Adapter::class)->getMock();
         $mock->method('get')->willReturn($response);
@@ -131,7 +135,7 @@ class ZonesTest extends TestCase
 
     public function testCachePurgeEverything()
     {
-        $response = $this->getPsr7JsonResponseForFixture('Endpoints/cachePurgeEverything.json');
+        $response = (new Guzzle())->getPsr7JsonResponseForFixture('Endpoints/cachePurgeEverything.json');
 
         $mock = $this->getMockBuilder(\Cloudflare\API\Adapter\Adapter::class)->getMock();
         $mock->method('delete')->willReturn($response);

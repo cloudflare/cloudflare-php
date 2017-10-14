@@ -7,8 +7,9 @@
  */
 
 use GuzzleHttp\Psr7\Response;
+use PHPUnit_Framework_TestCase as TestBase;
 
-class GuzzleTest extends TestCase
+class GuzzleTest extends TestBase
 {
     private $client;
 

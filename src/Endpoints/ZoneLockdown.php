@@ -43,7 +43,7 @@ class ZoneLockdown implements API
         string $zoneID,
         array $urls,
         \Cloudflare\API\Configurations\ZoneLockdown $configuration,
-        string $lockdownID = null,
+        string $ruleid = null,
         string $description = null
     ): bool {
         $options = [
@@ -51,8 +51,8 @@ class ZoneLockdown implements API
             'configurations' => $configuration->getArray()
         ];
 
-        if ($lockdownID !== null) {
-            $options['id'] = $lockdownID;
+        if ($ruleid !== null) {
+            $options['id'] = $ruleid;
         }
 
         if ($description !== null) {

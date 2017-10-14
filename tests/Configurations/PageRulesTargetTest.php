@@ -7,8 +7,9 @@
  */
 
 use Cloudflare\API\Configurations\PageRulesTargets;
+use PHPUnit_Framework_TestCase as TestBase;
 
-class PageRulesTargetTest extends TestCase
+class PageRulesTargetTest extends TestBase
 {
     public function testGetArray()
     {

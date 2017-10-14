@@ -5,11 +5,15 @@
  * Date: 01/02/2017
  * Time: 12:50
  */
-class UserTest extends TestCase
+
+use \Helpers\Guzzle as Guzzle;
+use PHPUnit_Framework_TestCase as TestBase;
+
+class UserTest extends TestBase
 {
     public function testGetUserDetails()
     {
-        $response = $this->getPsr7JsonResponseForFixture('Endpoints/getUserDetails.json');
+        $response = (new Guzzle())->getPsr7JsonResponseForFixture('Endpoints/getUserDetails.json');
 
         $mock = $this->getMockBuilder(\Cloudflare\API\Adapter\Adapter::class)->getMock();
         $mock->method('get')->willReturn($response);
@@ -25,7 +29,7 @@ class UserTest extends TestCase
 
     public function testGetUserID()
     {
-        $response = $this->getPsr7JsonResponseForFixture('Endpoints/getUserId.json');
+        $response = (new Guzzle())->getPsr7JsonResponseForFixture('Endpoints/getUserId.json');
 
         $mock = $this->getMockBuilder(\Cloudflare\API\Adapter\Adapter::class)->getMock();
         $mock->method('get')->willReturn($response);
@@ -36,7 +40,7 @@ class UserTest extends TestCase
 
     public function testGetUserEmail()
     {
-        $response = $this->getPsr7JsonResponseForFixture('Endpoints/getUserEmail.json');
+        $response = (new Guzzle())->getPsr7JsonResponseForFixture('Endpoints/getUserEmail.json');
 
         $mock = $this->getMockBuilder(\Cloudflare\API\Adapter\Adapter::class)->getMock();
         $mock->method('get')->willReturn($response);
@@ -49,7 +53,7 @@ class UserTest extends TestCase
 
     public function testUpdateUserDetails()
     {
-        $response = $this->getPsr7JsonResponseForFixture('Endpoints/updateUserDetails.json');
+        $response = (new Guzzle())->getPsr7JsonResponseForFixture('Endpoints/updateUserDetails.json');
 
         $mock = $this->getMockBuilder(\Cloudflare\API\Adapter\Adapter::class)->getMock();
         $mock->method('patch')->willReturn($response);

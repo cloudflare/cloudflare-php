@@ -7,8 +7,10 @@
  */
 
 use Cloudflare\API\Adapter\PageRules;
+use \Helpers\Guzzle as Guzzle;
+use PHPUnit_Framework_TestCase as TestBase;
 
-class PageRulesTest extends TestCase
+class PageRulesTest extends TestBase
 {
     public function testCreatePageRule()
     {
@@ -16,7 +18,7 @@ class PageRulesTest extends TestCase
         $action = new \Cloudflare\API\Configurations\PageRulesActions();
         $action->setAlwaysOnline(true);
 
-        $response = $this->getPsr7JsonResponseForFixture('Endpoints/createPageRule.json');
+        $response = (new Guzzle())->getPsr7JsonResponseForFixture('Endpoints/createPageRule.json');
 
         $mock = $this->getMockBuilder(\Cloudflare\API\Adapter\Adapter::class)->getMock();
         $mock->method('post')->willReturn($response);
@@ -42,7 +44,7 @@ class PageRulesTest extends TestCase
 
     public function testListPageRules()
     {
-        $response = $this->getPsr7JsonResponseForFixture('Endpoints/listPageRules.json');
+        $response = (new Guzzle())->getPsr7JsonResponseForFixture('Endpoints/listPageRules.json');
 
         $mock = $this->getMockBuilder(\Cloudflare\API\Adapter\Adapter::class)->getMock();
         $mock->method('get')->willReturn($response);
@@ -66,7 +68,7 @@ class PageRulesTest extends TestCase
 
     public function testGetPageRuleDetails()
     {
-        $response = $this->getPsr7JsonResponseForFixture('Endpoints/getPageRuleDetails.json');
+        $response = (new Guzzle())->getPsr7JsonResponseForFixture('Endpoints/getPageRuleDetails.json');
 
         $mock = $this->getMockBuilder(\Cloudflare\API\Adapter\Adapter::class)->getMock();
         $mock->method('get')->willReturn($response);
@@ -88,7 +90,7 @@ class PageRulesTest extends TestCase
         $action = new \Cloudflare\API\Configurations\PageRulesActions();
         $action->setAlwaysOnline(true);
 
-        $response = $this->getPsr7JsonResponseForFixture('Endpoints/updatePageRule.json');
+        $response = (new Guzzle())->getPsr7JsonResponseForFixture('Endpoints/updatePageRule.json');
 
         $mock = $this->getMockBuilder(\Cloudflare\API\Adapter\Adapter::class)->getMock();
         $mock->method('patch')->willReturn($response);
@@ -114,7 +116,7 @@ class PageRulesTest extends TestCase
 
     public function testDeletePageRule()
     {
-        $response = $this->getPsr7JsonResponseForFixture('Endpoints/deletePageRule.json');
+        $response = (new Guzzle())->getPsr7JsonResponseForFixture('Endpoints/deletePageRule.json');
 
         $mock = $this->getMockBuilder(\Cloudflare\API\Adapter\Adapter::class)->getMock();
         $mock->method('delete')->willReturn($response);

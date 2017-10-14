@@ -7,8 +7,9 @@
  */
 
 use Cloudflare\API\Auth\None;
+use PHPUnit_Framework_TestCase as TestBase;
 
-class NoneTest extends TestCase
+class NoneTest extends TestBase
 {
     public function testGetHeaders()
     {
