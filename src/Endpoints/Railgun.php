@@ -81,7 +81,7 @@ class Railgun implements API
 
     public function update(
         string $railID,
-        boolean $status
+        bool $status
     ): \stdClass {
         $query = [
         'enabled' => $status
@@ -95,7 +95,7 @@ class Railgun implements API
 
     public function delete(
         string $railID
-    ): \stdClass {
+    ):bool {
         $user = $this->adapter->delete('railguns/'.$railID, [], []);
         $body = json_decode($user->getBody());
         

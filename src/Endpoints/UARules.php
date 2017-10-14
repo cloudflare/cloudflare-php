@@ -43,7 +43,7 @@ class UARules implements API
         string $zoneID,
         string $mode,
         \Cloudflare\API\Configurations\Configurations $configuration,
-        string $ruleID = null,
+        string $id = null,
         string $description = null
     ): bool {
         $options = [
@@ -51,8 +51,8 @@ class UARules implements API
             'configurations' => $configuration->getArray()
         ];
 
-        if ($ruleID !== null) {
-            $options['id'] = $ruleID;
+        if ($id !== null) {
+            $options['id'] = $id;
         }
 
         if ($description !== null) {

@@ -21,16 +21,6 @@ class PageRules implements API
         $this->adapter = $adapter;
     }
 
-    /**
-     * @SuppressWarnings(PHPMD.BooleanArgumentFlag)
-     *
-     * @param string $zoneID
-     * @param PageRulesTargets $target
-     * @param PageRulesActions $actions
-     * @param bool $active
-     * @param int|null $priority
-     * @return bool
-     */
     public function createPageRule(
         string $zoneID,
         PageRulesTargets $target,
