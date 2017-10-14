@@ -7,6 +7,7 @@
  */
  
 use PHPUnit_Framework_TestCase as TestBase;
+
 class APIKeyTest extends TestBase
 {
     public function testGetHeaders()

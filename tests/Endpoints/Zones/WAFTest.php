@@ -8,6 +8,7 @@
 
 use \Helpers\Guzzle as Guzzle;
 use PHPUnit_Framework_TestCase as TestBase;
+
 class WAFTest extends TestBase
 {
     public function testgetPackages()
@@ -219,5 +220,5 @@ class WAFTest extends TestBase
         foreach ($details as $property => $value) {
             $this->assertEquals($result->{ $property }, $value);
         }
-	}
+    }
 }

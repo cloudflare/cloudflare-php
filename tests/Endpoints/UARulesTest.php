@@ -7,6 +7,7 @@
  */
 use \Helpers\Guzzle as Guzzle;
 use PHPUnit_Framework_TestCase as TestBase;
+
 class UARulesTest extends TestBase
 {
     public function testListRules()

@@ -9,6 +9,7 @@
  
 use \Helpers\Guzzle as Guzzle;
 use PHPUnit_Framework_TestCase as TestBase;
+
 class ZonesTest extends TestBase
 {
     public function testAddZone()

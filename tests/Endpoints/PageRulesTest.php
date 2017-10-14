@@ -9,6 +9,7 @@
 use Cloudflare\API\Adapter\PageRules;
 use \Helpers\Guzzle as Guzzle;
 use PHPUnit_Framework_TestCase as TestBase;
+
 class PageRulesTest extends TestBase
 {
     public function testCreatePageRule()

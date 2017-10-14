@@ -8,6 +8,7 @@
  */
 use \Helpers\Guzzle as Guzzle;
 use PHPUnit_Framework_TestCase as TestBase;
+
 class DNSTest extends TestBase
 {
     public function testAddRecord()

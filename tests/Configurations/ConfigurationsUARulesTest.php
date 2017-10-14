@@ -7,6 +7,7 @@
  * Time: 15:24
  */
 use PHPUnit_Framework_TestCase as TestBase;
+
 class ConfigurationsUARulesTest extends TestBase
 {
     public function testGetArray()

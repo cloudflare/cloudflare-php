@@ -8,6 +8,7 @@
 
 use \Helpers\Guzzle as Guzzle;
 use PHPUnit_Framework_TestCase as TestBase;
+
 class UserTest extends TestBase
 {
     public function testGetUserDetails()

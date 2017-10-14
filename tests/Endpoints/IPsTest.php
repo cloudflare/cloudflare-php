@@ -9,6 +9,7 @@
 use Cloudflare\API\Endpoints\IPs;
 use \Helpers\Guzzle as Guzzle;
 use PHPUnit_Framework_TestCase as TestBase;
+
 class IPsTest extends TestBase
 {
     public function testListIPs()

@@ -1,14 +1,17 @@
 <?php
 
 namespace Helpers;
+
 use \GuzzleHttp\Psr7 as Psr7;
+
 class Guzzle extends \PHPUnit_Framework_TestCase
 {
-	function testExample(){
+    public function testExample()
+    {
         $success = "abcde";
-		return $success;
-	}
-    function getPsr7StreamForFixture($fixture): Psr7\Stream
+        return $success;
+    }
+    public function getPsr7StreamForFixture($fixture): Psr7\Stream
     {
         $path = sprintf('%s/Fixtures/%s', __DIR__, $fixture);
 
@@ -21,7 +24,7 @@ class Guzzle extends \PHPUnit_Framework_TestCase
         return $stream;
     }
 
-    function getPsr7JsonResponseForFixture($fixture, $statusCode = 200): Psr7\Response
+    public function getPsr7JsonResponseForFixture($fixture, $statusCode = 200): Psr7\Response
     {
         $stream = $this->getPsr7StreamForFixture($fixture);
 

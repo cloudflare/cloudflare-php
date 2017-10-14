@@ -8,6 +8,7 @@
  */
  
 use PHPUnit_Framework_TestCase as TestBase;
+
 class ConfigurationZoneLockdownTest extends TestBase
 {
     public function testGetArray()
