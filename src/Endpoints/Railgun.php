@@ -57,18 +57,18 @@ class Railgun implements API
     }
 
     public function get(
-        string $railID
+        string $railgunID
     ): \stdClass {
-        $user = $this->adapter->get('railguns/' . $railID, [], []);
+        $user = $this->adapter->get('railguns/' . $railgunID, [], []);
         $body = json_decode($user->getBody());
 
         return $body->result;
     }
 
     public function getZones(
-        string $railID
+        string $railgunID
     ): \stdClass {
-        $user = $this->adapter->get('railguns/' . $railID . '/zones', [], []);
+        $user = $this->adapter->get('railguns/' . $railgunID . '/zones', [], []);
         $body = json_decode($user->getBody());
 
         $result = new \stdClass();
@@ -79,23 +79,23 @@ class Railgun implements API
     }
 
     public function update(
-        string $railID,
+        string $railgunID,
         bool $status
     ): \stdClass {
         $query = [
             'enabled' => $status
         ];
 
-        $user = $this->adapter->patch('railguns/' . $railID, [], $query);
+        $user = $this->adapter->patch('railguns/' . $railgunID, [], $query);
         $body = json_decode($user->getBody());
 
         return $body->result;
     }
 
     public function delete(
-        string $railID
+        string $railgunID
     ): bool {
-        $user = $this->adapter->delete('railguns/' . $railID, [], []);
+        $user = $this->adapter->delete('railguns/' . $railgunID, [], []);
         $body = json_decode($user->getBody());
 
         if (isset($body->result->id)) {
