@@ -17,12 +17,12 @@ Each API call is provided via a similarly named function within various classes 
 - [x] User Administration (partial)
 - [x] [Cloudflare IPs](https://www.cloudflare.com/ips/)
 - [x] [Page Rules](https://support.cloudflare.com/hc/en-us/articles/200168306-Is-there-a-tutorial-for-Page-Rules-)
-- [ ] [Web Application Firewall (WAF)](https://www.cloudflare.com/waf/)
+- [x] [Web Application Firewall (WAF)](https://www.cloudflare.com/waf/)
 - [ ] Virtual DNS Management
 - [ ] Custom hostnames
 - [x] Zone Lockdown and User-Agent Block rules
 - [ ] Organization Administration
-- [ ] [Railgun](https://www.cloudflare.com/railgun/) administration
+- [x] [Railgun](https://www.cloudflare.com/railgun/) administration
 - [ ] [Keyless SSL](https://blog.cloudflare.com/keyless-ssl-the-nitty-gritty-technical-details/)
 - [ ] [Origin CA](https://blog.cloudflare.com/universal-ssl-encryption-all-the-way-to-the-origin-for-free/)
 
