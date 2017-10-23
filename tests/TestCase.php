@@ -1,6 +1,10 @@
 <?php
 use GuzzleHttp\Psr7;
 
+/**
+ * Class TestCase
+ * @SuppressWarnings(PHPMD.NumberOfChildren)
+ */
 abstract class TestCase extends PHPUnit_Framework_TestCase
 {
     /**
