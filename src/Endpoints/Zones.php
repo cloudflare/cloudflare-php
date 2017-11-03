@@ -109,6 +109,19 @@ class Zones implements API
         return $zones->result[0]->id;
     }
 
+	public function toggleDevelopmentMode(string $zoneID, bool $enable): bool
+    {
+        $response = $this->adapter->patch('zones/' . $zoneID . '/settings/development_mode', [], ["value" => ($enable ? "on" : "off")]);
+
+        $body = json_decode($response->getBody());
+
+        if (isset($body->result->id)) {
+            return true;
+        }
+
+        return false;
+    }
+	
     /**
      * Purge Everything
      * @param string $zoneID
