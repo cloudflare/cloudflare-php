@@ -128,6 +128,27 @@ class ZonesTest extends TestCase
 
         $this->assertEquals("023e105f4ecef8ad9ca31a8372d0c353", $result);
     }
+	
+	public function testToggleDevelopmentMode()
+    {
+        $response = $this->getPsr7JsonResponseForFixture('Endpoints/toggleDevelopmentMode.json');
+
+        $mock = $this->getMockBuilder(\Cloudflare\API\Adapter\Adapter::class)->getMock();
+        $mock->method('patch')->willReturn($response);
+
+        $mock->expects($this->once())
+            ->method('patch')
+            ->with(
+                $this->equalTo('zones/c2547eb745079dac9320b638f5e225cf483cc5cfdda41/settings/development_mode'),
+                $this->equalTo([]),
+                $this->equalTo(["value" => "on"])
+            );
+
+        $zones = new \Cloudflare\API\Endpoints\Zones($mock);
+        $result = $zones->toggleDevelopmentMode("c2547eb745079dac9320b638f5e225cf483cc5cfdda41");
+
+        $this->assertTrue($result);
+    }
 
     public function testCachePurgeEverything()
     {

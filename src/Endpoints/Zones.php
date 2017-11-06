@@ -115,13 +115,13 @@ class Zones implements API
 
         $body = json_decode($response->getBody());
 
-        if (isset($body->result->id)) {
+        if (isset($body->success) && $body->success === "1") {
             return true;
         }
 
         return false;
     }
-	
+
     /**
      * Purge Everything
      * @param string $zoneID
