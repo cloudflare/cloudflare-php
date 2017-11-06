@@ -11,7 +11,6 @@ The recommended way to install this package is via the Packagist Dependency Mana
 The Cloudflare API can be found [here](https://api.cloudflare.com/).
 Each API call is provided via a similarly named function within various classes in the **Cloudflare\API\Endpoints** namespace:
 
-
 - [x] [DNS Records](https://www.cloudflare.com/dns/)
 - [x] Zones
 - [x] User Administration (partial)
@@ -37,6 +36,10 @@ $user    = new Cloudflare\API\Endpoints\User($adapter);
     
 echo $user->getUserID();
 ```
+
+## Contributions
+
+We welcome community contribution to this repository. [CONTRIBUTING.md](CONTRIBUTING.md) will help you start contributing.
 
 ## Licensing 
 
