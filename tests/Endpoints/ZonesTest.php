@@ -145,7 +145,7 @@ class ZonesTest extends TestCase
             );
 
         $zones = new \Cloudflare\API\Endpoints\Zones($mock);
-        $result = $zones->toggleDevelopmentMode("c2547eb745079dac9320b638f5e225cf483cc5cfdda41");
+        $result = $zones->toggleDevelopmentMode("c2547eb745079dac9320b638f5e225cf483cc5cfdda41", true);
 
         $this->assertTrue($result);
     }
