@@ -128,8 +128,8 @@ class ZonesTest extends TestCase
 
         $this->assertEquals("023e105f4ecef8ad9ca31a8372d0c353", $result);
     }
-	
-	public function testToggleDevelopmentMode()
+    
+    public function testToggleDevelopmentMode()
     {
         $response = $this->getPsr7JsonResponseForFixture('Endpoints/toggleDevelopmentMode.json');
 
