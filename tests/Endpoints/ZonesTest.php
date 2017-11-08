@@ -145,9 +145,10 @@ class ZonesTest extends TestCase
             );
 
         $zones = new \Cloudflare\API\Endpoints\Zones($mock);
-        $result = $zones->getAnalyticsDashboard("c2547eb745079dac9320b638f5e225cf483cc5cfdda41");
+        $analytics = $zones->getAnalyticsDashboard("c2547eb745079dac9320b638f5e225cf483cc5cfdda41");
 
-        $this->assertTrue($result);
+        $this->assertContains("totals", $analytics);
+        $this->assertContains("timeseries", $analytics);
     }
     
     public function testChangeDevelopmentMode()
