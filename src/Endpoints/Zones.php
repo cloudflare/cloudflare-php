@@ -109,7 +109,14 @@ class Zones implements API
         return $zones->result[0]->id;
     }
 
-    public function toggleDevelopmentMode(string $zoneID, bool $enable): bool
+    public function getAnalyticsDashboard(string $zoneID, string $since = "-10080", string $until = "0", bool $continuous = true): \stdClass
+    {
+        $response = $this->adapter->get('zones/' . $zoneID . '/analytics/dashboard', [], ["since" => $since, "until" => $until, "continuous" => $continuous]);
+
+        return json_decode($response->getBody())->result;
+    }
+
+    public function changeDevelopmentMode(string $zoneID, bool $enable = false): bool
     {
         $response = $this->adapter->patch('zones/' . $zoneID . '/settings/development_mode', [], ["value" => ($enable ? "on" : "off")]);
 
