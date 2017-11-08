@@ -147,8 +147,8 @@ class ZonesTest extends TestCase
         $zones = new \Cloudflare\API\Endpoints\Zones($mock);
         $analytics = $zones->getAnalyticsDashboard("c2547eb745079dac9320b638f5e225cf483cc5cfdda41");
 
-        $this->assertNotEmpty($analytics->totals->since);
-        $this->assertNotEmpty($analytics->timeseries[0]->since);
+        $this->assertObjectHasAttribute("since", $analytics->totals);
+        $this->assertObjectHasAttribute("since", $analytics->timeseries[0]);
     }
     
     public function testChangeDevelopmentMode()
