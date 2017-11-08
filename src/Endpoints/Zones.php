@@ -110,6 +110,43 @@ class Zones implements API
     }
 
     /**
+     * @SuppressWarnings(PHPMD.BooleanArgumentFlag)
+     *
+     * @param string $zoneID
+     * @param string $since
+     * @param string $until
+     * @param bool $continuous
+     * @return \stdClass
+     */
+    public function getAnalyticsDashboard(string $zoneID, string $since = "-10080", string $until = "0", bool $continuous = true): \stdClass
+    {
+        $response = $this->adapter->get('zones/' . $zoneID . '/analytics/dashboard', [], ["since" => $since, "until" => $until, "continuous" => $continuous]);
+
+        return json_decode($response->getBody())->result;
+    }
+
+    /**
+     * @SuppressWarnings(PHPMD.BooleanArgumentFlag)
+     *
+     * @param string $zoneID
+     * @param bool $enable
+     * @return bool
+     */
+    public function changeDevelopmentMode(string $zoneID, bool $enable = false): bool
+    {
+        $response = $this->adapter->patch('zones/' . $zoneID . '/settings/development_mode', [], ["value" => ($enable ? "on" : "off")]);
+
+        $body = json_decode($response->getBody());
+
+        if ($body->success) {
+            return true;
+        }
+
+        return false;
+    }
+
+
+    /**
      * Purge Everything
      * @param string $zoneID
      * @return bool

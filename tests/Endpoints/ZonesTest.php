@@ -129,6 +129,49 @@ class ZonesTest extends TestCase
         $this->assertEquals("023e105f4ecef8ad9ca31a8372d0c353", $result);
     }
 
+    public function testGetAnalyticsDashboard()
+    {
+        $response = $this->getPsr7JsonResponseForFixture('Endpoints/getAnalyticsDashboard.json');
+
+        $mock = $this->getMockBuilder(\Cloudflare\API\Adapter\Adapter::class)->getMock();
+        $mock->method('get')->willReturn($response);
+
+        $mock->expects($this->once())
+            ->method('get')
+            ->with(
+                $this->equalTo('zones/c2547eb745079dac9320b638f5e225cf483cc5cfdda41/analytics/dashboard'),
+                $this->equalTo([]),
+                $this->equalTo(["since" => "-10080", "until" => "0", "continuous" => true])
+            );
+
+        $zones = new \Cloudflare\API\Endpoints\Zones($mock);
+        $analytics = $zones->getAnalyticsDashboard("c2547eb745079dac9320b638f5e225cf483cc5cfdda41");
+
+        $this->assertObjectHasAttribute("since", $analytics->totals);
+        $this->assertObjectHasAttribute("since", $analytics->timeseries[0]);
+    }
+    
+    public function testChangeDevelopmentMode()
+    {
+        $response = $this->getPsr7JsonResponseForFixture('Endpoints/changeDevelopmentMode.json');
+
+        $mock = $this->getMockBuilder(\Cloudflare\API\Adapter\Adapter::class)->getMock();
+        $mock->method('patch')->willReturn($response);
+
+        $mock->expects($this->once())
+            ->method('patch')
+            ->with(
+                $this->equalTo('zones/c2547eb745079dac9320b638f5e225cf483cc5cfdda41/settings/development_mode'),
+                $this->equalTo([]),
+                $this->equalTo(["value" => "on"])
+            );
+
+        $zones = new \Cloudflare\API\Endpoints\Zones($mock);
+        $result = $zones->changeDevelopmentMode("c2547eb745079dac9320b638f5e225cf483cc5cfdda41", true);
+
+        $this->assertTrue($result);
+    }
+
     public function testCachePurgeEverything()
     {
         $response = $this->getPsr7JsonResponseForFixture('Endpoints/cachePurgeEverything.json');
