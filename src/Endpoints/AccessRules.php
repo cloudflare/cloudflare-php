@@ -70,12 +70,12 @@ class AccessRules implements API
     public function createRule(
         string $zoneID,
         string $mode,
-        Configurations $configuration,
+        \Cloudflare\API\Configurations\AccessRules $configuration,
         string $notes = null
     ): bool {
         $options = [
             'mode' => $mode,
-            'configuration' => $configuration->getArray()
+            'configuration' => $configuration->getObject()
         ];
 
         if ($notes !== null) {

@@ -48,7 +48,7 @@ class AccessRulesTest extends TestCase
                 $this->equalTo([]),
                 $this->equalTo([
                     'mode' => 'challenge',
-                    'configuration' => $config->getArray(),
+                    'configuration' => $config->getObject(),
                     'notes' => 'This rule is on because of an event that occured on date X',
                 ])
             );
