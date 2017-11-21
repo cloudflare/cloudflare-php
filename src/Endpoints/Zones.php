@@ -96,7 +96,7 @@ class Zones implements API
     {
         $zones = $this->listZones($name);
 
-        if (sizeof($zones->result) < 1) {
+        if (count($zones->result) < 1) {
             throw new EndpointException('Could not find zones with specified name.');
         }
 

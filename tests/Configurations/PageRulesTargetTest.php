@@ -15,7 +15,7 @@ class PageRulesTargetTest extends TestCase
         $targets = new PageRulesTargets('junade.com/*');
         $array = $targets->getArray();
 
-        $this->assertEquals(1, sizeof($array));
+        $this->assertEquals(1, count($array));
         $this->assertEquals('junade.com/*', $array[0]->constraint->value);
         $this->assertEquals('matches', $array[0]->constraint->operator);
     }

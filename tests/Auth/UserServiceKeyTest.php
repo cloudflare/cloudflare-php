@@ -19,6 +19,6 @@ class UserServiceKeyTest extends TestCase
             $headers['X-Auth-User-Service-Key']
         );
 
-        $this->assertEquals(1, sizeof($headers));
+        $this->assertEquals(1, count($headers));
     }
 }
