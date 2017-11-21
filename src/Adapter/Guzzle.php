@@ -122,9 +122,7 @@ class Guzzle implements Adapter
         }
 
         if (isset($json->errors)) {
-            foreach ($json->errors as $error) {
-                throw new ResponseException($error->message, $error->code);
-            }
+            throw new ResponseException($json->errors[0]->message, $json->errors[0]->code);
         }
 
         if (isset($json->success) && ($json->success === false)) {
