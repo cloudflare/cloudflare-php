@@ -27,12 +27,12 @@ class User implements API
 
     public function getUserID(): string
     {
-        return ($this->getUserDetails())->id;
+        return $this->getUserDetails()->id;
     }
 
     public function getUserEmail(): string
     {
-        return ($this->getUserDetails())->email;
+        return $this->getUserDetails()->email;
     }
 
     public function updateUserDetails(array $details): \stdClass

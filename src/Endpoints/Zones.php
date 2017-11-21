@@ -134,7 +134,7 @@ class Zones implements API
      */
     public function changeDevelopmentMode(string $zoneID, bool $enable = false): bool
     {
-        $response = $this->adapter->patch('zones/' . $zoneID . '/settings/development_mode', [], ['value' => ($enable ? 'on' : 'off')]);
+        $response = $this->adapter->patch('zones/' . $zoneID . '/settings/development_mode', [], ['value' => $enable ? 'on' : 'off']);
 
         $body = json_decode($response->getBody());
 
