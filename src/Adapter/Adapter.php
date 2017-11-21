@@ -31,6 +31,7 @@ interface Adapter
      * RFCs, it is never useful).
      *
      * @param String $uri
+     * @param array $query
      * @param array $headers
      *
      * @return mixed
