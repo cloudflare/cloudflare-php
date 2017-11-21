@@ -115,7 +115,7 @@ class PageRules implements API
     ): bool {
         $options = [];
 
-        if ($active !== null) {
+        if ($target !== null) {
             $options['targets'] = $target->getArray();
         }
 
