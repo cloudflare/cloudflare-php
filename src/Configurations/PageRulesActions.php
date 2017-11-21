@@ -301,7 +301,7 @@ class PageRulesActions implements Configurations
     {
         $configuration['id'] = $setting;
 
-        array_push($this->configs, (object) $configuration);
+        $this->configs[] = (object) $configuration;
     }
 
     private function getBoolAsOnOrOff(bool $value): string
