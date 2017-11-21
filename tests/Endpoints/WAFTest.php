@@ -6,8 +6,6 @@
  * Time: 13:34
  */
 
-use Cloudflare\API\Endpoints\WAF;
-
 class WAFTest extends TestCase
 {
     public function testgetPackages()

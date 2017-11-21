@@ -6,8 +6,6 @@
  * Time: 11:20
  */
 
-use Cloudflare\API\Endpoints\Railgun;
-
 class RailgunTest extends TestCase
 {
     public function testcreate()

@@ -6,8 +6,6 @@
  * Time: 20:08
  */
 
-use Cloudflare\API\Auth\None;
-
 class NoneTest extends TestCase
 {
     public function testGetHeaders()
