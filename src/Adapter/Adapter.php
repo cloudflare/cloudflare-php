@@ -21,56 +21,56 @@ interface Adapter
      * Adapter constructor.
      *
      * @param Auth $auth
-     * @param String $baseURI
+     * @param string $baseURI
      */
-    public function __construct(Auth $auth, String $baseURI);
+    public function __construct(Auth $auth, string $baseURI);
 
     /**
      * Sends a GET request.
      * Per Robustness Principle - not including the ability to send a body with a GET request (though possible in the
      * RFCs, it is never useful).
      *
-     * @param String $uri
+     * @param string $uri
      * @param array $query
      * @param array $headers
      *
      * @return mixed
      */
-    public function get(String $uri, array $query, array $headers): ResponseInterface;
+    public function get(string $uri, array $query, array $headers): ResponseInterface;
 
     /**
-     * @param String $uri
+     * @param string $uri
      * @param array $headers
      * @param array $body
      *
      * @return mixed
      */
-    public function post(String $uri, array $headers, array $body): ResponseInterface;
+    public function post(string $uri, array $headers, array $body): ResponseInterface;
 
     /**
-     * @param String $uri
+     * @param string $uri
      * @param array $headers
      * @param array $body
      *
      * @return mixed
      */
-    public function put(String $uri, array $headers, array $body): ResponseInterface;
+    public function put(string $uri, array $headers, array $body): ResponseInterface;
 
     /**
-     * @param String $uri
+     * @param string $uri
      * @param array $headers
      * @param array $body
      *
      * @return mixed
      */
-    public function patch(String $uri, array $headers, array $body): ResponseInterface;
+    public function patch(string $uri, array $headers, array $body): ResponseInterface;
 
     /**
-     * @param String $uri
+     * @param string $uri
      * @param array $headers
      * @param array $body
      *
      * @return mixed
      */
-    public function delete(String $uri, array $headers, array $body): ResponseInterface;
+    public function delete(string $uri, array $headers, array $body): ResponseInterface;
 }
