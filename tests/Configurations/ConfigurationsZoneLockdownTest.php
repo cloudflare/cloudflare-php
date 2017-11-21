@@ -6,7 +6,7 @@
  * Date: 05/09/2017
  * Time: 13:50
  */
-class ConfigurationZoneLockdownTest extends TestCase
+class ConfigurationsZoneLockdownTest extends TestCase
 {
     public function testGetArray()
     {
