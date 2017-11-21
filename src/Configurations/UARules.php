@@ -15,7 +15,7 @@ class UARules implements Configurations
     public function addUA(string $value)
     {
         $object = new \stdClass();
-        $object->target = "ua";
+        $object->target = 'ua';
         $object->value = $value;
 
         array_push($this->configs, $object);

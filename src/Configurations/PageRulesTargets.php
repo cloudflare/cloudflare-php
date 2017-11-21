@@ -17,7 +17,7 @@ class PageRulesTargets implements Configurations
         $target = new \stdClass();
         $target->target = 'url';
         $target->constraint = new \stdClass();
-        $target->constraint->operator = "matches";
+        $target->constraint->operator = 'matches';
         $target->constraint->value = $queryUrl;
 
         $this->targets = [$target];

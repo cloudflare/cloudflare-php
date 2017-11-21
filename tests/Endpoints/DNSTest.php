@@ -57,12 +57,12 @@ class DNSTest extends TestCase
             );
 
         $zones = new \Cloudflare\API\Endpoints\DNS($mock);
-        $result = $zones->listRecords("023e105f4ecef8ad9ca31a8372d0c353", "A", "example.com", "127.0.0.1", 1, 20, "type", "desc", "all");
+        $result = $zones->listRecords('023e105f4ecef8ad9ca31a8372d0c353', 'A', 'example.com', '127.0.0.1', 1, 20, 'type', 'desc', 'all');
 
         $this->assertObjectHasAttribute('result', $result);
         $this->assertObjectHasAttribute('result_info', $result);
 
-        $this->assertEquals("372e67954025e0ba6aaa6d586b9e0b59", $result->result[0]->id);
+        $this->assertEquals('372e67954025e0ba6aaa6d586b9e0b59', $result->result[0]->id);
         $this->assertEquals(1, $result->result_info->page);
     }
 
@@ -81,9 +81,9 @@ class DNSTest extends TestCase
             );
 
         $dns = new \Cloudflare\API\Endpoints\DNS($mock);
-        $result = $dns->getRecordDetails("023e105f4ecef8ad9ca31a8372d0c353", "372e67954025e0ba6aaa6d586b9e0b59");
+        $result = $dns->getRecordDetails('023e105f4ecef8ad9ca31a8372d0c353', '372e67954025e0ba6aaa6d586b9e0b59');
 
-        $this->assertEquals("372e67954025e0ba6aaa6d586b9e0b59", $result->id);
+        $this->assertEquals('372e67954025e0ba6aaa6d586b9e0b59', $result->id);
     }
 
     public function testUpdateDNSRecord()
@@ -95,8 +95,8 @@ class DNSTest extends TestCase
 
         $details = [
             'type' => 'A',
-            'name' => "example.com",
-            'content' => "1.2.3.4",
+            'name' => 'example.com',
+            'content' => '1.2.3.4',
             'ttl' => 120,
             'proxied' => false,
         ];
@@ -110,9 +110,9 @@ class DNSTest extends TestCase
             );
 
         $dns = new \Cloudflare\API\Endpoints\DNS($mock);
-        $result = $dns->updateRecordDetails("023e105f4ecef8ad9ca31a8372d0c353", "372e67954025e0ba6aaa6d586b9e0b59", $details);
+        $result = $dns->updateRecordDetails('023e105f4ecef8ad9ca31a8372d0c353', '372e67954025e0ba6aaa6d586b9e0b59', $details);
 
-        $this->assertEquals("372e67954025e0ba6aaa6d586b9e0b59", $result->result->id);
+        $this->assertEquals('372e67954025e0ba6aaa6d586b9e0b59', $result->result->id);
 
         foreach ($details as $property => $value) {
             $this->assertEquals($result->result->{ $property }, $value);

@@ -35,7 +35,7 @@ class Railgun implements API
     public function list(
         int $page = 1,
         int $perPage = 20,
-        string $direction = ""
+        string $direction = ''
     ): \stdClass {
         $query = [
             'page' => $page,

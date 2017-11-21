@@ -37,7 +37,7 @@ class Zones implements API
         if (!empty($organizationID)) {
             $organization = new \stdClass();
             $organization->id = $organizationID;
-            $options["organization"] = $organization;
+            $options['organization'] = $organization;
         }
 
         $user = $this->adapter->post('zones', [], $options);
@@ -58,13 +58,13 @@ class Zones implements API
     }
 
     public function listZones(
-        string $name = "",
-        string $status = "",
+        string $name = '',
+        string $status = '',
         int $page = 1,
         int $perPage = 20,
-        string $order = "",
-        string $direction = "",
-        string $match = "all"
+        string $order = '',
+        string $direction = '',
+        string $match = 'all'
     ): \stdClass {
         $query = [
             'page' => $page,
@@ -98,12 +98,12 @@ class Zones implements API
         return $result;
     }
 
-    public function getZoneID(string $name = ""): string
+    public function getZoneID(string $name = ''): string
     {
         $zones = $this->listZones($name);
 
         if (sizeof($zones->result) < 1) {
-            throw new EndpointException("Could not find zones with specified name.");
+            throw new EndpointException('Could not find zones with specified name.');
         }
 
         return $zones->result[0]->id;
@@ -118,9 +118,9 @@ class Zones implements API
      * @param bool $continuous
      * @return \stdClass
      */
-    public function getAnalyticsDashboard(string $zoneID, string $since = "-10080", string $until = "0", bool $continuous = true): \stdClass
+    public function getAnalyticsDashboard(string $zoneID, string $since = '-10080', string $until = '0', bool $continuous = true): \stdClass
     {
-        $response = $this->adapter->get('zones/' . $zoneID . '/analytics/dashboard', [], ["since" => $since, "until" => $until, "continuous" => $continuous]);
+        $response = $this->adapter->get('zones/' . $zoneID . '/analytics/dashboard', [], ['since' => $since, 'until' => $until, 'continuous' => $continuous]);
 
         return json_decode($response->getBody())->result;
     }
@@ -134,7 +134,7 @@ class Zones implements API
      */
     public function changeDevelopmentMode(string $zoneID, bool $enable = false): bool
     {
-        $response = $this->adapter->patch('zones/' . $zoneID . '/settings/development_mode', [], ["value" => ($enable ? "on" : "off")]);
+        $response = $this->adapter->patch('zones/' . $zoneID . '/settings/development_mode', [], ['value' => ($enable ? 'on' : 'off')]);
 
         $body = json_decode($response->getBody());
 
@@ -153,7 +153,7 @@ class Zones implements API
      */
     public function cachePurgeEverything(string $zoneID): bool
     {
-        $user = $this->adapter->delete('zones/' . $zoneID . '/purge_cache', [], ["purge_everything" => true]);
+        $user = $this->adapter->delete('zones/' . $zoneID . '/purge_cache', [], ['purge_everything' => true]);
 
         $body = json_decode($user->getBody());
 
@@ -167,7 +167,7 @@ class Zones implements API
     public function cachePurge(string $zoneID, array $files = null, array $tags = null): bool
     {
         if (is_null($files) && is_null($tags)) {
-            throw new EndpointException("No files or tags to purge.");
+            throw new EndpointException('No files or tags to purge.');
         }
 
         $options = [

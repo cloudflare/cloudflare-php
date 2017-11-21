@@ -37,7 +37,7 @@ class User implements API
 
     public function updateUserDetails(array $details): \stdClass
     {
-        $response = $this->adapter->patch("user", [], $details);
+        $response = $this->adapter->patch('user', [], $details);
         return json_decode($response->getBody());
     }
 }

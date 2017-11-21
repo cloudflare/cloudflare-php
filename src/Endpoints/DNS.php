@@ -62,14 +62,14 @@ class DNS implements API
 
     public function listRecords(
         string $zoneID,
-        string $type = "",
-        string $name = "",
-        string $content = "",
+        string $type = '',
+        string $name = '',
+        string $content = '',
         int $page = 1,
         int $perPage = 20,
-        string $order = "",
-        string $direction = "",
-        string $match = "all"
+        string $order = '',
+        string $direction = '',
+        string $match = 'all'
     ): \stdClass {
         $query = [
             'page' => $page,

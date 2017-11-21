@@ -13,7 +13,7 @@ class RailgunTest extends TestCase
     public function testcreate()
     {
         $details = [
-            'name' => "My Railgun",
+            'name' => 'My Railgun',
         ];
 
         $response = $this->getPsr7JsonResponseForFixture('Endpoints/createRailgun.json');
@@ -59,7 +59,7 @@ class RailgunTest extends TestCase
             );
 
         $railgun = new \Cloudflare\API\Endpoints\Railgun($mock);
-        $result = $railgun->list(1, 20, "desc");
+        $result = $railgun->list(1, 20, 'desc');
 
         $this->assertObjectHasAttribute('result', $result);
         $this->assertObjectHasAttribute('result_info', $result);
@@ -80,9 +80,9 @@ class RailgunTest extends TestCase
             );
 
         $railgun = new \Cloudflare\API\Endpoints\Railgun($mock);
-        $result = $railgun->get("e928d310693a83094309acf9ead50448");
+        $result = $railgun->get('e928d310693a83094309acf9ead50448');
 
-        $this->assertEquals("e928d310693a83094309acf9ead50448", $result->id);
+        $this->assertEquals('e928d310693a83094309acf9ead50448', $result->id);
     }
 
     public function testgetZones()
@@ -101,7 +101,7 @@ class RailgunTest extends TestCase
             );
 
         $railgun = new \Cloudflare\API\Endpoints\Railgun($mock);
-        $result = $railgun->getZones("e928d310693a83094309acf9ead50448");
+        $result = $railgun->getZones('e928d310693a83094309acf9ead50448');
 
         $this->assertObjectHasAttribute('result', $result);
         $this->assertObjectHasAttribute('result_info', $result);
@@ -127,9 +127,9 @@ class RailgunTest extends TestCase
             );
 
         $waf = new \Cloudflare\API\Endpoints\Railgun($mock);
-        $result = $waf->update("e928d310693a83094309acf9ead50448", true);
+        $result = $waf->update('e928d310693a83094309acf9ead50448', true);
 
-        $this->assertEquals("e928d310693a83094309acf9ead50448", $result->id);
+        $this->assertEquals('e928d310693a83094309acf9ead50448', $result->id);
     }
 
     public function testdelete()
@@ -148,6 +148,6 @@ class RailgunTest extends TestCase
             );
 
         $waf = new \Cloudflare\API\Endpoints\Railgun($mock);
-        $waf->delete("e928d310693a83094309acf9ead50448");
+        $waf->delete('e928d310693a83094309acf9ead50448');
     }
 }

@@ -15,7 +15,7 @@ class ZoneLockdown implements Configurations
     public function addIP(string $value)
     {
         $object = new \stdClass();
-        $object->target = "ip";
+        $object->target = 'ip';
         $object->value = $value;
 
         array_push($this->configs, $object);
@@ -24,7 +24,7 @@ class ZoneLockdown implements Configurations
     public function addIPRange(string $value)
     {
         $object = new \stdClass();
-        $object->target = "ip_range";
+        $object->target = 'ip_range';
         $object->value = $value;
 
         array_push($this->configs, $object);

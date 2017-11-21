@@ -23,9 +23,9 @@ class WAF implements \Cloudflare\API\Endpoints\API
         string $zoneID,
         int $page = 1,
         int $perPage = 20,
-        string $order = "",
-        string $direction = "",
-        string $match = "all"
+        string $order = '',
+        string $direction = '',
+        string $match = 'all'
     ): \stdClass {
         $query = [
             'page' => $page,
@@ -67,9 +67,9 @@ class WAF implements \Cloudflare\API\Endpoints\API
         string $packageID,
         int $page = 1,
         int $perPage = 20,
-        string $order = "",
-        string $direction = "",
-        string $match = "all"
+        string $order = '',
+        string $direction = '',
+        string $match = 'all'
     ): \stdClass {
         $query = [
             'page' => $page,
@@ -134,9 +134,9 @@ class WAF implements \Cloudflare\API\Endpoints\API
         string $packageID,
         int $page = 1,
         int $perPage = 20,
-        string $order = "",
-        string $direction = "",
-        string $match = "all"
+        string $order = '',
+        string $direction = '',
+        string $match = 'all'
     ): \stdClass {
         $query = [
             'page' => $page,

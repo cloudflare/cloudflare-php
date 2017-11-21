@@ -21,7 +21,7 @@ class Guzzle implements Adapter
     public function __construct(Auth $auth, String $baseURI = null)
     {
         if ($baseURI === null) {
-            $baseURI = "https://api.cloudflare.com/client/v4/";
+            $baseURI = 'https://api.cloudflare.com/client/v4/';
         }
 
         $headers = $auth->getHeaders();
@@ -128,7 +128,7 @@ class Guzzle implements Adapter
         }
 
         if (isset($json->success) && ($json->success === false)) {
-            throw new ResponseException("Request was unsuccessful.");
+            throw new ResponseException('Request was unsuccessful.');
         }
     }
 }
