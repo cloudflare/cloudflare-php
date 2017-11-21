@@ -160,7 +160,7 @@ class Zones implements API
 
     public function cachePurge(string $zoneID, array $files = null, array $tags = null): bool
     {
-        if (is_null($files) && is_null($tags)) {
+        if ($files === null && $tags === null) {
             throw new EndpointException('No files or tags to purge.');
         }
 
