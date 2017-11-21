@@ -10,7 +10,7 @@ namespace Cloudflare\API\Endpoints;
 
 use Cloudflare\API\Adapter\Adapter;
 
-class WAF implements \Cloudflare\API\Endpoints\API
+class WAF implements API
 {
     private $adapter;
 

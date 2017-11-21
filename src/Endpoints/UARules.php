@@ -8,6 +8,7 @@
 
 namespace Cloudflare\API\Endpoints;
 
+use Cloudflare\API\Configurations\Configurations;
 use Cloudflare\API\Adapter\Adapter;
 
 class UARules implements API
@@ -42,7 +43,7 @@ class UARules implements API
     public function createRule(
         string $zoneID,
         string $mode,
-        \Cloudflare\API\Configurations\Configurations $configuration,
+        Configurations $configuration,
         string $ruleID = null,
         string $description = null
     ): bool {
