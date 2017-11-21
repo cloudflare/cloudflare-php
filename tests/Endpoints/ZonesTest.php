@@ -95,7 +95,7 @@ class ZonesTest extends TestCase
             );
 
         $zones = new \Cloudflare\API\Endpoints\Zones($mock);
-        $result = $zones->listZones('example.com', 'active', 1, 20, 'status', 'desc', 'all');
+        $result = $zones->listZones('example.com', 'active', 1, 20, 'status', 'desc');
 
         $this->assertObjectHasAttribute('result', $result);
         $this->assertObjectHasAttribute('result_info', $result);

@@ -32,7 +32,7 @@ class WAFTest extends TestCase
             );
 
         $waf = new \Cloudflare\API\Endpoints\WAF($mock);
-        $result = $waf->getPackages('023e105f4ecef8ad9ca31a8372d0c353', 1, 20, 'status', 'desc', 'all');
+        $result = $waf->getPackages('023e105f4ecef8ad9ca31a8372d0c353', 1, 20, 'status', 'desc');
 
         $this->assertObjectHasAttribute('result', $result);
         $this->assertObjectHasAttribute('result_info', $result);
@@ -83,7 +83,7 @@ class WAFTest extends TestCase
             );
 
         $waf = new \Cloudflare\API\Endpoints\WAF($mock);
-        $result = $waf->getRules('023e105f4ecef8ad9ca31a8372d0c353', 'a25a9a7e9c00afc1fb2e0245519d725b', 1, 20, 'status', 'desc', 'all');
+        $result = $waf->getRules('023e105f4ecef8ad9ca31a8372d0c353', 'a25a9a7e9c00afc1fb2e0245519d725b', 1, 20, 'status', 'desc');
 
         $this->assertObjectHasAttribute('result', $result);
         $this->assertObjectHasAttribute('result_info', $result);
@@ -163,7 +163,7 @@ class WAFTest extends TestCase
             );
 
         $waf = new \Cloudflare\API\Endpoints\WAF($mock);
-        $result = $waf->getGroups('023e105f4ecef8ad9ca31a8372d0c353', 'a25a9a7e9c00afc1fb2e0245519d725b', 1, 20, 'status', 'desc', 'all');
+        $result = $waf->getGroups('023e105f4ecef8ad9ca31a8372d0c353', 'a25a9a7e9c00afc1fb2e0245519d725b', 1, 20, 'status', 'desc');
 
         $this->assertObjectHasAttribute('result', $result);
         $this->assertObjectHasAttribute('result_info', $result);

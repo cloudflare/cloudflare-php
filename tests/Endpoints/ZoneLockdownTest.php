@@ -27,7 +27,7 @@ class ZoneLockdownTest extends TestCase
             );
 
         $zones = new \Cloudflare\API\Endpoints\ZoneLockdown($mock);
-        $result = $zones->listLockdowns('023e105f4ecef8ad9ca31a8372d0c353', 1, 20);
+        $result = $zones->listLockdowns('023e105f4ecef8ad9ca31a8372d0c353');
 
         $this->assertObjectHasAttribute('result', $result);
         $this->assertObjectHasAttribute('result_info', $result);

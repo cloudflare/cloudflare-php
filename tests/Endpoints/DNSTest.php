@@ -57,7 +57,7 @@ class DNSTest extends TestCase
             );
 
         $zones = new \Cloudflare\API\Endpoints\DNS($mock);
-        $result = $zones->listRecords('023e105f4ecef8ad9ca31a8372d0c353', 'A', 'example.com', '127.0.0.1', 1, 20, 'type', 'desc', 'all');
+        $result = $zones->listRecords('023e105f4ecef8ad9ca31a8372d0c353', 'A', 'example.com', '127.0.0.1', 1, 20, 'type', 'desc');
 
         $this->assertObjectHasAttribute('result', $result);
         $this->assertObjectHasAttribute('result_info', $result);
