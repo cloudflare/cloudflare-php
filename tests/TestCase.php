@@ -11,7 +11,7 @@ abstract class TestCase extends PHPUnit_Framework_TestCase
      * Returns a PSR7 Stream for a given fixture.
      *
      * @param  string     $fixture The fixture to create the stream for.
-     * @return Psr7Stream
+     * @return Psr7\Stream
      */
     protected function getPsr7StreamForFixture($fixture): Psr7\Stream
     {
@@ -31,7 +31,7 @@ abstract class TestCase extends PHPUnit_Framework_TestCase
      *
      * @param  string        $fixture    The fixture to create the response for.
      * @param  integer       $statusCode A HTTP Status Code for the response.
-     * @return Psr7Response
+     * @return Psr7\Response
      */
     protected function getPsr7JsonResponseForFixture($fixture, $statusCode = 200): Psr7\Response
     {
