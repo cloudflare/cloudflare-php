@@ -14,18 +14,14 @@ class ZoneLockdown implements Configurations
 
     public function addIP(string $value)
     {
-        $object = new \stdClass();
-        $object->target = 'ip';
-        $object->value = $value;
+        $object = (object)['target' => 'ip', 'value' => $value];
 
         array_push($this->configs, $object);
     }
 
     public function addIPRange(string $value)
     {
-        $object = new \stdClass();
-        $object->target = 'ip_range';
-        $object->value = $value;
+        $object = (object)['target' => 'ip_range', 'value' => $value];
 
         array_push($this->configs, $object);
     }

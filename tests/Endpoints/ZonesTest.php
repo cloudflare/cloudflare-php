@@ -34,15 +34,16 @@ class ZonesTest extends TestCase
         $mock = $this->getMockBuilder(\Cloudflare\API\Adapter\Adapter::class)->getMock();
         $mock->method('post')->willReturn($response);
 
-        $org = new stdClass();
-        $org->id = '01a7362d577a6c3019a474fd6f485823';
-
         $mock->expects($this->once())
             ->method('post')
             ->with(
                 $this->equalTo('zones'),
                 $this->equalTo([]),
-                $this->equalTo(['name' => 'example.com', 'jumpstart' => true, 'organization' => $org])
+                $this->equalTo([
+                    'name' => 'example.com',
+                    'jumpstart' => true,
+                    'organization' => (object)['id' => '01a7362d577a6c3019a474fd6f485823']
+                ])
             );
 
         $zones = new \Cloudflare\API\Endpoints\Zones($mock);
