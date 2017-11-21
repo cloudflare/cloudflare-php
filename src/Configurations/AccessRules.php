@@ -2,26 +2,26 @@
 
 namespace Cloudflare\API\Configurations;
 
-class AccessRules
+class AccessRules implements Configurations
 {
     private $config;
 
     public function setIP(string $value)
     {
-        $this->config = (object)['target' => 'ip', 'value' => $value];
+        $this->config = ['target' => 'ip', 'value' => $value];
     }
 
     public function setIPRange(string $value)
     {
-        $this->config = (object)['target' => 'ip_range', 'value' => $value];
+        $this->config = ['target' => 'ip_range', 'value' => $value];
     }
 
     public function setCountry(string $value)
     {
-        $this->config = (object)['target' => 'country', 'value' => $value];
+        $this->config = ['target' => 'country', 'value' => $value];
     }
 
-    public function getObject(): \stdClass
+    public function getArray(): array
     {
         return $this->config;
     }

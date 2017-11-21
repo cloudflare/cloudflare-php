@@ -14,6 +14,22 @@ class AccessRules implements API
         $this->adapter = $adapter;
     }
 
+    /**
+     * @SuppressWarnings(PHPMD.ExcessiveParameterList)
+     *
+     * @param string $zoneID
+     * @param string $scopeType
+     * @param string $mode
+     * @param string $configurationTarget
+     * @param string $configurationValue
+     * @param int $page
+     * @param int $perPage
+     * @param string $order
+     * @param string $direction
+     * @param string $match
+     * @param string $notes
+     * @return \stdClass
+     */
     public function listRules(
         string $zoneID,
         string $scopeType = '',
@@ -70,12 +86,12 @@ class AccessRules implements API
     public function createRule(
         string $zoneID,
         string $mode,
-        \Cloudflare\API\Configurations\AccessRules $configuration,
+        Configurations $configuration,
         string $notes = null
     ): bool {
         $options = [
             'mode' => $mode,
-            'configuration' => $configuration->getObject()
+            'configuration' => (object) $configuration->getArray()
         ];
 
         if ($notes !== null) {
