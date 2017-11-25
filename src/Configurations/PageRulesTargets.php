@@ -14,13 +14,15 @@ class PageRulesTargets implements Configurations
 
     public function __construct(string $queryUrl)
     {
-        $target = new \stdClass();
-        $target->target = 'url';
-        $target->constraint = new \stdClass();
-        $target->constraint->operator = "matches";
-        $target->constraint->value = $queryUrl;
-
-        $this->targets = [$target];
+        $this->targets = [
+            (object)[
+                'target' => 'url',
+                'constraint' => (object)[
+                    'operator' => 'matches',
+                    'value' => $queryUrl
+                ]
+            ]
+        ];
     }
 
     public function getArray(): array

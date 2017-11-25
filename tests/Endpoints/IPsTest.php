@@ -6,8 +6,6 @@
  * Time: 20:16
  */
 
-use Cloudflare\API\Endpoints\IPs;
-
 class IPsTest extends TestCase
 {
     public function testListIPs()
@@ -26,7 +24,7 @@ class IPsTest extends TestCase
 
         $ips = new \Cloudflare\API\Endpoints\IPs($mock);
         $ips = $ips->listIPs();
-        $this->assertObjectHasAttribute("ipv4_cidrs", $ips);
-        $this->assertObjectHasAttribute("ipv6_cidrs", $ips);
+        $this->assertObjectHasAttribute('ipv4_cidrs', $ips);
+        $this->assertObjectHasAttribute('ipv6_cidrs', $ips);
     }
 }

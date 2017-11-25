@@ -12,7 +12,7 @@ class APIKey implements Auth
     private $email;
     private $apiKey;
 
-    public function __construct(String $email, String $apiKey)
+    public function __construct(string $email, string $apiKey)
     {
         $this->email  = $email;
         $this->apiKey = $apiKey;

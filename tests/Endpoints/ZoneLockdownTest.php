@@ -27,12 +27,12 @@ class ZoneLockdownTest extends TestCase
             );
 
         $zones = new \Cloudflare\API\Endpoints\ZoneLockdown($mock);
-        $result = $zones->listLockdowns("023e105f4ecef8ad9ca31a8372d0c353", 1, 20);
+        $result = $zones->listLockdowns('023e105f4ecef8ad9ca31a8372d0c353');
 
         $this->assertObjectHasAttribute('result', $result);
         $this->assertObjectHasAttribute('result_info', $result);
 
-        $this->assertEquals("372e67954025e0ba6aaa6d586b9e0b59", $result->result[0]->id);
+        $this->assertEquals('372e67954025e0ba6aaa6d586b9e0b59', $result->result[0]->id);
         $this->assertEquals(1, $result->result_info->page);
     }
 
@@ -52,7 +52,7 @@ class ZoneLockdownTest extends TestCase
                 $this->equalTo('zones/023e105f4ecef8ad9ca31a8372d0c353/firewall/lockdowns'),
                 $this->equalTo([]),
                 $this->equalTo([
-                    'urls' => ["api.mysite.com/some/endpoint*"],
+                    'urls' => ['api.mysite.com/some/endpoint*'],
                     'id' => '372e67954025e0ba6aaa6d586b9e0b59',
                     'description' => 'Restrict access to these endpoints to requests from a known IP address',
                     'configurations' => $config->getArray(),
@@ -62,7 +62,7 @@ class ZoneLockdownTest extends TestCase
         $zoneLockdown = new \Cloudflare\API\Endpoints\ZoneLockdown($mock);
         $zoneLockdown->createLockdown(
             '023e105f4ecef8ad9ca31a8372d0c353',
-            ["api.mysite.com/some/endpoint*"],
+            ['api.mysite.com/some/endpoint*'],
             $config,
             '372e67954025e0ba6aaa6d586b9e0b59',
             'Restrict access to these endpoints to requests from a known IP address'
@@ -84,9 +84,9 @@ class ZoneLockdownTest extends TestCase
             );
 
         $lockdown = new \Cloudflare\API\Endpoints\ZoneLockdown($mock);
-        $result = $lockdown->getLockdownDetails("023e105f4ecef8ad9ca31a8372d0c353", "372e67954025e0ba6aaa6d586b9e0b59");
+        $result = $lockdown->getLockdownDetails('023e105f4ecef8ad9ca31a8372d0c353', '372e67954025e0ba6aaa6d586b9e0b59');
 
-        $this->assertEquals("372e67954025e0ba6aaa6d586b9e0b59", $result->id);
+        $this->assertEquals('372e67954025e0ba6aaa6d586b9e0b59', $result->id);
     }
 
     public function testUpdateLockdown()
@@ -105,7 +105,7 @@ class ZoneLockdownTest extends TestCase
                 $this->equalTo('zones/023e105f4ecef8ad9ca31a8372d0c353/firewall/lockdowns/372e67954025e0ba6aaa6d586b9e0b59'),
                 $this->equalTo([]),
                 $this->equalTo([
-                    'urls' => ["api.mysite.com/some/endpoint*"],
+                    'urls' => ['api.mysite.com/some/endpoint*'],
                     'id' => '372e67954025e0ba6aaa6d586b9e0b59',
                     'description' => 'Restrict access to these endpoints to requests from a known IP address',
                     'configurations' => $config->getArray(),
@@ -116,7 +116,7 @@ class ZoneLockdownTest extends TestCase
         $zoneLockdown->updateLockdown(
             '023e105f4ecef8ad9ca31a8372d0c353',
             '372e67954025e0ba6aaa6d586b9e0b59',
-            ["api.mysite.com/some/endpoint*"],
+            ['api.mysite.com/some/endpoint*'],
             $config,
             'Restrict access to these endpoints to requests from a known IP address'
         );

@@ -32,11 +32,7 @@ class ZoneLockdown implements API
         $user = $this->adapter->get('zones/' . $zoneID . '/firewall/lockdowns', $query, []);
         $body = json_decode($user->getBody());
 
-        $result = new \stdClass();
-        $result->result = $body->result;
-        $result->result_info = $body->result_info;
-
-        return $result;
+        return (object)['result' => $body->result, 'result_info' => $body->result_info];
     }
 
     public function createLockdown(

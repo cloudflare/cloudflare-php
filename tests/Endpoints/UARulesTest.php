@@ -27,12 +27,12 @@ class UARulesTest extends TestCase
             );
 
         $zones = new \Cloudflare\API\Endpoints\UARules($mock);
-        $result = $zones->listRules("023e105f4ecef8ad9ca31a8372d0c353", 1, 20);
+        $result = $zones->listRules('023e105f4ecef8ad9ca31a8372d0c353');
 
         $this->assertObjectHasAttribute('result', $result);
         $this->assertObjectHasAttribute('result_info', $result);
 
-        $this->assertEquals("372e67954025e0ba6aaa6d586b9e0b59", $result->result[0]->id);
+        $this->assertEquals('372e67954025e0ba6aaa6d586b9e0b59', $result->result[0]->id);
         $this->assertEquals(1, $result->result_info->page);
     }
 
@@ -84,9 +84,9 @@ class UARulesTest extends TestCase
             );
 
         $lockdown = new \Cloudflare\API\Endpoints\UARules($mock);
-        $result = $lockdown->getRuleDetails("023e105f4ecef8ad9ca31a8372d0c353", "372e67954025e0ba6aaa6d586b9e0b59");
+        $result = $lockdown->getRuleDetails('023e105f4ecef8ad9ca31a8372d0c353', '372e67954025e0ba6aaa6d586b9e0b59');
 
-        $this->assertEquals("372e67954025e0ba6aaa6d586b9e0b59", $result->id);
+        $this->assertEquals('372e67954025e0ba6aaa6d586b9e0b59', $result->id);
     }
 
     public function testUpdateRule()
