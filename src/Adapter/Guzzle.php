@@ -121,7 +121,7 @@ class Guzzle implements Adapter
             throw new JSONException();
         }
 
-        if (isset($json->errors)) {
+        if (!empty($json->errors)) {
             throw new ResponseException($json->errors[0]->message, $json->errors[0]->code);
         }
 
