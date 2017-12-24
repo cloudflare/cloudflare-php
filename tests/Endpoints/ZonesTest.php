@@ -141,8 +141,8 @@ class ZonesTest extends TestCase
             ->method('get')
             ->with(
                 $this->equalTo('zones/c2547eb745079dac9320b638f5e225cf483cc5cfdda41/analytics/dashboard'),
-                $this->equalTo([]),
-                $this->equalTo(['since' => '-10080', 'until' => '0', 'continuous' => true])
+                $this->equalTo(['since' => '-10080', 'until' => '0', 'continuous' => var_export(true, true)]),
+                $this->equalTo([])
             );
 
         $zones = new \Cloudflare\API\Endpoints\Zones($mock);
