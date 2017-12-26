@@ -114,7 +114,7 @@ class Zones implements API
      */
     public function getAnalyticsDashboard(string $zoneID, string $since = '-10080', string $until = '0', bool $continuous = true): \stdClass
     {
-        $response = $this->adapter->get('zones/' . $zoneID . '/analytics/dashboard', [], ['since' => $since, 'until' => $until, 'continuous' => $continuous]);
+        $response = $this->adapter->get('zones/' . $zoneID . '/analytics/dashboard', ['since' => $since, 'until' => $until, 'continuous' => var_export($continuous, true)], []);
 
         return json_decode($response->getBody())->result;
     }
