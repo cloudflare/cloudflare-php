@@ -27,11 +27,11 @@ class Zones implements API
      * @param string $organizationID
      * @return \stdClass
      */
-    public function addZone(string $name, bool $jump_start = false, string $organizationID = ''): \stdClass
+    public function addZone(string $name, bool $jumpStart = false, string $organizationID = ''): \stdClass
     {
         $options = [
             'name' => $name,
-            'jump_start' => $jump_start
+            'jump_start' => $jumpStart
         ];
 
         if (!empty($organizationID)) {
