@@ -23,15 +23,15 @@ class Zones implements API
      * @SuppressWarnings(PHPMD.BooleanArgumentFlag)
      *
      * @param string $name
-     * @param bool $jumpstart
+     * @param bool $jump_start
      * @param string $organizationID
      * @return \stdClass
      */
-    public function addZone(string $name, bool $jumpstart = false, string $organizationID = ''): \stdClass
+    public function addZone(string $name, bool $jump_start = false, string $organizationID = ''): \stdClass
     {
         $options = [
             'name' => $name,
-            'jumpstart' => $jumpstart
+            'jump_start' => $jump_start
         ];
 
         if (!empty($organizationID)) {
