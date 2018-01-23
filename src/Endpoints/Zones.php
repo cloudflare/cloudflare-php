@@ -23,7 +23,7 @@ class Zones implements API
      * @SuppressWarnings(PHPMD.BooleanArgumentFlag)
      *
      * @param string $name
-     * @param bool $jump_start
+     * @param bool $jumpStart
      * @param string $organizationID
      * @return \stdClass
      */
