@@ -20,7 +20,7 @@ class ZonesTest extends TestCase
             ->with(
                 $this->equalTo('zones'),
                 $this->equalTo([]),
-                $this->equalTo(['name' => 'example.com', 'jumpstart' => false])
+                $this->equalTo(['name' => 'example.com', 'jump_start' => false])
             );
 
         $zones = new \Cloudflare\API\Endpoints\Zones($mock);
@@ -41,7 +41,7 @@ class ZonesTest extends TestCase
                 $this->equalTo([]),
                 $this->equalTo([
                     'name' => 'example.com',
-                    'jumpstart' => true,
+                    'jump_start' => true,
                     'organization' => (object)['id' => '01a7362d577a6c3019a474fd6f485823']
                 ])
             );
