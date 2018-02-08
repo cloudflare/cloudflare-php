@@ -13,10 +13,22 @@ use Cloudflare\API\Adapter\Adapter;
 class DNS implements API
 {
     private $adapter;
+    private $recordId = false;
 
     public function __construct(Adapter $adapter)
     {
         $this->adapter = $adapter;
+    }
+
+    /**
+     * Return the $record_id value. Could be a string or boolean false so
+     * no return type declaration can be made. Will be set by addRecord()
+     * on successful creation of a record.
+     * @return string|bool
+     */
+    public function getRecordID()
+    {
+        return $this->recordId;
     }
 
     /**
@@ -54,6 +66,7 @@ class DNS implements API
         $body = json_decode($user->getBody());
 
         if (isset($body->result->id)) {
+            $this->recordId = $body->result->id;
             return true;
         }
 
