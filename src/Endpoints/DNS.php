@@ -13,7 +13,7 @@ use Cloudflare\API\Adapter\Adapter;
 class DNS implements API
 {
     private $adapter;
-    private $record_id = false;
+    private $recordId = false;
 
     public function __construct(Adapter $adapter)
     {
@@ -28,7 +28,7 @@ class DNS implements API
      */
     public function getRecordID()
     {
-        return $this->record_id;
+        return $this->recordId;
     }
 
     /**
@@ -66,7 +66,7 @@ class DNS implements API
         $body = json_decode($user->getBody());
 
         if (isset($body->result->id)) {
-            $this->record_id = $body->result->id;
+            $this->recordId = $body->result->id;
             return true;
         }
 
