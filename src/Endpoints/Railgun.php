@@ -35,7 +35,7 @@ class Railgun implements API
     public function list(
         int $page = 1,
         int $perPage = 20,
-        string $direction = ""
+        string $direction = ''
     ): \stdClass {
         $query = [
             'page' => $page,
@@ -49,11 +49,7 @@ class Railgun implements API
         $user = $this->adapter->get('railguns', $query, []);
         $body = json_decode($user->getBody());
 
-        $result = new \stdClass();
-        $result->result = $body->result;
-        $result->result_info = $body->result_info;
-
-        return $result;
+        return (object)['result' => $body->result, 'result_info' => $body->result_info];
     }
 
     public function get(
@@ -71,11 +67,7 @@ class Railgun implements API
         $user = $this->adapter->get('railguns/' . $railgunID . '/zones', [], []);
         $body = json_decode($user->getBody());
 
-        $result = new \stdClass();
-        $result->result = $body->result;
-        $result->result_info = $body->result_info;
-
-        return $result;
+        return (object)['result' => $body->result, 'result_info' => $body->result_info];
     }
 
     public function update(

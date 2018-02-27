@@ -8,6 +8,7 @@
 
 namespace Cloudflare\API\Endpoints;
 
+use Cloudflare\API\Configurations\Configurations;
 use Cloudflare\API\Adapter\Adapter;
 
 class UARules implements API
@@ -32,17 +33,13 @@ class UARules implements API
         $user = $this->adapter->get('zones/' . $zoneID . '/firewall/ua_rules', $query, []);
         $body = json_decode($user->getBody());
 
-        $result = new \stdClass();
-        $result->result = $body->result;
-        $result->result_info = $body->result_info;
-
-        return $result;
+        return (object)['result' => $body->result, 'result_info' => $body->result_info];
     }
 
     public function createRule(
         string $zoneID,
         string $mode,
-        \Cloudflare\API\Configurations\Configurations $configuration,
+        Configurations $configuration,
         string $ruleID = null,
         string $description = null
     ): bool {
@@ -72,7 +69,7 @@ class UARules implements API
 
     public function getRuleDetails(string $zoneID, string $blockID): \stdClass
     {
-        $user = $this->adapter->get('zones/' . $zoneID . '/firewall/ua_rules/' . $blockID, []);
+        $user = $this->adapter->get('zones/' . $zoneID . '/firewall/ua_rules/' . $blockID, [], []);
         $body = json_decode($user->getBody());
         return $body->result;
     }

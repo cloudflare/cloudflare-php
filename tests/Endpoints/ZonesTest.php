@@ -20,33 +20,34 @@ class ZonesTest extends TestCase
             ->with(
                 $this->equalTo('zones'),
                 $this->equalTo([]),
-                $this->equalTo(['name' => 'example.com', 'jumpstart' => false])
+                $this->equalTo(['name' => 'example.com', 'jump_start' => false])
             );
 
         $zones = new \Cloudflare\API\Endpoints\Zones($mock);
-        $result = $zones->addZone("example.com");
+        $result = $zones->addZone('example.com');
 
-        $this->assertObjectHasAttribute("id", $result);
-        $this->assertEquals("023e105f4ecef8ad9ca31a8372d0c353", $result->id);
+        $this->assertObjectHasAttribute('id', $result);
+        $this->assertEquals('023e105f4ecef8ad9ca31a8372d0c353', $result->id);
 
         $response = $this->getPsr7JsonResponseForFixture('Endpoints/createPageRule.json');
 
         $mock = $this->getMockBuilder(\Cloudflare\API\Adapter\Adapter::class)->getMock();
         $mock->method('post')->willReturn($response);
 
-        $org = new stdClass();
-        $org->id = "01a7362d577a6c3019a474fd6f485823";
-
         $mock->expects($this->once())
             ->method('post')
             ->with(
                 $this->equalTo('zones'),
                 $this->equalTo([]),
-                $this->equalTo(['name' => 'example.com', 'jumpstart' => true, 'organization' => $org])
+                $this->equalTo([
+                    'name' => 'example.com',
+                    'jump_start' => true,
+                    'organization' => (object)['id' => '01a7362d577a6c3019a474fd6f485823']
+                ])
             );
 
         $zones = new \Cloudflare\API\Endpoints\Zones($mock);
-        $zones->addZone("example.com", true, "01a7362d577a6c3019a474fd6f485823");
+        $zones->addZone('example.com', true, '01a7362d577a6c3019a474fd6f485823');
     }
 
     public function testActivationTest()
@@ -65,7 +66,7 @@ class ZonesTest extends TestCase
             );
 
         $zones = new \Cloudflare\API\Endpoints\Zones($mock);
-        $result = $zones->activationCheck("c2547eb745079dac9320b638f5e225cf483cc5cfdda41");
+        $result = $zones->activationCheck('c2547eb745079dac9320b638f5e225cf483cc5cfdda41');
 
         $this->assertTrue($result);
     }
@@ -94,12 +95,12 @@ class ZonesTest extends TestCase
             );
 
         $zones = new \Cloudflare\API\Endpoints\Zones($mock);
-        $result = $zones->listZones("example.com", "active", 1, 20, "status", "desc", "all");
+        $result = $zones->listZones('example.com', 'active', 1, 20, 'status', 'desc');
 
         $this->assertObjectHasAttribute('result', $result);
         $this->assertObjectHasAttribute('result_info', $result);
 
-        $this->assertEquals("023e105f4ecef8ad9ca31a8372d0c353", $result->result[0]->id);
+        $this->assertEquals('023e105f4ecef8ad9ca31a8372d0c353', $result->result[0]->id);
         $this->assertEquals(1, $result->result_info->page);
     }
 
@@ -124,9 +125,9 @@ class ZonesTest extends TestCase
             );
 
         $zones = new \Cloudflare\API\Endpoints\Zones($mock);
-        $result = $zones->getZoneID("example.com");
+        $result = $zones->getZoneID('example.com');
 
-        $this->assertEquals("023e105f4ecef8ad9ca31a8372d0c353", $result);
+        $this->assertEquals('023e105f4ecef8ad9ca31a8372d0c353', $result);
     }
 
     public function testGetAnalyticsDashboard()
@@ -140,15 +141,15 @@ class ZonesTest extends TestCase
             ->method('get')
             ->with(
                 $this->equalTo('zones/c2547eb745079dac9320b638f5e225cf483cc5cfdda41/analytics/dashboard'),
-                $this->equalTo([]),
-                $this->equalTo(["since" => "-10080", "until" => "0", "continuous" => true])
+                $this->equalTo(['since' => '-10080', 'until' => '0', 'continuous' => var_export(true, true)]),
+                $this->equalTo([])
             );
 
         $zones = new \Cloudflare\API\Endpoints\Zones($mock);
-        $analytics = $zones->getAnalyticsDashboard("c2547eb745079dac9320b638f5e225cf483cc5cfdda41");
+        $analytics = $zones->getAnalyticsDashboard('c2547eb745079dac9320b638f5e225cf483cc5cfdda41');
 
-        $this->assertObjectHasAttribute("since", $analytics->totals);
-        $this->assertObjectHasAttribute("since", $analytics->timeseries[0]);
+        $this->assertObjectHasAttribute('since', $analytics->totals);
+        $this->assertObjectHasAttribute('since', $analytics->timeseries[0]);
     }
     
     public function testChangeDevelopmentMode()
@@ -163,11 +164,11 @@ class ZonesTest extends TestCase
             ->with(
                 $this->equalTo('zones/c2547eb745079dac9320b638f5e225cf483cc5cfdda41/settings/development_mode'),
                 $this->equalTo([]),
-                $this->equalTo(["value" => "on"])
+                $this->equalTo(['value' => 'on'])
             );
 
         $zones = new \Cloudflare\API\Endpoints\Zones($mock);
-        $result = $zones->changeDevelopmentMode("c2547eb745079dac9320b638f5e225cf483cc5cfdda41", true);
+        $result = $zones->changeDevelopmentMode('c2547eb745079dac9320b638f5e225cf483cc5cfdda41', true);
 
         $this->assertTrue($result);
     }
@@ -184,11 +185,11 @@ class ZonesTest extends TestCase
             ->with(
                 $this->equalTo('zones/c2547eb745079dac9320b638f5e225cf483cc5cfdda41/purge_cache'),
                 $this->equalTo([]),
-                $this->equalTo(["purge_everything" => true])
+                $this->equalTo(['purge_everything' => true])
             );
 
         $zones = new \Cloudflare\API\Endpoints\Zones($mock);
-        $result = $zones->cachePurgeEverything("c2547eb745079dac9320b638f5e225cf483cc5cfdda41");
+        $result = $zones->cachePurgeEverything('c2547eb745079dac9320b638f5e225cf483cc5cfdda41');
 
         $this->assertTrue($result);
     }

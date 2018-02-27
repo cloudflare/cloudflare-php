@@ -6,8 +6,6 @@
  * Time: 19:25
  */
 
-use Cloudflare\API\Adapter\PageRules;
-
 class PageRulesTest extends TestCase
 {
     public function testCreatePageRule()

@@ -6,8 +6,6 @@
  * Time: 13:34
  */
 
-use Cloudflare\API\Endpoints\WAF;
-
 class WAFTest extends TestCase
 {
     public function testgetPackages()
@@ -32,12 +30,12 @@ class WAFTest extends TestCase
             );
 
         $waf = new \Cloudflare\API\Endpoints\WAF($mock);
-        $result = $waf->getPackages("023e105f4ecef8ad9ca31a8372d0c353", 1, 20, "status", "desc", "all");
+        $result = $waf->getPackages('023e105f4ecef8ad9ca31a8372d0c353', 1, 20, 'status', 'desc');
 
         $this->assertObjectHasAttribute('result', $result);
         $this->assertObjectHasAttribute('result_info', $result);
 
-        $this->assertEquals("a25a9a7e9c00afc1fb2e0245519d725b", $result->result[0]->id);
+        $this->assertEquals('a25a9a7e9c00afc1fb2e0245519d725b', $result->result[0]->id);
         $this->assertEquals(1, $result->result_info->page);
     }
 
@@ -56,9 +54,9 @@ class WAFTest extends TestCase
             );
 
         $waf = new \Cloudflare\API\Endpoints\WAF($mock);
-        $result = $waf->getPackageInfo("023e105f4ecef8ad9ca31a8372d0c353", "a25a9a7e9c00afc1fb2e0245519d725b");
+        $result = $waf->getPackageInfo('023e105f4ecef8ad9ca31a8372d0c353', 'a25a9a7e9c00afc1fb2e0245519d725b');
 
-        $this->assertEquals("a25a9a7e9c00afc1fb2e0245519d725b", $result->id);
+        $this->assertEquals('a25a9a7e9c00afc1fb2e0245519d725b', $result->id);
     }
 
     public function testgetRules()
@@ -83,12 +81,12 @@ class WAFTest extends TestCase
             );
 
         $waf = new \Cloudflare\API\Endpoints\WAF($mock);
-        $result = $waf->getRules("023e105f4ecef8ad9ca31a8372d0c353", "a25a9a7e9c00afc1fb2e0245519d725b", 1, 20, "status", "desc", "all");
+        $result = $waf->getRules('023e105f4ecef8ad9ca31a8372d0c353', 'a25a9a7e9c00afc1fb2e0245519d725b', 1, 20, 'status', 'desc');
 
         $this->assertObjectHasAttribute('result', $result);
         $this->assertObjectHasAttribute('result_info', $result);
 
-        $this->assertEquals("92f17202ed8bd63d69a66b86a49a8f6b", $result->result[0]->id);
+        $this->assertEquals('92f17202ed8bd63d69a66b86a49a8f6b', $result->result[0]->id);
         $this->assertEquals(1, $result->result_info->page);
     }
 
@@ -107,9 +105,9 @@ class WAFTest extends TestCase
             );
 
         $waf = new \Cloudflare\API\Endpoints\WAF($mock);
-        $result = $waf->getRuleInfo("023e105f4ecef8ad9ca31a8372d0c353", "a25a9a7e9c00afc1fb2e0245519d725b", "f939de3be84e66e757adcdcb87908023");
+        $result = $waf->getRuleInfo('023e105f4ecef8ad9ca31a8372d0c353', 'a25a9a7e9c00afc1fb2e0245519d725b', 'f939de3be84e66e757adcdcb87908023');
 
-        $this->assertEquals("f939de3be84e66e757adcdcb87908023", $result->id);
+        $this->assertEquals('f939de3be84e66e757adcdcb87908023', $result->id);
     }
 
     public function testupdateRule()
@@ -120,7 +118,7 @@ class WAFTest extends TestCase
         $mock->method('patch')->willReturn($response);
 
         $details = [
-            'mode' => "on",
+            'mode' => 'on',
         ];
 
         $mock->expects($this->once())
@@ -132,9 +130,9 @@ class WAFTest extends TestCase
             );
 
         $waf = new \Cloudflare\API\Endpoints\WAF($mock);
-        $result = $waf->updateRule("023e105f4ecef8ad9ca31a8372d0c353", "a25a9a7e9c00afc1fb2e0245519d725b", "f939de3be84e66e757adcdcb87908023", "on");
+        $result = $waf->updateRule('023e105f4ecef8ad9ca31a8372d0c353', 'a25a9a7e9c00afc1fb2e0245519d725b', 'f939de3be84e66e757adcdcb87908023', 'on');
 
-        $this->assertEquals("f939de3be84e66e757adcdcb87908023", $result->id);
+        $this->assertEquals('f939de3be84e66e757adcdcb87908023', $result->id);
 
         foreach ($details as $property => $value) {
             $this->assertEquals($result->{ $property }, $value);
@@ -163,12 +161,12 @@ class WAFTest extends TestCase
             );
 
         $waf = new \Cloudflare\API\Endpoints\WAF($mock);
-        $result = $waf->getGroups("023e105f4ecef8ad9ca31a8372d0c353", "a25a9a7e9c00afc1fb2e0245519d725b", 1, 20, "status", "desc", "all");
+        $result = $waf->getGroups('023e105f4ecef8ad9ca31a8372d0c353', 'a25a9a7e9c00afc1fb2e0245519d725b', 1, 20, 'status', 'desc');
 
         $this->assertObjectHasAttribute('result', $result);
         $this->assertObjectHasAttribute('result_info', $result);
 
-        $this->assertEquals("de677e5818985db1285d0e80225f06e5", $result->result[0]->id);
+        $this->assertEquals('de677e5818985db1285d0e80225f06e5', $result->result[0]->id);
         $this->assertEquals(1, $result->result_info->page);
     }
 
@@ -187,9 +185,9 @@ class WAFTest extends TestCase
             );
 
         $waf = new \Cloudflare\API\Endpoints\WAF($mock);
-        $result = $waf->getGroupInfo("023e105f4ecef8ad9ca31a8372d0c353", "a25a9a7e9c00afc1fb2e0245519d725b", "de677e5818985db1285d0e80225f06e5");
+        $result = $waf->getGroupInfo('023e105f4ecef8ad9ca31a8372d0c353', 'a25a9a7e9c00afc1fb2e0245519d725b', 'de677e5818985db1285d0e80225f06e5');
 
-        $this->assertEquals("de677e5818985db1285d0e80225f06e5", $result->id);
+        $this->assertEquals('de677e5818985db1285d0e80225f06e5', $result->id);
     }
 
     public function testupdateGroup()
@@ -200,7 +198,7 @@ class WAFTest extends TestCase
         $mock->method('patch')->willReturn($response);
 
         $details = [
-            'mode' => "off",
+            'mode' => 'off',
         ];
 
         $mock->expects($this->once())
@@ -212,9 +210,9 @@ class WAFTest extends TestCase
             );
 
         $waf = new \Cloudflare\API\Endpoints\WAF($mock);
-        $result = $waf->updateGroup("023e105f4ecef8ad9ca31a8372d0c353", "a25a9a7e9c00afc1fb2e0245519d725b", "de677e5818985db1285d0e80225f06e5", "off");
+        $result = $waf->updateGroup('023e105f4ecef8ad9ca31a8372d0c353', 'a25a9a7e9c00afc1fb2e0245519d725b', 'de677e5818985db1285d0e80225f06e5', 'off');
 
-        $this->assertEquals("de677e5818985db1285d0e80225f06e5", $result->id);
+        $this->assertEquals('de677e5818985db1285d0e80225f06e5', $result->id);
 
         foreach ($details as $property => $value) {
             $this->assertEquals($result->{ $property }, $value);

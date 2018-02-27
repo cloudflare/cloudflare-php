@@ -70,19 +70,19 @@ class PageRules implements API
         string $direction = null,
         string $match = null
     ): array {
-        if (is_null($status) && !in_array($status, ['active', 'disabled'])) {
+        if ($status === null && !in_array($status, ['active', 'disabled'])) {
             throw new EndpointException('Page Rules can only be listed by status of active or disabled.');
         }
 
-        if (is_null($order) && !in_array($order, ['status', 'priority'])) {
+        if ($order === null && !in_array($order, ['status', 'priority'])) {
             throw new EndpointException('Page Rules can only be ordered by status or priority.');
         }
 
-        if (is_null($direction) && !in_array($direction, ['asc', 'desc'])) {
+        if ($direction === null && !in_array($direction, ['asc', 'desc'])) {
             throw new EndpointException('Direction of Page Rule ordering can only be asc or desc.');
         }
 
-        if (is_null($match) && !in_array($match, ['all', 'any'])) {
+        if ($match === null && !in_array($match, ['all', 'any'])) {
             throw new EndpointException('Match can only be any or all.');
         }
 
@@ -115,7 +115,7 @@ class PageRules implements API
     ): bool {
         $options = [];
 
-        if ($active !== null) {
+        if ($target !== null) {
             $options['targets'] = $target->getArray();
         }
 

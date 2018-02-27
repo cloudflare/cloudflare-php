@@ -18,10 +18,10 @@ class Guzzle implements Adapter
     /**
      * @inheritDoc
      */
-    public function __construct(Auth $auth, String $baseURI = null)
+    public function __construct(Auth $auth, string $baseURI = null)
     {
         if ($baseURI === null) {
-            $baseURI = "https://api.cloudflare.com/client/v4/";
+            $baseURI = 'https://api.cloudflare.com/client/v4/';
         }
 
         $headers = $auth->getHeaders();
@@ -37,7 +37,7 @@ class Guzzle implements Adapter
     /**
      * @inheritDoc
      */
-    public function get(String $uri, array $query = [], array $headers = []): ResponseInterface
+    public function get(string $uri, array $query = [], array $headers = []): ResponseInterface
     {
         $response = $this->client->get($uri, ['query' => $query, 'headers' => $headers]);
 
@@ -48,7 +48,7 @@ class Guzzle implements Adapter
     /**
      * @inheritDoc
      */
-    public function post(String $uri, array $headers = [], array $body = []): ResponseInterface
+    public function post(string $uri, array $headers = [], array $body = []): ResponseInterface
     {
         $response = $this->client->post(
             $uri,
@@ -65,7 +65,7 @@ class Guzzle implements Adapter
     /**
      * @inheritDoc
      */
-    public function put(String $uri, array $headers = [], array $body = []): ResponseInterface
+    public function put(string $uri, array $headers = [], array $body = []): ResponseInterface
     {
         $response = $this->client->put(
             $uri,
@@ -82,7 +82,7 @@ class Guzzle implements Adapter
     /**
      * @inheritDoc
      */
-    public function patch(String $uri, array $headers = [], array $body = []): ResponseInterface
+    public function patch(string $uri, array $headers = [], array $body = []): ResponseInterface
     {
         $response = $this->client->patch(
             $uri,
@@ -99,7 +99,7 @@ class Guzzle implements Adapter
     /**
      * @inheritDoc
      */
-    public function delete(String $uri, array $headers = [], array $body = []): ResponseInterface
+    public function delete(string $uri, array $headers = [], array $body = []): ResponseInterface
     {
         $response = $this->client->delete(
             $uri,
@@ -121,14 +121,12 @@ class Guzzle implements Adapter
             throw new JSONException();
         }
 
-        if (isset($json->errors)) {
-            foreach ($json->errors as $error) {
-                throw new ResponseException($error->message, $error->code);
-            }
+        if (isset($json->errors) && count($json->errors) >= 1) {
+            throw new ResponseException($json->errors[0]->message, $json->errors[0]->code);
         }
 
-        if (isset($json->success) && ($json->success === false)) {
-            throw new ResponseException("Request was unsuccessful.");
+        if (isset($json->success) && !$json->success) {
+            throw new ResponseException('Request was unsuccessful.');
         }
     }
 }

@@ -10,7 +10,7 @@ namespace Cloudflare\API\Endpoints;
 
 use Cloudflare\API\Adapter\Adapter;
 
-class WAF implements \Cloudflare\API\Endpoints\API
+class WAF implements API
 {
     private $adapter;
 
@@ -23,9 +23,9 @@ class WAF implements \Cloudflare\API\Endpoints\API
         string $zoneID,
         int $page = 1,
         int $perPage = 20,
-        string $order = "",
-        string $direction = "",
-        string $match = "all"
+        string $order = '',
+        string $direction = '',
+        string $match = 'all'
     ): \stdClass {
         $query = [
             'page' => $page,
@@ -44,11 +44,7 @@ class WAF implements \Cloudflare\API\Endpoints\API
         $user = $this->adapter->get('zones/' . $zoneID . '/firewall/waf/packages', $query, []);
         $body = json_decode($user->getBody());
 
-        $result = new \stdClass();
-        $result->result = $body->result;
-        $result->result_info = $body->result_info;
-
-        return $result;
+        return (object)['result' => $body->result, 'result_info' => $body->result_info];
     }
 
 
@@ -67,9 +63,9 @@ class WAF implements \Cloudflare\API\Endpoints\API
         string $packageID,
         int $page = 1,
         int $perPage = 20,
-        string $order = "",
-        string $direction = "",
-        string $match = "all"
+        string $order = '',
+        string $direction = '',
+        string $match = 'all'
     ): \stdClass {
         $query = [
             'page' => $page,
@@ -87,11 +83,7 @@ class WAF implements \Cloudflare\API\Endpoints\API
         $user = $this->adapter->get('zones/' . $zoneID . '/firewall/waf/packages/' . $packageID . '/rules', $query, []);
         $body = json_decode($user->getBody());
 
-        $result = new \stdClass();
-        $result->result = $body->result;
-        $result->result_info = $body->result_info;
-
-        return $result;
+        return (object)['result' => $body->result, 'result_info' => $body->result_info];
     }
 
     public function getRuleInfo(
@@ -134,9 +126,9 @@ class WAF implements \Cloudflare\API\Endpoints\API
         string $packageID,
         int $page = 1,
         int $perPage = 20,
-        string $order = "",
-        string $direction = "",
-        string $match = "all"
+        string $order = '',
+        string $direction = '',
+        string $match = 'all'
     ): \stdClass {
         $query = [
             'page' => $page,
@@ -159,11 +151,7 @@ class WAF implements \Cloudflare\API\Endpoints\API
         );
         $body = json_decode($user->getBody());
 
-        $result = new \stdClass();
-        $result->result = $body->result;
-        $result->result_info = $body->result_info;
-
-        return $result;
+        return (object)['result' => $body->result, 'result_info' => $body->result_info];
     }
 
     public function getGroupInfo(

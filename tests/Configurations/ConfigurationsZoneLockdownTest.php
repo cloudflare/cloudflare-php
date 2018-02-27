@@ -6,7 +6,7 @@
  * Date: 05/09/2017
  * Time: 13:50
  */
-class ConfigurationZoneLockdownTest extends TestCase
+class ConfigurationsZoneLockdownTest extends TestCase
 {
     public function testGetArray()
     {
@@ -14,7 +14,7 @@ class ConfigurationZoneLockdownTest extends TestCase
         $configuration->addIP('1.2.3.4');
 
         $array = $configuration->getArray();
-        $this->assertEquals(1, sizeof($array));
+        $this->assertCount(1, $array);
 
         $this->assertObjectHasAttribute('target', $array[0]);
         $this->assertEquals('ip', $array[0]->target);
@@ -24,7 +24,7 @@ class ConfigurationZoneLockdownTest extends TestCase
         $configuration->addIPRange('1.2.3.4/24');
 
         $array = $configuration->getArray();
-        $this->assertEquals(2, sizeof($array));
+        $this->assertCount(2, $array);
 
         $this->assertObjectHasAttribute('target', $array[1]);
         $this->assertEquals('ip_range', $array[1]->target);
