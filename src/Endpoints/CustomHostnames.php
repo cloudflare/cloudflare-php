@@ -58,7 +58,7 @@ class CustomHostnames implements API
     public function listHostnames(
         string $zoneID,
         string $hostname = '',
-        string $id = '',
+        string $hostnameID = '',
         int $page = 1,
         int $perPage = 20,
         string $order = '',
@@ -75,8 +75,8 @@ class CustomHostnames implements API
             $query['hostname'] = $hostname;
         }
 
-        if (!empty($id)) {
-            $query['id'] = $id;
+        if (!empty($hostnameID)) {
+            $query['id'] = $hostnameID;
         }
 
         if (!empty($order)) {
