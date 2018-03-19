@@ -18,7 +18,7 @@ Each API call is provided via a similarly named function within various classes 
 - [x] [Page Rules](https://support.cloudflare.com/hc/en-us/articles/200168306-Is-there-a-tutorial-for-Page-Rules-)
 - [x] [Web Application Firewall (WAF)](https://www.cloudflare.com/waf/)
 - [ ] Virtual DNS Management
-- [ ] Custom hostnames
+- [x] Custom hostnames
 - [x] Zone Lockdown and User-Agent Block rules
 - [ ] Organization Administration
 - [x] [Railgun](https://www.cloudflare.com/railgun/) administration
