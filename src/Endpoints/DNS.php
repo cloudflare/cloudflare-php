@@ -108,6 +108,15 @@ class DNS implements API
 
         return (object)['result' => $body->result, 'result_info' => $body->result_info];
     }
+    
+    public function getRecordID(string $zoneID, string $type = '', string $name = ''): string
+    {
+        $records = $this->listRecords($zoneID, $type, $name);
+        if (count($records->result) < 1) {
+            throw new EndpointException('Could not find records with specified name.');
+        }
+        return $records->result[0]->id;
+    }
 
     public function getRecordDetails(string $zoneID, string $recordID): \stdClass
     {
