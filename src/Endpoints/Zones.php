@@ -35,17 +35,17 @@ class Zones implements API
         ];
 
         if (!empty($organizationID)) {
-            $options['organization'] = (object)['id' => $organizationID];
+            $options['organization'] = ['id' => $organizationID];
         }
 
-        $user = $this->adapter->post('zones', [], $options);
+        $user = $this->adapter->post('zones', $options);
         $body = json_decode($user->getBody());
         return $body->result;
     }
 
     public function activationCheck(string $zoneID): bool
     {
-        $user = $this->adapter->put('zones/' . $zoneID . '/activation_check', [], []);
+        $user = $this->adapter->put('zones/' . $zoneID . '/activation_check');
         $body = json_decode($user->getBody());
 
         if (isset($body->result->id)) {
@@ -86,7 +86,7 @@ class Zones implements API
             $query['direction'] = $direction;
         }
 
-        $user = $this->adapter->get('zones', $query, []);
+        $user = $this->adapter->get('zones', $query);
         $body = json_decode($user->getBody());
 
         return (object)['result' => $body->result, 'result_info' => $body->result_info];
@@ -114,7 +114,7 @@ class Zones implements API
      */
     public function getAnalyticsDashboard(string $zoneID, string $since = '-10080', string $until = '0', bool $continuous = true): \stdClass
     {
-        $response = $this->adapter->get('zones/' . $zoneID . '/analytics/dashboard', ['since' => $since, 'until' => $until, 'continuous' => var_export($continuous, true)], []);
+        $response = $this->adapter->get('zones/' . $zoneID . '/analytics/dashboard', ['since' => $since, 'until' => $until, 'continuous' => var_export($continuous, true)]);
 
         return json_decode($response->getBody())->result;
     }
@@ -128,7 +128,7 @@ class Zones implements API
      */
     public function changeDevelopmentMode(string $zoneID, bool $enable = false): bool
     {
-        $response = $this->adapter->patch('zones/' . $zoneID . '/settings/development_mode', [], ['value' => $enable ? 'on' : 'off']);
+        $response = $this->adapter->patch('zones/' . $zoneID . '/settings/development_mode', ['value' => $enable ? 'on' : 'off']);
 
         $body = json_decode($response->getBody());
 
@@ -147,7 +147,7 @@ class Zones implements API
      */
     public function cachePurgeEverything(string $zoneID): bool
     {
-        $user = $this->adapter->delete('zones/' . $zoneID . '/purge_cache', [], ['purge_everything' => true]);
+        $user = $this->adapter->delete('zones/' . $zoneID . '/purge_cache', ['purge_everything' => true]);
 
         $body = json_decode($user->getBody());
 
@@ -169,7 +169,7 @@ class Zones implements API
             'tags' => $tags
         ];
 
-        $user = $this->adapter->delete('zones/' . $zoneID . '/purge_cache', [], $options);
+        $user = $this->adapter->delete('zones/' . $zoneID . '/purge_cache', $options);
 
         $body = json_decode($user->getBody());
 
