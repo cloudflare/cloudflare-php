@@ -164,10 +164,14 @@ class Zones implements API
             throw new EndpointException('No files or tags to purge.');
         }
 
-        $options = [
-            'files' => $files,
-            'tags' => $tags
-        ];
+        $options = [];
+        if (!is_null($files)) {
+            $options['files'] = $files;
+        }
+
+        if (!is_null($tags)) {
+            $options['tags'] = $tags;
+        }
 
         $user = $this->adapter->delete('zones/' . $zoneID . '/purge_cache', $options);
 
