@@ -158,10 +158,10 @@ class Zones implements API
         return false;
     }
 
-    public function cachePurge(string $zoneID, array $files = null, array $tags = null): bool
+    public function cachePurge(string $zoneID, array $files = null, array $tags = null, array $hosts = null): bool
     {
-        if ($files === null && $tags === null) {
-            throw new EndpointException('No files or tags to purge.');
+        if ($files === null && $tags === null && $hosts === null) {
+            throw new EndpointException('No files, tags or hosts to purge.');
         }
 
         $options = [];
@@ -170,6 +170,10 @@ class Zones implements API
         }
 
         if (!is_null($tags)) {
+            $options['tags'] = $tags;
+        }
+      
+        if (!is_null($hosts)) {
             $options['tags'] = $tags;
         }
 

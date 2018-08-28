@@ -144,7 +144,7 @@ class ZonesTest extends TestCase
         $this->assertObjectHasAttribute('since', $analytics->totals);
         $this->assertObjectHasAttribute('since', $analytics->timeseries[0]);
     }
-    
+
     public function testChangeDevelopmentMode()
     {
         $response = $this->getPsr7JsonResponseForFixture('Endpoints/changeDevelopmentMode.json');
@@ -181,6 +181,32 @@ class ZonesTest extends TestCase
 
         $zones = new \Cloudflare\API\Endpoints\Zones($mock);
         $result = $zones->cachePurgeEverything('c2547eb745079dac9320b638f5e225cf483cc5cfdda41');
+
+        $this->assertTrue($result);
+    }
+
+    public function testCachePurgeHost()
+    {
+        $response = $this->getPsr7JsonResponseForFixture('Endpoints/cachePurgeHost.json');
+
+        $mock = $this->getMockBuilder(\Cloudflare\API\Adapter\Adapter::class)->getMock();
+        $mock->method('delete')->willReturn($response);
+
+        $mock->expects($this->once())
+            ->method('delete')
+            ->with(
+                $this->equalTo('zones/c2547eb745079dac9320b638f5e225cf483cc5cfdda41/purge_cache'),
+                $this->equalTo(
+                    [
+                        'files' => [],
+                        'tags' => [],
+                        'hosts' => ['dash.cloudflare.com']
+                    ]
+                )
+            );
+
+        $zones = new \Cloudflare\API\Endpoints\Zones($mock);
+        $result = $zones->cachePurge('c2547eb745079dac9320b638f5e225cf483cc5cfdda41', [], [], ['dash.cloudflare.com']);
 
         $this->assertTrue($result);
     }
