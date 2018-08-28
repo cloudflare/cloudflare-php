@@ -52,7 +52,7 @@ class DNS implements API
         }
 
         if (!empty($priority)) {
-            $options['priority'] = $priority;
+            $options['priority'] = (int)$priority;
         }
 
         $user = $this->adapter->post('zones/' . $zoneID . '/dns_records', $options);
