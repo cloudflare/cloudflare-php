@@ -174,7 +174,7 @@ class Zones implements API
         }
       
         if (!is_null($hosts)) {
-            $options['tags'] = $tags;
+            $options['hosts'] = $hosts;
         }
 
         $user = $this->adapter->delete('zones/' . $zoneID . '/purge_cache', $options);
