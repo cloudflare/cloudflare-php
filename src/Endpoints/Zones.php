@@ -158,15 +158,16 @@ class Zones implements API
         return false;
     }
 
-    public function cachePurge(string $zoneID, array $files = null, array $tags = null): bool
+    public function cachePurge(string $zoneID, array $files = null, array $tags = null, array $hosts = null): bool
     {
-        if ($files === null && $tags === null) {
-            throw new EndpointException('No files or tags to purge.');
+        if ($files === null && $tags === null && $hosts === null) {
+            throw new EndpointException('No files, tags or hosts to purge.');
         }
 
         $options = [
             'files' => $files,
-            'tags' => $tags
+            'tags' => $tags,
+            'hosts' => $hosts
         ];
 
         $user = $this->adapter->delete('zones/' . $zoneID . '/purge_cache', $options);
