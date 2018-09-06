@@ -108,6 +108,7 @@ class PageRules implements API
 
     public function updatePageRule(
         string $zoneID,
+        string $ruleID,
         PageRulesTargets $target = null,
         PageRulesActions $actions = null,
         bool $active = null,
@@ -132,7 +133,7 @@ class PageRules implements API
         }
 
 
-        $query = $this->adapter->patch('zones/' . $zoneID . '/pagerules', $options);
+        $query = $this->adapter->patch('zones/' . $zoneID . '/pagerules/' . $ruleID , $options);
 
         $body = json_decode($query->getBody());
 
