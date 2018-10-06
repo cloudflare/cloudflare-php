@@ -29,6 +29,7 @@ class DNS implements API
      * @param int $ttl
      * @param bool $proxied
      * @param string $priority
+     * @param array $data
      * @return bool
      */
     public function addRecord(
@@ -38,7 +39,8 @@ class DNS implements API
         string $content,
         int $ttl = 0,
         bool $proxied = true,
-        string $priority = ''
+        string $priority = '',
+        array $data = []
     ): bool {
         $options = [
             'type' => $type,
@@ -53,6 +55,10 @@ class DNS implements API
 
         if (!empty($priority)) {
             $options['priority'] = (int)$priority;
+        }
+        
+        if (!empty($data)) {
+            $options['data'] = $data;
         }
 
         $user = $this->adapter->post('zones/' . $zoneID . '/dns_records', $options);
