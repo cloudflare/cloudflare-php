@@ -42,16 +42,16 @@ class Zones implements API
         }
 
         $user = $this->adapter->post('zones', $options);
-        $body = json_decode($user->getBody());
-        return $body->result;
+        $this->body = json_decode($user->getBody());
+        return $this->body->result;
     }
 
     public function activationCheck(string $zoneID): bool
     {
         $user = $this->adapter->put('zones/' . $zoneID . '/activation_check');
-        $body = json_decode($user->getBody());
+        $this->body = json_decode($user->getBody());
 
-        if (isset($body->result->id)) {
+        if (isset($this->body->result->id)) {
             return true;
         }
 
@@ -90,9 +90,9 @@ class Zones implements API
         }
 
         $user = $this->adapter->get('zones', $query);
-        $body = json_decode($user->getBody());
+        $this->body = json_decode($user->getBody());
 
-        return (object)['result' => $body->result, 'result_info' => $body->result_info];
+        return (object)['result' => $this->body->result, 'result_info' => $this->body->result_info];
     }
 
     public function getZoneID(string $name = ''): string
@@ -119,7 +119,9 @@ class Zones implements API
     {
         $response = $this->adapter->get('zones/' . $zoneID . '/analytics/dashboard', ['since' => $since, 'until' => $until, 'continuous' => var_export($continuous, true)]);
 
-        return json_decode($response->getBody())->result;
+        $this->body = $response->getBody();
+
+        return json_decode($this->body)->result;
     }
 
     /**
@@ -133,9 +135,9 @@ class Zones implements API
     {
         $response = $this->adapter->patch('zones/' . $zoneID . '/settings/development_mode', ['value' => $enable ? 'on' : 'off']);
 
-        $body = json_decode($response->getBody());
+        $this->body = json_decode($response->getBody());
 
-        if ($body->success) {
+        if ($this->body->success) {
             return true;
         }
 
@@ -152,9 +154,9 @@ class Zones implements API
     {
         $user = $this->adapter->delete('zones/' . $zoneID . '/purge_cache', ['purge_everything' => true]);
 
-        $body = json_decode($user->getBody());
+        $this->body = json_decode($user->getBody());
 
-        if (isset($body->result->id)) {
+        if (isset($this->body->result->id)) {
             return true;
         }
 
