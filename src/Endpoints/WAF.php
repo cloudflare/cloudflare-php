@@ -9,9 +9,12 @@
 namespace Cloudflare\API\Endpoints;
 
 use Cloudflare\API\Adapter\Adapter;
+use Cloudflare\API\Traits\BodyAccessorTrait;
 
 class WAF implements API
 {
+    use BodyAccessorTrait;
+
     private $adapter;
 
     public function __construct(Adapter $adapter)
@@ -42,9 +45,9 @@ class WAF implements API
         }
 
         $user = $this->adapter->get('zones/' . $zoneID . '/firewall/waf/packages', $query);
-        $body = json_decode($user->getBody());
+        $this->body = json_decode($user->getBody());
 
-        return (object)['result' => $body->result, 'result_info' => $body->result_info];
+        return (object)['result' => $this->body->result, 'result_info' => $this->body->result_info];
     }
 
 
@@ -53,9 +56,9 @@ class WAF implements API
         string $packageID
     ): \stdClass {
         $user = $this->adapter->get('zones/' . $zoneID . '/firewall/waf/packages/' . $packageID);
-        $body = json_decode($user->getBody());
+        $this->body = json_decode($user->getBody());
 
-        return $body->result;
+        return $this->body->result;
     }
 
     public function getRules(
@@ -81,9 +84,9 @@ class WAF implements API
             $query['direction'] = $direction;
         }
         $user = $this->adapter->get('zones/' . $zoneID . '/firewall/waf/packages/' . $packageID . '/rules', $query);
-        $body = json_decode($user->getBody());
+        $this->body = json_decode($user->getBody());
 
-        return (object)['result' => $body->result, 'result_info' => $body->result_info];
+        return (object)['result' => $this->body->result, 'result_info' => $this->body->result_info];
     }
 
     public function getRuleInfo(
@@ -92,9 +95,9 @@ class WAF implements API
         string $ruleID
     ): \stdClass {
         $user = $this->adapter->get('zones/' . $zoneID . '/firewall/waf/packages/' . $packageID . '/rules/' . $ruleID);
-        $body = json_decode($user->getBody());
+        $this->body = json_decode($user->getBody());
 
-        return $body->result;
+        return $this->body->result;
     }
 
     public function updateRule(
@@ -111,9 +114,9 @@ class WAF implements API
             'zones/' . $zoneID . '/firewall/waf/packages/' . $packageID . '/rules/' . $ruleID,
             $query
         );
-        $body = json_decode($user->getBody());
+        $this->body = json_decode($user->getBody());
 
-        return $body->result;
+        return $this->body->result;
     }
 
     public function getGroups(
@@ -143,9 +146,9 @@ class WAF implements API
             'zones/' . $zoneID . '/firewall/waf/packages/' . $packageID . '/groups',
             $query
         );
-        $body = json_decode($user->getBody());
+        $this->body = json_decode($user->getBody());
 
-        return (object)['result' => $body->result, 'result_info' => $body->result_info];
+        return (object)['result' => $this->body->result, 'result_info' => $this->body->result_info];
     }
 
     public function getGroupInfo(
@@ -154,9 +157,9 @@ class WAF implements API
         string $groupID
     ): \stdClass {
         $user = $this->adapter->get('zones/' . $zoneID . '/firewall/waf/packages/' . $packageID . '/groups/' . $groupID);
-        $body = json_decode($user->getBody());
+        $this->body = json_decode($user->getBody());
 
-        return $body->result;
+        return $this->body->result;
     }
 
     public function updateGroup(
@@ -173,8 +176,8 @@ class WAF implements API
             'zones/' . $zoneID . '/firewall/waf/packages/' . $packageID . '/groups/' . $groupID,
             $query
         );
-        $body = json_decode($user->getBody());
+        $this->body = json_decode($user->getBody());
 
-        return $body->result;
+        return $this->body->result;
     }
 }

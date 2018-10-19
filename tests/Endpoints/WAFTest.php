@@ -36,6 +36,7 @@ class WAFTest extends TestCase
 
         $this->assertEquals('a25a9a7e9c00afc1fb2e0245519d725b', $result->result[0]->id);
         $this->assertEquals(1, $result->result_info->page);
+        $this->assertEquals('a25a9a7e9c00afc1fb2e0245519d725b', $waf->getBody()->result[0]->id);
     }
 
     public function testgetPackageInfo()
@@ -55,6 +56,7 @@ class WAFTest extends TestCase
         $result = $waf->getPackageInfo('023e105f4ecef8ad9ca31a8372d0c353', 'a25a9a7e9c00afc1fb2e0245519d725b');
 
         $this->assertEquals('a25a9a7e9c00afc1fb2e0245519d725b', $result->id);
+        $this->assertEquals('a25a9a7e9c00afc1fb2e0245519d725b', $waf->getBody()->result->id);
     }
 
     public function testgetRules()
@@ -85,6 +87,7 @@ class WAFTest extends TestCase
 
         $this->assertEquals('92f17202ed8bd63d69a66b86a49a8f6b', $result->result[0]->id);
         $this->assertEquals(1, $result->result_info->page);
+        $this->assertEquals('92f17202ed8bd63d69a66b86a49a8f6b', $waf->getBody()->result[0]->id);
     }
 
     public function testgetRuleInfo()
@@ -104,6 +107,7 @@ class WAFTest extends TestCase
         $result = $waf->getRuleInfo('023e105f4ecef8ad9ca31a8372d0c353', 'a25a9a7e9c00afc1fb2e0245519d725b', 'f939de3be84e66e757adcdcb87908023');
 
         $this->assertEquals('f939de3be84e66e757adcdcb87908023', $result->id);
+        $this->assertEquals('f939de3be84e66e757adcdcb87908023', $waf->getBody()->result->id);
     }
 
     public function testupdateRule()
@@ -132,6 +136,7 @@ class WAFTest extends TestCase
         foreach ($details as $property => $value) {
             $this->assertEquals($result->{ $property }, $value);
         }
+        $this->assertEquals('f939de3be84e66e757adcdcb87908023', $waf->getBody()->result->id);
     }
 
     public function getGroups()
@@ -162,6 +167,7 @@ class WAFTest extends TestCase
 
         $this->assertEquals('de677e5818985db1285d0e80225f06e5', $result->result[0]->id);
         $this->assertEquals(1, $result->result_info->page);
+        $this->assertEquals('de677e5818985db1285d0e80225f06e5', $waf->getBody()->result[0]->id);
     }
 
     public function testgetGroupInfo()
@@ -181,6 +187,7 @@ class WAFTest extends TestCase
         $result = $waf->getGroupInfo('023e105f4ecef8ad9ca31a8372d0c353', 'a25a9a7e9c00afc1fb2e0245519d725b', 'de677e5818985db1285d0e80225f06e5');
 
         $this->assertEquals('de677e5818985db1285d0e80225f06e5', $result->id);
+        $this->assertEquals('de677e5818985db1285d0e80225f06e5', $waf->getBody()->result->id);
     }
 
     public function testupdateGroup()
@@ -209,5 +216,6 @@ class WAFTest extends TestCase
         foreach ($details as $property => $value) {
             $this->assertEquals($result->{ $property }, $value);
         }
+        $this->assertEquals('de677e5818985db1285d0e80225f06e5', $waf->getBody()->result->id);
     }
 }

@@ -9,9 +9,12 @@
 namespace Cloudflare\API\Endpoints;
 
 use Cloudflare\API\Adapter\Adapter;
+use Cloudflare\API\Traits\BodyAccessorTrait;
 
 class ZoneLockdown implements API
 {
+    use BodyAccessorTrait;
+
     private $adapter;
 
     public function __construct(Adapter $adapter)
@@ -30,9 +33,9 @@ class ZoneLockdown implements API
         ];
 
         $user = $this->adapter->get('zones/' . $zoneID . '/firewall/lockdowns', $query);
-        $body = json_decode($user->getBody());
+        $this->body = json_decode($user->getBody());
 
-        return (object)['result' => $body->result, 'result_info' => $body->result_info];
+        return (object)['result' => $this->body->result, 'result_info' => $this->body->result_info];
     }
 
     public function createLockdown(
@@ -57,9 +60,9 @@ class ZoneLockdown implements API
 
         $user = $this->adapter->post('zones/' . $zoneID . '/firewall/lockdowns', $options);
 
-        $body = json_decode($user->getBody());
+        $this->body = json_decode($user->getBody());
 
-        if (isset($body->result->id)) {
+        if (isset($this->body->result->id)) {
             return true;
         }
 
@@ -69,8 +72,8 @@ class ZoneLockdown implements API
     public function getLockdownDetails(string $zoneID, string $lockdownID): \stdClass
     {
         $user = $this->adapter->get('zones/' . $zoneID . '/firewall/lockdowns/' . $lockdownID);
-        $body = json_decode($user->getBody());
-        return $body->result;
+        $this->body = json_decode($user->getBody());
+        return $this->body->result;
     }
 
     public function updateLockdown(
@@ -92,9 +95,9 @@ class ZoneLockdown implements API
 
         $user = $this->adapter->put('zones/' . $zoneID . '/firewall/lockdowns/' . $lockdownID, $options);
 
-        $body = json_decode($user->getBody());
+        $this->body = json_decode($user->getBody());
 
-        if (isset($body->result->id)) {
+        if (isset($this->body->result->id)) {
             return true;
         }
 
@@ -105,9 +108,9 @@ class ZoneLockdown implements API
     {
         $user = $this->adapter->delete('zones/' . $zoneID . '/firewall/lockdowns/' . $lockdownID);
 
-        $body = json_decode($user->getBody());
+        $this->body = json_decode($user->getBody());
 
-        if (isset($body->result->id)) {
+        if (isset($this->body->result->id)) {
             return true;
         }
 

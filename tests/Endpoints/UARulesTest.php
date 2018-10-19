@@ -33,6 +33,7 @@ class UARulesTest extends TestCase
 
         $this->assertEquals('372e67954025e0ba6aaa6d586b9e0b59', $result->result[0]->id);
         $this->assertEquals(1, $result->result_info->page);
+        $this->assertEquals('372e67954025e0ba6aaa6d586b9e0b59', $zones->getBody()->result[0]->id);
     }
 
     public function testCreateRule()
@@ -65,6 +66,7 @@ class UARulesTest extends TestCase
             '372e67954025e0ba6aaa6d586b9e0b59',
             'Prevent access from abusive clients identified by this UserAgent to mitigate DDoS attack'
         );
+        $this->assertEquals('372e67954025e0ba6aaa6d586b9e0b59', $rules->getBody()->result->id);
     }
 
     public function getRuleDetails()
@@ -84,6 +86,7 @@ class UARulesTest extends TestCase
         $result = $lockdown->getRuleDetails('023e105f4ecef8ad9ca31a8372d0c353', '372e67954025e0ba6aaa6d586b9e0b59');
 
         $this->assertEquals('372e67954025e0ba6aaa6d586b9e0b59', $result->id);
+        $this->assertEquals('372e67954025e0ba6aaa6d586b9e0b59', $rules->getBody()->result->id);
     }
 
     public function testUpdateRule()
@@ -116,6 +119,7 @@ class UARulesTest extends TestCase
             $config,
             'Restrict access to these endpoints to requests from a known IP address'
         );
+        $this->assertEquals('372e67954025e0ba6aaa6d586b9e0b59', $rules->getBody()->result->id);
     }
 
     public function testDeleteRule()
@@ -133,5 +137,6 @@ class UARulesTest extends TestCase
 
         $rules = new \Cloudflare\API\Endpoints\UARules($mock);
         $rules->deleteRule('023e105f4ecef8ad9ca31a8372d0c353', '372e67954025e0ba6aaa6d586b9e0b59');
+        $this->assertEquals('372e67954025e0ba6aaa6d586b9e0b59', $rules->getBody()->result->id);
     }
 }
