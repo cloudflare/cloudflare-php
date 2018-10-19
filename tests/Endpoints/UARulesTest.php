@@ -86,7 +86,7 @@ class UARulesTest extends TestCase
         $result = $lockdown->getRuleDetails('023e105f4ecef8ad9ca31a8372d0c353', '372e67954025e0ba6aaa6d586b9e0b59');
 
         $this->assertEquals('372e67954025e0ba6aaa6d586b9e0b59', $result->id);
-        $this->assertEquals('372e67954025e0ba6aaa6d586b9e0b59', $rules->getBody()->result->id);
+        $this->assertEquals('372e67954025e0ba6aaa6d586b9e0b59', $lockdown->getBody()->result->id);
     }
 
     public function testUpdateRule()
