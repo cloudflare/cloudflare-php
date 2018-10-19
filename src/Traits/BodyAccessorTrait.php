@@ -2,7 +2,8 @@
 
 namespace Cloudflare\API\Traits;
 
-trait BodyAccessorTrait {
+trait BodyAccessorTrait
+{
     private $body;
 
     public function getBody()
