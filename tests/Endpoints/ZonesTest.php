@@ -210,4 +210,29 @@ class ZonesTest extends TestCase
 
         $this->assertTrue($result);
     }
+
+    public function testCachePurge()
+    {
+        $response = $this->getPsr7JsonResponseForFixture('Endpoints/cachePurge.json');
+
+        $mock = $this->getMockBuilder(\Cloudflare\API\Adapter\Adapter::class)->getMock();
+        $mock->method('delete')->willReturn($response);
+
+        $mock->expects($this->once())
+            ->method('delete')
+            ->with(
+                $this->equalTo('zones/c2547eb745079dac9320b638f5e225cf483cc5cfdda41/purge_cache'),
+                $this->equalTo(['files' => [
+                    'https://example.com/file.jpg',
+                    ]
+                ])
+            );
+
+        $zones = new \Cloudflare\API\Endpoints\Zones($mock);
+        $result = $zones->cachePurge('c2547eb745079dac9320b638f5e225cf483cc5cfdda41', [
+            'https://example.com/file.jpg',
+        ]);
+
+        $this->assertTrue($result);
+    }
 }
