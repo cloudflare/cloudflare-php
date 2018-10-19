@@ -32,6 +32,7 @@ class CustomHostnamesTest extends TestCase
 
         $hostname = new CustomHostnames($mock);
         $hostname->addHostname('023e105f4ecef8ad9ca31a8372d0c353', 'app.example.com', 'http', 'dv');
+        $this->assertEquals('0d89c70d-ad9f-4843-b99f-6cc0252067e9', $hostname->getBody()->result->id);
     }
 
     public function testListHostnames()
@@ -64,6 +65,7 @@ class CustomHostnamesTest extends TestCase
 
         $this->assertEquals('0d89c70d-ad9f-4843-b99f-6cc0252067e9', $result->result[0]->id);
         $this->assertEquals(1, $result->result_info->page);
+        $this->assertEquals('0d89c70d-ad9f-4843-b99f-6cc0252067e9', $zones->getBody()->result[0]->id);
     }
 
     public function testGetHostname()
@@ -84,6 +86,7 @@ class CustomHostnamesTest extends TestCase
 
         $this->assertObjectHasAttribute('id', $result);
         $this->assertObjectHasAttribute('hostname', $result);
+        $this->assertEquals('0d89c70d-ad9f-4843-b99f-6cc0252067e9', $zones->getBody()->result->id);
     }
 
     public function testUpdateHostname()
@@ -110,6 +113,7 @@ class CustomHostnamesTest extends TestCase
 
         $this->assertObjectHasAttribute('id', $result);
         $this->assertObjectHasAttribute('hostname', $result);
+        $this->assertEquals('0d89c70d-ad9f-4843-b99f-6cc0252067e9', $zones->getBody()->result->id);
     }
 
     public function testDeleteHostname()
@@ -129,5 +133,6 @@ class CustomHostnamesTest extends TestCase
         $result = $zones->deleteHostname('023e105f4ecef8ad9ca31a8372d0c353', '0d89c70d-ad9f-4843-b99f-6cc0252067e9');
 
         $this->assertEquals('0d89c70d-ad9f-4843-b99f-6cc0252067e9', $result->id);
+        $this->assertEquals('0d89c70d-ad9f-4843-b99f-6cc0252067e9', $zones->getBody()->id);
     }
 }

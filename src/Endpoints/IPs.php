@@ -9,9 +9,12 @@
 namespace Cloudflare\API\Endpoints;
 
 use Cloudflare\API\Adapter\Adapter;
+use Cloudflare\API\Traits\BodyAccessorTrait;
 
 class IPs implements API
 {
+    use BodyAccessorTrait;
+
     private $adapter;
 
     public function __construct(Adapter $adapter)
@@ -22,8 +25,8 @@ class IPs implements API
     public function listIPs(): \stdClass
     {
         $ips = $this->adapter->get('ips');
-        $body = json_decode($ips->getBody());
+        $this->body = json_decode($ips->getBody());
 
-        return $body->result;
+        return $this->body->result;
     }
 }

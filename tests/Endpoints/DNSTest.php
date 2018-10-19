@@ -63,6 +63,7 @@ class DNSTest extends TestCase
 
         $this->assertEquals('372e67954025e0ba6aaa6d586b9e0b59', $result->result[0]->id);
         $this->assertEquals(1, $result->result_info->page);
+        $this->assertEquals('372e67954025e0ba6aaa6d586b9e0b59', $zones->getBody()->result[0]->id);
     }
 
     public function testGetDNSRecordDetails()
@@ -82,6 +83,7 @@ class DNSTest extends TestCase
         $result = $dns->getRecordDetails('023e105f4ecef8ad9ca31a8372d0c353', '372e67954025e0ba6aaa6d586b9e0b59');
 
         $this->assertEquals('372e67954025e0ba6aaa6d586b9e0b59', $result->id);
+        $this->assertEquals('372e67954025e0ba6aaa6d586b9e0b59', $dns->getBody()->result->id);
     }
 
     public function testUpdateDNSRecord()
@@ -110,6 +112,7 @@ class DNSTest extends TestCase
         $result = $dns->updateRecordDetails('023e105f4ecef8ad9ca31a8372d0c353', '372e67954025e0ba6aaa6d586b9e0b59', $details);
 
         $this->assertEquals('372e67954025e0ba6aaa6d586b9e0b59', $result->result->id);
+        $this->assertEquals('372e67954025e0ba6aaa6d586b9e0b59', $dns->getBody()->result->id);
 
         foreach ($details as $property => $value) {
             $this->assertEquals($result->result->{ $property }, $value);

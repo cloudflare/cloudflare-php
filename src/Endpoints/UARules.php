@@ -10,9 +10,12 @@ namespace Cloudflare\API\Endpoints;
 
 use Cloudflare\API\Configurations\Configurations;
 use Cloudflare\API\Adapter\Adapter;
+use Cloudflare\API\Traits\BodyAccessorTrait;
 
 class UARules implements API
 {
+    use BodyAccessorTrait;
+
     private $adapter;
 
     public function __construct(Adapter $adapter)
@@ -31,9 +34,9 @@ class UARules implements API
         ];
 
         $user = $this->adapter->get('zones/' . $zoneID . '/firewall/ua_rules', $query);
-        $body = json_decode($user->getBody());
+        $this->body = json_decode($user->getBody());
 
-        return (object)['result' => $body->result, 'result_info' => $body->result_info];
+        return (object)['result' => $this->body->result, 'result_info' => $this->body->result_info];
     }
 
     public function createRule(
@@ -58,9 +61,9 @@ class UARules implements API
 
         $user = $this->adapter->post('zones/' . $zoneID . '/firewall/ua_rules', $options);
 
-        $body = json_decode($user->getBody());
+        $this->body = json_decode($user->getBody());
 
-        if (isset($body->result->id)) {
+        if (isset($this->body->result->id)) {
             return true;
         }
 
@@ -70,8 +73,8 @@ class UARules implements API
     public function getRuleDetails(string $zoneID, string $blockID): \stdClass
     {
         $user = $this->adapter->get('zones/' . $zoneID . '/firewall/ua_rules/' . $blockID);
-        $body = json_decode($user->getBody());
-        return $body->result;
+        $this->body = json_decode($user->getBody());
+        return $this->body->result;
     }
 
     public function updateRule(
@@ -93,9 +96,9 @@ class UARules implements API
 
         $user = $this->adapter->put('zones/' . $zoneID . '/firewall/ua_rules/' . $ruleID, $options);
 
-        $body = json_decode($user->getBody());
+        $this->body = json_decode($user->getBody());
 
-        if (isset($body->result->id)) {
+        if (isset($this->body->result->id)) {
             return true;
         }
 
@@ -106,9 +109,9 @@ class UARules implements API
     {
         $user = $this->adapter->delete('zones/' . $zoneID . '/firewall/ua_rules/' . $ruleID);
 
-        $body = json_decode($user->getBody());
+        $this->body = json_decode($user->getBody());
 
-        if (isset($body->result->id)) {
+        if (isset($this->body->result->id)) {
             return true;
         }
 
