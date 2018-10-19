@@ -4,9 +4,12 @@ namespace Cloudflare\API\Endpoints;
 
 use Cloudflare\API\Adapter\Adapter;
 use Cloudflare\API\Configurations\Configurations;
+use Cloudflare\API\Traits\BodyAccessorTrait;
 
 class AccessRules implements API
 {
+    use BodyAccessorTrait;
+    
     private $adapter;
 
     public function __construct(Adapter $adapter)
@@ -78,9 +81,9 @@ class AccessRules implements API
         }
 
         $data = $this->adapter->get('zones/' . $zoneID . '/firewall/access_rules/rules', $query);
-        $body = json_decode($data->getBody());
+        $this->body = json_decode($data->getBody());
 
-        return (object)['result' => $body->result, 'result_info' => $body->result_info];
+        return (object)['result' => $this->body->result, 'result_info' => $this->body->result_info];
     }
 
     public function createRule(
@@ -100,9 +103,9 @@ class AccessRules implements API
 
         $query = $this->adapter->post('zones/' . $zoneID . '/firewall/access_rules/rules', $options);
 
-        $body = json_decode($query->getBody());
+        $this->body = json_decode($query->getBody());
 
-        if (isset($body->result->id)) {
+        if (isset($this->body->result->id)) {
             return true;
         }
 
@@ -125,9 +128,9 @@ class AccessRules implements API
 
         $query = $this->adapter->patch('zones/' . $zoneID . '/firewall/access_rules/rules/' . $ruleID, $options);
 
-        $body = json_decode($query->getBody());
+        $this->body = json_decode($query->getBody());
 
-        if (isset($body->result->id)) {
+        if (isset($this->body->result->id)) {
             return true;
         }
 
@@ -142,9 +145,9 @@ class AccessRules implements API
 
         $data = $this->adapter->delete('zones/' . $zoneID . '/firewall/access_rules/rules/' . $ruleID, $options);
 
-        $body = json_decode($data->getBody());
+        $this->body = json_decode($data->getBody());
 
-        if (isset($body->result->id)) {
+        if (isset($this->body->result->id)) {
             return true;
         }
 
