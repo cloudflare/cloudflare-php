@@ -46,6 +46,7 @@ class ZonesTest extends TestCase
 
         $zones = new \Cloudflare\API\Endpoints\Zones($mock);
         $zones->addZone('example.com', true, '01a7362d577a6c3019a474fd6f485823');
+        $this->assertEquals('9a7806061c88ada191ed06f989cc3dac', $zones->getBody()->result->id);
     }
 
     public function testActivationTest()
@@ -65,6 +66,7 @@ class ZonesTest extends TestCase
         $result = $zones->activationCheck('c2547eb745079dac9320b638f5e225cf483cc5cfdda41');
 
         $this->assertTrue($result);
+        $this->assertEquals('023e105f4ecef8ad9ca31a8372d0c353', $zones->getBody()->result->id);
     }
 
     public function testListZones()
@@ -97,6 +99,7 @@ class ZonesTest extends TestCase
 
         $this->assertEquals('023e105f4ecef8ad9ca31a8372d0c353', $result->result[0]->id);
         $this->assertEquals(1, $result->result_info->page);
+        $this->assertEquals('023e105f4ecef8ad9ca31a8372d0c353', $zones->getBody()->result[0]->id);
     }
 
     public function testGetZoneID()
@@ -122,6 +125,7 @@ class ZonesTest extends TestCase
         $result = $zones->getZoneID('example.com');
 
         $this->assertEquals('023e105f4ecef8ad9ca31a8372d0c353', $result);
+        $this->assertEquals('023e105f4ecef8ad9ca31a8372d0c353', $zones->getBody()->result[0]->id);
     }
 
     public function testGetAnalyticsDashboard()
@@ -163,6 +167,7 @@ class ZonesTest extends TestCase
         $result = $zones->changeDevelopmentMode('c2547eb745079dac9320b638f5e225cf483cc5cfdda41', true);
 
         $this->assertTrue($result);
+        $this->assertEquals('development_mode', $zones->getBody()->result->id);
     }
 
     public function testCachePurgeEverything()
@@ -183,6 +188,7 @@ class ZonesTest extends TestCase
         $result = $zones->cachePurgeEverything('c2547eb745079dac9320b638f5e225cf483cc5cfdda41');
 
         $this->assertTrue($result);
+        $this->assertEquals('023e105f4ecef8ad9ca31a8372d0c353', $zones->getBody()->result->id);
     }
 
     public function testCachePurgeHost()
@@ -209,6 +215,7 @@ class ZonesTest extends TestCase
         $result = $zones->cachePurge('c2547eb745079dac9320b638f5e225cf483cc5cfdda41', [], [], ['dash.cloudflare.com']);
 
         $this->assertTrue($result);
+        $this->assertEquals('023e105f4ecef8ad9ca31a8372d0c353', $zones->getBody()->result->id);
     }
 
     public function testCachePurge()
@@ -234,6 +241,6 @@ class ZonesTest extends TestCase
         ]);
 
         $this->assertTrue($result);
-        $this->assertEquals('c2547eb745079dac9320b638f5e225cf483cc5cfdda41', $zones->getBody()->result->id);
+        $this->assertEquals('023e105f4ecef8ad9ca31a8372d0c353', $zones->getBody()->result->id);
     }
 }
