@@ -9,9 +9,12 @@
 namespace Cloudflare\API\Endpoints;
 
 use Cloudflare\API\Adapter\Adapter;
+use Cloudflare\API\Traits\BodyAccessorTrait;
 
 class Zones implements API
 {
+    use BodyAccessorTrait;
+
     private $adapter;
 
     public function __construct(Adapter $adapter)
@@ -172,16 +175,16 @@ class Zones implements API
         if (!is_null($tags)) {
             $options['tags'] = $tags;
         }
-      
+
         if (!is_null($hosts)) {
             $options['hosts'] = $hosts;
         }
 
         $user = $this->adapter->delete('zones/' . $zoneID . '/purge_cache', $options);
 
-        $body = json_decode($user->getBody());
+        $this->body = json_decode($user->getBody());
 
-        if (isset($body->result->id)) {
+        if (isset($this->body->result->id)) {
             return true;
         }
 
