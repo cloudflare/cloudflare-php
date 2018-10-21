@@ -19,11 +19,11 @@ class TLS implements API
         $this->adapter = $adapter;
     }
 
-    public function enableTLS13($zoneID, $enable=false)
+    public function enableTLS13($zoneID)
     {
         $return = $this->adapter->patch(
             'zones/' . $zoneID . '/settings/tls_1_3',
-            ['value' => $enable ? 'on' : 'off']
+            ['value' => 'on']
         );
         $body = json_decode($return->getBody());
 
@@ -33,6 +33,23 @@ class TLS implements API
 
         return false;
     }
+
+    public function disableTLS13($zoneID)
+    {
+        $return = $this->adapter->patch(
+            'zones/' . $zoneID . '/settings/tls_1_3',
+            ['value' => 'off']
+        );
+        $body = json_decode($return->getBody());
+
+        if ($body->success) {
+            return true;
+        }
+
+        return false;
+    }
+
+
 
     public function changeMinimumTLSVersion($zoneID, $minimumVersion)
     {

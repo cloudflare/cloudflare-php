@@ -23,8 +23,28 @@ class TLSTest extends TestCase
                 $this->equalTo(['value' => 'on'])
             );
 
-        $ZoneTLSSettings = new \Cloudflare\API\Endpoints\TLS($mock);
-        $result = $ZoneTLSSettings->enableTLS13('c2547eb745079dac9320b638f5e225cf483cc5cfdda41', true);
+        $zoneTLSSettings = new \Cloudflare\API\Endpoints\TLS($mock);
+        $result = $zoneTLSSettings->enableTLS13('c2547eb745079dac9320b638f5e225cf483cc5cfdda41', true);
+
+        $this->assertTrue($result);
+    }
+
+    public function testDisableTLS13()
+    {
+        $response = $this->getPsr7JsonResponseForFixture('Endpoints/disableTLS13.json');
+
+        $mock = $this->getMockBuilder(\Cloudflare\API\Adapter\Adapter::class)->getMock();
+        $mock->method('patch')->willReturn($response);
+
+        $mock->expects($this->once())
+            ->method('patch')
+            ->with(
+                $this->equalTo('zones/c2547eb745079dac9320b638f5e225cf483cc5cfdda41/settings/tls_1_3'),
+                $this->equalTo(['value' => 'off'])
+            );
+
+        $zoneTLSSettings = new \Cloudflare\API\Endpoints\TLS($mock);
+        $result = $zoneTLSSettings->disableTLS13('c2547eb745079dac9320b638f5e225cf483cc5cfdda41', true);
 
         $this->assertTrue($result);
     }
@@ -43,8 +63,8 @@ class TLSTest extends TestCase
                 $this->equalTo(['value' => '1.1'])
             );
 
-        $ZoneTLSSettings = new \Cloudflare\API\Endpoints\TLS($mock);
-        $result = $ZoneTLSSettings->changeMinimumTLSVersion('c2547eb745079dac9320b638f5e225cf483cc5cfdda41', '1.1');
+        $zoneTLSSettings = new \Cloudflare\API\Endpoints\TLS($mock);
+        $result = $zoneTLSSettings->changeMinimumTLSVersion('c2547eb745079dac9320b638f5e225cf483cc5cfdda41', '1.1');
 
         $this->assertTrue($result);
     }
