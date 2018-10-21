@@ -19,6 +19,7 @@ Each API call is provided via a similarly named function within various classes 
 - [x] [Web Application Firewall (WAF)](https://www.cloudflare.com/waf/)
 - [ ] Virtual DNS Management
 - [x] Custom hostnames
+- [x] Manage TLS settings
 - [x] Zone Lockdown and User-Agent Block rules
 - [ ] Organization Administration
 - [x] [Railgun](https://www.cloudflare.com/railgun/) administration
