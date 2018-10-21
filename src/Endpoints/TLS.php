@@ -1,9 +1,9 @@
 <?php
 /**
  * Created by PhpStorm.
- * User: junade
- * Date: 06/06/2017
- * Time: 15:45
+ * User: Jurgen Coetsiers
+ * Date: 21/10/2018
+ * Time: 09:10
  */
 
 namespace Cloudflare\API\Endpoints;
