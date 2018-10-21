@@ -44,6 +44,10 @@ class TLS implements API
         );
         $body = json_decode($return->getBody());
 
-        return $body->result;
+        if ($body->success) {
+            return true;
+        }
+
+        return false;
     }
 }

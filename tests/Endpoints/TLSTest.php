@@ -28,4 +28,24 @@ class TLSTest extends TestCase
 
         $this->assertTrue($result);
     }
+
+    public function testChangeMinimimTLSVersion()
+    {
+        $response = $this->getPsr7JsonResponseForFixture('Endpoints/changeMinimumTLSVersion.json');
+
+        $mock = $this->getMockBuilder(\Cloudflare\API\Adapter\Adapter::class)->getMock();
+        $mock->method('patch')->willReturn($response);
+
+        $mock->expects($this->once())
+            ->method('patch')
+            ->with(
+                $this->equalTo('zones/c2547eb745079dac9320b638f5e225cf483cc5cfdda41/settings/min_tls_version'),
+                $this->equalTo(['value' => '1.1'])
+            );
+
+        $ZoneTLSSettings = new \Cloudflare\API\Endpoints\TLS($mock);
+        $result = $ZoneTLSSettings->changeMinimumTLSVersion('c2547eb745079dac9320b638f5e225cf483cc5cfdda41', '1.1');
+
+        $this->assertTrue($result);
+    }
 }
