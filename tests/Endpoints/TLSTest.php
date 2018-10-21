@@ -7,7 +7,7 @@
  * Time: 09:09
  */
 
-class ZoneSettingsTest extends TestCase
+class TLSTest extends TestCase
 {
     public function testEnableTLS13()
     {
@@ -23,11 +23,9 @@ class ZoneSettingsTest extends TestCase
                 $this->equalTo(['value' => 'on'])
             );
 
-        $zoneSettings = new \Cloudflare\API\Endpoints\ZoneSettings($mock);
-        $result = $zoneSettings->enableTLS13('c2547eb745079dac9320b638f5e225cf483cc5cfdda41', true);
+        $ZoneTLSSettings = new \Cloudflare\API\Endpoints\TLS($mock);
+        $result = $ZoneTLSSettings->enableTLS13('c2547eb745079dac9320b638f5e225cf483cc5cfdda41', true);
 
         $this->assertTrue($result);
     }
-
-
 }

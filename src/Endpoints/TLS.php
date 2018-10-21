@@ -10,7 +10,7 @@ namespace Cloudflare\API\Endpoints;
 
 use Cloudflare\API\Adapter\Adapter;
 
-class ZoneSettings implements API
+class TLS implements API
 {
     private $adapter;
 
@@ -19,20 +19,23 @@ class ZoneSettings implements API
         $this->adapter = $adapter;
     }
 
-    public function enableTLS13($zoneID, $enable=false) {
-
+    public function enableTLS13($zoneID, $enable=false)
+    {
         $return = $this->adapter->patch(
             'zones/' . $zoneID . '/settings/tls_1_3',
             ['value' => $enable ? 'on' : 'off']
         );
         $body = json_decode($return->getBody());
 
-        return $body->result;
+        if ($body->success) {
+            return true;
+        }
 
+        return false;
     }
 
-    public function changeMinimumTLSVersion($zoneID, $minimumVersion) {
-
+    public function changeMinimumTLSVersion($zoneID, $minimumVersion)
+    {
         $return = $this->adapter->patch(
             'zones/' . $zoneID . '/settings/min_tls_version',
             [
@@ -42,9 +45,5 @@ class ZoneSettings implements API
         $body = json_decode($return->getBody());
 
         return $body->result;
-
     }
-
-
-
 }
