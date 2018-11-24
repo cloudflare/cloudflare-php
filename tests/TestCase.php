@@ -1,11 +1,12 @@
 <?php
 use GuzzleHttp\Psr7;
+use PHPUnit\Framework\TestCase as BaseTestCase;
 
 /**
  * Class TestCase
  * @SuppressWarnings(PHPMD.NumberOfChildren)
  */
-abstract class TestCase extends PHPUnit_Framework_TestCase
+abstract class TestCase extends BaseTestCase
 {
     /**
      * Returns a PSR7 Stream for a given fixture.
