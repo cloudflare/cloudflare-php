@@ -261,7 +261,7 @@ class PageRulesActions implements Configurations
             throw new ConfigurationsException('Can only be set to off, flexible, full, strict, origin_pull.');
         }
 
-        $this->addConfigurationOption('smart_errors', [
+        $this->addConfigurationOption('ssl', [
             'value' => $value
         ]);
     }
