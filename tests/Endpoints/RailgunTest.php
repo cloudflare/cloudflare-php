@@ -34,6 +34,7 @@ class RailgunTest extends TestCase
         foreach ($details as $property => $value) {
             $this->assertEquals($result->result->{ $property }, $value);
         }
+        $this->assertEquals('e928d310693a83094309acf9ead50448', $railgun->getBody()->result->id);
     }
 
     public function testlist()
@@ -59,6 +60,7 @@ class RailgunTest extends TestCase
 
         $this->assertObjectHasAttribute('result', $result);
         $this->assertObjectHasAttribute('result_info', $result);
+        $this->assertEquals('e928d310693a83094309acf9ead50448', $railgun->getBody()->result[0]->id);
     }
 
     public function testget()
@@ -78,6 +80,7 @@ class RailgunTest extends TestCase
         $result = $railgun->get('e928d310693a83094309acf9ead50448');
 
         $this->assertEquals('e928d310693a83094309acf9ead50448', $result->id);
+        $this->assertEquals('e928d310693a83094309acf9ead50448', $railgun->getBody()->result->id);
     }
 
     public function testgetZones()
@@ -98,6 +101,7 @@ class RailgunTest extends TestCase
 
         $this->assertObjectHasAttribute('result', $result);
         $this->assertObjectHasAttribute('result_info', $result);
+        $this->assertEquals('023e105f4ecef8ad9ca31a8372d0c353', $railgun->getBody()->result[0]->id);
     }
 
     public function testupdate()
@@ -122,6 +126,7 @@ class RailgunTest extends TestCase
         $result = $waf->update('e928d310693a83094309acf9ead50448', true);
 
         $this->assertEquals('e928d310693a83094309acf9ead50448', $result->id);
+        $this->assertEquals('e928d310693a83094309acf9ead50448', $waf->getBody()->result->id);
     }
 
     public function testdelete()
@@ -139,5 +144,6 @@ class RailgunTest extends TestCase
 
         $waf = new \Cloudflare\API\Endpoints\Railgun($mock);
         $waf->delete('e928d310693a83094309acf9ead50448');
+        $this->assertEquals('e928d310693a83094309acf9ead50448', $waf->getBody()->result->id);
     }
 }

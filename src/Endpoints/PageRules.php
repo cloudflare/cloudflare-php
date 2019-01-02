@@ -11,9 +11,12 @@ namespace Cloudflare\API\Endpoints;
 use Cloudflare\API\Adapter\Adapter;
 use Cloudflare\API\Configurations\PageRulesActions;
 use Cloudflare\API\Configurations\PageRulesTargets;
+use Cloudflare\API\Traits\BodyAccessorTrait;
 
 class PageRules implements API
 {
+    use BodyAccessorTrait;
+
     private $adapter;
 
     public function __construct(Adapter $adapter)
@@ -54,9 +57,9 @@ class PageRules implements API
 
         $query = $this->adapter->post('zones/' . $zoneID . '/pagerules', $options);
 
-        $body = json_decode($query->getBody());
+        $this->body = json_decode($query->getBody());
 
-        if (isset($body->result->id)) {
+        if (isset($this->body->result->id)) {
             return true;
         }
 
@@ -94,16 +97,16 @@ class PageRules implements API
         ];
 
         $user = $this->adapter->get('zones/' . $zoneID . '/pagerules', $query);
-        $body = json_decode($user->getBody());
+        $this->body = json_decode($user->getBody());
 
-        return $body->result;
+        return $this->body->result;
     }
 
     public function getPageRuleDetails(string $zoneID, string $ruleID): \stdClass
     {
         $user = $this->adapter->get('zones/' . $zoneID . '/pagerules/' . $ruleID);
-        $body = json_decode($user->getBody());
-        return $body->result;
+        $this->body = json_decode($user->getBody());
+        return $this->body->result;
     }
 
     public function updatePageRule(
@@ -134,9 +137,9 @@ class PageRules implements API
 
         $query = $this->adapter->patch('zones/' . $zoneID . '/pagerules', $options);
 
-        $body = json_decode($query->getBody());
+        $this->body = json_decode($query->getBody());
 
-        if (isset($body->result->id)) {
+        if (isset($this->body->result->id)) {
             return true;
         }
 
@@ -147,9 +150,9 @@ class PageRules implements API
     {
         $user = $this->adapter->delete('zones/' . $zoneID . '/pagerules/' . $ruleID);
 
-        $body = json_decode($user->getBody());
+        $this->body = json_decode($user->getBody());
 
-        if (isset($body->result->id)) {
+        if (isset($this->body->result->id)) {
             return true;
         }
 

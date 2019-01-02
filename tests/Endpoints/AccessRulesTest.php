@@ -28,6 +28,7 @@ class AccessRulesTest extends TestCase
 
         $this->assertEquals('92f17202ed8bd63d69a66b86a49a8f6b', $result->result[0]->id);
         $this->assertEquals(1, $result->result_info->page);
+        $this->assertEquals('92f17202ed8bd63d69a66b86a49a8f6b', $zones->getBody()->result[0]->id);
     }
 
     public function testCreateRule()
@@ -58,6 +59,7 @@ class AccessRulesTest extends TestCase
             $config,
             'This rule is on because of an event that occured on date X'
         );
+        $this->assertEquals('92f17202ed8bd63d69a66b86a49a8f6b', $rules->getBody()->result->id);
     }
 
     public function testUpdateRule()
@@ -84,6 +86,7 @@ class AccessRulesTest extends TestCase
             'challenge',
             'This rule is on because of an event that occured on date X'
         );
+        $this->assertEquals('92f17202ed8bd63d69a66b86a49a8f6b', $rules->getBody()->result->id);
     }
 
     public function testDeleteRule()
@@ -104,5 +107,6 @@ class AccessRulesTest extends TestCase
 
         $rules = new \Cloudflare\API\Endpoints\AccessRules($mock);
         $rules->deleteRule('023e105f4ecef8ad9ca31a8372d0c353', '92f17202ed8bd63d69a66b86a49a8f6b');
+        $this->assertEquals('92f17202ed8bd63d69a66b86a49a8f6b', $rules->getBody()->result->id);
     }
 }

@@ -35,6 +35,7 @@ class PageRulesTest extends TestCase
         $result = $pageRules->createPageRule('023e105f4ecef8ad9ca31a8372d0c353', $target, $action, true, 1);
 
         $this->assertTrue($result);
+        $this->assertEquals('9a7806061c88ada191ed06f989cc3dac', $pageRules->getBody()->result->id);
     }
 
     public function testListPageRules()
@@ -58,6 +59,7 @@ class PageRulesTest extends TestCase
 
         $pageRules = new \Cloudflare\API\Endpoints\PageRules($mock);
         $pageRules->listPageRules('023e105f4ecef8ad9ca31a8372d0c353', 'active', 'status', 'desc', 'all');
+        $this->assertEquals('9a7806061c88ada191ed06f989cc3dac', $pageRules->getBody()->result[0]->id);
     }
 
     public function testGetPageRuleDetails()
@@ -75,6 +77,7 @@ class PageRulesTest extends TestCase
 
         $pageRules = new \Cloudflare\API\Endpoints\PageRules($mock);
         $pageRules->getPageRuleDetails('023e105f4ecef8ad9ca31a8372d0c353', '9a7806061c88ada191ed06f989cc3dac');
+        $this->assertEquals('9a7806061c88ada191ed06f989cc3dac', $pageRules->getBody()->result->id);
     }
 
     public function testUpdatePageRule()
@@ -104,6 +107,7 @@ class PageRulesTest extends TestCase
         $result = $pageRules->updatePageRule('023e105f4ecef8ad9ca31a8372d0c353', $target, $action, true, 1);
 
         $this->assertTrue($result);
+        $this->assertEquals('9a7806061c88ada191ed06f989cc3dac', $pageRules->getBody()->result->id);
     }
 
     public function testDeletePageRule()
@@ -123,5 +127,6 @@ class PageRulesTest extends TestCase
         $result = $pageRules->deletePageRule('023e105f4ecef8ad9ca31a8372d0c353', '9a7806061c88ada191ed06f989cc3dac');
 
         $this->assertTrue($result);
+        $this->assertEquals('9a7806061c88ada191ed06f989cc3dac', $pageRules->getBody()->result->id);
     }
 }

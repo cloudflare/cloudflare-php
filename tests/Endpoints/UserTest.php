@@ -21,6 +21,7 @@ class UserTest extends TestCase
         $this->assertEquals('7c5dae5552338874e5053f2534d2767a', $details->id);
         $this->assertObjectHasAttribute('email', $details);
         $this->assertEquals('user@example.com', $details->email);
+        $this->assertEquals('7c5dae5552338874e5053f2534d2767a', $user->getBody()->result->id);
     }
 
     public function testGetUserID()
@@ -32,6 +33,7 @@ class UserTest extends TestCase
 
         $user = new \Cloudflare\API\Endpoints\User($mock);
         $this->assertEquals('7c5dae5552338874e5053f2534d2767a', $user->getUserID());
+        $this->assertEquals('7c5dae5552338874e5053f2534d2767a', $user->getBody()->result->id);
     }
 
     public function testGetUserEmail()
@@ -45,6 +47,7 @@ class UserTest extends TestCase
 
         $user = new \Cloudflare\API\Endpoints\User($mock);
         $this->assertEquals('user@example.com', $user->getUserEmail());
+        $this->assertEquals('user@example.com', $user->getBody()->result->email);
     }
 
     public function testUpdateUserDetails()
@@ -60,5 +63,6 @@ class UserTest extends TestCase
 
         $user = new \Cloudflare\API\Endpoints\User($mock);
         $user->updateUserDetails(['email' => 'user2@example.com']);
+        $this->assertEquals('7c5dae5552338874e5053f2534d2767a', $user->getBody()->result->id);
     }
 }

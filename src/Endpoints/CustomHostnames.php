@@ -9,9 +9,12 @@
 namespace Cloudflare\API\Endpoints;
 
 use Cloudflare\API\Adapter\Adapter;
+use Cloudflare\API\Traits\BodyAccessorTrait;
 
 class CustomHostnames implements API
 {
+    use BodyAccessorTrait;
+    
     private $adapter;
 
     public function __construct(Adapter $adapter)
@@ -40,8 +43,8 @@ class CustomHostnames implements API
         ];
 
         $zone = $this->adapter->post('zones/'.$zoneID.'/custom_hostnames', $options);
-        $body = json_decode($zone->getBody());
-        return $body->result;
+        $this->body = json_decode($zone->getBody());
+        return $this->body->result;
     }
 
     /**
@@ -88,9 +91,9 @@ class CustomHostnames implements API
         }
 
         $zone = $this->adapter->get('zones/'.$zoneID.'/custom_hostnames', $query);
-        $body = json_decode($zone->getBody());
+        $this->body = json_decode($zone->getBody());
 
-        return (object)['result' => $body->result, 'result_info' => $body->result_info];
+        return (object)['result' => $this->body->result, 'result_info' => $this->body->result_info];
     }
 
     /**
@@ -101,9 +104,9 @@ class CustomHostnames implements API
     public function getHostname(string $zoneID, string $hostnameID)
     {
         $zone = $this->adapter->get('zones/'.$zoneID.'/custom_hostnames/'.$hostnameID);
-        $body = json_decode($zone->getBody());
+        $this->body = json_decode($zone->getBody());
 
-        return $body->result;
+        return $this->body->result;
     }
 
     /**
@@ -132,8 +135,8 @@ class CustomHostnames implements API
         ];
 
         $zone = $this->adapter->patch('zones/'.$zoneID.'/custom_hostnames/'.$hostnameID, $options);
-        $body = json_decode($zone->getBody());
-        return $body->result;
+        $this->body = json_decode($zone->getBody());
+        return $this->body->result;
     }
 
     /**
@@ -144,7 +147,7 @@ class CustomHostnames implements API
     public function deleteHostname(string $zoneID, string $hostnameID): \stdClass
     {
         $zone = $this->adapter->delete('zones/'.$zoneID.'/custom_hostnames/'.$hostnameID);
-        $body = json_decode($zone->getBody());
-        return $body;
+        $this->body = json_decode($zone->getBody());
+        return $this->body;
     }
 }
