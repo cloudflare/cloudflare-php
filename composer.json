@@ -5,7 +5,8 @@
   "require": {
     "guzzlehttp/guzzle": "^6.2.2",
     "php": ">=7.0.0",
-    "psr/http-message": "~1.0"
+    "psr/http-message": "~1.0",
+    "ext-json": "*"
   },
   "require-dev": {
     "phpunit/phpunit": "5.7.5",
@@ -28,5 +29,10 @@
     "classmap": [
         "tests/"
     ]
+  },
+  "config": {
+    "preferred-install": "dist",
+    "sort-packages": true,
+    "optimize-autoloader": true
   }
 }
