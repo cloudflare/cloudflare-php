@@ -58,6 +58,15 @@ class Zones implements API
         return false;
     }
 
+    public function getZoneById(
+        string $zoneId
+    ): \stdClass {
+        $user = $this->adapter->get('zones/' . $zoneId);
+        $this->body = json_decode($user->getBody());
+
+        return (object)['result' => $this->body->result];
+    }
+
     public function listZones(
         string $name = '',
         string $status = '',
