@@ -144,6 +144,52 @@ class Zones implements API
         return false;
     }
 
+    /**
+     * Return auto minify settings
+     * @param string $zoneID
+     * @return array
+     */
+    public function getAutoMinify(string $zoneID): array
+    {
+        $response = $this->adapter->get('zones/' . $zoneID . '/settings/minify');
+
+        $this->body = json_decode($response->getBody());
+
+        $minify = [
+            'css' => $this->body->result->value->css == 'on',
+            'html' => $this->body->result->value->html == 'on',
+            'js' => $this->body->result->value->js == 'on',
+        ];
+
+        return $minify;
+    }
+
+    /**
+     * Change auto minify settings
+     * @param string $zoneID
+     * @param bool $css
+     * @param bool $html
+     * @param bool $js
+     * @return bool
+     */
+    public function setAutoMinify(string $zoneID, bool $css = false, bool $html = false, bool $js = false): bool
+    {
+        $minify = [
+            'css' => $css ? 'on' : 'off',
+            'html' => $html ? 'on' : 'off',
+            'js' => $js ? 'on' : 'off',
+        ];
+
+        $response = $this->adapter->patch('zones/' . $zoneID . '/settings/minify', ['value' => $minify]);
+
+        $this->body = json_decode($response->getBody());
+
+        if ($this->body->success) {
+            return true;
+        }
+
+        return false;
+    }
 
     /**
      * Purge Everything
