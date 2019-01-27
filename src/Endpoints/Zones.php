@@ -144,6 +144,38 @@ class Zones implements API
         return false;
     }
 
+    /**
+     * Return caching level settings
+     * @param string $zoneID
+     * @return string
+     */
+    public function getCachingLevel(string $zoneID): string
+    {
+        $response = $this->adapter->get('zones/' . $zoneID . '/settings/cache_level');
+
+        $this->body = json_decode($response->getBody());
+
+        return $this->body->result->value;
+    }
+
+    /**
+     * Change caching level settings
+     * @param string $zoneID
+     * @param string $level (aggressive | basic | simplified)
+     * @return bool
+     */
+    public function setCachingLevel(string $zoneID, string $level = 'aggressive'): bool
+    {
+        $response = $this->adapter->patch('zones/' . $zoneID . '/settings/cache_level', ['value' => $level]);
+
+        $this->body = json_decode($response->getBody());
+
+        if ($this->body->success) {
+            return true;
+        }
+
+        return false;
+    }
 
     /**
      * Purge Everything
