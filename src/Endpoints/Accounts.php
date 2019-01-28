@@ -47,7 +47,7 @@ class Accounts implements API
 
         $this->body = $response->getBody();
 
-        return json_decode($this->body)->result;
+        return (object)['result' => $this->body->result];
     }
 
     public function getDomainDetails(string $accountID, string $domainName): \stdClass
@@ -56,6 +56,6 @@ class Accounts implements API
 
         $this->body = $response->getBody();
 
-        return json_decode($this->body)->result;
+        return (object)['result' => $this->body->result];
     }
 }
