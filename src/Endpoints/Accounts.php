@@ -41,21 +41,21 @@ class Accounts implements API
         return (object)['result' => $this->body->result, 'result_info' => $this->body->result_info];
     }
 
-    public function getDomains(string $accountID): \stdClass
+    public function getDomains(string $accountID): array
     {
         $response = $this->adapter->get('accounts/' . $accountID . '/registrar/domains');
 
-        $this->body = $response->getBody();
+        $this->body = json_decode($response->getBody());
 
-        return (object)['result' => $this->body->result];
+        return $this->body->result;
     }
 
-    public function getDomainDetails(string $accountID, string $domainName): \stdClass
+    public function getDomainDetails(string $accountID, string $domainName): array
     {
         $response = $this->adapter->get('accounts/' . $accountID . '/registrar/domains' . $domainName);
 
-        $this->body = $response->getBody();
+        $this->body = json_decode($response->getBody());
 
-        return (object)['result' => $this->body->result];
+        return $this->body->result;
     }
 }
