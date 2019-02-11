@@ -21,6 +21,11 @@ class AccessRules implements Configurations
         $this->config = ['target' => 'country', 'value' => $value];
     }
 
+    public function setASN(string $value)
+    {
+        $this->config = ['target' => 'asn', 'value' => $value];
+    }
+
     public function getArray(): array
     {
         return $this->config;
