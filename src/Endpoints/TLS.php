@@ -67,6 +67,7 @@ class TLS implements API
 
         return false;
     }
+<<<<<<< HEAD
     public function getHTTPSRedirectStatus($zoneID) {
         $return = $this->adapter->get(
             'zones/' . $zoneID . '/settings/always_use_https'
@@ -121,4 +122,6 @@ class TLS implements API
 
         return false;
     }
+=======
+>>>>>>> 4694904b38fdf5f251559a473cecf77a63cf9202
 }
