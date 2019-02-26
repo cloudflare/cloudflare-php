@@ -92,7 +92,8 @@ class ZoneSettings implements API
     public function updateMinifySetting($zoneID, $html, $css, $js)
     {
         $return = $this->adapter->patch(
-            'zones/' . $zoneID . '/settings/minify', [
+            'zones/' . $zoneID . '/settings/minify',
+            [
                 'value' => [
                     'html' => $html,
                     'css'  => $css,
@@ -112,7 +113,8 @@ class ZoneSettings implements API
     public function updateRocketLoaderSetting($zoneID, $value)
     {
         $return = $this->adapter->patch(
-            'zones/' . $zoneID . '/settings/rocket_loader', [
+            'zones/' . $zoneID . '/settings/rocket_loader',
+            [
                 'value' => $value,
             ]
         );
@@ -128,7 +130,8 @@ class ZoneSettings implements API
     public function updateAlwaysOnlineSetting($zoneID, $value)
     {
         $return = $this->adapter->patch(
-            'zones/' . $zoneID . '/settings/always_online', [
+            'zones/' . $zoneID . '/settings/always_online',
+            [
                 'value' => $value,
             ]
         );
@@ -144,7 +147,8 @@ class ZoneSettings implements API
     public function updateEmailObfuscationSetting($zoneID, $value)
     {
         $return = $this->adapter->patch(
-            'zones/' . $zoneID . '/settings/email_obfuscation', [
+            'zones/' . $zoneID . '/settings/email_obfuscation',
+            [
                 'value' => $value,
             ]
         );
@@ -160,7 +164,8 @@ class ZoneSettings implements API
     public function updateHotlinkProtectionSetting($zoneID, $value)
     {
         $return = $this->adapter->patch(
-            'zones/' . $zoneID . '/settings/hotlink_protection', [
+            'zones/' . $zoneID . '/settings/hotlink_protection',
+            [
                 'value' => $value,
             ]
         );
