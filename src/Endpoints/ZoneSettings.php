@@ -89,7 +89,7 @@ class ZoneSettings implements API
         return false;
     }
 
-    public function updateMinifySetting($zoneID, $html, $css, $js)
+    public function updateMinifySetting($zoneID, $html, $css, $javascript)
     {
         $return = $this->adapter->patch(
             'zones/' . $zoneID . '/settings/minify',
@@ -97,7 +97,7 @@ class ZoneSettings implements API
                 'value' => [
                     'html' => $html,
                     'css'  => $css,
-                    'js'   => $js,
+                    'js'   => $javascript,
                 ],
             ]
         );
