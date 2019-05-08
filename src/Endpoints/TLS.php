@@ -25,7 +25,7 @@ class TLS implements API
             'zones/' . $zoneID . '/settings/tls_1_3',
             ['value' => 'on']
         );
-        $body = json_decode($return->getBody());
+        $body   = json_decode($return->getBody());
 
         if ($body->success) {
             return true;
@@ -40,7 +40,7 @@ class TLS implements API
             'zones/' . $zoneID . '/settings/tls_1_3',
             ['value' => 'off']
         );
-        $body = json_decode($return->getBody());
+        $body   = json_decode($return->getBody());
 
         if ($body->success) {
             return true;
@@ -50,16 +50,77 @@ class TLS implements API
     }
 
 
-
     public function changeMinimumTLSVersion($zoneID, $minimumVersion)
     {
         $return = $this->adapter->patch(
             'zones/' . $zoneID . '/settings/min_tls_version',
             [
-                'value' => $minimumVersion
+                'value' => $minimumVersion,
             ]
         );
-        $body = json_decode($return->getBody());
+        $body   = json_decode($return->getBody());
+
+        if ($body->success) {
+            return true;
+        }
+
+        return false;
+    }
+
+    public function getHTTPSRedirectSetting($zoneID)
+    {
+        $return = $this->adapter->get(
+            'zones/' . $zoneID . '/settings/always_use_https'
+        );
+        $body   = json_decode($return->getBody());
+
+        if ($body->success) {
+            return $body->result->value;
+        }
+
+        return false;
+    }
+
+    public function getHTTPSRewritesSetting($zoneID)
+    {
+        $return = $this->adapter->get(
+            'zones/' . $zoneID . '/settings/automatic_https_rewrites'
+        );
+        $body   = json_decode($return->getBody());
+
+        if ($body->success) {
+            return $body->result->value;
+        }
+
+        return false;
+    }
+
+    public function updateHTTPSRedirectStatus($zoneID, $value)
+    {
+        $return = $this->adapter->patch(
+            'zones/' . $zoneID . '/settings/always_use_https',
+            [
+                'value' => $value,
+            ]
+        );
+        $body   = json_decode($return->getBody());
+
+        if ($body->success) {
+            return true;
+        }
+
+        return false;
+    }
+
+    public function updateHTTPSRewritesStatus($zoneID, $value)
+    {
+        $return = $this->adapter->patch(
+            'zones/' . $zoneID . '/settings/automatic_https_rewrites',
+            [
+                'value' => $value,
+            ]
+        );
+        $body   = json_decode($return->getBody());
 
         if ($body->success) {
             return true;
