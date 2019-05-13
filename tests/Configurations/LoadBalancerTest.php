@@ -15,19 +15,18 @@ class LoadBalancerTest extends TestCase
      */
     public function testArguments($setFunction, $arguments, $getFunction, $invalid)
     {
-        $lb = new LoadBalancer('bous', [], 'bogus');
+        $loadBalancer = new LoadBalancer('bogus', [], 'bogus');
         foreach ($arguments as $argument) {
-            if ($invalid) {
+            if ($invalid === true) {
                 try {
-                    $lb->{$setFunction}($argument);
+                    $loadBalancer->{$setFunction}($argument);
                 } catch (ConfigurationsException $e) {
-                    $this->assertNotEquals($argument, $lb->{$getFunction}());
+                    $this->assertNotEquals($argument, $loadBalancer->{$getFunction}());
                 }
-            } else {
-                $lb->{$setFunction}($argument);
-                $this->assertEquals($argument, $lb->{$getFunction}());
+            } elseif ($invalid === false) {
+                $loadBalancer->{$setFunction}($argument);
+                $this->assertEquals($argument, $loadBalancer->{$getFunction}());
             }
-
         }
     }
 

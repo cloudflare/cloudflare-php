@@ -90,10 +90,10 @@ class LoadBalancersTest extends TestCase
         $response = $this->getPsr7JsonResponseForFixture('Endpoints/updateLoadBalancer.json');
 
         $mock = $this->getMockBuilder(Adapter::class)->getMock();
-        $mock->method('patch')->willReturn($response);
+        $mock->method('put')->willReturn($response);
 
         $mock->expects($this->once())
-            ->method('patch')
+            ->method('put')
             ->with(
                 $this->equalTo('zones/699d98642c564d2e855e9661899b7252/load_balancers/699d98642c564d2e855e9661899b7252'),
                 $this->equalTo($lbConfiguration->getArray())
