@@ -27,7 +27,6 @@ class LoadBalancerTest extends TestCase
                 $lb->{$setFunction}($argument);
                 $this->assertEquals($argument, $lb->{$getFunction}());
             }
-
         }
     }
 
