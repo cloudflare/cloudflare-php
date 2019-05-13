@@ -15,7 +15,7 @@ class LoadBalancerTest extends TestCase
      */
     public function testArguments($setFunction, $arguments, $getFunction, $invalid)
     {
-        $lb = new LoadBalancer('bous', [], 'bogus');
+        $lb = new LoadBalancer('bogus', [], 'bogus');
         foreach ($arguments as $argument) {
             if ($invalid) {
                 try {

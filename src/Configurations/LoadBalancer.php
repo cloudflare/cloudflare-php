@@ -88,7 +88,7 @@ class LoadBalancer implements Configurations
         $this->configs['enabled'] = $enabled;
     }
 
-    public function getEnabled(bool $enabled = true):bool
+    public function getEnabled():bool
     {
         return $this->configs['enabled'] ?? true;
     }
