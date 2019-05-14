@@ -71,7 +71,11 @@ class Pools implements API
 
         $poolConfiguration = new Pool($pool->name, $pool->origins);
         $poolConfiguration->setDescription($pool->description);
-        $poolConfiguration->setEnabled($pool->enabled);
+        if ($pool->enabled === true) {
+            $poolConfiguration->enable();
+        } elseif ($pool->enabled === false) {
+            $poolConfiguration->disable();
+        }
         $poolConfiguration->setMonitor($pool->monitor);
         $poolConfiguration->setNotificationEmail($pool->notification_email);
 

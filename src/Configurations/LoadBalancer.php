@@ -28,9 +28,9 @@ class LoadBalancer implements Configurations
         return $this->configs['name'] ?? '';
     }
 
-    public function setDefaultPools(array $default_pools)
+    public function setDefaultPools(array $defaultPools)
     {
-        $this->configs['default_pools'] = $default_pools;
+        $this->configs['default_pools'] = $defaultPools;
     }
 
     public function getDefaultPools():array
@@ -81,11 +81,6 @@ class LoadBalancer implements Configurations
     public function isDisabled():bool
     {
         return !$this->configs['enabled'] ?? false;
-    }
-
-    public function setEnabled(bool $enabled = true)
-    {
-        $this->configs['enabled'] = $enabled;
     }
 
     public function getEnabled():bool
@@ -147,9 +142,14 @@ class LoadBalancer implements Configurations
         return $this->configs['description'] ?? '';
     }
 
-    public function setProxied(bool $proxied = true)
+    public function enableProxied()
     {
-        $this->configs['proxied'] = $proxied;
+        $this->configs['proxied'] = true;
+    }
+
+    public function disableProxied()
+    {
+        $this->configs['proxied'] = false;
     }
 
     public function isProxied():bool

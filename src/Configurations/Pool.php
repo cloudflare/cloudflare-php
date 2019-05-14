@@ -75,11 +75,6 @@ class Pool implements Configurations
         return !$this->configs['enabled'] ?? false;
     }
 
-    public function setEnabled(bool $enabled = true)
-    {
-        $this->configs['enabled'] = $enabled;
-    }
-
     public function getEnabled():bool
     {
         return $this->configs['enabled'] ?? true;

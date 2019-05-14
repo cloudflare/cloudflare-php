@@ -15,17 +15,17 @@ class PoolTest extends TestCase
      */
     public function testArguments($setFunction, $arguments, $getFunction, $invalid)
     {
-        $lb = new Pool('bogus', []);
+        $pool = new Pool('bogus', []);
         foreach ($arguments as $argument) {
             if ($invalid) {
                 try {
-                    $lb->{$setFunction}($argument);
+                    $pool->{$setFunction}($argument);
                 } catch (ConfigurationsException $e) {
-                    $this->assertNotEquals($argument, $lb->{$getFunction}());
+                    $this->assertNotEquals($argument, $pool->{$getFunction}());
                 }
-            } else {
-                $lb->{$setFunction}($argument);
-                $this->assertEquals($argument, $lb->{$getFunction}());
+            } elseif ($invalid === false) {
+                $pool->{$setFunction}($argument);
+                $this->assertEquals($argument, $pool->{$getFunction}());
             }
         }
     }

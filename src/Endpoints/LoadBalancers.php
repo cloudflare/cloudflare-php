@@ -57,44 +57,54 @@ class LoadBalancers implements API
     {
         $loadBalancer = $this->getLoadBalancerDetails($zoneID, $loadBalancerID);
 
-        $loadBalancerConfiguration = new LoadBalancer($loadBalancer->name, $loadBalancer->default_pools, $loadBalancer->fallback_pool);
-        $loadBalancerConfiguration->setSteeringPolicy($loadBalancer->steering_policy);
-        $loadBalancerConfiguration->setEnabled($loadBalancer->enabled);
+        $lbConfiguration = new LoadBalancer($loadBalancer->name, $loadBalancer->default_pools, $loadBalancer->fallback_pool);
+        $lbConfiguration->setSteeringPolicy($loadBalancer->steering_policy);
+        if ($loadBalancer->enabled === true) {
+            $lbConfiguration->enable();
+        } elseif ($loadBalancer->enabled === false) {
+            $lbConfiguration->disable();
+        }
 
         if (is_array($loadBalancer->pop_pools)) {
-            $loadBalancerConfiguration->setPopPools($loadBalancer->pop_pools);
+            $lbConfiguration->setPopPools($loadBalancer->pop_pools);
         }
 
         if (isset($loadBalancer->ttl)) {
-            $loadBalancerConfiguration->setTtl($loadBalancer->ttl);
+            $lbConfiguration->setTtl($loadBalancer->ttl);
         }
 
         if (is_array($loadBalancer->region_pools)) {
-            $loadBalancerConfiguration->setRegionPools($loadBalancer->region_pools);
+            $lbConfiguration->setRegionPools($loadBalancer->region_pools);
         }
-        $loadBalancerConfiguration->setSessionAffinity($loadBalancer->session_affinity);
-        $loadBalancerConfiguration->setDescription($loadBalancer->description);
-        $loadBalancerConfiguration->setProxied($loadBalancer->proxied);
+        $lbConfiguration->setSessionAffinity($loadBalancer->session_affinity);
+        $lbConfiguration->setDescription($loadBalancer->description);
+        if ($loadBalancer->proxied === true) {
+            $lbConfiguration->enableProxied();
+        } elseif ($loadBalancer->proxied === false) {
+            $lbConfiguration->disableProxied();
+        }
+
+        $lbConfiguration->setProxied($loadBalancer->proxied);
 
         if (isset($loadBalancer->session_affinity_ttl)) {
-            $loadBalancerConfiguration->setSessionAffinityTtl($loadBalancer->session_affinity_ttl);
+            $lbConfiguration->setSessionAffinityTtl($loadBalancer->session_affinity_ttl);
         }
 
-        return $loadBalancerConfiguration;
+        return $lbConfiguration;
     }
 
     /**
      * @param string $zoneID
      * @param string $loadBalancerID
-     * @param LoadBalancer $loadBalancerConfiguration
+     * @param LoadBalancer $lbConfiguration
      * @return bool
      */
     public function updateLoadBalancer(
         string $zoneID,
         string $loadBalancerID,
-        LoadBalancer $loadBalancerConfiguration
+        LoadBalancer $lbConfiguration
     ): bool {
-        $options = $loadBalancerConfiguration->getArray();
+        $options = $lbConfiguration->getArray();
 
         $query = $this->adapter->patch('zones/' . $zoneID . '/load_balancers/' . $loadBalancerID, $options);
 
@@ -109,14 +119,14 @@ class LoadBalancers implements API
 
     /**
      * @param string $zoneID
-     * @param LoadBalancer $loadBalancerConfiguration
+     * @param LoadBalancer $lbConfiguration
      * @return bool
      */
     public function createLoadBalancer(
         string $zoneID,
-        LoadBalancer $loadBalancerConfiguration
+        LoadBalancer $lbConfiguration
     ): bool {
-        $options = $loadBalancerConfiguration->getArray();
+        $options = $lbConfiguration->getArray();
 
         $query = $this->adapter->post('zones/' . $zoneID . '/load_balancers', $options);
 
