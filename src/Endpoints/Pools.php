@@ -24,50 +24,50 @@ class Pools implements API
     }
 
     /**
-     * @param string $zoneID
+     * @param string $accountID
      * @return mixed
      */
-    public function listPools(string $zoneID)
+    public function listPools(string $accountID)
     {
-        $pools = $this->adapter->get('zones/' . $zoneID . '/load_balancers/pools');
+        $pools = $this->adapter->get('accounts/' . $accountID . '/load_balancers/pools');
         $this->body = json_decode($pools->getBody());
 
         return $this->body->result;
     }
 
     /**
-     * @param string $zoneID
+     * @param string $accountID
      * @param string $poolID
      * @return mixed
      */
-    public function getPoolDetails(string $zoneID, string $poolID)
+    public function getPoolDetails(string $accountID, string $poolID)
     {
-        $pool = $this->adapter->get('zones/' . $zoneID . '/load_balancers/pools/' . $poolID);
+        $pool = $this->adapter->get('accounts/' . $accountID . '/load_balancers/pools/' . $poolID);
         $this->body = json_decode($pool->getBody());
         return $this->body->result;
     }
 
     /**
-     * @param string $zoneID
+     * @param string $accountID
      * @param string $poolID
      * @return mixed
      */
-    public function getPoolHealthDetails(string $zoneID, string $poolID)
+    public function getPoolHealthDetails(string $accountID, string $poolID)
     {
-        $pool = $this->adapter->get('zones/' . $zoneID . '/load_balancers/pools/' . $poolID . '/health');
+        $pool = $this->adapter->get('accounts/' . $accountID . '/load_balancers/pools/' . $poolID . '/health');
         $this->body = json_decode($pool->getBody());
         return $this->body->result;
     }
 
     /**
-     * @param string $zoneID
+     * @param string $accountID
      * @param string $poolID
      * @return Pool
      * @throws ConfigurationsException
      */
-    public function getPoolConfiguration(string $zoneID, string $poolID)
+    public function getPoolConfiguration(string $accountID, string $poolID)
     {
-        $pool = $this->getPoolDetails($zoneID, $poolID);
+        $pool = $this->getPoolDetails($accountID, $poolID);
 
         $poolConfiguration = new Pool($pool->name, $pool->origins);
         $poolConfiguration->setDescription($pool->description);
@@ -83,19 +83,19 @@ class Pools implements API
     }
 
     /**
-     * @param string $zoneID
+     * @param string $accountID
      * @param string $poolID
      * @param Pool $poolConfiguration
      * @return bool
      */
     public function updatePool(
-        string $zoneID,
+        string $accountID,
         string $poolID,
         Pool $poolConfiguration
     ): bool {
         $options = $poolConfiguration->getArray();
 
-        $query = $this->adapter->patch('zones/' . $zoneID . '/load_balancers/pools/' . $poolID, $options);
+        $query = $this->adapter->patch('accounts/' . $accountID . '/load_balancers/pools/' . $poolID, $options);
 
         $this->body = json_decode($query->getBody());
 
@@ -107,17 +107,17 @@ class Pools implements API
     }
 
     /**
-     * @param string $zoneID
+     * @param string $accountID
      * @param Pool $poolConfiguration
      * @return bool
      */
     public function createPool(
-        string $zoneID,
+        string $accountID,
         Pool $poolConfiguration
     ): bool {
         $options = $poolConfiguration->getArray();
 
-        $query = $this->adapter->post('zones/' . $zoneID . '/load_balancers/pools', $options);
+        $query = $this->adapter->post('accounts/' . $accountID . '/load_balancers/pools', $options);
 
         $this->body = json_decode($query->getBody());
 
@@ -129,13 +129,13 @@ class Pools implements API
     }
 
     /**
-     * @param string $zoneID
+     * @param string $accountID
      * @param string $poolID
      * @return bool
      */
-    public function deletePool(string $zoneID, string $poolID): bool
+    public function deletePool(string $accountID, string $poolID): bool
     {
-        $pool = $this->adapter->delete('zones/' . $zoneID . '/load_balancers/pools/' . $poolID);
+        $pool = $this->adapter->delete('accounts/' . $accountID . '/load_balancers/pools/' . $poolID);
 
         $this->body = json_decode($pool->getBody());
 

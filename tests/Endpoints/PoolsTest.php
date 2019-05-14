@@ -32,7 +32,7 @@ class PoolsTest extends TestCase
         $mock->expects($this->once())
             ->method('post')
             ->with(
-                $this->equalTo('zones/01a7362d577a6c3019a474fd6f485823/load_balancers/pools'),
+                $this->equalTo('accounts/01a7362d577a6c3019a474fd6f485823/load_balancers/pools'),
                 $poolConfiguration->getArray()
             );
 
@@ -53,7 +53,7 @@ class PoolsTest extends TestCase
         $mock->expects($this->once())
             ->method('get')
             ->with(
-                $this->equalTo('zones/01a7362d577a6c3019a474fd6f485823/load_balancers/pools')
+                $this->equalTo('accounts/01a7362d577a6c3019a474fd6f485823/load_balancers/pools')
             );
 
         $pools = new Pools($mock);
@@ -71,7 +71,7 @@ class PoolsTest extends TestCase
         $mock->expects($this->once())
             ->method('get')
             ->with(
-                $this->equalTo('zones/01a7362d577a6c3019a474fd6f485823/load_balancers/pools/17b5962d775c646f3f9725cbc7a53df4')
+                $this->equalTo('accounts/01a7362d577a6c3019a474fd6f485823/load_balancers/pools/17b5962d775c646f3f9725cbc7a53df4')
             );
 
         $pools = new Pools($mock);
@@ -100,7 +100,7 @@ class PoolsTest extends TestCase
         $mock->expects($this->once())
             ->method('patch')
             ->with(
-                $this->equalTo('zones/01a7362d577a6c3019a474fd6f485823/load_balancers/pools/17b5962d775c646f3f9725cbc7a53df4'),
+                $this->equalTo('accounts/01a7362d577a6c3019a474fd6f485823/load_balancers/pools/17b5962d775c646f3f9725cbc7a53df4'),
                 $this->equalTo($poolConfiguration->getArray())
             );
 
@@ -121,7 +121,7 @@ class PoolsTest extends TestCase
         $mock->expects($this->once())
             ->method('delete')
             ->with(
-                $this->equalTo('zones/01a7362d577a6c3019a474fd6f485823/load_balancers/pools/17b5962d775c646f3f9725cbc7a53df4')
+                $this->equalTo('accounts/01a7362d577a6c3019a474fd6f485823/load_balancers/pools/17b5962d775c646f3f9725cbc7a53df4')
             );
 
         $pools = new Pools($mock);
