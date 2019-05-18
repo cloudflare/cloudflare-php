@@ -49,7 +49,7 @@ class PageRulesTest extends TestCase
             ->method('get')
             ->with(
                 $this->equalTo('zones/023e105f4ecef8ad9ca31a8372d0c353/pagerules'),
-              $this->equalTo([
+                $this->equalTo([
                 'status' => 'active',
                 'order' => 'status',
                 'direction' => 'desc',
@@ -94,7 +94,7 @@ class PageRulesTest extends TestCase
         $mock->expects($this->once())
             ->method('patch')
             ->with(
-                $this->equalTo('zones/023e105f4ecef8ad9ca31a8372d0c353/pagerules'),
+                $this->equalTo('zones/023e105f4ecef8ad9ca31a8372d0c353/pagerules/9a7806061c88ada191ed06f989cc3dac'),
                 $this->equalTo([
                     'targets' => $target->getArray(),
                     'actions' => $action->getArray(),
@@ -104,7 +104,7 @@ class PageRulesTest extends TestCase
             );
 
         $pageRules = new \Cloudflare\API\Endpoints\PageRules($mock);
-        $result = $pageRules->updatePageRule('023e105f4ecef8ad9ca31a8372d0c353', $target, $action, true, 1);
+        $result = $pageRules->updatePageRule('023e105f4ecef8ad9ca31a8372d0c353', '9a7806061c88ada191ed06f989cc3dac', $target, $action, true, 1);
 
         $this->assertTrue($result);
         $this->assertEquals('9a7806061c88ada191ed06f989cc3dac', $pageRules->getBody()->result->id);
