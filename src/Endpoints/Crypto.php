@@ -25,11 +25,9 @@ class Crypto implements API
             'zones/' . $zoneID . '/settings/ssl'
         );
         $body = json_decode($return->getBody());
-
         if ($body->success) {
             return $body->result->value;
         }
-
         return false;
     }
 
@@ -45,11 +43,9 @@ class Crypto implements API
             'zones/' . $zoneID . '/ssl/verification'
         );
         $body = json_decode($return->getBody());
-
         if ($body->result) {
             return $body->result;
         }
-
         return false;
     }
 
@@ -65,11 +61,9 @@ class Crypto implements API
             'zones/' . $zoneID . '/settings/opportunistic_encryption'
         );
         $body = json_decode($return->getBody());
-
         if ($body->success) {
             return $body->result->value;
         }
-
         return false;
     }
 
@@ -85,11 +79,9 @@ class Crypto implements API
             'zones/' . $zoneID . '/settings/opportunistic_onion'
         );
         $body = json_decode($return->getBody());
-
         if ($body->success) {
             return $body->result;
         }
-
         return false;
     }
 
@@ -99,11 +91,9 @@ class Crypto implements API
             'zones/' . $zoneID . '/settings/always_use_https'
         );
         $body = json_decode($return->getBody());
-
         if ($body->success) {
             return $body->result->value;
         }
-
         return false;
     }
 
@@ -113,11 +103,9 @@ class Crypto implements API
             'zones/' . $zoneID . '/settings/automatic_https_rewrites'
         );
         $body = json_decode($return->getBody());
-
         if ($body->success) {
             return $body->result->value;
         }
-
         return false;
     }
 
@@ -137,11 +125,9 @@ class Crypto implements API
             ]
         );
         $body = json_decode($return->getBody());
-
         if ($body->success) {
             return true;
         }
-
         return false;
     }
 
@@ -161,11 +147,9 @@ class Crypto implements API
             ]
         );
         $body = json_decode($return->getBody());
-
         if ($body->success) {
             return true;
         }
-
         return false;
     }
 
@@ -185,14 +169,19 @@ class Crypto implements API
             ]
         );
         $body = json_decode($return->getBody());
-
         if ($body->success) {
             return true;
         }
-
         return false;
     }
 
+    /**
+     * Update the Oppurtunistic Encryption setting for the zone
+     *
+     * @param string $zoneID The ID of the zone
+     * @param string $value The value of the zone setting
+     * @return bool 
+     */
     public function updateOpportunisticEncryptionSetting($zoneID, $value)
     {
         $return = $this->adapter->patch(
@@ -202,14 +191,19 @@ class Crypto implements API
             ]
         );
         $body = json_decode($return->getBody());
-
         if ($body->success) {
             return true;
         }
-
         return false;
     }
 
+    /**
+     * Update the Onion Routing setting for the zone
+     *
+     * @param string $zoneID The ID of the zone
+     * @param string $value The value of the zone setting
+     * @return bool 
+     */
     public function updateOnionRoutingSetting($zoneID, $value)
     {
         $return = $this->adapter->patch(
@@ -219,11 +213,9 @@ class Crypto implements API
             ]
         );
         $body = json_decode($return->getBody());
-
         if ($body->success) {
             return true;
         }
-
         return false;
     }
 }
