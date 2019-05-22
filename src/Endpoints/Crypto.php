@@ -44,7 +44,7 @@ class Crypto implements API
         );
         $body = json_decode($return->getBody());
         if ($body->result) {
-            return $body->result;
+            return $body;
         }
         return false;
     }
