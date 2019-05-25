@@ -138,5 +138,4 @@ class SSLTest extends TestCase
 
         $this->assertTrue($result);
     }
-
 }

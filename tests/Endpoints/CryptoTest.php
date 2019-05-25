@@ -79,5 +79,4 @@ class CryptoTest extends TestCase
 
         $this->assertTrue($result);
     }
-
 }
