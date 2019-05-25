@@ -2,7 +2,6 @@
 
 class CryptoTest extends TestCase
 {
-
     public function testGetOpportunisticEncryptionSetting()
     {
         $response = $this->getPsr7JsonResponseForFixture('Endpoints/getOpportunisticEncryptionSetting.json');
