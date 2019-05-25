@@ -118,5 +118,4 @@ class TLS implements API
         }
         return false;
     }
-
 }

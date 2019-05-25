@@ -150,5 +150,4 @@ class SSL implements API
         }
         return false;
     }
-
 }
