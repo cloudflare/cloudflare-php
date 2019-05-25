@@ -41,7 +41,7 @@ class TLS implements API
      * Enable TLS 1.3 for the zone
      *
      * @param string $zoneID The ID of the zone
-     * @return bool 
+     * @return bool
      */
     public function enableTLS13($zoneID)
     {
@@ -60,7 +60,7 @@ class TLS implements API
      * Disable TLS 1.3 for the zone
      *
      * @param string $zoneID The ID of the zone
-     * @return bool 
+     * @return bool
      */
     public function disableTLS13($zoneID)
     {
@@ -80,7 +80,7 @@ class TLS implements API
      *
      * @param string $zoneID The ID of the zone
      * @param string $minimumVersion The version to update to
-     * @return bool 
+     * @return bool
      */
     public function changeMinimumTLSVersion($zoneID, $minimumVersion)
     {
@@ -102,7 +102,7 @@ class TLS implements API
      *
      * @param string $zoneID The ID of the zone
      * @param string $value The value of the zone setting
-     * @return bool 
+     * @return bool
      */
     public function updateTLSClientAuth($zoneID, $value)
     {

@@ -17,7 +17,7 @@ class SSL implements API
      * Get the SSL setting for the zone
      *
      * @param string $zoneID The ID of the zone
-     * @return string|false 
+     * @return string|false
      */
     public function getSSLSetting(string $zoneID)
     {
@@ -35,7 +35,7 @@ class SSL implements API
      * Get SSL Verification Info for a Zone
      *
      * @param string $zoneID The ID of the zone
-     * @return array|false 
+     * @return array|false
      */
     public function getSSLVerificationStatus(string $zoneID)
     {
@@ -53,7 +53,7 @@ class SSL implements API
      * Get the HTTPS Redirect setting for the zone
      *
      * @param string $zoneID The ID of the zone
-     * @return string|false 
+     * @return string|false
      */
     public function getHTTPSRedirectSetting(string $zoneID)
     {
@@ -71,7 +71,7 @@ class SSL implements API
      * Get the HTTPS Rewrite setting for the zone
      *
      * @param string $zoneID The ID of the zone
-     * @return string|false 
+     * @return string|false
      */
     public function getHTTPSRewritesSetting(string $zoneID)
     {
@@ -90,7 +90,7 @@ class SSL implements API
      *
      * @param string $zoneID The ID of the zone
      * @param string $value The value of the zone setting
-     * @return bool 
+     * @return bool
      */
     public function updateSSLSetting(string $zoneID, string $value)
     {
@@ -112,7 +112,7 @@ class SSL implements API
      *
      * @param string $zoneID The ID of the zone
      * @param string $value The value of the zone setting
-     * @return bool 
+     * @return bool
      */
     public function updateHTTPSRedirectSetting(string $zoneID, string $value)
     {
@@ -134,7 +134,7 @@ class SSL implements API
      *
      * @param string $zoneID The ID of the zone
      * @param string $value The value of the zone setting
-     * @return bool 
+     * @return bool
      */
     public function updateHTTPSRewritesSetting(string $zoneID, string $value)
     {

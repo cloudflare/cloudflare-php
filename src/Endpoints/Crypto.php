@@ -17,7 +17,7 @@ class Crypto implements API
      * Get the Opportunistic Encryption feature for a zone.
      *
      * @param string $zoneID The ID of the zone
-     * @return string|false 
+     * @return string|false
      */
     public function getOpportunisticEncryptionSetting(string $zoneID)
     {
@@ -35,7 +35,7 @@ class Crypto implements API
      * Get the Onion Routing feature for a zone.
      *
      * @param string $zoneID The ID of the zone
-     * @return string|false 
+     * @return string|false
      */
     public function getOnionRoutingSetting(string $zoneID)
     {
@@ -54,7 +54,7 @@ class Crypto implements API
      *
      * @param string $zoneID The ID of the zone
      * @param string $value The value of the zone setting
-     * @return bool 
+     * @return bool
      */
     public function updateOpportunisticEncryptionSetting(string $zoneID, string $value)
     {
@@ -76,7 +76,7 @@ class Crypto implements API
      *
      * @param string $zoneID The ID of the zone
      * @param string $value The value of the zone setting
-     * @return bool 
+     * @return bool
      */
     public function updateOnionRoutingSetting(string $zoneID, string $value)
     {
