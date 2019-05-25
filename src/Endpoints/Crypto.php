@@ -19,13 +19,13 @@ class Crypto implements API
      * @param string $zoneID The ID of the zone
      * @return string|false 
      */
-    public function getSSLSetting($zoneID)
+    public function getSSLSetting(string $zoneID)
     {
         $return = $this->adapter->get(
             'zones/' . $zoneID . '/settings/ssl'
         );
         $body = json_decode($return->getBody());
-        if ($body->success) {
+        if (isset($body->result)) {
             return $body->result->value;
         }
         return false;
@@ -37,13 +37,13 @@ class Crypto implements API
      * @param string $zoneID The ID of the zone
      * @return array|false 
      */
-    public function getSSLVerificationStatus($zoneID)
+    public function getSSLVerificationStatus(string $zoneID)
     {
         $return = $this->adapter->get(
             'zones/' . $zoneID . '/ssl/verification'
         );
         $body = json_decode($return->getBody());
-        if ($body->result) {
+        if (isset($body->result)) {
             return $body;
         }
         return false;
@@ -55,13 +55,13 @@ class Crypto implements API
      * @param string $zoneID The ID of the zone
      * @return string|false 
      */
-    public function getOpportunisticEncryptionSetting($zoneID)
+    public function getOpportunisticEncryptionSetting(string $zoneID)
     {
         $return = $this->adapter->get(
             'zones/' . $zoneID . '/settings/opportunistic_encryption'
         );
         $body = json_decode($return->getBody());
-        if ($body->success) {
+        if (isset($body->result)) {
             return $body->result->value;
         }
         return false;
@@ -73,38 +73,50 @@ class Crypto implements API
      * @param string $zoneID The ID of the zone
      * @return string|false 
      */
-    public function getOnionRoutingSetting($zoneID)
+    public function getOnionRoutingSetting(string $zoneID)
     {
         $return = $this->adapter->get(
             'zones/' . $zoneID . '/settings/opportunistic_onion'
         );
         $body = json_decode($return->getBody());
-        if ($body->success) {
+        if (isset($body->result)) {
             return $body->result;
         }
         return false;
     }
 
-    public function getHTTPSRedirectSetting($zoneID)
+    /**
+     * Get the HTTPS Redirect setting for the zone
+     *
+     * @param string $zoneID The ID of the zone
+     * @return string|false 
+     */
+    public function getHTTPSRedirectSetting(string $zoneID)
     {
         $return = $this->adapter->get(
             'zones/' . $zoneID . '/settings/always_use_https'
         );
         $body = json_decode($return->getBody());
-        if ($body->success) {
-            return $body->result->value;
+        if (isset($body->result)) {
+            return $body->result;
         }
         return false;
     }
 
-    public function getHTTPSRewritesSetting($zoneID)
+    /**
+     * Get the HTTPS Rewrite setting for the zone
+     *
+     * @param string $zoneID The ID of the zone
+     * @return string|false 
+     */
+    public function getHTTPSRewritesSetting(string $zoneID)
     {
         $return = $this->adapter->get(
             'zones/' . $zoneID . '/settings/automatic_https_rewrites'
         );
         $body = json_decode($return->getBody());
-        if ($body->success) {
-            return $body->result->value;
+        if (isset($body->result)) {
+            return $body->result;
         }
         return false;
     }
@@ -116,7 +128,7 @@ class Crypto implements API
      * @param string $value The value of the zone setting
      * @return bool 
      */
-    public function updateSSLSetting($zoneID, $value)
+    public function updateSSLSetting(string $zoneID, string $value)
     {
         $return = $this->adapter->patch(
             'zones/' . $zoneID . '/settings/ssl',
@@ -125,7 +137,7 @@ class Crypto implements API
             ]
         );
         $body = json_decode($return->getBody());
-        if ($body->success) {
+        if (isset($body->success) && $body->success == true) {
             return true;
         }
         return false;
@@ -138,7 +150,7 @@ class Crypto implements API
      * @param string $value The value of the zone setting
      * @return bool 
      */
-    public function updateHTTPSRedirectSetting($zoneID, $value)
+    public function updateHTTPSRedirectSetting(string $zoneID, string $value)
     {
         $return = $this->adapter->patch(
             'zones/' . $zoneID . '/settings/always_use_https',
@@ -147,7 +159,7 @@ class Crypto implements API
             ]
         );
         $body = json_decode($return->getBody());
-        if ($body->success) {
+        if (isset($body->success) && $body->success == true) {
             return true;
         }
         return false;
@@ -160,7 +172,7 @@ class Crypto implements API
      * @param string $value The value of the zone setting
      * @return bool 
      */
-    public function updateHTTPSRewritesSetting($zoneID, $value)
+    public function updateHTTPSRewritesSetting(string $zoneID, string $value)
     {
         $return = $this->adapter->patch(
             'zones/' . $zoneID . '/settings/automatic_https_rewrites',
@@ -169,7 +181,7 @@ class Crypto implements API
             ]
         );
         $body = json_decode($return->getBody());
-        if ($body->success) {
+        if (isset($body->success) && $body->success == true) {
             return true;
         }
         return false;
@@ -182,7 +194,7 @@ class Crypto implements API
      * @param string $value The value of the zone setting
      * @return bool 
      */
-    public function updateOpportunisticEncryptionSetting($zoneID, $value)
+    public function updateOpportunisticEncryptionSetting(string $zoneID, string $value)
     {
         $return = $this->adapter->patch(
             'zones/' . $zoneID . '/settings/opportunistic_encryption',
@@ -191,7 +203,7 @@ class Crypto implements API
             ]
         );
         $body = json_decode($return->getBody());
-        if ($body->success) {
+        if (isset($body->success) && $body->success == true) {
             return true;
         }
         return false;
@@ -204,7 +216,7 @@ class Crypto implements API
      * @param string $value The value of the zone setting
      * @return bool 
      */
-    public function updateOnionRoutingSetting($zoneID, $value)
+    public function updateOnionRoutingSetting(string $zoneID, string $value)
     {
         $return = $this->adapter->patch(
             'zones/' . $zoneID . '/settings/opportunistic_onion',
@@ -213,7 +225,7 @@ class Crypto implements API
             ]
         );
         $body = json_decode($return->getBody());
-        if ($body->success) {
+        if (isset($body->success) && $body->success == true) {
             return true;
         }
         return false;

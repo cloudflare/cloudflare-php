@@ -31,7 +31,7 @@ class TLS implements API
             'zones/' . $zoneID . '/settings/tls_client_auth'
         );
         $body   = json_decode($return->getBody());
-        if ($body->success) {
+        if (isset($body->result)) {
             return $body->result->value;
         }
         return false;
@@ -50,7 +50,7 @@ class TLS implements API
             ['value' => 'on']
         );
         $body   = json_decode($return->getBody());
-        if ($body->success) {
+        if (isset($body->success) && $body->success == true) {
             return true;
         }
         return false;
@@ -69,7 +69,7 @@ class TLS implements API
             ['value' => 'off']
         );
         $body   = json_decode($return->getBody());
-        if ($body->success) {
+        if (isset($body->success) && $body->success == true) {
             return true;
         }
         return false;
@@ -91,7 +91,7 @@ class TLS implements API
             ]
         );
         $body   = json_decode($return->getBody());
-        if ($body->success) {
+        if (isset($body->success) && $body->success == true) {
             return true;
         }
         return false;
@@ -113,7 +113,7 @@ class TLS implements API
             ]
         );
         $body   = json_decode($return->getBody());
-        if ($body->success) {
+        if (isset($body->success) && $body->success == true) {
             return true;
         }
         return false;
