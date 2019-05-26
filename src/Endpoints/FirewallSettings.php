@@ -93,10 +93,10 @@ class FirewallSettings implements API
      * Update the Challenge TTL setting for the zone
      *
      * @param string $zoneID The ID of the zone
-     * @param integer $value The value of the zone setting
+     * @param int $value The value of the zone setting
      * @return bool
      */
-    public function updateChallengeTTLSetting(string $zoneID, integer $value)
+    public function updateChallengeTTLSetting(string $zoneID, int $value)
     {
         $return = $this->adapter->patch(
             'zones/' . $zoneID . '/settings/challenge_ttl',
