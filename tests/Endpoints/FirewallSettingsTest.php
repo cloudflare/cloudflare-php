@@ -69,7 +69,7 @@ class FirewallSettingsTest extends TestCase
         $mock->expects($this->once())
             ->method('patch')
             ->with(
-                $this->equalTo('zones/c2547eb745079dac9320b638f5e225cf483cc5cfdda41/settings/opportunistic_encryption'),
+                $this->equalTo('zones/c2547eb745079dac9320b638f5e225cf483cc5cfdda41/settings/security_level'),
                 $this->equalTo(['value' => 'medium'])
             );
 
