@@ -19,10 +19,10 @@ class UARulesTest extends TestCase
             ->method('get')
             ->with(
                 $this->equalTo('zones/023e105f4ecef8ad9ca31a8372d0c353/firewall/ua_rules'),
-              $this->equalTo([
-                'page' => 1,
-                'per_page' => 20
-              ])
+                $this->equalTo([
+                    'page' => 1,
+                    'per_page' => 20
+                ])
             );
 
         $zones = new \Cloudflare\API\Endpoints\UARules($mock);
