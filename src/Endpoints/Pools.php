@@ -83,6 +83,10 @@ class Pools implements API
         $poolConfiguration->setMonitor($pool->monitor);
         $poolConfiguration->setNotificationEmail($pool->notification_email);
 
+        if (is_array($pool->check_regions)) {
+            $poolConfiguration->setCheckRegions($pool->check_regions);
+        }
+
         return $poolConfiguration;
     }
 

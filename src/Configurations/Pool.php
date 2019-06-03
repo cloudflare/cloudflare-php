@@ -90,6 +90,16 @@ class Pool implements Configurations
         return $this->configs['monitor'] ?? '';
     }
 
+    public function setCheckRegions(array $checkRegions)
+    {
+        $this->configs['check_regions'] = $checkRegions;
+    }
+
+    public function getCheckRegions():array
+    {
+        return $this->configs['check_regions'] ?? [];
+    }
+
     public function setNotificationEmail(string $email)
     {
         if (filter_var($email, FILTER_VALIDATE_EMAIL) === false) {
