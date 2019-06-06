@@ -58,6 +58,21 @@ class Zones implements API
         return false;
     }
 
+    public function pause(string $zoneID, bool $paused = true): bool
+    {
+        $options = [
+            'paused' => $paused,
+        ];
+        $user = $this->adapter->patch('zones/' . $zoneID, $options);
+        $this->body = json_decode($user->getBody());
+
+        if (isset($this->body->result->id)) {
+            return true;
+        }
+
+        return false;
+    }
+
     public function listZones(
         string $name = '',
         string $status = '',

@@ -49,6 +49,29 @@ class ZonesTest extends TestCase
         $this->assertEquals('9a7806061c88ada191ed06f989cc3dac', $zones->getBody()->result->id);
     }
 
+    public function testPauseTest()
+    {
+        $response = $this->getPsr7JsonResponseForFixture('Endpoints/pauseTest.json');
+
+        $mock = $this->getMockBuilder(\Cloudflare\API\Adapter\Adapter::class)->getMock();
+        $mock->method('patch')->willReturn($response);
+
+        $mock->expects($this->once())
+            ->method('patch')
+            ->with(
+                $this->equalTo('zones/c2547eb745079dac9320b638f5e225cf483cc5cfdda41'),
+                $this->equalTo([
+                    'pause' => true,
+                ])
+            );
+
+        $zones = new \Cloudflare\API\Endpoints\Zones($mock);
+        $result = $zones->pause('c2547eb745079dac9320b638f5e225cf483cc5cfdda41', true);
+
+        $this->assertTrue($result);
+        $this->assertEquals('023e105f4ecef8ad9ca31a8372d0c353', $zones->getBody()->result->id);
+    }
+
     public function testActivationTest()
     {
         $response = $this->getPsr7JsonResponseForFixture('Endpoints/activationTest.json');
