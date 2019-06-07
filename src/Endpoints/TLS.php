@@ -19,6 +19,30 @@ class TLS implements API
         $this->adapter = $adapter;
     }
 
+    /**
+     * Get the TLS Client Auth setting for the zone
+     *
+     * @param string $zoneID The ID of the zone
+     * @return string|false
+     */
+    public function getTLSClientAuth($zoneID)
+    {
+        $return = $this->adapter->get(
+            'zones/' . $zoneID . '/settings/tls_client_auth'
+        );
+        $body   = json_decode($return->getBody());
+        if (isset($body->result)) {
+            return $body->result->value;
+        }
+        return false;
+    }
+
+    /**
+     * Enable TLS 1.3 for the zone
+     *
+     * @param string $zoneID The ID of the zone
+     * @return bool
+     */
     public function enableTLS13($zoneID)
     {
         $return = $this->adapter->patch(
@@ -26,14 +50,18 @@ class TLS implements API
             ['value' => 'on']
         );
         $body   = json_decode($return->getBody());
-
-        if ($body->success) {
+        if (isset($body->success) && $body->success == true) {
             return true;
         }
-
         return false;
     }
 
+    /**
+     * Disable TLS 1.3 for the zone
+     *
+     * @param string $zoneID The ID of the zone
+     * @return bool
+     */
     public function disableTLS13($zoneID)
     {
         $return = $this->adapter->patch(
@@ -41,15 +69,19 @@ class TLS implements API
             ['value' => 'off']
         );
         $body   = json_decode($return->getBody());
-
-        if ($body->success) {
+        if (isset($body->success) && $body->success == true) {
             return true;
         }
-
         return false;
     }
 
-
+    /**
+     * Update the minimum TLS version setting for the zone
+     *
+     * @param string $zoneID The ID of the zone
+     * @param string $minimumVersion The version to update to
+     * @return bool
+     */
     public function changeMinimumTLSVersion($zoneID, $minimumVersion)
     {
         $return = $this->adapter->patch(
@@ -59,73 +91,31 @@ class TLS implements API
             ]
         );
         $body   = json_decode($return->getBody());
-
-        if ($body->success) {
+        if (isset($body->success) && $body->success == true) {
             return true;
         }
-
         return false;
     }
 
-    public function getHTTPSRedirectSetting($zoneID)
-    {
-        $return = $this->adapter->get(
-            'zones/' . $zoneID . '/settings/always_use_https'
-        );
-        $body   = json_decode($return->getBody());
-
-        if ($body->success) {
-            return $body->result->value;
-        }
-
-        return false;
-    }
-
-    public function getHTTPSRewritesSetting($zoneID)
-    {
-        $return = $this->adapter->get(
-            'zones/' . $zoneID . '/settings/automatic_https_rewrites'
-        );
-        $body   = json_decode($return->getBody());
-
-        if ($body->success) {
-            return $body->result->value;
-        }
-
-        return false;
-    }
-
-    public function updateHTTPSRedirectStatus($zoneID, $value)
+    /**
+     * Update the TLS Client Auth setting for the zone
+     *
+     * @param string $zoneID The ID of the zone
+     * @param string $value The value of the zone setting
+     * @return bool
+     */
+    public function updateTLSClientAuth($zoneID, $value)
     {
         $return = $this->adapter->patch(
-            'zones/' . $zoneID . '/settings/always_use_https',
+            'zones/' . $zoneID . '/settings/tls_client_auth',
             [
                 'value' => $value,
             ]
         );
         $body   = json_decode($return->getBody());
-
-        if ($body->success) {
+        if (isset($body->success) && $body->success == true) {
             return true;
         }
-
-        return false;
-    }
-
-    public function updateHTTPSRewritesStatus($zoneID, $value)
-    {
-        $return = $this->adapter->patch(
-            'zones/' . $zoneID . '/settings/automatic_https_rewrites',
-            [
-                'value' => $value,
-            ]
-        );
-        $body   = json_decode($return->getBody());
-
-        if ($body->success) {
-            return true;
-        }
-
         return false;
     }
 }
