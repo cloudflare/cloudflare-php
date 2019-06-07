@@ -1,0 +1,11 @@
+{
+    "success": true,
+    "errors": [],
+    "messages": [],
+    "result": {
+        "id": "security_level",
+        "value": "medium",
+        "editable": true,
+        "modified_on": "2014-01-01T05:20:00.12345Z"
+    }
+}
