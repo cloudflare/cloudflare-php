@@ -26,8 +26,8 @@ Each API call is provided via a similarly named function within various classes 
 - [ ] [Keyless SSL](https://blog.cloudflare.com/keyless-ssl-the-nitty-gritty-technical-details/)
 - [ ] [Origin CA](https://blog.cloudflare.com/universal-ssl-encryption-all-the-way-to-the-origin-for-free/)
 - [x] Crypto
-- [ ] Load Balancers
-- [ ] Firewall Settings
+- [x] Load Balancers
+- [x] Firewall Settings
 
 Note that this repository is currently under development, additional classes and endpoints being actively added.
 
