@@ -9,17 +9,26 @@
 namespace Cloudflare\API\Endpoints;
 
 use Cloudflare\API\Adapter\Adapter;
-use Cloudflare\API\Traits\BodyAccessorTrait;
 
 class DNS implements API
 {
-    use BodyAccessorTrait;
-
     private $adapter;
+    private $record_id = false;
 
     public function __construct(Adapter $adapter)
     {
         $this->adapter = $adapter;
+    }
+
+    /**
+     * Return the $record_id value. Could be a string or boolean false so
+     * no return type declaration can be made. Will be set by addRecord()
+     * on successful creation of a record.
+     * @return string|bool
+     */
+    public function getRecordID()
+    {
+        return $this->record_id;
     }
 
     /**
@@ -31,8 +40,6 @@ class DNS implements API
      * @param string $content
      * @param int $ttl
      * @param bool $proxied
-     * @param string $priority
-     * @param array $data
      * @return bool
      */
     public function addRecord(
@@ -41,9 +48,7 @@ class DNS implements API
         string $name,
         string $content,
         int $ttl = 0,
-        bool $proxied = true,
-        string $priority = '',
-        array $data = []
+        bool $proxied = true
     ): bool {
         $options = [
             'type' => $type,
@@ -56,19 +61,12 @@ class DNS implements API
             $options['ttl'] = $ttl;
         }
 
-        if (!empty($priority)) {
-            $options['priority'] = (int)$priority;
-        }
-        
-        if (!empty($data)) {
-            $options['data'] = $data;
-        }
+        $user = $this->adapter->post('zones/' . $zoneID . '/dns_records', [], $options);
 
-        $user = $this->adapter->post('zones/' . $zoneID . '/dns_records', $options);
+        $body = json_decode($user->getBody());
 
-        $this->body = json_decode($user->getBody());
-
-        if (isset($this->body->result->id)) {
+        if (isset($body->result->id)) {
+            $this->record_id = $body->result->id;
             return true;
         }
 
@@ -112,42 +110,32 @@ class DNS implements API
             $query['direction'] = $direction;
         }
 
-        $user = $this->adapter->get('zones/' . $zoneID . '/dns_records', $query);
-        $this->body = json_decode($user->getBody());
+        $user = $this->adapter->get('zones/' . $zoneID . '/dns_records', $query, []);
+        $body = json_decode($user->getBody());
 
-        return (object)['result' => $this->body->result, 'result_info' => $this->body->result_info];
+        return (object)['result' => $body->result, 'result_info' => $body->result_info];
     }
 
     public function getRecordDetails(string $zoneID, string $recordID): \stdClass
     {
-        $user = $this->adapter->get('zones/' . $zoneID . '/dns_records/' . $recordID);
-        $this->body = json_decode($user->getBody());
-        return $this->body->result;
-    }
-
-    public function getRecordID(string $zoneID, string $type = '', string $name = ''): string
-    {
-        $records = $this->listRecords($zoneID, $type, $name);
-        if (isset($records->result{0}->id)) {
-            return $records->result{0}->id;
-        }
-        return false;
+        $user = $this->adapter->get('zones/' . $zoneID . '/dns_records/' . $recordID, [], []);
+        $body = json_decode($user->getBody());
+        return $body->result;
     }
 
     public function updateRecordDetails(string $zoneID, string $recordID, array $details): \stdClass
     {
-        $response = $this->adapter->put('zones/' . $zoneID . '/dns_records/' . $recordID, $details);
-        $this->body = json_decode($response->getBody());
-        return $this->body;
+        $response = $this->adapter->put('zones/' . $zoneID . '/dns_records/' . $recordID, [], $details);
+        return json_decode($response->getBody());
     }
 
     public function deleteRecord(string $zoneID, string $recordID): bool
     {
-        $user = $this->adapter->delete('zones/' . $zoneID . '/dns_records/' . $recordID);
+        $user = $this->adapter->delete('zones/' . $zoneID . '/dns_records/' . $recordID, [], []);
 
-        $this->body = json_decode($user->getBody());
+        $body = json_decode($user->getBody());
 
-        if (isset($this->body->result->id)) {
+        if (isset($body->result->id)) {
             return true;
         }
 
