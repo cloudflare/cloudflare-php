@@ -81,4 +81,39 @@ class Firewall implements API
 
         return false;
     }
+
+    public function updateFirewallRule(
+        string $zoneID,
+        string $ruleID,
+        string $filterID,
+        string $expression,
+        string $action,
+        string $description = null,
+        bool $paused = true,
+        int $priority = null
+    ): \stdClass {
+        $rule = [
+            'id' => $ruleID,
+            'filter' => [
+                'id' => $filterID,
+                'expression' => $expression,
+                'paused' => false
+            ],
+            'action' => $action,
+            'paused' => $paused
+        ];
+
+        if ($description !== null) {
+            $rule['description'] = $description;
+        }
+
+        if ($priority !== null) {
+            $rule['priority'] = $priority;
+        }
+
+        $rule = $this->adapter->put('zones/' . $zoneID . '/firewall/rules/' . $ruleID, $rule);
+        $body = json_decode($rule->getBody());
+
+        return $body->result;
+    }
 }
