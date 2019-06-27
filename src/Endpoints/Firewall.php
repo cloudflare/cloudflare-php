@@ -28,7 +28,7 @@ class Firewall implements API
         string $expression,
         string $action,
         string $description = null,
-        bool $paused = true,
+        bool $paused = false,
         int $priority = null
     ): array {
         $rule = [
