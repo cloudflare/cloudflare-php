@@ -41,11 +41,11 @@ class Firewall implements API
         ];
 
         if ($description !== null) {
-            $options['description'] = $description;
+            $rule['description'] = $description;
         }
 
         if ($priority !== null) {
-            $options['priority'] = $priority;
+            $rule['priority'] = $priority;
         }
 
         return $this->createFirewallRules($zoneID, [$rule]);
