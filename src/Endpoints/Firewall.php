@@ -16,11 +16,17 @@ class Firewall implements API
     public function createFirewallRules(
         string $zoneID,
         array $rules
-    ): array {
+    ): bool {
         $query = $this->adapter->post('zones/' . $zoneID . '/firewall/rules', $rules);
         $body = json_decode($query->getBody());
 
-        return $body->result;
+        foreach ($body->result as $result) {
+            if (!isset($result->id)) {
+                return false;
+            }
+        }
+
+        return true;
     }
 
     public function createFirewallRule(
@@ -30,7 +36,7 @@ class Firewall implements API
         string $description = null,
         bool $paused = false,
         int $priority = null
-    ): array {
+    ): bool {
         $rule = [
             'filter' => [
                 'expression' => $expression,
