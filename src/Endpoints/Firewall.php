@@ -55,7 +55,7 @@ class Firewall implements API
         string $zoneID,
         int $page = 1,
         int $perPage = 50
-    ): array {
+    ): \stdClass {
         $query = [
             'page' => $page,
             'per_page' => $perPage,
@@ -64,7 +64,7 @@ class Firewall implements API
         $rules = $this->adapter->get('zones/' . $zoneID . '/firewall/rules', $query);
         $body = json_decode($rules->getBody());
 
-        return $body->result;
+        return (object)['result' => $body->result, 'result_info' => $body->result_info];
     }
 
     public function deleteFirewallRule(
