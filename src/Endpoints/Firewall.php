@@ -3,6 +3,7 @@
 namespace Cloudflare\API\Endpoints;
 
 use Cloudflare\API\Adapter\Adapter;
+use Cloudflare\API\Configurations\FirewallRuleOptions;
 
 class Firewall implements API
 {
@@ -32,19 +33,16 @@ class Firewall implements API
     public function createFirewallRule(
         string $zoneID,
         string $expression,
-        string $action,
+        FirewallRuleOptions $options,
         string $description = null,
-        bool $paused = false,
         int $priority = null
     ): bool {
-        $rule = [
+        $rule = array_merge([
             'filter' => [
                 'expression' => $expression,
                 'paused' => false
-            ],
-            'action' => $action,
-            'paused' => $paused
-        ];
+            ]
+        ], $options->getArray());
 
         if ($description !== null) {
             $rule['description'] = $description;
@@ -93,21 +91,18 @@ class Firewall implements API
         string $ruleID,
         string $filterID,
         string $expression,
-        string $action,
+        FirewallRuleOptions $options,
         string $description = null,
-        bool $paused = true,
         int $priority = null
     ): \stdClass {
-        $rule = [
+        $rule = array_merge([
             'id' => $ruleID,
             'filter' => [
                 'id' => $filterID,
                 'expression' => $expression,
                 'paused' => false
-            ],
-            'action' => $action,
-            'paused' => $paused
-        ];
+            ]
+        ], $options->getArray());
 
         if ($description !== null) {
             $rule['description'] = $description;
