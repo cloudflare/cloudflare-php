@@ -3,7 +3,7 @@ class ZoneDeleteTest extends TestCase
 {
     public function testDeleteTest()
     {
-        $response = $this->getPsr7JsonResponseForFixture('Endpoints/deleteTest.json');
+        $response = $this->getPsr7JsonResponseForFixture('Endpoints/deleteZoneTest.json');
         $mock = $this->getMockBuilder(\Cloudflare\API\Adapter\Adapter::class)->getMock();
         $mock->method('delete')->willReturn($response);
         $mock->expects($this->once())
