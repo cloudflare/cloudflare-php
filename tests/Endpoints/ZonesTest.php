@@ -8,7 +8,7 @@
  */
 class ZonesTest extends TestCase
 {
-    private function testAddZone()
+    public function testAddZone()
     {
         $response = $this->getPsr7JsonResponseForFixture('Endpoints/addZone.json');
 
@@ -69,7 +69,7 @@ class ZonesTest extends TestCase
         $this->assertEquals('023e105f4ecef8ad9ca31a8372d0c353', $zones->getBody()->result->id);
     }
 
-    private function testListZones()
+    public function testListZones()
     {
         $response = $this->getPsr7JsonResponseForFixture('Endpoints/listZones.json');
 
@@ -262,30 +262,5 @@ class ZonesTest extends TestCase
         $this->assertTrue($result);
         $this->assertEquals('023e105f4ecef8ad9ca31a8372d0c353', $zones->getBody()->result->id);
     }
-
-    private function testDeleteTest()
-    {
-        $response = $this->getPsr7JsonResponseForFixture('Endpoints/deleteTest.json');
-
-        $mock = $this->getMockBuilder(\Cloudflare\API\Adapter\Adapter::class)->getMock();
-        $mock->method('delete')->willReturn($response);
-
-        $mock->expects($this->once())
-            ->method('delete')
-            ->with(
-                $this->equalTo('zones/023e105f4ecef8ad9ca31a8372d0c353')
-            );
-
-        $zones = new \Cloudflare\API\Endpoints\Zones($mock);
-        $result = $zones->deleteZone('023e105f4ecef8ad9ca31a8372d0c353');
-
-        $this->assertTrue($result);
-        $this->assertEquals('9a7806061c88ada191ed06f989cc3dac', $zones->getBody()->result->id);
-    }    
-	
-	public function testAddListDeleteZone(){
-		$this->testAddZone();
-		$this->testListZones();
-		$this->testDeleteTest();
-	}
+	   
 }
