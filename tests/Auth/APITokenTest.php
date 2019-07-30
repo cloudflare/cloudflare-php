@@ -1,9 +1,9 @@
 <?php
 
 /**
- * User: junade
- * Date: 13/01/2017
- * Time: 17:15
+ * User: czPechy
+ * Date: 30/07/2018
+ * Time: 23:25
  */
 class APITokenTest extends TestCase
 {
