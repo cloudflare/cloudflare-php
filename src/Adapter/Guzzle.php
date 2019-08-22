@@ -85,7 +85,9 @@ class Guzzle implements Adapter
             ($method === 'get' ? 'query' : 'json') => $data,
         ]);
 
-        $this->checkError($response);
+        if (strpos($uri, 'export') === false) {
+            $this->checkError($response);
+        }
 
         return $response;
     }
