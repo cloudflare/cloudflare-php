@@ -32,6 +32,8 @@ class SSL implements API
     }
 
     /**
+     * @SuppressWarnings(PHPMD.BooleanArgumentFlag)
+     *
      * Get SSL Verification Info for a Zone
      *
      * @param string $zoneID The ID of the zone
