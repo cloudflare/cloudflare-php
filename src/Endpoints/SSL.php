@@ -150,4 +150,27 @@ class SSL implements API
         }
         return false;
     }
+
+    /**
+     * Update the SSL certificate pack validation method
+     *
+     * @param string $zoneID The ID of the zone
+     * @param string $certPackUUID The certificate pack UUID
+     * @param string $validationMethod The verification method
+     * @return bool
+     */
+    public function updateSSLCertificatePackValidationMethod(string $zoneID, string $certPackUUID, string $validationMethod)
+    {
+        $return = $this->adapter->patch(
+            'zones/' . $zoneID . '/ssl/verification/' . $certPackUUID,
+            [
+                'validation_method' => $validationMethod,
+            ]
+        );
+        $body = json_decode($return->getBody());
+        if (isset($body->success) && $body->success == true) {
+            return true;
+        }
+        return false;
+    }
 }

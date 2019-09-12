@@ -138,4 +138,24 @@ class SSLTest extends TestCase
 
         $this->assertTrue($result);
     }
+
+    public function testUpdateSSLCertificatePackValidationMethod()
+    {
+        $response = $this->getPsr7JsonResponseForFixture('Endpoints/updateSSLCertificatePackValidationMethod.json');
+
+        $mock = $this->getMockBuilder(\Cloudflare\API\Adapter\Adapter::class)->getMock();
+        $mock->method('patch')->willReturn($response);
+
+        $mock->expects($this->once())
+            ->method('patch')
+            ->with(
+                $this->equalTo('zones/c2547eb745079dac9320b638f5e225cf483cc5cfdda41/ssl/verification/a77f8bd7-3b47-46b4-a6f1-75cf98109948'),
+                $this->equalTo(['validation_method' => 'cname'])
+            );
+
+        $sslMock = new \Cloudflare\API\Endpoints\SSL($mock);
+        $result = $sslMock->updateSSLCertificatePackValidationMethod('c2547eb745079dac9320b638f5e225cf483cc5cfdda41', 'a77f8bd7-3b47-46b4-a6f1-75cf98109948', 'cname');
+
+        $this->assertTrue($result);
+    }
 }
