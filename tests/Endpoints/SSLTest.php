@@ -150,11 +150,11 @@ class SSLTest extends TestCase
             ->method('patch')
             ->with(
                 $this->equalTo('zones/c2547eb745079dac9320b638f5e225cf483cc5cfdda41/ssl/verification/a77f8bd7-3b47-46b4-a6f1-75cf98109948'),
-                $this->equalTo(['validation_method' => 'cname'])
+                $this->equalTo(['validation_method' => 'txt'])
             );
 
         $sslMock = new \Cloudflare\API\Endpoints\SSL($mock);
-        $result = $sslMock->updateSSLCertificatePackValidationMethod('c2547eb745079dac9320b638f5e225cf483cc5cfdda41', 'a77f8bd7-3b47-46b4-a6f1-75cf98109948', 'cname');
+        $result = $sslMock->updateSSLCertificatePackValidationMethod('c2547eb745079dac9320b638f5e225cf483cc5cfdda41', 'a77f8bd7-3b47-46b4-a6f1-75cf98109948', 'txt');
 
         $this->assertTrue($result);
     }

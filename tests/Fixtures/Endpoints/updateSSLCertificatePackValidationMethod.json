@@ -2,5 +2,8 @@
   "success": true,
   "errors": [],
   "messages": [],
-  "result": "off"
+  "result": {
+    "validation_method": "txt",
+    "status": "pending_validation"
+  }
 }
