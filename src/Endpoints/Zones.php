@@ -246,5 +246,5 @@ class Zones implements API
         }
 
         return false;
-    }    
+    }
 }
