@@ -262,5 +262,4 @@ class ZonesTest extends TestCase
         $this->assertTrue($result);
         $this->assertEquals('023e105f4ecef8ad9ca31a8372d0c353', $zones->getBody()->result->id);
     }
-	   
 }
