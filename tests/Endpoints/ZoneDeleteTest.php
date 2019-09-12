@@ -15,5 +15,5 @@ class ZoneDeleteTest extends TestCase
         $result = $zones->deleteZone('023e105f4ecef8ad9ca31a8372d0c353');
         $this->assertTrue($result);
         $this->assertEquals('9a7806061c88ada191ed06f989cc3dac', $zones->getBody()->result->id);
-    } 
+    }
 }
