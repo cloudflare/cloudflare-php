@@ -233,4 +233,16 @@ class Zones implements API
 
         return false;
     }
+
+    /**
+     * @param string $zoneID
+     * @return \stdClass
+     */
+    public function deleteZone(string $zoneID): \stdClass
+    {
+        #zone:edit - permission needed
+        $zone = $this->adapter->delete('zones/'.$zoneID);
+        $this->body = json_decode($zone->getBody());
+        return $this->body;
+    }
 }
