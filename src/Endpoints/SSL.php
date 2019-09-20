@@ -32,16 +32,23 @@ class SSL implements API
     }
 
     /**
+     * @SuppressWarnings(PHPMD.BooleanArgumentFlag)
+     *
      * Get SSL Verification Info for a Zone
      *
      * @param string $zoneID The ID of the zone
+     * @param bool $retry Immediately retry SSL Verification
      * @return array|false
      */
-    public function getSSLVerificationStatus(string $zoneID)
+    public function getSSLVerificationStatus(string $zoneID, bool $retry = false)
     {
         $return = $this->adapter->get(
-            'zones/' . $zoneID . '/ssl/verification'
+            'zones/' . $zoneID . '/ssl/verification',
+            [
+                'retry' => $retry
+            ]
         );
+
         $body = json_decode($return->getBody());
         if (isset($body->result)) {
             return $body;
