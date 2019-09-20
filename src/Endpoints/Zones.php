@@ -233,4 +233,18 @@ class Zones implements API
 
         return false;
     }
+
+    /**
+     * Delete Zone
+     */
+    public function deleteZone(string $identifier): bool
+    {
+        $user = $this->adapter->delete('zones/' . $identifier);
+        $this->body = json_decode($user->getBody());
+        if (isset($this->body->result->id)) {
+            return true;
+        }
+
+        return false;
+    }
 }
