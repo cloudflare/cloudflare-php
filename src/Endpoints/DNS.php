@@ -128,8 +128,8 @@ class DNS implements API
     public function getRecordID(string $zoneID, string $type = '', string $name = ''): string
     {
         $records = $this->listRecords($zoneID, $type, $name);
-        if (isset($records->result{0}->id)) {
-            return $records->result{0}->id;
+        if (isset($records->result[0]->id)) {
+            return $records->result[0]->id;
         }
         return false;
     }
