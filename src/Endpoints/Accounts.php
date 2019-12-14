@@ -58,4 +58,18 @@ class Accounts implements API
 
         return $this->body->result;
     }
+
+    public function lockDomain(string $accountID, string $domainName): array
+    {
+        $response = $this->adapter->put('accounts/' . $accountID . '/registrar/domains' . $domainName, ["locked" => true]);
+        $this->body = json_decode($response->getBody());
+        return $this->body;
+    }
+
+    public function unlockDomain(string $accountID, string $domainName): array
+    {
+        $response = $this->adapter->put('accounts/' . $accountID . '/registrar/domains' . $domainName, ["locked" => false]);
+        $this->body = json_decode($response->getBody());
+        return $this->body;
+    }
 }
