@@ -61,7 +61,7 @@ class ZonesTest extends TestCase
             ->with(
                 $this->equalTo('zones/c2547eb745079dac9320b638f5e225cf483cc5cfdda41'),
                 $this->equalTo([
-                    'pause' => true,
+                    'paused' => true,
                 ])
             );
 
