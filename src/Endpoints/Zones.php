@@ -58,12 +58,9 @@ class Zones implements API
         return false;
     }
 
-    public function pause(string $zoneID, bool $paused = true): bool
+    public function pause(string $zoneID): bool
     {
-        $options = [
-            'paused' => $paused,
-        ];
-        $user = $this->adapter->patch('zones/' . $zoneID, $options);
+        $user = $this->adapter->patch('zones/' . $zoneID, ['paused' => true]);
         $this->body = json_decode($user->getBody());
 
         if (isset($this->body->result->id)) {
@@ -72,7 +69,19 @@ class Zones implements API
 
         return false;
     }
-  
+
+    public function unpause(string $zoneID): bool
+    {
+        $user = $this->adapter->patch('zones/' . $zoneID, ['paused' => false]);
+        $this->body = json_decode($user->getBody());
+
+        if (isset($this->body->result->id)) {
+            return true;
+        }
+
+        return false;
+    }
+
     public function getZoneById(
         string $zoneId
     ): \stdClass {
