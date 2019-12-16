@@ -66,7 +66,7 @@ class ZonesTest extends TestCase
             );
 
         $zones = new \Cloudflare\API\Endpoints\Zones($mock);
-        $result = $zones->pause('c2547eb745079dac9320b638f5e225cf483cc5cfdda41', true);
+        $result = $zones->pause('c2547eb745079dac9320b638f5e225cf483cc5cfdda41');
 
         $this->assertTrue($result);
         $this->assertEquals('023e105f4ecef8ad9ca31a8372d0c353', $zones->getBody()->result->id);
