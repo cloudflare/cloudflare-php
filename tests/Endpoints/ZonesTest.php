@@ -125,6 +125,25 @@ class ZonesTest extends TestCase
         $this->assertEquals('023e105f4ecef8ad9ca31a8372d0c353', $zones->getBody()->result[0]->id);
     }
 
+    public function testGetZoneByID()
+    {
+        $response = $this->getPsr7JsonResponseForFixture('Endpoints/getZoneById.json');
+
+        $mock = $this->getMockBuilder(\Cloudflare\API\Adapter\Adapter::class)->getMock();
+        $mock->method('get')->willReturn($response);
+
+        $mock->expects($this->once())
+             ->method('get')
+             ->with($this->equalTo('zones/023e105f4ecef8ad9ca31a8372d0c353'));
+
+        $zones = new \Cloudflare\API\Endpoints\Zones($mock);
+        $result = $zones->getZoneById('023e105f4ecef8ad9ca31a8372d0c353');
+
+        $this->assertInstanceOf(\stdClass::class, $result);
+        $this->assertEquals('023e105f4ecef8ad9ca31a8372d0c353', $zones->getBody()->result->id);
+        $this->assertEquals('example.com', $zones->getBody()->result->name);
+    }
+
     public function testGetZoneID()
     {
         $response = $this->getPsr7JsonResponseForFixture('Endpoints/getZoneId.json');

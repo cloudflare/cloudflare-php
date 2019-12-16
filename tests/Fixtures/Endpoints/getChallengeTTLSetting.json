@@ -1,0 +1,11 @@
+{
+    "success": true,
+    "errors": [],
+    "messages": [],
+    "result": {
+        "id": "challenge_ttl",
+        "value": 1800,
+        "editable": true,
+        "modified_on": "2014-01-01T05:20:00.12345Z"
+    }
+}

@@ -72,6 +72,15 @@ class Zones implements API
 
         return false;
     }
+  
+    public function getZoneById(
+        string $zoneId
+    ): \stdClass {
+        $user = $this->adapter->get('zones/' . $zoneId);
+        $this->body = json_decode($user->getBody());
+
+        return (object)['result' => $this->body->result];
+    }
 
     public function listZones(
         string $name = '',
@@ -159,6 +168,38 @@ class Zones implements API
         return false;
     }
 
+    /**
+     * Return caching level settings
+     * @param string $zoneID
+     * @return string
+     */
+    public function getCachingLevel(string $zoneID): string
+    {
+        $response = $this->adapter->get('zones/' . $zoneID . '/settings/cache_level');
+
+        $this->body = json_decode($response->getBody());
+
+        return $this->body->result->value;
+    }
+
+    /**
+     * Change caching level settings
+     * @param string $zoneID
+     * @param string $level (aggressive | basic | simplified)
+     * @return bool
+     */
+    public function setCachingLevel(string $zoneID, string $level = 'aggressive'): bool
+    {
+        $response = $this->adapter->patch('zones/' . $zoneID . '/settings/cache_level', ['value' => $level]);
+
+        $this->body = json_decode($response->getBody());
+
+        if ($this->body->success) {
+            return true;
+        }
+
+        return false;
+    }
 
     /**
      * Purge Everything
@@ -201,6 +242,20 @@ class Zones implements API
 
         $this->body = json_decode($user->getBody());
 
+        if (isset($this->body->result->id)) {
+            return true;
+        }
+
+        return false;
+    }
+
+    /**
+     * Delete Zone
+     */
+    public function deleteZone(string $identifier): bool
+    {
+        $user = $this->adapter->delete('zones/' . $identifier);
+        $this->body = json_decode($user->getBody());
         if (isset($this->body->result->id)) {
             return true;
         }

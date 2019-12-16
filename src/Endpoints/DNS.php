@@ -125,6 +125,15 @@ class DNS implements API
         return $this->body->result;
     }
 
+    public function getRecordID(string $zoneID, string $type = '', string $name = ''): string
+    {
+        $records = $this->listRecords($zoneID, $type, $name);
+        if (isset($records->result{0}->id)) {
+            return $records->result{0}->id;
+        }
+        return false;
+    }
+
     public function updateRecordDetails(string $zoneID, string $recordID, array $details): \stdClass
     {
         $response = $this->adapter->put('zones/' . $zoneID . '/dns_records/' . $recordID, $details);

@@ -140,10 +140,10 @@ class PageRulesActions implements Configurations
         ]);
     }
 
-    public function setHostHeaderOverride(bool $active)
+    public function setHostHeaderOverride(string $value)
     {
         $this->addConfigurationOption('host_header_override', [
-            'value' => $this->getBoolAsOnOrOff($active)
+            'value' => $value
         ]);
     }
 
@@ -198,7 +198,7 @@ class PageRulesActions implements Configurations
         ]);
     }
 
-    public function setResolveOverride(bool $value)
+    public function setResolveOverride(string $value)
     {
         $this->addConfigurationOption('resolve_override', [
             'value' => $value
