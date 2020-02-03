@@ -109,6 +109,37 @@ class PageRules implements API
         return $this->body->result;
     }
 
+    public function editPageRule(
+        string $zoneID,
+        string $ruleID,
+        PageRulesTargets $target,
+        PageRulesActions $actions,
+        bool $active = null,
+        int $priority = null
+    ): bool {
+        $options = [];
+        $options['targets'] = $target->getArray();
+        $options['actions'] = $actions->getArray();
+
+        if ($active !== null) {
+            $options['status'] = $active == true ? 'active' : 'disabled';
+        }
+
+        if ($priority !== null) {
+            $options['priority'] = $priority;
+        }
+
+        $query = $this->adapter->put('zones/' . $zoneID . '/pagerules/' . $ruleID, $options);
+
+        $this->body = json_decode($query->getBody());
+
+        if (isset($this->body->result->id)) {
+            return true;
+        }
+
+        return false;
+    }
+
     public function updatePageRule(
         string $zoneID,
         string $ruleID,
