@@ -1,0 +1,20 @@
+{
+  "result": [
+    {
+      "id": "970b10321e3f4adda674c912b5f76591",
+      "paused": false,
+      "description": "Foobar",
+      "action": "block",
+      "filter": {
+        "id": "70f39827184d487e97cc286b960f4cc3",
+        "expression": "http.cookie eq \"foobar\"",
+        "paused": false
+      },
+      "created_on": "2019-07-05T15:53:15Z",
+      "modified_on": "2019-07-05T15:53:15Z"
+    }
+  ],
+  "success": true,
+  "errors": [],
+  "messages": []
+}
