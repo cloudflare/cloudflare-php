@@ -33,6 +33,13 @@ class PageRulesActions implements Configurations
         ]);
     }
 
+    public function setOriginCacheControl(bool $active)
+    {
+        $this->addConfigurationOption('explicit_cache_control', [
+            'value' => $this->getBoolAsOnOrOff($active)
+        ]);
+    }
+
     public function setBrowserIntegrityCheck(bool $active)
     {
         $this->addConfigurationOption('browser_check', [
