@@ -12,6 +12,7 @@ The Cloudflare API can be found [here](https://api.cloudflare.com/).
 Each API call is provided via a similarly named function within various classes in the **Cloudflare\API\Endpoints** namespace:
 
 - [x] [DNS Records](https://www.cloudflare.com/dns/)
+- [x] [DNS Analytics](https://api.cloudflare.com/#dns-analytics-table)
 - [x] Zones
 - [x] User Administration (partial)
 - [x] [Cloudflare IPs](https://www.cloudflare.com/ips/)
@@ -37,7 +38,7 @@ Note that this repository is currently under development, additional classes and
 $key     = new Cloudflare\API\Auth\APIKey('user@example.com', 'apiKey');
 $adapter = new Cloudflare\API\Adapter\Guzzle($key);
 $user    = new Cloudflare\API\Endpoints\User($adapter);
-    
+
 echo $user->getUserID();
 ```
 
@@ -45,6 +46,6 @@ echo $user->getUserID();
 
 We welcome community contribution to this repository. [CONTRIBUTING.md](CONTRIBUTING.md) will help you start contributing.
 
-## Licensing 
+## Licensing
 
 Licensed under the 3-clause BSD license. See the [LICENSE](LICENSE) file for details.
