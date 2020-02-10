@@ -51,19 +51,11 @@ class DNSAnalytics implements API
             'until' => $until
         ];
 
-        $report = $this->adapter->get(
-            'zones/' . $zoneID . '/dns_analytics/report',
-            $options
-        );
+        $endpoint = 'zones/' . $zoneID . '/dns_analytics/report';
+
+        $report = $this->adapter->get($endpoint, $options);
 
         $this->body = json_decode($report->getBody());
-
-        if (!$this->body->success) {
-            throw new EndpointException(
-                @$this->body->errors[0] ?:
-                "An error occured during report getting."
-            );
-        }
 
         return $this->body->result->data;
     }
