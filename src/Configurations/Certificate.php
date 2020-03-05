@@ -13,8 +13,8 @@ class Certificate implements Configurations
 
     /**
      * Array of hostnames or wildcard names (e.g., *.example.com) bound to the certificate
-     * Example:
-     * @param array $hostnames ["example.com", "foo.example.com"]
+     * Example: $hostnames = ["example.com", "foo.example.com"]
+     * @param array $hostnames
      */
     public function setHostnames(array $hostnames)
     {
