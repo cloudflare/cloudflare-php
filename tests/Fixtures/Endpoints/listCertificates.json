@@ -1,0 +1,19 @@
+{
+  "success": true,
+  "errors": [],
+  "messages": [],
+  "result": [
+    {
+      "id": "328578533902268680212849205732770752308931942346",
+      "certificate": "some-cert-data",
+      "hostnames": [
+        "example.com",
+        "*.example.com"
+      ],
+      "expires_on": "2014-01-01T05:20:00.12345Z",
+      "request_type": "origin-rsa",
+      "requested_validity": 5475,
+      "csr": "some-csr-data"
+    }
+  ]
+}
