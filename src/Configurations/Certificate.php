@@ -4,6 +4,10 @@ namespace Cloudflare\API\Configurations;
 
 class Certificate implements Configurations
 {
+    const ORIGIN_RSA = 'origin-rsa';
+    const ORIGIN_ECC = 'origin-ecc';
+    const KEYLESS_CERTIFICATE = 'keyless-certificate';
+
     private $config = [];
 
     public function getArray(): array
