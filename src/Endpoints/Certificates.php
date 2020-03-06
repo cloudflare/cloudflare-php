@@ -40,10 +40,10 @@ class Certificates implements API
      */
     public function getCertificate(string $certificateID, string $zoneID)
     {
-        $certificates = $this->adapter->get('certificates/' . $certificateID, ['zone_id' => $zoneID]);
+        $certificates = $this->adapter->get('certificates/'.$certificateID, ['zone_id' => $zoneID]);
         $this->body = json_decode($certificates->getBody());
 
-        return $this->body->result;
+        return (object)['result' => $this->body->result];
     }
 
     /**
@@ -53,9 +53,9 @@ class Certificates implements API
      * @param string $zoneID
      * @return bool
      */
-    public function revokeCertificate(string $certificateID, string $zoneID)
+    public function revokeCertificate(string $certificateID, string $zoneID): bool
     {
-        $certificates = $this->adapter->delete('certificates/' . $certificateID, ['zone_id' => $zoneID]);
+        $certificates = $this->adapter->delete('certificates/'.$certificateID, ['zone_id' => $zoneID]);
         $this->body = json_decode($certificates->getBody());
 
         if (isset($this->body->result->id)) {
@@ -73,7 +73,7 @@ class Certificates implements API
      */
     public function createCertificate(CertificateConfig $config): bool
     {
-        $certificate = $this->adapter->post('certificates', $config);
+        $certificate = $this->adapter->post('certificates', $config->getArray());
 
         $this->body = json_decode($certificate->getBody());
 
