@@ -1,0 +1,18 @@
+{
+  "success": true,
+  "errors": [],
+  "messages": [],
+  "result": {
+    "id": "security_header",
+    "value": {
+      "strict_transport_security": {
+        "enabled": true,
+        "max_age": 86400,
+        "include_subdomains": false,
+        "nosniff": true
+      }
+    },
+    "editable": true,
+    "modified_on": "2014-01-01T05:20:00.12345Z"
+  }
+}

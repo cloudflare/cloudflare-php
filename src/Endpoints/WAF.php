@@ -21,6 +21,20 @@ class WAF implements API
     {
         $this->adapter = $adapter;
     }
+    
+    public function getWAFSetting(string $zoneID)
+    {
+        $return = $this->adapter->get(
+            'zones/' . $zoneID . '/settings/waf'
+        );
+        $body   = json_decode($return->getBody());
+
+        if (isset($body->result)) {
+            return $body->result->value;
+        }
+
+        return false;
+    }
 
     public function getPackages(
         string $zoneID,
@@ -98,6 +112,20 @@ class WAF implements API
         $this->body = json_decode($user->getBody());
 
         return $this->body->result;
+    }
+    
+    public function updateWAFSetting(string $zoneID, string $value)
+    {
+        $waf = $this->adapter->patch('zones/' . $zoneID . '/settings/waf',
+            ['value' => $value]
+        );
+        $body = json_decode($waf->getBody());
+
+        if (isset($body->success)) {
+            return $body->success;
+        }
+
+        return false;
     }
 
     public function updateRule(

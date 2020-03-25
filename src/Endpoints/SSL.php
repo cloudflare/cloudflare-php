@@ -91,6 +91,18 @@ class SSL implements API
         }
         return false;
     }
+    
+    public function getHSTSSetting(string $zoneID)
+    {
+        $return = $this->adapter->get(
+            'zones/' . $zoneID . '/settings/security_header'
+        );
+        $body = json_decode($return->getBody());
+        if (isset($body->result)) {
+            return $body->result->value;
+        }
+        return false;
+    }
 
     /**
      * Update the SSL setting for the zone
@@ -177,6 +189,33 @@ class SSL implements API
         $body = json_decode($return->getBody());
         if (isset($body->success) && $body->success == true) {
             return true;
+        }
+        return false;
+    }
+    
+    public function updateHSTSSetting(
+            string $zoneID,
+            bool $enabled,
+            int $max_age = 86400,
+            bool $subdomains = true,
+            bool $preload = true
+        ) {
+        $return = $this->adapter->patch(
+            'zones/' . $zoneID . '/settings/security_header',
+            [
+                'value' => [
+                    'strict_transport_security' => [
+                        'enabled' => $enabled,
+                        'max_age' => $max_age,
+                        'include_subdomains' => $subdomains,
+                        'nosniff' => $preload
+                    ]
+                ]
+            ]
+        );
+        $body = json_decode($return->getBody());
+        if (isset($body->success)) {
+            return $body->success;
         }
         return false;
     }
