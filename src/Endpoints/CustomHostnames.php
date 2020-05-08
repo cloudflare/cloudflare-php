@@ -30,15 +30,17 @@ class CustomHostnames implements API
      * @param string $hostname
      * @param string $sslMethod
      * @param string $sslType
+     * @param array $sslSettings
      * @return \stdClass
      */
-    public function addHostname(string $zoneID, string $hostname, string $sslMethod = 'http', string $sslType = 'dv'): \stdClass
+    public function addHostname(string $zoneID, string $hostname, string $sslMethod = 'http', string $sslType = 'dv', array $sslSettings = []): \stdClass
     {
         $options = [
             'hostname' => $hostname,
             'ssl' => [
                 'method' => $sslMethod,
-                'type' => $sslType
+                'type' => $sslType,
+                'settings' => $sslSettings
             ]
         ];
 
@@ -118,7 +120,7 @@ class CustomHostnames implements API
      * @param string $sslType
      * @return \stdClass
      */
-    public function updateHostname(string $zoneID, string $hostnameID, string $sslMethod = '', string $sslType = ''): \stdClass
+    public function updateHostname(string $zoneID, string $hostnameID, string $sslMethod = '', string $sslType = '', array $sslSettings = []): \stdClass
     {
         $query = [];
 
@@ -128,6 +130,10 @@ class CustomHostnames implements API
 
         if (!empty($sslType)) {
             $query['type'] = $sslType;
+        }
+
+        if (!empty($sslSettings)) {
+            $query['settings'] = $sslSettings;
         }
 
         $options = [
