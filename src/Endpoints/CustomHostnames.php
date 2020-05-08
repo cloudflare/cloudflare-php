@@ -33,7 +33,7 @@ class CustomHostnames implements API
      * @param array $sslSettings
      * @return \stdClass
      */
-    public function addHostname(string $zoneID, string $hostname, string $sslMethod = 'http', string $sslType = 'dv', array $sslSettings = []): \stdClass
+    public function addHostname(string $zoneID, string $hostname, string $sslMethod = 'http', string $sslType = 'dv', array $sslSettings = [], string $customOriginServer = ''): \stdClass
     {
         $options = [
             'hostname' => $hostname,
@@ -43,6 +43,10 @@ class CustomHostnames implements API
                 'settings' => $sslSettings
             ]
         ];
+
+        if (!empty($customOriginServer)) {
+            $options['custom_origin_server'] = $customOriginServer;
+        }
 
         $zone = $this->adapter->post('zones/'.$zoneID.'/custom_hostnames', $options);
         $this->body = json_decode($zone->getBody());
@@ -120,7 +124,7 @@ class CustomHostnames implements API
      * @param string $sslType
      * @return \stdClass
      */
-    public function updateHostname(string $zoneID, string $hostnameID, string $sslMethod = '', string $sslType = '', array $sslSettings = []): \stdClass
+    public function updateHostname(string $zoneID, string $hostnameID, string $sslMethod = '', string $sslType = '', array $sslSettings = [], string $customOriginServer = ''): \stdClass
     {
         $query = [];
 
@@ -139,6 +143,10 @@ class CustomHostnames implements API
         $options = [
             'ssl' => $query
         ];
+
+        if (!empty($customOriginServer)) {
+            $options['custom_origin_server'] = $customOriginServer;
+        }
 
         $zone = $this->adapter->patch('zones/'.$zoneID.'/custom_hostnames/'.$hostnameID, $options);
         $this->body = json_decode($zone->getBody());
