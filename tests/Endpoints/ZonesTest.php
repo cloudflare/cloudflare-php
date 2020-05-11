@@ -197,7 +197,7 @@ class ZonesTest extends TestCase
         $mock->method('delete')->willReturn($response);
 
         $mock->expects($this->once())
-            ->method('delete')
+            ->method('post')
             ->with(
                 $this->equalTo('zones/c2547eb745079dac9320b638f5e225cf483cc5cfdda41/purge_cache'),
                 $this->equalTo(['purge_everything' => true])
@@ -218,7 +218,7 @@ class ZonesTest extends TestCase
         $mock->method('delete')->willReturn($response);
 
         $mock->expects($this->once())
-            ->method('delete')
+            ->method('post')
             ->with(
                 $this->equalTo('zones/c2547eb745079dac9320b638f5e225cf483cc5cfdda41/purge_cache'),
                 $this->equalTo(
@@ -245,7 +245,7 @@ class ZonesTest extends TestCase
         $mock->method('delete')->willReturn($response);
 
         $mock->expects($this->once())
-            ->method('delete')
+            ->method('post')
             ->with(
                 $this->equalTo('zones/c2547eb745079dac9320b638f5e225cf483cc5cfdda41/purge_cache'),
                 $this->equalTo(['files' => [
