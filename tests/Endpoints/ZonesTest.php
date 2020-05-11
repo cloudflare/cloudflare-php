@@ -194,7 +194,7 @@ class ZonesTest extends TestCase
         $response = $this->getPsr7JsonResponseForFixture('Endpoints/cachePurgeEverything.json');
 
         $mock = $this->getMockBuilder(\Cloudflare\API\Adapter\Adapter::class)->getMock();
-        $mock->method('delete')->willReturn($response);
+        $mock->method('post')->willReturn($response);
 
         $mock->expects($this->once())
             ->method('post')
@@ -215,7 +215,7 @@ class ZonesTest extends TestCase
         $response = $this->getPsr7JsonResponseForFixture('Endpoints/cachePurgeHost.json');
 
         $mock = $this->getMockBuilder(\Cloudflare\API\Adapter\Adapter::class)->getMock();
-        $mock->method('delete')->willReturn($response);
+        $mock->method('post')->willReturn($response);
 
         $mock->expects($this->once())
             ->method('post')
@@ -242,7 +242,7 @@ class ZonesTest extends TestCase
         $response = $this->getPsr7JsonResponseForFixture('Endpoints/cachePurge.json');
 
         $mock = $this->getMockBuilder(\Cloudflare\API\Adapter\Adapter::class)->getMock();
-        $mock->method('delete')->willReturn($response);
+        $mock->method('post')->willReturn($response);
 
         $mock->expects($this->once())
             ->method('post')
