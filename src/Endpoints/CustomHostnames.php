@@ -31,9 +31,11 @@ class CustomHostnames implements API
      * @param string $sslMethod
      * @param string $sslType
      * @param array $sslSettings
+     * @param string $customOriginServer
+     * @param bool $wildcard
      * @return \stdClass
      */
-    public function addHostname(string $zoneID, string $hostname, string $sslMethod = 'http', string $sslType = 'dv', array $sslSettings = [], string $customOriginServer = ''): \stdClass
+    public function addHostname(string $zoneID, string $hostname, string $sslMethod = 'http', string $sslType = 'dv', array $sslSettings = [], string $customOriginServer = '', bool $wildcard = false): \stdClass
     {
         $options = [
             'hostname' => $hostname,
@@ -41,7 +43,8 @@ class CustomHostnames implements API
                 'method' => $sslMethod,
                 'type' => $sslType,
                 'settings' => $sslSettings
-            ]
+            ],
+            'wildcard' => $wildcard,
         ];
 
         if (!empty($customOriginServer)) {
