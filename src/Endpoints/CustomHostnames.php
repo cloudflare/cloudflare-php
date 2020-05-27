@@ -143,9 +143,11 @@ class CustomHostnames implements API
             $query['settings'] = $sslSettings;
         }
 
-        $options = [
-            'ssl' => $query
-        ];
+        if (!empty($query)) {
+            $options = [
+                'ssl' => $query
+            ];
+        }
 
         if (!empty($customOriginServer)) {
             $options['custom_origin_server'] = $customOriginServer;
