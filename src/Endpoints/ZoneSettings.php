@@ -106,6 +106,20 @@ class ZoneSettings implements API
         return false;
     }
 
+    public function getIpv6Setting($zoneID)
+    {
+        $return = $this->adapter->get(
+            'zones/' . $zoneID . '/settings/ipv6'
+        );
+        $body   = json_decode($return->getBody());
+
+        if ($body->success) {
+            return $body->result->value;
+        }
+
+        return false;
+    }
+    
     public function updateMinifySetting($zoneID, $html, $css, $javascript)
     {
         $return = $this->adapter->patch(
@@ -199,6 +213,23 @@ class ZoneSettings implements API
     {
         $return = $this->adapter->patch(
             'zones/' . $zoneID . '/settings/server_side_exclude',
+            [
+                'value' => $value
+            ]
+        );
+        $body = json_decode($return->getBody());
+
+        if ($body->success) {
+            return $body->result->value;
+        }
+
+        return false;
+    }
+    
+    public function updateIpv6Setting($zoneID, $value)
+    {
+        $return = $this->adapter->patch(
+            'zones/' . $zoneID . '/settings/ipv6',
             [
                 'value' => $value
             ]
