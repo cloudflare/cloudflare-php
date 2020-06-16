@@ -128,6 +128,35 @@ class Zones implements API
         return (object)['result' => $this->body->result, 'result_info' => $this->body->result_info];
     }
 
+    public function listOrganizationZones(
+        string $organizationID = '',
+        string $status = '',
+        int $page = 1,
+        int $perPage = 500,
+        string $order = '',
+        string $direction = ''
+    ): \stdClass {
+        $query = [
+            'page' => $page,
+            'per_page' => $perPage,
+            'account.id' => $organizationID
+        ];
+
+        if (!empty($status)) {
+            $query['status'] = $status;
+        }
+
+        if (!empty($order)) {
+            $query['order'] = $order;
+        }
+
+        $user = $this->adapter->get('zones', $query);
+        $this->body = json_decode($user->getBody());
+
+        return (object)['result' => $this->body->result, 'result_info' => $this->body->result_info];
+    }
+
+
     public function getZoneID(string $name = ''): string
     {
         $zones = $this->listZones($name);
