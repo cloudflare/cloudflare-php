@@ -56,7 +56,7 @@ class DNS implements API
             $options['ttl'] = $ttl;
         }
 
-        if (!empty($priority)) {
+        if (is_numeric($priority)) {
             $options['priority'] = (int)$priority;
         }
         
