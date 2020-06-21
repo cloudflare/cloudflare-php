@@ -194,10 +194,10 @@ class ZonesTest extends TestCase
         $response = $this->getPsr7JsonResponseForFixture('Endpoints/cachePurgeEverything.json');
 
         $mock = $this->getMockBuilder(\Cloudflare\API\Adapter\Adapter::class)->getMock();
-        $mock->method('delete')->willReturn($response);
+        $mock->method('post')->willReturn($response);
 
         $mock->expects($this->once())
-            ->method('delete')
+            ->method('post')
             ->with(
                 $this->equalTo('zones/c2547eb745079dac9320b638f5e225cf483cc5cfdda41/purge_cache'),
                 $this->equalTo(['purge_everything' => true])
@@ -215,10 +215,10 @@ class ZonesTest extends TestCase
         $response = $this->getPsr7JsonResponseForFixture('Endpoints/cachePurgeHost.json');
 
         $mock = $this->getMockBuilder(\Cloudflare\API\Adapter\Adapter::class)->getMock();
-        $mock->method('delete')->willReturn($response);
+        $mock->method('post')->willReturn($response);
 
         $mock->expects($this->once())
-            ->method('delete')
+            ->method('post')
             ->with(
                 $this->equalTo('zones/c2547eb745079dac9320b638f5e225cf483cc5cfdda41/purge_cache'),
                 $this->equalTo(
@@ -242,10 +242,10 @@ class ZonesTest extends TestCase
         $response = $this->getPsr7JsonResponseForFixture('Endpoints/cachePurge.json');
 
         $mock = $this->getMockBuilder(\Cloudflare\API\Adapter\Adapter::class)->getMock();
-        $mock->method('delete')->willReturn($response);
+        $mock->method('post')->willReturn($response);
 
         $mock->expects($this->once())
-            ->method('delete')
+            ->method('post')
             ->with(
                 $this->equalTo('zones/c2547eb745079dac9320b638f5e225cf483cc5cfdda41/purge_cache'),
                 $this->equalTo(['files' => [
