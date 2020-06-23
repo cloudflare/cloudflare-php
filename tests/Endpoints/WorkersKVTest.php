@@ -2,7 +2,6 @@
 
 class WorkersKVTest extends TestCase
 {
-
     public function testCreateNamespace()
     {
         $response = $this->getPsr7JsonResponseForFixture('Endpoints/createWorkersKVNamespace.json');
