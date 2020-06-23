@@ -1,0 +1,10 @@
+{
+  "success": true,
+  "errors": [],
+  "messages": [],
+  "result": {
+    "id": "6b23666a511e428aa9da1bad45a0c81f",
+    "title": "Foo",
+    "supports_url_encoding": false
+  }
+}
