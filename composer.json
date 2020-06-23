@@ -10,7 +10,7 @@
   },
   "require-dev": {
     "phpunit/phpunit": "5.7.5",
-    "phpmd/phpmd" : "@stable",
+    "phpmd/phpmd": "@stable",
     "friendsofphp/php-cs-fixer": "^2.6"
   },
   "license": "BSD-3-Clause",
@@ -27,7 +27,7 @@
   },
   "autoload-dev": {
     "classmap": [
-        "tests/"
+      "tests/"
     ]
   },
   "config": {
