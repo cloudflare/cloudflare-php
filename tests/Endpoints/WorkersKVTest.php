@@ -23,4 +23,42 @@ class WorkersKVTest extends TestCase
         $this->assertObjectHasAttribute('id', $result);
         $this->assertEquals('6b23666a511e428aa9da1bad45a0c81f', $result->id);
     }
+
+    public function testGetNamespaces()
+    {
+        $response = $this->getPsr7JsonResponseForFixture('Endpoints/getWorkersKVNamespaces.json');
+
+        $mock = $this->getMockBuilder(\Cloudflare\API\Adapter\Adapter::class)->getMock();
+
+        $mock->method('get')->willReturn($response);
+
+        $mock->expects($this->once())
+            ->method('get')
+            ->with(
+                $this->equalTo('accounts/023e105f4ecef8ad9ca31a8372d0c353/storage/kv/namespaces')
+            );
+
+        $worker = new \Cloudflare\API\Endpoints\WorkersKV($mock);
+        $result = $worker->getNameSpaces("023e105f4ecef8ad9ca31a8372d0c353");
+        $this->assertCount(1, $result);
+    }
+
+    public function testListNamespaceKeys()
+    {
+        $response = $this->getPsr7JsonResponseForFixture('Endpoints/getWorkersKVListNamespaceKeys.json');
+
+        $mock = $this->getMockBuilder(\Cloudflare\API\Adapter\Adapter::class)->getMock();
+
+        $mock->method('get')->willReturn($response);
+
+        $mock->expects($this->once())
+            ->method('get')
+            ->with(
+                $this->equalTo('accounts/023e105f4ecef8ad9ca31a8372d0c353/storage/kv/namespaces/0f2ac74b498b48028cb68387c421e279/keys')
+            );
+
+        $worker = new \Cloudflare\API\Endpoints\WorkersKV($mock);
+        $result = $worker->listNamespaceKeys("023e105f4ecef8ad9ca31a8372d0c353", "0f2ac74b498b48028cb68387c421e279");
+        $this->assertCount(1, $result);
+    }
 }
