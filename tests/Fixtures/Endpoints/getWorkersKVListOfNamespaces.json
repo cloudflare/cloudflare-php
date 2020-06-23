@@ -1,0 +1,12 @@
+{
+  "success": true,
+  "errors": [],
+  "messages": [],
+  "result": [
+    {
+      "id": "0f2ac74b498b48028cb68387c421e279",
+      "title": "My Own Namespace",
+      "supports_url_encoding": true
+    }
+  ]
+}

@@ -46,9 +46,22 @@ class WorkersKV implements API
         return $this->body->result;
     }
 
-    public function getListOfNamespaces(string $accountID)
+    public function getListOfNamespaces(string $accountID, int $page = 1, int $perPage = 50, string $order = '', string $direction = '')
     {
-        $namespace = $this->adapter->get('accounts/' . $accountID . '/storage/kv/namespaces?per_page=100');
+        $query = [
+            'page' => $page,
+            'per_page' => $perPage
+        ];
+
+        if (!empty($order)) {
+            $query['order'] = $order;
+        }
+
+        if (!empty($direction)) {
+            $query['direction'] = $direction;
+        }
+
+        $namespace = $this->adapter->get('accounts/' . $accountID . '/storage/kv/namespaces', $query);
         $this->body = json_decode($namespace->getBody());
         return $this->body->result;
     }

@@ -45,6 +45,29 @@ class WorkersKVTest extends TestCase
 
     public function testListNamespaceKeys()
     {
+        $response = $this->getPsr7JsonResponseForFixture('Endpoints/getWorkersKVListOfNamespaces.json');
+
+        $mock = $this->getMockBuilder(\Cloudflare\API\Adapter\Adapter::class)->getMock();
+
+        $mock->method('get')->willReturn($response);
+
+        $mock->expects($this->once())
+            ->method('get')
+            ->with(
+                $this->equalTo('accounts/023e105f4ecef8ad9ca31a8372d0c353/storage/kv/namespaces'),
+                $this->equalTo([
+                    "page" => 1,
+                    "per_page" => 100
+                ]),
+            );
+
+        $worker = new \Cloudflare\API\Endpoints\WorkersKV($mock);
+        $result = $worker->getListOfNamespaces("023e105f4ecef8ad9ca31a8372d0c353", 1, 100);
+        $this->assertCount(1, $result);
+    }
+
+    public function testgetListOfNamespaces()
+    {
         $response = $this->getPsr7JsonResponseForFixture('Endpoints/getWorkersKVListNamespaceKeys.json');
 
         $mock = $this->getMockBuilder(\Cloudflare\API\Adapter\Adapter::class)->getMock();
