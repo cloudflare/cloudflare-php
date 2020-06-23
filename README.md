@@ -28,6 +28,7 @@ Each API call is provided via a similarly named function within various classes 
 - [x] Crypto
 - [x] Load Balancers
 - [x] Firewall Settings
+- [x] WorkersKV
 
 Note that this repository is currently under development, additional classes and endpoints being actively added.
 
@@ -37,7 +38,7 @@ Note that this repository is currently under development, additional classes and
 $key     = new Cloudflare\API\Auth\APIKey('user@example.com', 'apiKey');
 $adapter = new Cloudflare\API\Adapter\Guzzle($key);
 $user    = new Cloudflare\API\Endpoints\User($adapter);
-    
+
 echo $user->getUserID();
 ```
 
@@ -45,6 +46,6 @@ echo $user->getUserID();
 
 We welcome community contribution to this repository. [CONTRIBUTING.md](CONTRIBUTING.md) will help you start contributing.
 
-## Licensing 
+## Licensing
 
 Licensed under the 3-clause BSD license. See the [LICENSE](LICENSE) file for details.
