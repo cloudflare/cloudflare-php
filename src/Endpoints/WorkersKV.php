@@ -46,9 +46,9 @@ class WorkersKV implements API
         return $this->body->result;
     }
 
-    public function getReadKeyValuePair(string $accountID, $namespaceIdentifier, $key_name): string
+    public function getReadKeyValuePair(string $accountID, $namespaceIdentifier, $keyName): string
     {
-        $response = $this->adapter->get('accounts/' . $accountID . '/storage/kv/namespaces/' . $namespaceIdentifier . '/values/' . $key_name);
+        $response = $this->adapter->get('accounts/' . $accountID . '/storage/kv/namespaces/' . $namespaceIdentifier . '/values/' . $keyName);
         $this->body = json_decode($response->getBody());
         return $this->body;
     }

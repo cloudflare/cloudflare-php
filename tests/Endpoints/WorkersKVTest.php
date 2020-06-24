@@ -1,12 +1,15 @@
 <?php
 
+use Cloudflare\API\Adapter\Adapter;
+use Cloudflare\API\Endpoints\WorkersKV;
+
 class WorkersKVTest extends TestCase
 {
     public function testCreateNamespace()
     {
         $response = $this->getPsr7JsonResponseForFixture('Endpoints/createWorkersKVNamespace.json');
 
-        $mock = $this->getMockBuilder(\Cloudflare\API\Adapter\Adapter::class)->getMock();
+        $mock = $this->getMockBuilder(Adapter::class)->getMock();
 
         $mock->method('post')->willReturn($response);
 
@@ -17,7 +20,7 @@ class WorkersKVTest extends TestCase
                 $this->equalTo(['title' => "Foo"])
             );
 
-        $worker = new \Cloudflare\API\Endpoints\WorkersKV($mock);
+        $worker = new WorkersKV($mock);
         $result = $worker->createNamespace("023e105f4ecef8ad9ca31a8372d0c353", "Foo");
         $this->assertObjectHasAttribute('id', $result);
         $this->assertEquals('6b23666a511e428aa9da1bad45a0c81f', $result->id);
@@ -27,7 +30,7 @@ class WorkersKVTest extends TestCase
     {
         $response = $this->getPsr7JsonResponseForFixture('Endpoints/getWorkersKVNamespaces.json');
 
-        $mock = $this->getMockBuilder(\Cloudflare\API\Adapter\Adapter::class)->getMock();
+        $mock = $this->getMockBuilder(Adapter::class)->getMock();
 
         $mock->method('get')->willReturn($response);
 
@@ -37,7 +40,7 @@ class WorkersKVTest extends TestCase
                 $this->equalTo('accounts/023e105f4ecef8ad9ca31a8372d0c353/storage/kv/namespaces')
             );
 
-        $worker = new \Cloudflare\API\Endpoints\WorkersKV($mock);
+        $worker = new WorkersKV($mock);
         $result = $worker->getNameSpaces("023e105f4ecef8ad9ca31a8372d0c353");
         $this->assertCount(1, $result);
     }
@@ -45,10 +48,10 @@ class WorkersKVTest extends TestCase
     public function testGetAllNamespacesKeysAndValues()
     {
         $response = $this->getPsr7JsonResponseForFixture('Endpoints/getWorkersKVListNamespaceKeys.json');
-        $response_two = $this->getPsr7JsonResponseForFixture('Endpoints/getWorkersKVNamespacesKeyValue.json');
-        $mock = $this->getMockBuilder(\Cloudflare\API\Adapter\Adapter::class)->getMock();
-        $mock->method('get')->willReturn($response, $response_two);
-        $worker = new \Cloudflare\API\Endpoints\WorkersKV($mock);
+        $responseTwo = $this->getPsr7JsonResponseForFixture('Endpoints/getWorkersKVNamespacesKeyValue.json');
+        $mock = $this->getMockBuilder(Adapter::class)->getMock();
+        $mock->method('get')->willReturn($response, $responseTwo);
+        $worker = new WorkersKV($mock);
         $result = $worker->getAllKeysAndValuesForNamespace("023e105f4ecef8ad9ca31a8372d0c353", "0f2ac74b498b48028cb68387c421e279");
         $this->assertCount(1, $result);
         $this->assertObjectHasAttribute("value", $result[0]);
@@ -59,7 +62,7 @@ class WorkersKVTest extends TestCase
     {
         $response = $this->getPsr7JsonResponseForFixture('Endpoints/getWorkersKVListNamespaceKeys.json');
 
-        $mock = $this->getMockBuilder(\Cloudflare\API\Adapter\Adapter::class)->getMock();
+        $mock = $this->getMockBuilder(Adapter::class)->getMock();
 
         $mock->method('get')->willReturn($response);
 
@@ -69,7 +72,7 @@ class WorkersKVTest extends TestCase
                 $this->equalTo('accounts/023e105f4ecef8ad9ca31a8372d0c353/storage/kv/namespaces/0f2ac74b498b48028cb68387c421e279/keys')
             );
 
-        $worker = new \Cloudflare\API\Endpoints\WorkersKV($mock);
+        $worker = new WorkersKV($mock);
         $result = $worker->listNamespaceKeys("023e105f4ecef8ad9ca31a8372d0c353", "0f2ac74b498b48028cb68387c421e279");
         $this->assertCount(1, $result);
     }
@@ -78,7 +81,7 @@ class WorkersKVTest extends TestCase
     {
         $response = $this->getPsr7JsonResponseForFixture('Endpoints/getWorkersKVListNamespaceKeys.json');
 
-        $mock = $this->getMockBuilder(\Cloudflare\API\Adapter\Adapter::class)->getMock();
+        $mock = $this->getMockBuilder(Adapter::class)->getMock();
 
         $mock->method('get')->willReturn($response);
 
@@ -88,7 +91,7 @@ class WorkersKVTest extends TestCase
                 $this->equalTo('accounts/023e105f4ecef8ad9ca31a8372d0c353/storage/kv/namespaces/0f2ac74b498b48028cb68387c421e279/keys')
             );
 
-        $worker = new \Cloudflare\API\Endpoints\WorkersKV($mock);
+        $worker = new WorkersKV($mock);
         $result = $worker->listNamespaceKeys("023e105f4ecef8ad9ca31a8372d0c353", "0f2ac74b498b48028cb68387c421e279");
         $this->assertCount(1, $result);
     }
@@ -97,11 +100,11 @@ class WorkersKVTest extends TestCase
     {
         $response = $this->getPsr7JsonResponseForFixture('Endpoints/putWorkersKVWriteMultipleKeyValuePairs.json');
 
-        $mock = $this->getMockBuilder(\Cloudflare\API\Adapter\Adapter::class)->getMock();
+        $mock = $this->getMockBuilder(Adapter::class)->getMock();
 
         $mock->method('put')->willReturn($response);
 
-        $bulk_keys = [
+        $bulkKeys = [
             [
                 "key" => "Foo", "value" => "bar"
             ],
@@ -114,12 +117,12 @@ class WorkersKVTest extends TestCase
             ->with(
                 $this->equalTo('accounts/023e105f4ecef8ad9ca31a8372d0c353/storage/kv/namespaces/0f2ac74b498b48028cb68387c421e279/bulk'),
                 $this->equalTo(
-                    $bulk_keys
+                    $bulkKeys
                 )
             );
 
-        $worker = new \Cloudflare\API\Endpoints\WorkersKV($mock);
-        $result = $worker->writeMultipleKeyValuePairs("023e105f4ecef8ad9ca31a8372d0c353", "0f2ac74b498b48028cb68387c421e279", $bulk_keys);
+        $worker = new WorkersKV($mock);
+        $result = $worker->writeMultipleKeyValuePairs("023e105f4ecef8ad9ca31a8372d0c353", "0f2ac74b498b48028cb68387c421e279", $bulkKeys);
         $this->assertTrue($result);
     }
 
@@ -127,7 +130,7 @@ class WorkersKVTest extends TestCase
     {
         $response = $this->getPsr7JsonResponseForFixture('Endpoints/getWorkersKVNamespacesKeyValue.json');
 
-        $mock = $this->getMockBuilder(\Cloudflare\API\Adapter\Adapter::class)->getMock();
+        $mock = $this->getMockBuilder(Adapter::class)->getMock();
 
         $mock->method('get')->willReturn($response);
 
@@ -137,7 +140,7 @@ class WorkersKVTest extends TestCase
                 $this->equalTo('accounts/023e105f4ecef8ad9ca31a8372d0c353/storage/kv/namespaces/0f2ac74b498b48028cb68387c421e279/values/Foo')
             );
 
-        $worker = new \Cloudflare\API\Endpoints\WorkersKV($mock);
+        $worker = new WorkersKV($mock);
         $result = $worker->getReadKeyValuePair("023e105f4ecef8ad9ca31a8372d0c353", "0f2ac74b498b48028cb68387c421e279", "Foo");
         $this->assertEquals("Some Value", $result);
     }
