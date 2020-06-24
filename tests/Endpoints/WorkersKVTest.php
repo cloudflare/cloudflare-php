@@ -57,7 +57,7 @@ class WorkersKVTest extends TestCase
                 $this->equalTo([
                     "page" => 1,
                     "per_page" => 100
-                ]),
+                ])
             );
 
         $worker = new \Cloudflare\API\Endpoints\WorkersKV($mock);
