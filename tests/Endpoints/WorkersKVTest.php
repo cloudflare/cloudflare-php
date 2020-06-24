@@ -113,4 +113,23 @@ class WorkersKVTest extends TestCase
         $result = $worker->writeMultipleKeyValuePairs("023e105f4ecef8ad9ca31a8372d0c353", "0f2ac74b498b48028cb68387c421e279", $bulk_keys);
         $this->assertTrue($result);
     }
+
+    public function testGetReadKeyValuePair()
+    {
+        $response = $this->getPsr7JsonResponseForFixture('Endpoints/getWorkersKVNamespacesKeyValue.json');
+
+        $mock = $this->getMockBuilder(\Cloudflare\API\Adapter\Adapter::class)->getMock();
+
+        $mock->method('get')->willReturn($response);
+
+        $mock->expects($this->once())
+            ->method('get')
+            ->with(
+                $this->equalTo('accounts/023e105f4ecef8ad9ca31a8372d0c353/storage/kv/namespaces/0f2ac74b498b48028cb68387c421e279/values/Foo')
+            );
+
+        $worker = new \Cloudflare\API\Endpoints\WorkersKV($mock);
+        $result = $worker->getReadKeyValuePair("023e105f4ecef8ad9ca31a8372d0c353", "0f2ac74b498b48028cb68387c421e279", "Foo");
+        $this->assertEquals("Some Value", $result);
+    }
 }

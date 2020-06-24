@@ -46,6 +46,13 @@ class WorkersKV implements API
         return $this->body->result;
     }
 
+    public function getReadKeyValuePair(string $accountID, $namespaceIdentifier, $key_name): string
+    {
+        $response = $this->adapter->get('accounts/' . $accountID . '/storage/kv/namespaces/' . $namespaceIdentifier . '/values/' . $key_name);
+        $this->body = json_decode($response->getBody());
+        return $this->body;
+    }
+
     public function getListOfNamespaces(string $accountID, int $page = 1, int $perPage = 50, string $order = '', string $direction = '')
     {
         $query = [
