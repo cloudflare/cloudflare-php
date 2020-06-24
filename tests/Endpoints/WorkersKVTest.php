@@ -42,9 +42,22 @@ class WorkersKVTest extends TestCase
         $this->assertCount(1, $result);
     }
 
+    public function testGetAllNamespacesKeysAndValues()
+    {
+        $response = $this->getPsr7JsonResponseForFixture('Endpoints/getWorkersKVListNamespaceKeys.json');
+        $response_two = $this->getPsr7JsonResponseForFixture('Endpoints/getWorkersKVNamespacesKeyValue.json');
+        $mock = $this->getMockBuilder(\Cloudflare\API\Adapter\Adapter::class)->getMock();
+        $mock->method('get')->willReturn($response, $response_two);
+        $worker = new \Cloudflare\API\Endpoints\WorkersKV($mock);
+        $result = $worker->getAllKeysAndValuesForNamespace("023e105f4ecef8ad9ca31a8372d0c353", "0f2ac74b498b48028cb68387c421e279");
+        $this->assertCount(1, $result);
+        $this->assertObjectHasAttribute("value", $result[0]);
+        $this->assertEquals("Some Value", $result[0]->value);
+    }
+
     public function testListNamespaceKeys()
     {
-        $response = $this->getPsr7JsonResponseForFixture('Endpoints/getWorkersKVListOfNamespaces.json');
+        $response = $this->getPsr7JsonResponseForFixture('Endpoints/getWorkersKVListNamespaceKeys.json');
 
         $mock = $this->getMockBuilder(\Cloudflare\API\Adapter\Adapter::class)->getMock();
 
@@ -53,15 +66,11 @@ class WorkersKVTest extends TestCase
         $mock->expects($this->once())
             ->method('get')
             ->with(
-                $this->equalTo('accounts/023e105f4ecef8ad9ca31a8372d0c353/storage/kv/namespaces'),
-                $this->equalTo([
-                    "page" => 1,
-                    "per_page" => 100
-                ])
+                $this->equalTo('accounts/023e105f4ecef8ad9ca31a8372d0c353/storage/kv/namespaces/0f2ac74b498b48028cb68387c421e279/keys')
             );
 
         $worker = new \Cloudflare\API\Endpoints\WorkersKV($mock);
-        $result = $worker->getListOfNamespaces("023e105f4ecef8ad9ca31a8372d0c353", 1, 100);
+        $result = $worker->listNamespaceKeys("023e105f4ecef8ad9ca31a8372d0c353", "0f2ac74b498b48028cb68387c421e279");
         $this->assertCount(1, $result);
     }
 

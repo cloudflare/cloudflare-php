@@ -22,7 +22,7 @@ class WorkersKV implements API
         $this->adapter = $adapter;
     }
 
-    public function createNamespace(string $accountID, string $namespace): object
+    public function createNamespace(string $accountID, string $namespace): \stdClass
     {
         $response = $this->adapter->post(
             'accounts/' . $accountID . '/storage/kv/namespaces',
@@ -51,6 +51,16 @@ class WorkersKV implements API
         $response = $this->adapter->get('accounts/' . $accountID . '/storage/kv/namespaces/' . $namespaceIdentifier . '/values/' . $key_name);
         $this->body = json_decode($response->getBody());
         return $this->body;
+    }
+
+    public function getAllKeysAndValuesForNamespace(string $accountID, string $namespaceIdentifier)
+    {
+        $keys = $this->listNamespaceKeys($accountID, $namespaceIdentifier);
+        foreach ($keys as $index => $values) {
+            $value = $this->getReadKeyValuePair($accountID, $namespaceIdentifier, $values->name);
+            $keys[$index]->value = $value;
+        }
+        return $keys;
     }
 
     public function getListOfNamespaces(string $accountID, int $page = 1, int $perPage = 50, string $order = '', string $direction = '')
