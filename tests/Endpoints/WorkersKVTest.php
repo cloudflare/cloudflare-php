@@ -144,4 +144,24 @@ class WorkersKVTest extends TestCase
         $result = $worker->getReadKeyValuePair("023e105f4ecef8ad9ca31a8372d0c353", "0f2ac74b498b48028cb68387c421e279", "Foo");
         $this->assertEquals("Some Value", $result);
     }
+
+    public function testDeleteKeyValuePair ()
+    {
+        $response = $this->getPsr7JsonResponseForFixture('Endpoints/deleteKeyValuePair.json');
+
+        $mock = $this->getMockBuilder(Adapter::class)->getMock();
+
+        $mock->method('delete')->willReturn($response);
+
+        $mock->expects($this->once())
+            ->method('delete')
+            ->with(
+                $this->equalTo('accounts/023e105f4ecef8ad9ca31a8372d0c353/storage/kv/namespaces/0f2ac74b498b48028cb68387c421e279/values'),
+                ['Foo']
+            );
+
+            $worker = new WorkersKV($mock);
+            $result = $worker->deleteKeyValuePair("023e105f4ecef8ad9ca31a8372d0c353", "0f2ac74b498b48028cb68387c421e279", 'Foo');
+            $this->assertTrue($result);
+    }
 }

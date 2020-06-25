@@ -88,4 +88,10 @@ class WorkersKV implements API
         $this->adapter->put('accounts/' . $accountID . '/storage/kv/namespaces/' . $namespaceIdentifier . '/bulk', $keys);
         return true;
     }
+
+    public function deleteKeyValuePair(string $accountID, $namespaceIdentifier, string $key): bool
+    {
+        $this->adapter->delete('accounts/' . $accountID . '/storage/kv/namespaces/' . $namespaceIdentifier . '/values', [$key]);
+        return true;
+    }
 }
