@@ -217,7 +217,7 @@ class Zones implements API
      */
     public function cachePurgeEverything(string $zoneID): bool
     {
-        $user = $this->adapter->delete('zones/' . $zoneID . '/purge_cache', ['purge_everything' => true]);
+        $user = $this->adapter->post('zones/' . $zoneID . '/purge_cache', ['purge_everything' => true]);
 
         $this->body = json_decode($user->getBody());
 
@@ -247,7 +247,7 @@ class Zones implements API
             $options['hosts'] = $hosts;
         }
 
-        $user = $this->adapter->delete('zones/' . $zoneID . '/purge_cache', $options);
+        $user = $this->adapter->post('zones/' . $zoneID . '/purge_cache', $options);
 
         $this->body = json_decode($user->getBody());
 
