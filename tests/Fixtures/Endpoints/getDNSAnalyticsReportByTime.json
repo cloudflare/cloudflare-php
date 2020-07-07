@@ -1,0 +1,31 @@
+{
+  "result": {
+    "rows": 2,
+    "data": [
+      {
+        "metrics": [[911, 993]]
+      }
+    ],
+    "data_lag": 0,
+    "min": {},
+    "max": {},
+    "totals": {
+      "queryCount": 455312
+    },
+    "time_intervals": [
+      ["2020-02-10T11:19:00Z", "2020-02-10T11:19:59Z"],
+      ["2020-02-10T11:20:00Z", "2020-02-10T11:20:59Z"]
+    ],
+    "query": {
+      "dimensions": [],
+      "metrics": ["queryCount"],
+      "since": "2020-02-01T00:00:00Z",
+      "until": "2020-02-28T23:59:59Z",
+      "time_delta": "minute",
+      "limit": 2
+    }
+  },
+  "success": true,
+  "errors": [],
+  "messages": []
+}
