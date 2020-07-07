@@ -23,15 +23,27 @@ class CustomHostnamesTest extends TestCase
                 $this->equalTo('zones/023e105f4ecef8ad9ca31a8372d0c353/custom_hostnames'),
                 $this->equalTo([
                     'hostname' => 'app.example.com',
+                    'custom_origin_server' => 'origin.example.com',
                     'ssl' => [
                         'method' => 'http',
-                        'type' => 'dv'
-                    ]
+                        'type' => 'dv',
+                        'settings' => [
+                            'http2' => 'on',
+                            'http3' => 'on',
+                            'min_tls_version' => '1.2'
+                        ]
+                    ],
+                    'wildcard' => true,
                 ])
             );
 
         $hostname = new CustomHostnames($mock);
-        $hostname->addHostname('023e105f4ecef8ad9ca31a8372d0c353', 'app.example.com', 'http', 'dv');
+        $sslSettings = [
+            'http2' => 'on',
+            'http3' => 'on',
+            'min_tls_version' => '1.2'
+        ];
+        $hostname->addHostname('023e105f4ecef8ad9ca31a8372d0c353', 'app.example.com', 'http', 'dv', $sslSettings, 'origin.example.com', true);
         $this->assertEquals('0d89c70d-ad9f-4843-b99f-6cc0252067e9', $hostname->getBody()->result->id);
     }
 
@@ -101,15 +113,26 @@ class CustomHostnamesTest extends TestCase
             ->with(
                 $this->equalTo('zones/023e105f4ecef8ad9ca31a8372d0c353/custom_hostnames/0d89c70d-ad9f-4843-b99f-6cc0252067e9'),
                 $this->equalTo([
+                    'custom_origin_server' => 'origin.example.com',
                     'ssl' => [
                         'method' => 'http',
-                        'type' =>  'dv'
+                        'type' =>  'dv',
+                        'settings' => [
+                            'http2' => 'on',
+                            'http3' => 'on',
+                            'min_tls_version' => '1.2'
+                        ]
                     ]
                 ])
             );
 
         $zones = new \Cloudflare\API\Endpoints\CustomHostnames($mock);
-        $result = $zones->updateHostname('023e105f4ecef8ad9ca31a8372d0c353', '0d89c70d-ad9f-4843-b99f-6cc0252067e9', 'http', 'dv');
+        $sslSettings = [
+            'http2' => 'on',
+            'http3' => 'on',
+            'min_tls_version' => '1.2'
+        ];
+        $result = $zones->updateHostname('023e105f4ecef8ad9ca31a8372d0c353', '0d89c70d-ad9f-4843-b99f-6cc0252067e9', 'http', 'dv', $sslSettings, 'origin.example.com');
 
         $this->assertObjectHasAttribute('id', $result);
         $this->assertObjectHasAttribute('hostname', $result);
