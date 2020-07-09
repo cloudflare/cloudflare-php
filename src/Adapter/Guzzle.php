@@ -34,6 +34,8 @@ class Guzzle implements Adapter
                 'headers' => $headers,
                 'Accept' => 'application/json'
             ]);
+        } else {
+	    $this->client = $client;
         }
     }
 
