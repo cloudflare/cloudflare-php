@@ -59,7 +59,7 @@ class DNS implements API
         if (is_numeric($priority)) {
             $options['priority'] = (int)$priority;
         }
-        
+
         if (!empty($data)) {
             $options['data'] = $data;
         }
@@ -153,4 +153,12 @@ class DNS implements API
 
         return false;
     }
+
+    public function export(string $zoneID) : string
+    {
+        $response = $this->adapter->get('zones/' . $zoneID . '/dns_records/export');
+
+        return $response->getBody()->getContents();
+    }
+
 }
