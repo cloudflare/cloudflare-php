@@ -32,6 +32,7 @@ class PoolTest extends TestCase
 
     public function testArgumentsDataProvider()
     {
+        $this->expectNotToPerformAssertions();
         return [
             'origins arguments valid' => [
                 'setOrigins', [[['name' => 'test', 'address' => 'server1.example.com']]], 'getOrigins', false

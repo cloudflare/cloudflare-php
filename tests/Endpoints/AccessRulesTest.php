@@ -6,7 +6,7 @@ class AccessRulesTest extends TestCase
     {
         $response = $this->getPsr7JsonResponseForFixture('Endpoints/listAccessRules.json');
 
-        $mock = $this->getMockBuilder(\Cloudflare\API\Adapter\Adapter::class)->getMock();
+        $mock = $this->createMock(\Cloudflare\API\Adapter\Adapter::class);
         $mock->method('get')->willReturn($response);
 
         $mock->expects($this->once())
@@ -38,7 +38,7 @@ class AccessRulesTest extends TestCase
 
         $response = $this->getPsr7JsonResponseForFixture('Endpoints/createAccessRule.json');
 
-        $mock = $this->getMockBuilder(\Cloudflare\API\Adapter\Adapter::class)->getMock();
+        $mock = $this->createMock(\Cloudflare\API\Adapter\Adapter::class);
         $mock->method('post')->willReturn($response);
 
         $mock->expects($this->once())
@@ -66,7 +66,7 @@ class AccessRulesTest extends TestCase
     {
         $response = $this->getPsr7JsonResponseForFixture('Endpoints/updateAccessRule.json');
 
-        $mock = $this->getMockBuilder(\Cloudflare\API\Adapter\Adapter::class)->getMock();
+        $mock = $this->createMock(\Cloudflare\API\Adapter\Adapter::class);
         $mock->method('patch')->willReturn($response);
 
         $mock->expects($this->once())
@@ -93,7 +93,7 @@ class AccessRulesTest extends TestCase
     {
         $response = $this->getPsr7JsonResponseForFixture('Endpoints/deleteAccessRule.json');
 
-        $mock = $this->getMockBuilder(\Cloudflare\API\Adapter\Adapter::class)->getMock();
+        $mock = $this->createMock(\Cloudflare\API\Adapter\Adapter::class);
         $mock->method('delete')->willReturn($response);
 
         $mock->expects($this->once())

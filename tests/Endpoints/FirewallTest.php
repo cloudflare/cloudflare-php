@@ -6,7 +6,7 @@ class FirewallTest extends TestCase
     {
         $response = $this->getPsr7JsonResponseForFixture('Endpoints/createFirewallRules.json');
 
-        $mock = $this->getMockBuilder(\Cloudflare\API\Adapter\Adapter::class)->getMock();
+        $mock = $this->createMock(\Cloudflare\API\Adapter\Adapter::class);
         $mock->method('post')->willReturn($response);
 
         $mock->expects($this->once())
@@ -62,7 +62,7 @@ class FirewallTest extends TestCase
     {
         $response = $this->getPsr7JsonResponseForFixture('Endpoints/createFirewallRule.json');
 
-        $mock = $this->getMockBuilder(\Cloudflare\API\Adapter\Adapter::class)->getMock();
+        $mock = $this->createMock(\Cloudflare\API\Adapter\Adapter::class);
         $mock->method('post')->willReturn($response);
 
         $mock->expects($this->once())
@@ -98,7 +98,7 @@ class FirewallTest extends TestCase
     {
         $response = $this->getPsr7JsonResponseForFixture('Endpoints/listFirewallRules.json');
 
-        $mock = $this->getMockBuilder(\Cloudflare\API\Adapter\Adapter::class)->getMock();
+        $mock = $this->createMock(\Cloudflare\API\Adapter\Adapter::class);
         $mock->method('get')->willReturn($response);
 
         $mock->expects($this->once())
@@ -124,7 +124,7 @@ class FirewallTest extends TestCase
     {
         $response = $this->getPsr7JsonResponseForFixture('Endpoints/deleteFirewallRule.json');
 
-        $mock = $this->getMockBuilder(\Cloudflare\API\Adapter\Adapter::class)->getMock();
+        $mock = $this->createMock(\Cloudflare\API\Adapter\Adapter::class);
         $mock->method('delete')->willReturn($response);
 
         $mock->expects($this->once())
@@ -141,7 +141,7 @@ class FirewallTest extends TestCase
     {
         $response = $this->getPsr7JsonResponseForFixture('Endpoints/updateFirewallRule.json');
 
-        $mock = $this->getMockBuilder(\Cloudflare\API\Adapter\Adapter::class)->getMock();
+        $mock = $this->createMock(\Cloudflare\API\Adapter\Adapter::class);
         $mock->method('put')->willReturn($response);
 
         $mock->expects($this->once())

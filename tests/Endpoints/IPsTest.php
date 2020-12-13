@@ -12,7 +12,7 @@ class IPsTest extends TestCase
     {
         $response = $this->getPsr7JsonResponseForFixture('Endpoints/listIPs.json');
 
-        $mock = $this->getMockBuilder(\Cloudflare\API\Adapter\Adapter::class)->getMock();
+        $mock = $this->createMock(\Cloudflare\API\Adapter\Adapter::class);
         $mock->method('get')->willReturn($response);
 
         $mock->expects($this->once())

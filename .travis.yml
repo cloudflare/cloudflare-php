@@ -10,7 +10,8 @@ php:
 
 jobs:
   allow_failures:
-  - php: 7.4
+  - php: 7.0
+  - php: 7.1
   - php: nightly
 
 before_install:

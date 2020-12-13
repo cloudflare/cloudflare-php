@@ -32,6 +32,7 @@ class LoadBalancerTest extends TestCase
 
     public function testArgumentsDataProvider()
     {
+        $this->expectNotToPerformAssertions();
         return [
             'steeringPolicy arguments valid' => [
                 'setSteeringPolicy', ['off', 'geo', 'random', 'dynamic_latency', ''], 'getSteeringPolicy', false
