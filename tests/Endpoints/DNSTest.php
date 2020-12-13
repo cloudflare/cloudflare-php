@@ -12,7 +12,7 @@ class DNSTest extends TestCase
     {
         $response = $this->getPsr7JsonResponseForFixture('Endpoints/addRecord.json');
 
-        $mock = $this->getMockBuilder(\Cloudflare\API\Adapter\Adapter::class)->getMock();
+        $mock = $this->createMock(\Cloudflare\API\Adapter\Adapter::class);
         $mock->method('post')->willReturn($response);
 
         $mock->expects($this->once())
@@ -36,7 +36,7 @@ class DNSTest extends TestCase
     {
         $response = $this->getPsr7JsonResponseForFixture('Endpoints/addRecord.json');
 
-        $mock = $this->getMockBuilder(\Cloudflare\API\Adapter\Adapter::class)->getMock();
+        $mock = $this->createMock(\Cloudflare\API\Adapter\Adapter::class);
         $mock->method('post')->willReturn($response);
 
         $mock->expects($this->once())
@@ -61,7 +61,7 @@ class DNSTest extends TestCase
     {
         $response = $this->getPsr7JsonResponseForFixture('Endpoints/addRecord.json');
 
-        $mock = $this->getMockBuilder(\Cloudflare\API\Adapter\Adapter::class)->getMock();
+        $mock = $this->createMock(\Cloudflare\API\Adapter\Adapter::class);
         $mock->method('post')->willReturn($response);
 
         $mock->expects($this->once())
@@ -87,7 +87,7 @@ class DNSTest extends TestCase
     {
         $response = $this->getPsr7JsonResponseForFixture('Endpoints/listRecords.json');
 
-        $mock = $this->getMockBuilder(\Cloudflare\API\Adapter\Adapter::class)->getMock();
+        $mock = $this->createMock(\Cloudflare\API\Adapter\Adapter::class);
         $mock->method('get')->willReturn($response);
 
         $mock->expects($this->once())
@@ -121,7 +121,7 @@ class DNSTest extends TestCase
     {
         $response = $this->getPsr7JsonResponseForFixture('Endpoints/getDNSRecordDetails.json');
 
-        $mock = $this->getMockBuilder(\Cloudflare\API\Adapter\Adapter::class)->getMock();
+        $mock = $this->createMock(\Cloudflare\API\Adapter\Adapter::class);
         $mock->method('get')->willReturn($response);
 
         $mock->expects($this->once())
@@ -141,7 +141,7 @@ class DNSTest extends TestCase
     {
         $response = $this->getPsr7JsonResponseForFixture('Endpoints/getRecordId.json');
 
-        $mock = $this->getMockBuilder(\Cloudflare\API\Adapter\Adapter::class)->getMock();
+        $mock = $this->createMock(\Cloudflare\API\Adapter\Adapter::class);
         $mock->method('get')->willReturn($response);
 
         $mock->expects($this->once())
@@ -160,7 +160,7 @@ class DNSTest extends TestCase
     {
         $response = $this->getPsr7JsonResponseForFixture('Endpoints/updateDNSRecord.json');
 
-        $mock = $this->getMockBuilder(\Cloudflare\API\Adapter\Adapter::class)->getMock();
+        $mock = $this->createMock(\Cloudflare\API\Adapter\Adapter::class);
         $mock->method('put')->willReturn($response);
 
         $details = [

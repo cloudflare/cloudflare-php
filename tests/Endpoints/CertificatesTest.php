@@ -8,7 +8,7 @@ class CertificatesTest extends TestCase
     {
         $response = $this->getPsr7JsonResponseForFixture('Endpoints/listCertificates.json');
 
-        $mock = $this->getMockBuilder(\Cloudflare\API\Adapter\Adapter::class)->getMock();
+        $mock = $this->createMock(\Cloudflare\API\Adapter\Adapter::class);
         $mock->method('get')->willReturn($response);
 
         $mock->expects($this->once())
@@ -40,7 +40,7 @@ class CertificatesTest extends TestCase
     {
         $response = $this->getPsr7JsonResponseForFixture('Endpoints/getCertificate.json');
 
-        $mock = $this->getMockBuilder(\Cloudflare\API\Adapter\Adapter::class)->getMock();
+        $mock = $this->createMock(\Cloudflare\API\Adapter\Adapter::class);
         $mock->method('get')->willReturn($response);
 
         $mock->expects($this->once())
@@ -71,7 +71,7 @@ class CertificatesTest extends TestCase
     {
         $response = $this->getPsr7JsonResponseForFixture('Endpoints/getCertificate.json');
 
-        $mock = $this->getMockBuilder(\Cloudflare\API\Adapter\Adapter::class)->getMock();
+        $mock = $this->createMock(\Cloudflare\API\Adapter\Adapter::class);
         $mock->method('delete')->willReturn($response);
 
         $mock->expects($this->once())
@@ -101,7 +101,7 @@ class CertificatesTest extends TestCase
 
         $response = $this->getPsr7JsonResponseForFixture('Endpoints/getCertificate.json');
 
-        $mock = $this->getMockBuilder(\Cloudflare\API\Adapter\Adapter::class)->getMock();
+        $mock = $this->createMock(\Cloudflare\API\Adapter\Adapter::class);
         $mock->method('post')->willReturn($response);
 
         $mock->expects($this->once())

@@ -6,7 +6,7 @@ class FirewallSettingsTest extends TestCase
     {
         $response = $this->getPsr7JsonResponseForFixture('Endpoints/getSecurityLevelSetting.json');
 
-        $mock = $this->getMockBuilder(\Cloudflare\API\Adapter\Adapter::class)->getMock();
+        $mock = $this->createMock(\Cloudflare\API\Adapter\Adapter::class);
         $mock->method('get')->willReturn($response);
 
         $mock->expects($this->once())
@@ -25,7 +25,7 @@ class FirewallSettingsTest extends TestCase
     {
         $response = $this->getPsr7JsonResponseForFixture('Endpoints/getChallengeTTLSetting.json');
 
-        $mock = $this->getMockBuilder(\Cloudflare\API\Adapter\Adapter::class)->getMock();
+        $mock = $this->createMock(\Cloudflare\API\Adapter\Adapter::class);
         $mock->method('get')->willReturn($response);
 
         $mock->expects($this->once())
@@ -44,7 +44,7 @@ class FirewallSettingsTest extends TestCase
     {
         $response = $this->getPsr7JsonResponseForFixture('Endpoints/getBrowserIntegrityCheckSetting.json');
 
-        $mock = $this->getMockBuilder(\Cloudflare\API\Adapter\Adapter::class)->getMock();
+        $mock = $this->createMock(\Cloudflare\API\Adapter\Adapter::class);
         $mock->method('get')->willReturn($response);
 
         $mock->expects($this->once())
@@ -63,7 +63,7 @@ class FirewallSettingsTest extends TestCase
     {
         $response = $this->getPsr7JsonResponseForFixture('Endpoints/updateSecurityLevelSetting.json');
 
-        $mock = $this->getMockBuilder(\Cloudflare\API\Adapter\Adapter::class)->getMock();
+        $mock = $this->createMock(\Cloudflare\API\Adapter\Adapter::class);
         $mock->method('patch')->willReturn($response);
 
         $mock->expects($this->once())
@@ -83,7 +83,7 @@ class FirewallSettingsTest extends TestCase
     {
         $response = $this->getPsr7JsonResponseForFixture('Endpoints/updateChallengeTTLSetting.json');
 
-        $mock = $this->getMockBuilder(\Cloudflare\API\Adapter\Adapter::class)->getMock();
+        $mock = $this->createMock(\Cloudflare\API\Adapter\Adapter::class);
         $mock->method('patch')->willReturn($response);
 
         $mock->expects($this->once())
@@ -103,7 +103,7 @@ class FirewallSettingsTest extends TestCase
     {
         $response = $this->getPsr7JsonResponseForFixture('Endpoints/updateBrowserIntegrityCheckSetting.json');
 
-        $mock = $this->getMockBuilder(\Cloudflare\API\Adapter\Adapter::class)->getMock();
+        $mock = $this->createMock(\Cloudflare\API\Adapter\Adapter::class);
         $mock->method('patch')->willReturn($response);
 
         $mock->expects($this->once())

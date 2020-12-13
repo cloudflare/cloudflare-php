@@ -14,9 +14,9 @@ class DNSAnalyticsTest extends TestCase
             'Endpoints/getDNSAnalyticsReportTable.json'
         );
 
-        $mock = $this->getMockBuilder(
+        $mock = $this->createMock(
             \Cloudflare\API\Adapter\Adapter::class
-        )->getMock();
+        );
         $mock->method('get')->willReturn($response);
 
         $mock
@@ -54,9 +54,9 @@ class DNSAnalyticsTest extends TestCase
             'Endpoints/getDNSAnalyticsReportByTime.json'
         );
 
-        $mock = $this->getMockBuilder(
+        $mock = $this->createMock(
             \Cloudflare\API\Adapter\Adapter::class
-        )->getMock();
+        );
         $mock->method('get')->willReturn($response);
 
         $mock
