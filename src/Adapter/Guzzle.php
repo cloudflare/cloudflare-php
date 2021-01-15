@@ -14,7 +14,7 @@ use Psr\Http\Message\ResponseInterface;
 class Guzzle implements Adapter
 {
     private $client;
-    
+
     public function __construct(Auth $auth, string $baseURI = null)
     {
         if ($baseURI === null) {
