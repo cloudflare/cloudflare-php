@@ -5,7 +5,7 @@ namespace Cloudflare\API\Endpoints;
 use Cloudflare\API\Adapter\Adapter;
 use Cloudflare\API\Configurations\FirewallRuleOptions;
 
-class Firewall implements API
+class Filter implements API
 {
     private $adapter;
 
