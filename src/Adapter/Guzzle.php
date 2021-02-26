@@ -92,7 +92,15 @@ class Guzzle implements Adapter
 
     private function checkError(ResponseInterface $response)
     {
-        $json = json_decode($response->getBody());
+
+        $body = (string) $response->getBody();
+
+        // If first character of the response body is not { then the response is in plain text so need to skip below checks as they fail.
+        if (strpos($body, '{') !== 0) {
+          return;
+        }
+
+        $json = json_decode($body);
 
         if (json_last_error() !== JSON_ERROR_NONE) {
             throw new JSONException();
