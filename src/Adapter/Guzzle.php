@@ -1,14 +1,10 @@
 <?php
-/**
- * User: junade
- * Date: 13/01/2017
- * Time: 18:26
- */
 
 namespace Cloudflare\API\Adapter;
 
 use Cloudflare\API\Auth\Auth;
 use GuzzleHttp\Client;
+use GuzzleHttp\Exception\RequestException;
 use Psr\Http\Message\ResponseInterface;
 
 class Guzzle implements Adapter
@@ -80,30 +76,15 @@ class Guzzle implements Adapter
             throw new \InvalidArgumentException('Request method must be get, post, put, patch, or delete');
         }
 
-        $response = $this->client->$method($uri, [
-            'headers' => $headers,
-            ($method === 'get' ? 'query' : 'json') => $data,
-        ]);
-
-        $this->checkError($response);
+        try {
+            $response = $this->client->$method($uri, [
+                'headers' => $headers,
+                ($method === 'get' ? 'query' : 'json') => $data,
+            ]);
+        } catch (RequestException $err) {
+            throw ResponseException::fromRequestException($err);
+        }
 
         return $response;
-    }
-
-    private function checkError(ResponseInterface $response)
-    {
-        $json = json_decode($response->getBody());
-
-        if (json_last_error() !== JSON_ERROR_NONE) {
-            throw new JSONException();
-        }
-
-        if (isset($json->errors) && count($json->errors) >= 1) {
-            throw new ResponseException($json->errors[0]->message, $json->errors[0]->code);
-        }
-
-        if (isset($json->success) && !$json->success) {
-            throw new ResponseException('Request was unsuccessful.');
-        }
     }
 }
