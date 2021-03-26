@@ -300,6 +300,13 @@ class PageRulesActions implements Configurations
             'value' => $this->getBoolAsOnOrOff($active)
         ]);
     }
+    
+    public function setPolish(bool $active)
+    {
+        $this->addConfigurationOption('polish', [
+            'value' => $this->getBoolAsOnOrOff($active)
+        ]);
+    }
 
     public function getArray(): array
     {
