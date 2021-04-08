@@ -1,8 +1,11 @@
 <?php
 
+namespace Cloudflare\API\Test\Endpoints;
+
 use Cloudflare\API\Adapter\Adapter;
 use Cloudflare\API\Configurations\LoadBalancer;
 use Cloudflare\API\Endpoints\LoadBalancers;
+use Cloudflare\API\Test\TestCase;
 
 /**
  * @author Martijn Smidt <martijn@squeezely.tech>
@@ -24,7 +27,7 @@ class LoadBalancersTest extends TestCase
 
         $response = $this->getPsr7JsonResponseForFixture('Endpoints/createLoadBalancer.json');
 
-        $mock = $this->getMockBuilder(Adapter::class)->getMock();
+        $mock = $this->createMock(Adapter::class);
         $mock->method('post')->willReturn($response);
 
         $mock->expects($this->once())
@@ -45,7 +48,7 @@ class LoadBalancersTest extends TestCase
     {
         $response = $this->getPsr7JsonResponseForFixture('Endpoints/listLoadBalancers.json');
 
-        $mock = $this->getMockBuilder(Adapter::class)->getMock();
+        $mock = $this->createMock(Adapter::class);
         $mock->method('get')->willReturn($response);
 
         $mock->expects($this->once())
@@ -63,7 +66,7 @@ class LoadBalancersTest extends TestCase
     {
         $response = $this->getPsr7JsonResponseForFixture('Endpoints/getLoadBalancerDetails.json');
 
-        $mock = $this->getMockBuilder(Adapter::class)->getMock();
+        $mock = $this->createMock(Adapter::class);
         $mock->method('get')->willReturn($response);
 
         $mock->expects($this->once())
@@ -89,7 +92,7 @@ class LoadBalancersTest extends TestCase
 
         $response = $this->getPsr7JsonResponseForFixture('Endpoints/updateLoadBalancer.json');
 
-        $mock = $this->getMockBuilder(Adapter::class)->getMock();
+        $mock = $this->createMock(Adapter::class);
         $mock->method('put')->willReturn($response);
 
         $mock->expects($this->once())
@@ -110,7 +113,7 @@ class LoadBalancersTest extends TestCase
     {
         $response = $this->getPsr7JsonResponseForFixture('Endpoints/deleteLoadBalancer.json');
 
-        $mock = $this->getMockBuilder(Adapter::class)->getMock();
+        $mock = $this->createMock(Adapter::class);
         $mock->method('delete')->willReturn($response);
 
         $mock->expects($this->once())

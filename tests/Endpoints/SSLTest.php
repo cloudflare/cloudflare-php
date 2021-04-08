@@ -1,12 +1,18 @@
 <?php
 
+namespace Cloudflare\API\Test\Endpoints;
+
+use Cloudflare\API\Adapter\Adapter;
+use Cloudflare\API\Endpoints\SSL;
+use Cloudflare\API\Test\TestCase;
+
 class SSLTest extends TestCase
 {
     public function testGetSSLSetting()
     {
         $response = $this->getPsr7JsonResponseForFixture('Endpoints/getSSLSetting.json');
 
-        $mock = $this->getMockBuilder(\Cloudflare\API\Adapter\Adapter::class)->getMock();
+        $mock = $this->createMock(Adapter::class);
         $mock->method('get')->willReturn($response);
 
         $mock->expects($this->once())
@@ -15,7 +21,7 @@ class SSLTest extends TestCase
                 $this->equalTo('zones/c2547eb745079dac9320b638f5e225cf483cc5cfdda41/settings/ssl')
             );
 
-        $sslMock = new \Cloudflare\API\Endpoints\SSL($mock);
+        $sslMock = new SSL($mock);
         $result = $sslMock->getSSLSetting('c2547eb745079dac9320b638f5e225cf483cc5cfdda41');
 
         $this->assertEquals('off', $result);
@@ -25,7 +31,7 @@ class SSLTest extends TestCase
     {
         $response = $this->getPsr7JsonResponseForFixture('Endpoints/getSSLVerificationStatus.json');
 
-        $mock = $this->getMockBuilder(\Cloudflare\API\Adapter\Adapter::class)->getMock();
+        $mock = $this->createMock(Adapter::class);
         $mock->method('get')->willReturn($response);
 
         $mock->expects($this->once())
@@ -34,7 +40,7 @@ class SSLTest extends TestCase
                 $this->equalTo('zones/c2547eb745079dac9320b638f5e225cf483cc5cfdda41/ssl/verification')
             );
 
-        $sslMock = new \Cloudflare\API\Endpoints\SSL($mock);
+        $sslMock = new SSL($mock);
         $result = $sslMock->getSSLVerificationStatus('c2547eb745079dac9320b638f5e225cf483cc5cfdda41');
 
         $this->assertObjectHasAttribute('result', $result);
@@ -45,7 +51,7 @@ class SSLTest extends TestCase
     {
         $response = $this->getPsr7JsonResponseForFixture('Endpoints/getHTTPSRedirectSetting.json');
 
-        $mock = $this->getMockBuilder(\Cloudflare\API\Adapter\Adapter::class)->getMock();
+        $mock = $this->createMock(Adapter::class);
         $mock->method('get')->willReturn($response);
 
         $mock->expects($this->once())
@@ -54,7 +60,7 @@ class SSLTest extends TestCase
                 $this->equalTo('zones/c2547eb745079dac9320b638f5e225cf483cc5cfdda41/settings/always_use_https')
             );
 
-        $sslMock = new \Cloudflare\API\Endpoints\SSL($mock);
+        $sslMock = new SSL($mock);
         $result = $sslMock->getHTTPSRedirectSetting('c2547eb745079dac9320b638f5e225cf483cc5cfdda41');
 
         $this->assertEquals('off', $result);
@@ -64,7 +70,7 @@ class SSLTest extends TestCase
     {
         $response = $this->getPsr7JsonResponseForFixture('Endpoints/getHTTPSRewritesSetting.json');
 
-        $mock = $this->getMockBuilder(\Cloudflare\API\Adapter\Adapter::class)->getMock();
+        $mock = $this->createMock(Adapter::class);
         $mock->method('get')->willReturn($response);
 
         $mock->expects($this->once())
@@ -73,7 +79,7 @@ class SSLTest extends TestCase
                 $this->equalTo('zones/c2547eb745079dac9320b638f5e225cf483cc5cfdda41/settings/automatic_https_rewrites')
             );
 
-        $sslMock = new \Cloudflare\API\Endpoints\SSL($mock);
+        $sslMock = new SSL($mock);
         $result = $sslMock->getHTTPSRewritesSetting('c2547eb745079dac9320b638f5e225cf483cc5cfdda41');
 
         $this->assertEquals('off', $result);
@@ -83,7 +89,7 @@ class SSLTest extends TestCase
     {
         $response = $this->getPsr7JsonResponseForFixture('Endpoints/updateSSLSetting.json');
 
-        $mock = $this->getMockBuilder(\Cloudflare\API\Adapter\Adapter::class)->getMock();
+        $mock = $this->createMock(Adapter::class);
         $mock->method('patch')->willReturn($response);
 
         $mock->expects($this->once())
@@ -93,7 +99,7 @@ class SSLTest extends TestCase
                 $this->equalTo(['value' => 'full'])
             );
 
-        $sslMock = new \Cloudflare\API\Endpoints\SSL($mock);
+        $sslMock = new SSL($mock);
         $result = $sslMock->updateSSLSetting('c2547eb745079dac9320b638f5e225cf483cc5cfdda41', 'full');
 
         $this->assertTrue($result);
@@ -103,7 +109,7 @@ class SSLTest extends TestCase
     {
         $response = $this->getPsr7JsonResponseForFixture('Endpoints/updateHTTPSRedirectSetting.json');
 
-        $mock = $this->getMockBuilder(\Cloudflare\API\Adapter\Adapter::class)->getMock();
+        $mock = $this->createMock(Adapter::class);
         $mock->method('patch')->willReturn($response);
 
         $mock->expects($this->once())
@@ -113,7 +119,7 @@ class SSLTest extends TestCase
                 $this->equalTo(['value' => 'off'])
             );
 
-        $sslMock = new \Cloudflare\API\Endpoints\SSL($mock);
+        $sslMock = new SSL($mock);
         $result = $sslMock->updateHTTPSRedirectSetting('c2547eb745079dac9320b638f5e225cf483cc5cfdda41', 'off');
 
         $this->assertTrue($result);
@@ -123,7 +129,7 @@ class SSLTest extends TestCase
     {
         $response = $this->getPsr7JsonResponseForFixture('Endpoints/updateHTTPSRewritesSetting.json');
 
-        $mock = $this->getMockBuilder(\Cloudflare\API\Adapter\Adapter::class)->getMock();
+        $mock = $this->createMock(Adapter::class);
         $mock->method('patch')->willReturn($response);
 
         $mock->expects($this->once())
@@ -133,7 +139,7 @@ class SSLTest extends TestCase
                 $this->equalTo(['value' => 'off'])
             );
 
-        $sslMock = new \Cloudflare\API\Endpoints\SSL($mock);
+        $sslMock = new SSL($mock);
         $result = $sslMock->updateHTTPSRewritesSetting('c2547eb745079dac9320b638f5e225cf483cc5cfdda41', 'off');
 
         $this->assertTrue($result);
@@ -143,7 +149,7 @@ class SSLTest extends TestCase
     {
         $response = $this->getPsr7JsonResponseForFixture('Endpoints/updateSSLCertificatePackValidationMethod.json');
 
-        $mock = $this->getMockBuilder(\Cloudflare\API\Adapter\Adapter::class)->getMock();
+        $mock = $this->createMock(Adapter::class);
         $mock->method('patch')->willReturn($response);
 
         $mock->expects($this->once())
@@ -153,7 +159,7 @@ class SSLTest extends TestCase
                 $this->equalTo(['validation_method' => 'txt'])
             );
 
-        $sslMock = new \Cloudflare\API\Endpoints\SSL($mock);
+        $sslMock = new SSL($mock);
         $result = $sslMock->updateSSLCertificatePackValidationMethod('c2547eb745079dac9320b638f5e225cf483cc5cfdda41', 'a77f8bd7-3b47-46b4-a6f1-75cf98109948', 'txt');
 
         $this->assertTrue($result);

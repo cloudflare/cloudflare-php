@@ -1,27 +1,33 @@
 <?php
 
+namespace Cloudflare\API\Test\Adapter;
+
+use Cloudflare\API\Adapter\Guzzle;
+use Cloudflare\API\Adapter\JSONException;
+use Cloudflare\API\Adapter\ResponseException;
+use Cloudflare\API\Auth\Auth;
+use GuzzleHttp\Exception\RequestException;
+use GuzzleHttp\Psr7\Response;
+use PHPUnit\Framework\TestCase;
+use ReflectionClass;
+
 /**
  * User: junade
  * Date: 13/01/2017
  * Time: 23:35
  */
-
-use GuzzleHttp\Psr7\Response;
-
 class GuzzleTest extends TestCase
 {
     private $client;
 
     public function setUp(): void
     {
-        $auth = $this->getMockBuilder(\Cloudflare\API\Auth\Auth::class)
-            ->setMethods(['getHeaders'])
-            ->getMock();
+        $authMock = $this->createMock(Auth::class);
 
-        $auth->method('getHeaders')
+        $authMock->method('getHeaders')
             ->willReturn(['X-Testing' => 'Test']);
 
-        $this->client = new \Cloudflare\API\Adapter\Guzzle($auth, 'https://httpbin.org/');
+        $this->client = new Guzzle($authMock, 'https://httpbin.org/');
     }
 
     public function testGet()
@@ -91,7 +97,7 @@ class GuzzleTest extends TestCase
 
     public function testErrors()
     {
-        $class = new ReflectionClass(\Cloudflare\API\Adapter\Guzzle::class);
+        $class = new ReflectionClass(Guzzle::class);
         $method = $class->getMethod('checkError');
         $method->setAccessible(true);
 
@@ -105,7 +111,7 @@ class GuzzleTest extends TestCase
         ;
         $response = new Response(200, [], $body);
 
-        $this->expectException(\Cloudflare\API\Adapter\ResponseException::class);
+        $this->expectException(ResponseException::class);
         $method->invokeArgs($this->client, [$response]);
 
         $body =
@@ -118,19 +124,19 @@ class GuzzleTest extends TestCase
         ;
         $response = new Response(200, [], $body);
 
-        $this->expectException(\Cloudflare\API\Adapter\ResponseException::class);
+        $this->expectException(ResponseException::class);
         $method->invokeArgs($this->client, [$response]);
 
         $body = 'this isnt json.';
         $response = new Response(200, [], $body);
 
-        $this->expectException(\Cloudflare\API\Adapter\JSONException::class);
+        $this->expectException(JSONException::class);
         $method->invokeArgs($this->client, [$response]);
     }
 
     public function testNotFound()
     {
-        $this->expectException(\GuzzleHttp\Exception\RequestException::class);
+        $this->expectException(RequestException::class);
         $this->client->get('https://httpbin.org/status/404');
     }
 }

@@ -2,8 +2,11 @@
 
 declare(strict_types=1);
 
+namespace Cloudflare\API\Test\Endpoints;
+
 use Cloudflare\API\Adapter\Adapter;
 use Cloudflare\API\Endpoints\ZoneSettings;
+use Cloudflare\API\Test\TestCase;
 
 class ZoneSettingsTest extends TestCase
 {
@@ -11,7 +14,7 @@ class ZoneSettingsTest extends TestCase
     {
         $response = $this->getPsr7JsonResponseForFixture('Endpoints/getServerSideExclude.json');
 
-        $mock = $this->getMockBuilder(Adapter::class)->getMock();
+        $mock = $this->createMock(Adapter::class);
         $mock->method('get')->willReturn($response);
 
         $mock->expects($this->once())->method('get');
@@ -26,7 +29,7 @@ class ZoneSettingsTest extends TestCase
     {
         $response = $this->getPsr7JsonResponseForFixture('Endpoints/updateServerSideExclude.json');
 
-        $mock = $this->getMockBuilder(Adapter::class)->getMock();
+        $mock = $this->createMock(Adapter::class);
         $mock->method('patch')->willReturn($response);
 
         $mock->expects($this->once())->method('patch');
@@ -41,7 +44,7 @@ class ZoneSettingsTest extends TestCase
     {
         $response = $this->getPsr7JsonResponseForFixture('Endpoints/getBrowserCacheTtlSetting.json');
 
-        $mock = $this->getMockBuilder(Adapter::class)->getMock();
+        $mock = $this->createMock(Adapter::class);
         $mock->method('get')->willReturn($response);
 
         $mock->expects($this->once())->method('get');
@@ -56,7 +59,7 @@ class ZoneSettingsTest extends TestCase
     {
         $response = $this->getPsr7JsonResponseForFixture('Endpoints/updateBrowserCacheTtlSetting.json');
 
-        $mock = $this->getMockBuilder(Adapter::class)->getMock();
+        $mock = $this->createMock(Adapter::class);
         $mock->method('patch')->willReturn($response);
 
         $mock->expects($this->once())->method('patch');

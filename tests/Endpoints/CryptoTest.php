@@ -1,12 +1,18 @@
 <?php
 
+namespace Cloudflare\API\Test\Endpoints;
+
+use Cloudflare\API\Adapter\Adapter;
+use Cloudflare\API\Endpoints\Crypto;
+use Cloudflare\API\Test\TestCase;
+
 class CryptoTest extends TestCase
 {
     public function testGetOpportunisticEncryptionSetting()
     {
         $response = $this->getPsr7JsonResponseForFixture('Endpoints/getOpportunisticEncryptionSetting.json');
 
-        $mock = $this->getMockBuilder(\Cloudflare\API\Adapter\Adapter::class)->getMock();
+        $mock = $this->createMock(Adapter::class);
         $mock->method('get')->willReturn($response);
 
         $mock->expects($this->once())
@@ -15,7 +21,7 @@ class CryptoTest extends TestCase
                 $this->equalTo('zones/c2547eb745079dac9320b638f5e225cf483cc5cfdda41/settings/opportunistic_encryption')
             );
 
-        $cryptoMock = new \Cloudflare\API\Endpoints\Crypto($mock);
+        $cryptoMock = new Crypto($mock);
         $result = $cryptoMock->getOpportunisticEncryptionSetting('c2547eb745079dac9320b638f5e225cf483cc5cfdda41');
 
         $this->assertEquals('off', $result);
@@ -25,7 +31,7 @@ class CryptoTest extends TestCase
     {
         $response = $this->getPsr7JsonResponseForFixture('Endpoints/getOnionRoutingSetting.json');
 
-        $mock = $this->getMockBuilder(\Cloudflare\API\Adapter\Adapter::class)->getMock();
+        $mock = $this->createMock(Adapter::class);
         $mock->method('get')->willReturn($response);
 
         $mock->expects($this->once())
@@ -34,7 +40,7 @@ class CryptoTest extends TestCase
                 $this->equalTo('zones/c2547eb745079dac9320b638f5e225cf483cc5cfdda41/settings/opportunistic_onion')
             );
 
-        $cryptoMock = new \Cloudflare\API\Endpoints\Crypto($mock);
+        $cryptoMock = new Crypto($mock);
         $result = $cryptoMock->getOnionRoutingSetting('c2547eb745079dac9320b638f5e225cf483cc5cfdda41');
 
         $this->assertEquals('off', $result);
@@ -44,7 +50,7 @@ class CryptoTest extends TestCase
     {
         $response = $this->getPsr7JsonResponseForFixture('Endpoints/updateOpportunisticEncryptionSetting.json');
 
-        $mock = $this->getMockBuilder(\Cloudflare\API\Adapter\Adapter::class)->getMock();
+        $mock = $this->createMock(Adapter::class);
         $mock->method('patch')->willReturn($response);
 
         $mock->expects($this->once())
@@ -54,7 +60,7 @@ class CryptoTest extends TestCase
                 $this->equalTo(['value' => 'off'])
             );
 
-        $cryptoMock = new \Cloudflare\API\Endpoints\Crypto($mock);
+        $cryptoMock = new Crypto($mock);
         $result = $cryptoMock->updateOpportunisticEncryptionSetting('c2547eb745079dac9320b638f5e225cf483cc5cfdda41', 'off');
 
         $this->assertTrue($result);
@@ -64,7 +70,7 @@ class CryptoTest extends TestCase
     {
         $response = $this->getPsr7JsonResponseForFixture('Endpoints/updateOnionRoutingSetting.json');
 
-        $mock = $this->getMockBuilder(\Cloudflare\API\Adapter\Adapter::class)->getMock();
+        $mock = $this->createMock(Adapter::class);
         $mock->method('patch')->willReturn($response);
 
         $mock->expects($this->once())
@@ -74,7 +80,7 @@ class CryptoTest extends TestCase
                 $this->equalTo(['value' => 'off'])
             );
 
-        $cryptoMock = new \Cloudflare\API\Endpoints\Crypto($mock);
+        $cryptoMock = new Crypto($mock);
         $result = $cryptoMock->updateOnionRoutingSetting('c2547eb745079dac9320b638f5e225cf483cc5cfdda41', 'off');
 
         $this->assertTrue($result);

@@ -1,5 +1,9 @@
 <?php
+
+namespace Cloudflare\API\Test\Configurations;
+
 use Cloudflare\API\Configurations\PageRulesActions;
+use Cloudflare\API\Test\TestCase;
 
 class PageRulesActionTest extends TestCase
 {

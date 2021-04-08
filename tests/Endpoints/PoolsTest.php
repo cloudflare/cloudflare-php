@@ -1,7 +1,11 @@
 <?php
 
+namespace Cloudflare\API\Test\Endpoints;
+
 use Cloudflare\API\Adapter\Adapter;
+use Cloudflare\API\Configurations\Pool;
 use Cloudflare\API\Endpoints\Pools;
+use Cloudflare\API\Test\TestCase;
 
 /**
  * @author Martijn Smidt <martijn@squeezely.tech>
@@ -22,11 +26,11 @@ class PoolsTest extends TestCase
             ]
         ];
 
-        $poolConfiguration = new \Cloudflare\API\Configurations\Pool('primary-dc-1', $origins);
+        $poolConfiguration = new Pool('primary-dc-1', $origins);
 
         $response = $this->getPsr7JsonResponseForFixture('Endpoints/createPool.json');
 
-        $mock = $this->getMockBuilder(Adapter::class)->getMock();
+        $mock = $this->createMock(Adapter::class);
         $mock->method('post')->willReturn($response);
 
         $mock->expects($this->once())
@@ -47,7 +51,7 @@ class PoolsTest extends TestCase
     {
         $response = $this->getPsr7JsonResponseForFixture('Endpoints/listPools.json');
 
-        $mock = $this->getMockBuilder(Adapter::class)->getMock();
+        $mock = $this->createMock(Adapter::class);
         $mock->method('get')->willReturn($response);
 
         $mock->expects($this->once())
@@ -65,7 +69,7 @@ class PoolsTest extends TestCase
     {
         $response = $this->getPsr7JsonResponseForFixture('Endpoints/getPoolDetails.json');
 
-        $mock = $this->getMockBuilder(Adapter::class)->getMock();
+        $mock = $this->createMock(Adapter::class);
         $mock->method('get')->willReturn($response);
 
         $mock->expects($this->once())
@@ -90,11 +94,11 @@ class PoolsTest extends TestCase
             ]
         ];
 
-        $poolConfiguration = new \Cloudflare\API\Configurations\Pool('primary-dc-1', $origins);
+        $poolConfiguration = new Pool('primary-dc-1', $origins);
 
         $response = $this->getPsr7JsonResponseForFixture('Endpoints/updatePool.json');
 
-        $mock = $this->getMockBuilder(Adapter::class)->getMock();
+        $mock = $this->createMock(Adapter::class);
         $mock->method('put')->willReturn($response);
 
         $mock->expects($this->once())
@@ -115,7 +119,7 @@ class PoolsTest extends TestCase
     {
         $response = $this->getPsr7JsonResponseForFixture('Endpoints/deletePool.json');
 
-        $mock = $this->getMockBuilder(Adapter::class)->getMock();
+        $mock = $this->createMock(Adapter::class);
         $mock->method('delete')->willReturn($response);
 
         $mock->expects($this->once())

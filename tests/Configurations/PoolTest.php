@@ -1,17 +1,20 @@
 <?php
+
+namespace Cloudflare\API\Test\Configurations;
+
+use Cloudflare\API\Configurations\ConfigurationsException;
+use Cloudflare\API\Configurations\Pool;
+use Cloudflare\API\Test\TestCase;
+
 /**
  * @author Martijn Smidt <martijn@squeezely.tech>
  * User: HemeraOne
  * Date: 13/05/2019
  */
-
-use Cloudflare\API\Configurations\ConfigurationsException;
-use Cloudflare\API\Configurations\Pool;
-
 class PoolTest extends TestCase
 {
     /**
-     * @dataProvider testArgumentsDataProvider
+     * @dataProvider argumentsDataProvider
      */
     public function testArguments($setFunction, $arguments, $getFunction, $invalid)
     {
@@ -20,7 +23,7 @@ class PoolTest extends TestCase
             if ($invalid) {
                 try {
                     $pool->{$setFunction}($argument);
-                } catch (ConfigurationsException $e) {
+                } catch (ConfigurationsException $exception) {
                     $this->assertNotEquals($argument, $pool->{$getFunction}());
                 }
             } elseif ($invalid === false) {
@@ -30,7 +33,7 @@ class PoolTest extends TestCase
         }
     }
 
-    public function testArgumentsDataProvider()
+    public function argumentsDataProvider(): array
     {
         return [
             'origins arguments valid' => [

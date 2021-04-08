@@ -6,9 +6,15 @@
  * Time: 11:20
  */
 
+namespace Cloudflare\API\Test\Endpoints;
+
+use Cloudflare\API\Adapter\Adapter;
+use Cloudflare\API\Endpoints\Railgun;
+use Cloudflare\API\Test\TestCase;
+
 class RailgunTest extends TestCase
 {
-    public function testcreate()
+    public function testCreate()
     {
         $details = [
             'name' => 'My Railgun',
@@ -16,7 +22,7 @@ class RailgunTest extends TestCase
 
         $response = $this->getPsr7JsonResponseForFixture('Endpoints/createRailgun.json');
 
-        $mock = $this->getMockBuilder(\Cloudflare\API\Adapter\Adapter::class)->getMock();
+        $mock = $this->createMock(Adapter::class);
         $mock->method('post')->willReturn($response);
 
         $mock->expects($this->once())
@@ -26,7 +32,7 @@ class RailgunTest extends TestCase
                 $this->equalTo(['name' => $details['name']])
             );
 
-        $railgun = new \Cloudflare\API\Endpoints\Railgun($mock);
+        $railgun = new Railgun($mock);
         $result = $railgun->create($details['name']);
 
         $this->assertObjectHasAttribute('result', $result);
@@ -41,7 +47,7 @@ class RailgunTest extends TestCase
     {
         $response = $this->getPsr7JsonResponseForFixture('Endpoints/listRailguns.json');
 
-        $mock = $this->getMockBuilder(\Cloudflare\API\Adapter\Adapter::class)->getMock();
+        $mock = $this->createMock(Adapter::class);
         $mock->method('get')->willReturn($response);
 
         $mock->expects($this->once())
@@ -55,7 +61,7 @@ class RailgunTest extends TestCase
                 ])
             );
 
-        $railgun = new \Cloudflare\API\Endpoints\Railgun($mock);
+        $railgun = new Railgun($mock);
         $result = $railgun->list(1, 20, 'desc');
 
         $this->assertObjectHasAttribute('result', $result);
@@ -67,7 +73,7 @@ class RailgunTest extends TestCase
     {
         $response = $this->getPsr7JsonResponseForFixture('Endpoints/getRailgun.json');
 
-        $mock = $this->getMockBuilder(\Cloudflare\API\Adapter\Adapter::class)->getMock();
+        $mock = $this->createMock(Adapter::class);
         $mock->method('get')->willReturn($response);
 
         $mock->expects($this->once())
@@ -76,7 +82,7 @@ class RailgunTest extends TestCase
                 $this->equalTo('railguns/e928d310693a83094309acf9ead50448')
             );
 
-        $railgun = new \Cloudflare\API\Endpoints\Railgun($mock);
+        $railgun = new Railgun($mock);
         $result = $railgun->get('e928d310693a83094309acf9ead50448');
 
         $this->assertEquals('e928d310693a83094309acf9ead50448', $result->id);
@@ -87,7 +93,7 @@ class RailgunTest extends TestCase
     {
         $response = $this->getPsr7JsonResponseForFixture('Endpoints/listRailgunZones.json');
 
-        $mock = $this->getMockBuilder(\Cloudflare\API\Adapter\Adapter::class)->getMock();
+        $mock = $this->createMock(Adapter::class);
         $mock->method('get')->willReturn($response);
 
         $mock->expects($this->once())
@@ -96,7 +102,7 @@ class RailgunTest extends TestCase
                 $this->equalTo('railguns/e928d310693a83094309acf9ead50448/zones')
             );
 
-        $railgun = new \Cloudflare\API\Endpoints\Railgun($mock);
+        $railgun = new Railgun($mock);
         $result = $railgun->getZones('e928d310693a83094309acf9ead50448');
 
         $this->assertObjectHasAttribute('result', $result);
@@ -108,7 +114,7 @@ class RailgunTest extends TestCase
     {
         $response = $this->getPsr7JsonResponseForFixture('Endpoints/updateRailgun.json');
 
-        $mock = $this->getMockBuilder(\Cloudflare\API\Adapter\Adapter::class)->getMock();
+        $mock = $this->createMock(Adapter::class);
         $mock->method('patch')->willReturn($response);
 
         $details = [
@@ -122,7 +128,7 @@ class RailgunTest extends TestCase
                 $this->equalTo($details)
             );
 
-        $waf = new \Cloudflare\API\Endpoints\Railgun($mock);
+        $waf = new Railgun($mock);
         $result = $waf->update('e928d310693a83094309acf9ead50448', true);
 
         $this->assertEquals('e928d310693a83094309acf9ead50448', $result->id);
@@ -133,7 +139,7 @@ class RailgunTest extends TestCase
     {
         $response = $this->getPsr7JsonResponseForFixture('Endpoints/deleteRailgun.json');
 
-        $mock = $this->getMockBuilder(\Cloudflare\API\Adapter\Adapter::class)->getMock();
+        $mock = $this->createMock(Adapter::class);
         $mock->method('delete')->willReturn($response);
 
         $mock->expects($this->once())
@@ -142,7 +148,7 @@ class RailgunTest extends TestCase
                 $this->equalTo('railguns/e928d310693a83094309acf9ead50448')
             );
 
-        $waf = new \Cloudflare\API\Endpoints\Railgun($mock);
+        $waf = new Railgun($mock);
         $waf->delete('e928d310693a83094309acf9ead50448');
         $this->assertEquals('e928d310693a83094309acf9ead50448', $waf->getBody()->result->id);
     }
