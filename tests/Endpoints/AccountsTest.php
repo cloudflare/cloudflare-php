@@ -1,4 +1,11 @@
 <?php
+
+namespace Cloudflare\API\Test\Endpoints;
+
+use Cloudflare\API\Adapter\Adapter;
+use Cloudflare\API\Endpoints\Accounts;
+use Cloudflare\API\Test\TestCase;
+
 /**
  * User: kanasite
  * Date: 01/28/2019
@@ -10,7 +17,7 @@ class AccountsTest extends TestCase
     {
         $response = $this->getPsr7JsonResponseForFixture('Endpoints/listAccounts.json');
 
-        $mock = $this->getMockBuilder(\Cloudflare\API\Adapter\Adapter::class)->getMock();
+        $mock = $this->createMock(Adapter::class);
         $mock->method('get')->willReturn($response);
 
         $mock->expects($this->once())
@@ -24,7 +31,7 @@ class AccountsTest extends TestCase
                 ])
             );
 
-        $accounts = new \Cloudflare\API\Endpoints\Accounts($mock);
+        $accounts = new Accounts($mock);
         $result = $accounts->listAccounts(1, 20, 'desc');
 
         $this->assertObjectHasAttribute('result', $result);

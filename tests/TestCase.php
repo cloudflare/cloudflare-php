@@ -1,4 +1,7 @@
 <?php
+
+namespace Cloudflare\API\Test;
+
 use GuzzleHttp\Psr7;
 use PHPUnit\Framework\TestCase as BaseTestCase;
 

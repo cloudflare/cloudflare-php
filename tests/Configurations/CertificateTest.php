@@ -1,7 +1,9 @@
 <?php
 
-use PHPUnit\Framework\TestCase;
+namespace Cloudflare\API\Test\Configurations;
+
 use Cloudflare\API\Configurations\Certificate;
+use Cloudflare\API\Test\TestCase;
 
 class CertificateTest extends TestCase
 {

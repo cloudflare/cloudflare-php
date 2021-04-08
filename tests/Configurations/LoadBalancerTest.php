@@ -1,17 +1,20 @@
 <?php
+
+namespace Cloudflare\API\Test\Configurations;
+
+use Cloudflare\API\Configurations\ConfigurationsException;
+use Cloudflare\API\Configurations\LoadBalancer;
+use Cloudflare\API\Test\TestCase;
+
 /**
  * @author Martijn Smidt <martijn@squeezely.tech>
  * User: HemeraOne
  * Date: 13/05/2019
  */
-
-use Cloudflare\API\Configurations\ConfigurationsException;
-use Cloudflare\API\Configurations\LoadBalancer;
-
 class LoadBalancerTest extends TestCase
 {
     /**
-     * @dataProvider testArgumentsDataProvider
+     * @dataProvider argumentsDataProvider
      */
     public function testArguments($setFunction, $arguments, $getFunction, $invalid)
     {
@@ -20,7 +23,7 @@ class LoadBalancerTest extends TestCase
             if ($invalid === true) {
                 try {
                     $loadBalancer->{$setFunction}($argument);
-                } catch (ConfigurationsException $e) {
+                } catch (ConfigurationsException $exception) {
                     $this->assertNotEquals($argument, $loadBalancer->{$getFunction}());
                 }
             } elseif ($invalid === false) {
@@ -30,7 +33,7 @@ class LoadBalancerTest extends TestCase
         }
     }
 
-    public function testArgumentsDataProvider()
+    public function argumentsDataProvider()
     {
         return [
             'steeringPolicy arguments valid' => [
