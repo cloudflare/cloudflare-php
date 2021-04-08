@@ -1,22 +1,26 @@
 language: php
 
-php:
-    - 7.2
-    - 7.3
-    - 7.4
-    - 8.0
-    - nightly
+matrix:
+  fast_finish: true
+  include:
+    - php: 7.2
+      env:
+        - COMPOSER_UPDATE=true
+    - php: 7.3
+    - php: 7.4
+    - php: 8.0
+    - php: nightly
 
 jobs:
   allow_failures:
-  - php: 7.4
   - php: nightly
 
 before_install:
     - composer self-update
 
 install:
-    - travis_retry composer install --no-interaction --prefer-source
+    - if [[ $COMPOSER_UPDATE != 'true' ]]; then composer install --prefer-dist --no-interaction; fi
+    - if [[ $COMPOSER_UPDATE == 'true' ]]; then composer update --prefer-dist --prefer-stable --no-interaction; fi
 
 script:
     - composer run lint
