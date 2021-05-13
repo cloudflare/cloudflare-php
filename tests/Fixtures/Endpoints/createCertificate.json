@@ -1,0 +1,17 @@
+{
+  "success": true,
+  "errors": [],
+  "messages": [],
+  "result": {
+    "id": "12341234123412341234",
+    "certificate": "some-cert-data-foofoo",
+    "hostnames": [
+      "foo.example.com",
+      "bar.example.com"
+    ],
+    "expires_on": "2014-01-01T05:20:00.12345Z",
+    "request_type": "origin-ecc",
+    "requested_validity":  365,
+    "csr": "some-csr-data-barbar"
+  }
+}

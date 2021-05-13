@@ -117,7 +117,7 @@ class PageRulesActions implements Configurations
 
     public function setEdgeCacheTTL(int $value)
     {
-        if ($value > 2419200) {
+        if ($value > 2678400) {
             throw new ConfigurationsException('Edge Cache TTL too high.');
         }
 

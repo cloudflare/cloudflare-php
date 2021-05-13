@@ -12,6 +12,7 @@ The Cloudflare API can be found [here](https://api.cloudflare.com/).
 Each API call is provided via a similarly named function within various classes in the **Cloudflare\API\Endpoints** namespace:
 
 - [x] [DNS Records](https://www.cloudflare.com/dns/)
+- [x] [DNS Analytics](https://api.cloudflare.com/#dns-analytics-table)
 - [x] Zones
 - [x] User Administration (partial)
 - [x] [Cloudflare IPs](https://www.cloudflare.com/ips/)
@@ -24,7 +25,7 @@ Each API call is provided via a similarly named function within various classes 
 - [ ] Organization Administration
 - [x] [Railgun](https://www.cloudflare.com/railgun/) administration
 - [ ] [Keyless SSL](https://blog.cloudflare.com/keyless-ssl-the-nitty-gritty-technical-details/)
-- [ ] [Origin CA](https://blog.cloudflare.com/universal-ssl-encryption-all-the-way-to-the-origin-for-free/)
+- [x] [Origin CA](https://blog.cloudflare.com/universal-ssl-encryption-all-the-way-to-the-origin-for-free/)
 - [x] Crypto
 - [x] Load Balancers
 - [x] Firewall Settings

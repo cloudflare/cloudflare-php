@@ -36,4 +36,34 @@ class ZoneSettingsTest extends TestCase
 
         $this->assertSame('on', $result);
     }
+
+    public function testGetBrowserCacheTtlSetting()
+    {
+        $response = $this->getPsr7JsonResponseForFixture('Endpoints/getBrowserCacheTtlSetting.json');
+
+        $mock = $this->getMockBuilder(Adapter::class)->getMock();
+        $mock->method('get')->willReturn($response);
+
+        $mock->expects($this->once())->method('get');
+
+        $zones = new ZoneSettings($mock);
+        $result = $zones->getBrowserCacheTtlSetting('023e105f4ecef8ad9ca31a8372d0c353');
+
+        $this->assertSame(14400, $result);
+    }
+
+    public function testUpdateBrowserCacheTtlSetting()
+    {
+        $response = $this->getPsr7JsonResponseForFixture('Endpoints/updateBrowserCacheTtlSetting.json');
+
+        $mock = $this->getMockBuilder(Adapter::class)->getMock();
+        $mock->method('patch')->willReturn($response);
+
+        $mock->expects($this->once())->method('patch');
+
+        $zones = new ZoneSettings($mock);
+        $result = $zones->updateBrowserCacheTtlSetting('023e105f4ecef8ad9ca31a8372d0c353', 16070400);
+
+        $this->assertTrue($result);
+    }
 }

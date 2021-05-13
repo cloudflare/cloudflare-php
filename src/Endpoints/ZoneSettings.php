@@ -106,6 +106,37 @@ class ZoneSettings implements API
         return false;
     }
 
+    public function getBrowserCacheTtlSetting($zoneID)
+    {
+        $return = $this->adapter->get(
+            'zones/' . $zoneID . '/settings/browser_cache_ttl'
+        );
+        $body   = json_decode($return->getBody());
+
+        if ($body->success) {
+            return $body->result->value;
+        }
+
+        return false;
+    }
+
+    public function updateBrowserCacheTtlSetting($zoneID, $value)
+    {
+        $return = $this->adapter->patch(
+            'zones/' . $zoneID . '/settings/browser_cache_ttl',
+            [
+                'value' => $value
+            ]
+        );
+        $body   = json_decode($return->getBody());
+
+        if ($body->success) {
+            return true;
+        }
+
+        return false;
+    }
+
     public function updateMinifySetting($zoneID, $html, $css, $javascript)
     {
         $return = $this->adapter->patch(
