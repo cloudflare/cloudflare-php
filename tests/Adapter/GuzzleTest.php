@@ -101,8 +101,7 @@ class GuzzleTest extends TestCase
                 "success": false,
                 "errors": [{"code":1003,"message":"Invalid or missing zone id."}],
                 "messages": []
-             }'
-        ;
+             }';
         $response = new Response(200, [], $body);
 
         $this->expectException(\Cloudflare\API\Adapter\ResponseException::class);
@@ -114,8 +113,7 @@ class GuzzleTest extends TestCase
                 "success": false,
                 "errors": [],
                 "messages": []
-             }'
-        ;
+             }';
         $response = new Response(200, [], $body);
 
         $this->expectException(\Cloudflare\API\Adapter\ResponseException::class);

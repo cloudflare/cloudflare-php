@@ -29,6 +29,7 @@ Each API call is provided via a similarly named function within various classes 
 - [x] Crypto
 - [x] Load Balancers
 - [x] Firewall Settings
+- [x] WorkersKV
 
 Note that this repository is currently under development, additional classes and endpoints being actively added.
 

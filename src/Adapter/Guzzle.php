@@ -1,4 +1,5 @@
 <?php
+
 /**
  * User: junade
  * Date: 13/01/2017
@@ -9,6 +10,7 @@ namespace Cloudflare\API\Adapter;
 
 use Cloudflare\API\Auth\Auth;
 use GuzzleHttp\Client;
+use InvalidArgumentException;
 use Psr\Http\Message\ResponseInterface;
 
 class Guzzle implements Adapter
@@ -18,7 +20,7 @@ class Guzzle implements Adapter
     /**
      * @inheritDoc
      */
-    public function __construct(Auth $auth, string $baseURI = null)
+    public function __construct(Auth $auth, Client $client = null, string $baseURI = null)
     {
         if ($baseURI === null) {
             $baseURI = 'https://api.cloudflare.com/client/v4/';
@@ -26,13 +28,16 @@ class Guzzle implements Adapter
 
         $headers = $auth->getHeaders();
 
-        $this->client = new Client([
-            'base_uri' => $baseURI,
-            'headers' => $headers,
-            'Accept' => 'application/json'
-        ]);
+        if ($client == null) {
+            $this->client = new Client([
+                'base_uri' => $baseURI,
+                'headers' => $headers,
+                'Accept' => 'application/json'
+            ]);
+        } else {
+	    $this->client = $client;
+        }
     }
-
 
     /**
      * @inheritDoc
@@ -77,7 +82,7 @@ class Guzzle implements Adapter
     public function request(string $method, string $uri, array $data = [], array $headers = [])
     {
         if (!in_array($method, ['get', 'post', 'put', 'patch', 'delete'])) {
-            throw new \InvalidArgumentException('Request method must be get, post, put, patch, or delete');
+            throw new InvalidArgumentException('Request method must be get, post, put, patch, or delete');
         }
 
         $response = $this->client->$method($uri, [
@@ -92,7 +97,14 @@ class Guzzle implements Adapter
 
     private function checkError(ResponseInterface $response)
     {
-        $json = json_decode($response->getBody());
+        $body = (string) $response->getBody();
+
+        // If first character of the response body is not { then the response is in plain text so need to skip below checks as they fail.
+        if (strpos($body, '{') !== 0) {
+            return;
+        }
+
+        $json = json_decode($body);
 
         if (json_last_error() !== JSON_ERROR_NONE) {
             throw new JSONException();

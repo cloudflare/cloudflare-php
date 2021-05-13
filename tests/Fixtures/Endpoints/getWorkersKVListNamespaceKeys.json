@@ -1,0 +1,18 @@
+{
+  "success": true,
+  "errors": [],
+  "messages": [],
+  "result": [
+    {
+      "name": "My-Key",
+      "expiration": 1577836800,
+      "metadata": {
+        "someMetadataKey": "someMetadataValue"
+      }
+    }
+  ],
+  "result_info": {
+    "count": 1,
+    "cursor": "6Ck1la0VxJ0djhidm1MdX2FyDGxLKVeeHZZmORS_8XeSuhz9SjIJRaSa2lnsF01tQOHrfTGAP3R5X1Kv5iVUuMbNKhWNAXHOl6ePB0TUL8nw"
+  }
+}
