@@ -6,6 +6,9 @@ use GuzzleHttp\Exception\RequestException;
 use GuzzleHttp\Psr7\Request;
 use GuzzleHttp\Psr7\Response;
 
+/**
+ * @SuppressWarnings(PHPMD.StaticAccess)
+ */
 class ResponseExceptionTest extends TestCase
 {
     public function testFromRequestExceptionNoResponse()

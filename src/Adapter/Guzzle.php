@@ -70,6 +70,9 @@ class Guzzle implements Adapter
         return $this->request('delete', $uri, $data, $headers);
     }
 
+    /**
+     * @SuppressWarnings(PHPMD.StaticAccess)
+     */
     public function request(string $method, string $uri, array $data = [], array $headers = [])
     {
         if (!in_array($method, ['get', 'post', 'put', 'patch', 'delete'])) {
