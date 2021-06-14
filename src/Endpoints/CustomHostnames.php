@@ -38,8 +38,18 @@ class CustomHostnames implements API
      * @param string $customCertificate
      * @return \stdClass
      */
-    public function addHostname(string $zoneID, string $hostname, string $sslMethod = 'http', string $sslType = 'dv', array $sslSettings = [], string $customOriginServer = '', bool $wildcard = false, string $bundleMethod = '', string $customKey = '', string $customCertificate = ''): \stdClass
-    {
+    public function addHostname(
+        string $zoneID,
+        string $hostname,
+        string $sslMethod = 'http',
+        string $sslType = 'dv',
+        array $sslSettings = [],
+        string $customOriginServer = '',
+        bool $wildcard = false,
+        string $bundleMethod = '',
+        string $customKey = '',
+        string $customCertificate = ''
+    ): \stdClass {
         $options = [
             'hostname' => $hostname,
             'ssl' => [
