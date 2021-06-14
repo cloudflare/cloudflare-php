@@ -14,7 +14,7 @@ use Cloudflare\API\Traits\BodyAccessorTrait;
 class CustomHostnames implements API
 {
     use BodyAccessorTrait;
-    
+
     private $adapter;
 
     public function __construct(Adapter $adapter)
@@ -30,12 +30,15 @@ class CustomHostnames implements API
      * @param string $hostname
      * @param string $sslMethod
      * @param string $sslType
-     * @param array $sslSettings
+     * @param array  $sslSettings
      * @param string $customOriginServer
-     * @param bool $wildcard
+     * @param bool   $wildcard
+     * @param string $bundleMethod
+     * @param string $customKey
+     * @param string $customCertificate
      * @return \stdClass
      */
-    public function addHostname(string $zoneID, string $hostname, string $sslMethod = 'http', string $sslType = 'dv', array $sslSettings = [], string $customOriginServer = '', bool $wildcard = false): \stdClass
+    public function addHostname(string $zoneID, string $hostname, string $sslMethod = 'http', string $sslType = 'dv', array $sslSettings = [], string $customOriginServer = '', bool $wildcard = false, string $bundleMethod = '', string $customKey = '', string $customCertificate = ''): \stdClass
     {
         $options = [
             'hostname' => $hostname,
@@ -49,6 +52,18 @@ class CustomHostnames implements API
 
         if (!empty($customOriginServer)) {
             $options['custom_origin_server'] = $customOriginServer;
+        }
+
+        if (empty($bundleMethod) === false) {
+            $options['bundle_method'] = $bundleMethod;
+        }
+
+        if (empty($customKey) === false) {
+            $options['custom_key'] = $customKey;
+        }
+
+        if (empty($customCertificate) === false) {
+            $options['custom_certificate'] = $customCertificate;
         }
 
         $zone = $this->adapter->post('zones/'.$zoneID.'/custom_hostnames', $options);
