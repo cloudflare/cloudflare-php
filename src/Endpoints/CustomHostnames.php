@@ -129,8 +129,17 @@ class CustomHostnames implements API
      * @param string $customOriginServer
      * @return \stdClass
      */
-    public function updateHostname(string $zoneID, string $hostnameID, string $sslMethod = '', string $sslType = '', array $sslSettings = [], string $customOriginServer = '', ?bool $wildcard = null, string $bundleMethod = '', string $customKey = '', string $customCertificate = ''): \stdClass
-    {
+    public function updateHostname(
+        string $zoneID,
+        string $hostnameID,
+        string $sslMethod = '',
+        string $sslType = '',
+        array $sslSettings = [],
+        string $customOriginServer = '',
+        ?bool $wildcard = null,
+        string $bundleMethod = '',
+        string $customKey = '',
+        string $customCertificate = ''): \stdClass {
         $query = [];
 
         if (!empty($sslMethod)) {
