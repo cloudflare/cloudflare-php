@@ -121,12 +121,16 @@ class CustomHostnames implements API
     /**
      * @SuppressWarnings(PHPMD.BooleanArgumentFlag)
      *
-     * @param string $zoneID
-     * @param string $hostnameID
-     * @param string $sslMethod
-     * @param string $sslType
-     * @param array  $sslSettings
-     * @param string $customOriginServer
+     * @param string    $zoneID
+     * @param string    $hostnameID
+     * @param string    $sslMethod
+     * @param string    $sslType
+     * @param array     $sslSettings
+     * @param string    $customOriginServer
+     * @param bool|null $wildcard
+     * @param string    $bundleMethod
+     * @param string    $customKey
+     * @param string    $customCertificate
      * @return \stdClass
      */
     public function updateHostname(
