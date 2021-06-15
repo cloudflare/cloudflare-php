@@ -129,7 +129,7 @@ class CustomHostnames implements API
      * @param string $customOriginServer
      * @return \stdClass
      */
-    public function updateHostname(string $zoneID, string $hostnameID, string $sslMethod = '', string $sslType = '', array $sslSettings = [], string $customOriginServer = ''): \stdClass
+    public function updateHostname(string $zoneID, string $hostnameID, string $sslMethod = '', string $sslType = '', array $sslSettings = [], string $customOriginServer = '', ?bool $wildcard = null, string $bundleMethod = '', string $customKey = '', string $customCertificate = ''): \stdClass
     {
         $query = [];
 
@@ -143,6 +143,22 @@ class CustomHostnames implements API
 
         if (!empty($sslSettings)) {
             $query['settings'] = $sslSettings;
+        }
+
+        if (is_null($wildcard) === false) {
+            $query['wildcard'] = $wildcard;
+        }
+
+        if (empty($bundleMethod) === false) {
+            $query['bundle_method'] = $bundleMethod;
+        }
+
+        if (empty($customKey) === false) {
+            $query['custom_key'] = $customKey;
+        }
+
+        if (empty($customCertificate) === false) {
+            $query['custom_certificate'] = $customCertificate;
         }
 
         if (!empty($query)) {
