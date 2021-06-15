@@ -85,13 +85,13 @@ CERTIFICATE;
                         'settings' => [
                             'http2' => 'on',
                             'http3' => 'on',
-                            'min_tls_version' => '1.2'
-                        ]
+                            'min_tls_version' => '1.2',
+                        ],
+                        'bundle_method' => 'optimal',
+                        'custom_key' => $customKey,
+                        'custom_certificate' => $customCertificate,
+                        'wildcard' => true,
                     ],
-                    'bundle_method' => 'optimal',
-                    'custom_key' => $customKey,
-                    'custom_certificate' => $customCertificate,
-                    'wildcard' => true,
                 ])
             );
 

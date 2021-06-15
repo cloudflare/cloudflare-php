@@ -55,9 +55,9 @@ class CustomHostnames implements API
             'ssl' => [
                 'method' => $sslMethod,
                 'type' => $sslType,
-                'settings' => $sslSettings
+                'settings' => $sslSettings,
+                'wildcard' => $wildcard,
             ],
-            'wildcard' => $wildcard,
         ];
 
         if (!empty($customOriginServer)) {
@@ -65,15 +65,15 @@ class CustomHostnames implements API
         }
 
         if (empty($bundleMethod) === false) {
-            $options['bundle_method'] = $bundleMethod;
+            $options['ssl']['bundle_method'] = $bundleMethod;
         }
 
         if (empty($customKey) === false) {
-            $options['custom_key'] = $customKey;
+            $options['ssl']['custom_key'] = $customKey;
         }
 
         if (empty($customCertificate) === false) {
-            $options['custom_certificate'] = $customCertificate;
+            $options['ssl']['custom_certificate'] = $customCertificate;
         }
 
         $zone = $this->adapter->post('zones/'.$zoneID.'/custom_hostnames', $options);
