@@ -14,7 +14,7 @@ use Cloudflare\API\Traits\BodyAccessorTrait;
 class CustomHostnames implements API
 {
     use BodyAccessorTrait;
-    
+
     private $adapter;
 
     public function __construct(Adapter $adapter)
@@ -125,6 +125,8 @@ class CustomHostnames implements API
      * @param string $hostnameID
      * @param string $sslMethod
      * @param string $sslType
+     * @param array  $sslSettings
+     * @param string $customOriginServer
      * @return \stdClass
      */
     public function updateHostname(string $zoneID, string $hostnameID, string $sslMethod = '', string $sslType = '', array $sslSettings = [], string $customOriginServer = ''): \stdClass
