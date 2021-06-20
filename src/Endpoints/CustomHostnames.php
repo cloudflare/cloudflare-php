@@ -169,4 +169,16 @@ class CustomHostnames implements API
         $this->body = json_decode($zone->getBody());
         return $this->body;
     }
+
+    /**
+     * @param string $zoneID
+     * @return \stdClass
+     */
+    public function getFallbackOrigin(string $zoneID): \stdClass
+    {
+        $zone = $this->adapter->get('zones/'.$zoneID.'/custom_hostnames/fallback_origin');
+        $this->body = json_decode($zone->getBody());
+
+        return $this->body->result;
+    }
 }
