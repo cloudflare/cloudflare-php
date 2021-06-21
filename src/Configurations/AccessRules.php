@@ -14,11 +14,6 @@ class AccessRules implements Configurations
           $this->config = ['target' => 'ip', 'value' => $value];
         }
     }
-    
-    public function setIPv6(string $value)
-    {
-        $this->config = ['target' => 'ip6', 'value' => $value];
-    }
 
     public function setIPRange(string $value)
     {
