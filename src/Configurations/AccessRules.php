@@ -8,7 +8,11 @@ class AccessRules implements Configurations
 
     public function setIP(string $value)
     {
-        $this->config = ['target' => 'ip', 'value' => $value];
+        if (strpos($value, ':') !== false) {
+          $this->config = ['target' => 'ip6', 'value' => $value];
+        } else {
+          $this->config = ['target' => 'ip', 'value' => $value];
+        }
     }
     
     public function setIPv6(string $value)
