@@ -157,19 +157,19 @@ class CustomHostnames implements API
             $query['settings'] = $sslSettings;
         }
 
-        if (is_null($wildcard) === false) {
+        if (!is_null($wildcard)) {
             $query['wildcard'] = $wildcard;
         }
 
-        if (empty($bundleMethod) === false) {
+        if (!empty($bundleMethod)) {
             $query['bundle_method'] = $bundleMethod;
         }
 
-        if (empty($customSsl['key']) === false) {
+        if (!empty($customSsl['key'])) {
             $query['custom_key'] = $customSsl['key'];
         }
 
-        if (empty($customSsl['certificate']) === false) {
+        if (!empty($customSsl['certificate'])) {
             $query['custom_certificate'] = $customSsl['certificate'];
         }
 
