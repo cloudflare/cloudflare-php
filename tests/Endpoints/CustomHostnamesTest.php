@@ -155,6 +155,7 @@ class CustomHostnamesTest extends TestCase
             'http3' => 'on',
             'min_tls_version' => '1.2'
         ];
+
         $result = $zones->updateHostname(
             '023e105f4ecef8ad9ca31a8372d0c353',
             '0d89c70d-ad9f-4843-b99f-6cc0252067e9',
