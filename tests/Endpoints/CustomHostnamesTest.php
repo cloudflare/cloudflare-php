@@ -14,10 +14,10 @@ class CustomHostnamesTest extends TestCase
     {
         $response = $this->getPsr7JsonResponseForFixture('Endpoints/createCustomHostname.json');
 
+        $customSsl = $this->getCustomSsl();
+
         $mock = $this->getMockBuilder(\Cloudflare\API\Adapter\Adapter::class)->getMock();
         $mock->method('post')->willReturn($response);
-
-        $customSsl = $this->getCustomSsl();
 
         $mock->expects($this->once())
             ->method('post')
