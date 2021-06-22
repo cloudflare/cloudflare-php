@@ -30,25 +30,48 @@ class CustomHostnames implements API
      * @param string $hostname
      * @param string $sslMethod
      * @param string $sslType
-     * @param array $sslSettings
+     * @param array  $sslSettings
      * @param string $customOriginServer
-     * @param bool $wildcard
+     * @param bool   $wildcard
+     * @param string $bundleMethod
+     * @param array $customSsl
      * @return \stdClass
      */
-    public function addHostname(string $zoneID, string $hostname, string $sslMethod = 'http', string $sslType = 'dv', array $sslSettings = [], string $customOriginServer = '', bool $wildcard = false): \stdClass
-    {
+    public function addHostname(
+        string $zoneID,
+        string $hostname,
+        string $sslMethod = 'http',
+        string $sslType = 'dv',
+        array $sslSettings = [],
+        string $customOriginServer = '',
+        bool $wildcard = false,
+        string $bundleMethod = '',
+        array $customSsl = []
+    ): \stdClass {
         $options = [
             'hostname' => $hostname,
             'ssl' => [
                 'method' => $sslMethod,
                 'type' => $sslType,
-                'settings' => $sslSettings
+                'settings' => $sslSettings,
+                'wildcard' => $wildcard,
             ],
-            'wildcard' => $wildcard,
         ];
 
         if (!empty($customOriginServer)) {
             $options['custom_origin_server'] = $customOriginServer;
+        }
+
+        if (!empty($bundleMethod)) {
+            $options['ssl']['bundle_method'] = $bundleMethod;
+        }
+
+        if (!empty($customSsl['key'])) {
+            $options['ssl']['custom_key'] = $customSsl['key'];
+        }
+
+        if (!empty($customSsl['certificate'])) {
+            $options['ssl']['custom_certificate'] = $customSsl['certificate'];
         }
 
         $zone = $this->adapter->post('zones/'.$zoneID.'/custom_hostnames', $options);
