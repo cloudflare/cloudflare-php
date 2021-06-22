@@ -164,7 +164,7 @@ class CustomHostnames implements API
         string $sslType = '',
         array $sslSettings = [],
         string $customOriginServer = '',
-        ?bool $wildcard = null,
+        bool $wildcard = null,
         string $bundleMethod = '',
         array $customSsl = []
     ): \stdClass {
