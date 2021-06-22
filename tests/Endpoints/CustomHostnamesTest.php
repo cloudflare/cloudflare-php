@@ -47,7 +47,7 @@ bsrBsljYfVvtLQzilugs1oEe94LTrYjR2oQt0W24bqpGQHuv1ILuUBuodERkxSFL
 /cMkj3wSfC341hFaJEuG1+PcxA==
 -----END PRIVATE KEY-----
 KEY;
-    $customCertificate = <<<CERTIFICATE
+        $customCertificate = <<<CERTIFICATE
 -----BEGIN CERTIFICATE-----
 MIIDmTCCAoGgAwIBAgIULyaeNqp0tOut/wvuxNyKmUxOGYEwDQYJKoZIhvcNAQEL
 BQAwXDELMAkGA1UEBhMCWFgxFTATBgNVBAcMDERlZmF1bHQgQ2l0eTEcMBoGA1UE
