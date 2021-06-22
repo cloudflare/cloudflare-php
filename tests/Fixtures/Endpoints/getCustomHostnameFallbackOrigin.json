@@ -1,0 +1,18 @@
+{
+  "success": true,
+  "errors": [
+    {}
+  ],
+  "messages": [
+    {}
+  ],
+  "result": {
+    "origin": "fallback.example.com",
+    "status": "pending_deployment",
+    "errors": [
+      "DNS records are not setup correctly. Origin should be a proxied A/AAAA/CNAME dns record"
+    ],
+    "created_at": "2019-10-28T18:11:23.37411Z",
+    "updated_at": "2020-03-16T18:11:23.531995Z"
+  }
+}
