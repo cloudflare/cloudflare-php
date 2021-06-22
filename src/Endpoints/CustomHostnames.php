@@ -144,6 +144,7 @@ class CustomHostnames implements API
         array $customSsl = []
     ): \stdClass {
         $query = [];
+        $options = [];
 
         if (!empty($sslMethod)) {
             $query['method'] = $sslMethod;
