@@ -47,6 +47,7 @@ bsrBsljYfVvtLQzilugs1oEe94LTrYjR2oQt0W24bqpGQHuv1ILuUBuodERkxSFL
 /cMkj3wSfC341hFaJEuG1+PcxA==
 -----END PRIVATE KEY-----
 KEY;
+
         $customCertificate = <<<CERTIFICATE
 -----BEGIN CERTIFICATE-----
 MIIDmTCCAoGgAwIBAgIULyaeNqp0tOut/wvuxNyKmUxOGYEwDQYJKoZIhvcNAQEL
@@ -101,6 +102,7 @@ CERTIFICATE;
             'http3' => 'on',
             'min_tls_version' => '1.2'
         ];
+
         $hostname->addHostname(
             '023e105f4ecef8ad9ca31a8372d0c353',
             'app.example.com',
@@ -110,8 +112,10 @@ CERTIFICATE;
             'origin.example.com',
             true,
             'optimal',
-            $customKey,
-            $customCertificate
+            [
+                'key' => $customKey,
+                'certificate' => $customCertificate,
+            ]
         );
         $this->assertEquals('0d89c70d-ad9f-4843-b99f-6cc0252067e9', $hostname->getBody()->result->id);
     }

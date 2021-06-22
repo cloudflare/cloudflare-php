@@ -34,8 +34,7 @@ class CustomHostnames implements API
      * @param string $customOriginServer
      * @param bool   $wildcard
      * @param string $bundleMethod
-     * @param string $customKey
-     * @param string $customCertificate
+     * @param array $customSsl
      * @return \stdClass
      */
     public function addHostname(
@@ -47,8 +46,7 @@ class CustomHostnames implements API
         string $customOriginServer = '',
         bool $wildcard = false,
         string $bundleMethod = '',
-        string $customKey = '',
-        string $customCertificate = ''
+        array $customSsl = []
     ): \stdClass {
         $options = [
             'hostname' => $hostname,
@@ -68,12 +66,12 @@ class CustomHostnames implements API
             $options['ssl']['bundle_method'] = $bundleMethod;
         }
 
-        if (!empty($customKey)) {
-            $options['ssl']['custom_key'] = $customKey;
+        if (!empty($customSsl['key'])) {
+            $options['ssl']['custom_key'] = $customSsl['key'];
         }
 
-        if (!empty($customCertificate)) {
-            $options['ssl']['custom_certificate'] = $customCertificate;
+        if (!empty($customSsl['certificate'])) {
+            $options['ssl']['custom_certificate'] = $customSsl['certificate'];
         }
 
         $zone = $this->adapter->post('zones/'.$zoneID.'/custom_hostnames', $options);
