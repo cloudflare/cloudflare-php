@@ -64,15 +64,15 @@ class CustomHostnames implements API
             $options['custom_origin_server'] = $customOriginServer;
         }
 
-        if (empty($bundleMethod) === false) {
+        if (!empty($bundleMethod)) {
             $options['ssl']['bundle_method'] = $bundleMethod;
         }
 
-        if (empty($customKey) === false) {
+        if (!empty($customKey)) {
             $options['ssl']['custom_key'] = $customKey;
         }
 
-        if (empty($customCertificate) === false) {
+        if (!empty($customCertificate)) {
             $options['ssl']['custom_certificate'] = $customCertificate;
         }
 
