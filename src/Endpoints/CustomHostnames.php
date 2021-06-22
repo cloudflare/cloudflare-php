@@ -120,6 +120,8 @@ class CustomHostnames implements API
 
     /**
      * @SuppressWarnings(PHPMD.BooleanArgumentFlag)
+     * @SuppressWarnings(PHPMD.CyclomaticComplexity)
+     * @SuppressWarnings(PHPMD.NPathComplexity)
      *
      * @param string    $zoneID
      * @param string    $hostnameID
