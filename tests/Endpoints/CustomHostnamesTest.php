@@ -158,4 +158,24 @@ class CustomHostnamesTest extends TestCase
         $this->assertEquals('0d89c70d-ad9f-4843-b99f-6cc0252067e9', $result->id);
         $this->assertEquals('0d89c70d-ad9f-4843-b99f-6cc0252067e9', $zones->getBody()->id);
     }
+
+    public function testGetHostnameFallbackOrigin()
+    {
+        $response = $this->getPsr7JsonResponseForFixture('Endpoints/getCustomHostnameFallbackOrigin.json');
+
+        $mock = $this->getMockBuilder(\Cloudflare\API\Adapter\Adapter::class)->getMock();
+        $mock->method('get')->willReturn($response);
+
+        $mock->expects($this->once())
+            ->method('get')
+            ->with(
+                $this->equalTo('zones/023e105f4ecef8ad9ca31a8372d0c353/custom_hostnames/fallback_origin')
+            );
+
+        $zones = new \Cloudflare\API\Endpoints\CustomHostnames($mock);
+        $result = $zones->getFallbackOrigin('023e105f4ecef8ad9ca31a8372d0c353');
+
+        $this->assertObjectHasAttribute('origin', $result);
+        $this->assertObjectHasAttribute('status', $result);
+    }
 }
