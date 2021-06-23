@@ -143,16 +143,33 @@ class CustomHostnames implements API
 
     /**
      * @SuppressWarnings(PHPMD.BooleanArgumentFlag)
+     * @SuppressWarnings(PHPMD.CyclomaticComplexity)
+     * @SuppressWarnings(PHPMD.NPathComplexity)
      *
-     * @param string $zoneID
-     * @param string $hostnameID
-     * @param string $sslMethod
-     * @param string $sslType
+     * @param string    $zoneID
+     * @param string    $hostnameID
+     * @param string    $sslMethod
+     * @param string    $sslType
+     * @param array     $sslSettings
+     * @param string    $customOriginServer
+     * @param bool|null $wildcard
+     * @param string    $bundleMethod
+     * @param array    $customSsl
      * @return \stdClass
      */
-    public function updateHostname(string $zoneID, string $hostnameID, string $sslMethod = '', string $sslType = '', array $sslSettings = [], string $customOriginServer = ''): \stdClass
-    {
+    public function updateHostname(
+        string $zoneID,
+        string $hostnameID,
+        string $sslMethod = '',
+        string $sslType = '',
+        array $sslSettings = [],
+        string $customOriginServer = '',
+        bool $wildcard = null,
+        string $bundleMethod = '',
+        array $customSsl = []
+    ): \stdClass {
         $query = [];
+        $options = [];
 
         if (!empty($sslMethod)) {
             $query['method'] = $sslMethod;
@@ -164,6 +181,22 @@ class CustomHostnames implements API
 
         if (!empty($sslSettings)) {
             $query['settings'] = $sslSettings;
+        }
+
+        if (!is_null($wildcard)) {
+            $query['wildcard'] = $wildcard;
+        }
+
+        if (!empty($bundleMethod)) {
+            $query['bundle_method'] = $bundleMethod;
+        }
+
+        if (!empty($customSsl['key'])) {
+            $query['custom_key'] = $customSsl['key'];
+        }
+
+        if (!empty($customSsl['certificate'])) {
+            $query['custom_certificate'] = $customSsl['certificate'];
         }
 
         if (!empty($query)) {

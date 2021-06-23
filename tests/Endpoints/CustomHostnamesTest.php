@@ -121,6 +121,8 @@ class CustomHostnamesTest extends TestCase
     {
         $response = $this->getPsr7JsonResponseForFixture('Endpoints/updateHostname.json');
 
+        $customSsl = $this->getCustomSsl();
+
         $mock = $this->getMockBuilder(\Cloudflare\API\Adapter\Adapter::class)->getMock();
         $mock->method('patch')->willReturn($response);
 
@@ -137,7 +139,12 @@ class CustomHostnamesTest extends TestCase
                             'http2' => 'on',
                             'http3' => 'on',
                             'min_tls_version' => '1.2'
-                        ]
+                        ],
+                        'bundle_method' => 'optimal',
+                        'custom_key' => $customSsl['key'],
+                        'custom_certificate' => $customSsl['certificate'],
+                        'wildcard' => true,
+
                     ]
                 ])
             );
@@ -148,7 +155,21 @@ class CustomHostnamesTest extends TestCase
             'http3' => 'on',
             'min_tls_version' => '1.2'
         ];
-        $result = $zones->updateHostname('023e105f4ecef8ad9ca31a8372d0c353', '0d89c70d-ad9f-4843-b99f-6cc0252067e9', 'http', 'dv', $sslSettings, 'origin.example.com');
+
+        $result = $zones->updateHostname(
+            '023e105f4ecef8ad9ca31a8372d0c353',
+            '0d89c70d-ad9f-4843-b99f-6cc0252067e9',
+            'http',
+            'dv',
+            $sslSettings,
+            'origin.example.com',
+            true,
+            'optimal',
+            [
+                'key' => $customSsl['key'],
+                'certificate' => $customSsl['certificate'],
+            ]
+        );
 
         $this->assertObjectHasAttribute('id', $result);
         $this->assertObjectHasAttribute('hostname', $result);
@@ -194,7 +215,7 @@ class CustomHostnamesTest extends TestCase
         $this->assertObjectHasAttribute('origin', $result);
         $this->assertObjectHasAttribute('status', $result);
     }
-  
+
     private function getCustomSsl(): array
     {
         $customKey = <<<KEY
