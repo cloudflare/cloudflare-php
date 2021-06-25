@@ -306,7 +306,7 @@ class PageRulesActions implements Configurations
         return $this->configs;
     }
 
-    private function addConfigurationOption(string $setting, array $configuration)
+    public function addConfigurationOption(string $setting, array $configuration)
     {
         $configuration['id'] = $setting;
 
