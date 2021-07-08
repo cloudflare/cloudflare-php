@@ -228,10 +228,10 @@ class Zones implements API
         return false;
     }
 
-    public function cachePurge(string $zoneID, array $files = null, array $tags = null, array $hosts = null): bool
+    public function cachePurge(string $zoneID, array $files = null, array $tags = null, array $hosts = null, array $prefixes = null): bool
     {
-        if ($files === null && $tags === null && $hosts === null) {
-            throw new EndpointException('No files, tags or hosts to purge.');
+        if ($files === null && $tags === null && $hosts === null && $prefixes === null) {
+            throw new EndpointException('No files, tags, hosts or prefixes to purge.');
         }
 
         $options = [];
@@ -245,6 +245,10 @@ class Zones implements API
 
         if (!is_null($hosts)) {
             $options['hosts'] = $hosts;
+        }
+
+        if (!is_null($prefixes)) {
+            $options['prefixes'] = $prefixes;
         }
 
         $user = $this->adapter->post('zones/' . $zoneID . '/purge_cache', $options);
