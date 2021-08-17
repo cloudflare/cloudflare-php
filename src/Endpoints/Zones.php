@@ -1,9 +1,8 @@
 <?php
 /**
- * Created by PhpStorm.
- * User: junade
- * Date: 06/06/2017
- * Time: 15:45
+ * User: abdullahavci
+ * Date: 17/08/2021
+ * Time: 11:01
  */
 
 namespace Cloudflare\API\Endpoints;
@@ -155,6 +154,20 @@ class Zones implements API
         $this->body = $response->getBody();
 
         return json_decode($this->body)->result;
+    }
+
+    /**
+     * Return development mode status
+     * @param string $zoneID
+     * @return string
+     */
+    public function getDevelopmentMode(string $zoneID): string
+    {
+        $response = $this->adapter->get('zones/' . $zoneID . '/settings/development_mode');
+
+        $this->body = json_decode($response->getBody());
+
+        return $this->body->result->value;
     }
 
     /**
