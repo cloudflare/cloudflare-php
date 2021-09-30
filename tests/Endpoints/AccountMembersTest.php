@@ -5,7 +5,7 @@ use Cloudflare\API\Endpoints\AccountMembers;
 
 class AccountMembersTest extends TestCase
 {
-    public function testAddAccountMember(): void
+    public function testAddAccountMember()
     {
         $response = $this->getPsr7JsonResponseForFixture('Endpoints/createAccountMember.json');
 
