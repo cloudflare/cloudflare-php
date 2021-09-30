@@ -28,7 +28,7 @@ class Accounts implements API
             'type' => $type,
         ];
 
-        $account    = $this->adapter->post('accounts', $options);
+        $account = $this->adapter->post('accounts', $options);
         $this->body = json_decode($account->getBody());
 
         return $this->body->result;
