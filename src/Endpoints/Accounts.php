@@ -21,7 +21,8 @@ class Accounts implements API
         $this->adapter = $adapter;
     }
 
-    public function addAccount(string $name, string $type = 'standard'): \stdClass {
+    public function addAccount(string $name, string $type = 'standard'): \stdClass
+    {
         $options = [
             'name' => $name,
             'type' => $type,
