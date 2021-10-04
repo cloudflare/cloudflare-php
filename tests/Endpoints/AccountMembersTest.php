@@ -29,4 +29,31 @@ class AccountMembersTest extends TestCase
 
         $this->assertEquals('4536bcfad5faccb111b47003c79917fa', $accountMembers->getBody()->result->id);
     }
+
+    public function testListAccountMembers()
+    {
+        $response = $this->getPsr7JsonResponseForFixture('Endpoints/listAccountMembers.json');
+
+        $mock = $this->getMockBuilder(Adapter::class)->getMock();
+        $mock->method('get')->willReturn($response);
+
+        $mock->expects($this->once())
+            ->method('get')
+            ->with(
+                $this->equalTo('accounts/023e105f4ecef8ad9ca31a8372d0c353/members'),
+                $this->equalTo([
+                    'page' => 1,
+                    'per_page' => 20,
+                ])
+            );
+
+        $accountMembers = new AccountMembers($mock);
+        $result = $accountMembers->listAccountMembers('023e105f4ecef8ad9ca31a8372d0c353', 1, 20);
+
+        $this->assertObjectHasAttribute('result', $result);
+
+        $this->assertEquals('4536bcfad5faccb111b47003c79917fa', $result->result[0]->id);
+        $this->assertEquals(1, $result->result_info->count);
+        $this->assertEquals('4536bcfad5faccb111b47003c79917fa', $accountMembers->getBody()->result[0]->id);
+    }
 }
