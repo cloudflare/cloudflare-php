@@ -30,7 +30,7 @@ class Zones implements API
      * @param string $organizationID
      * @return \stdClass
      */
-    public function addZone(string $name, bool $jumpStart = false, string $organizationID = ''): \stdClass
+    public function addZone(string $name, bool $jumpStart = false, string $organizationID = '', string $accountId = ''): \stdClass
     {
         $options = [
             'name' => $name,
@@ -39,6 +39,10 @@ class Zones implements API
 
         if (!empty($organizationID)) {
             $options['organization'] = ['id' => $organizationID];
+        }
+
+        if (!empty($accountId)) {
+            $options['account'] = ['id' => $accountId];
         }
 
         $user = $this->adapter->post('zones', $options);
