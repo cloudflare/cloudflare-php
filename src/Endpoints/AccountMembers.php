@@ -31,4 +31,20 @@ class AccountMembers implements API
 
         return $this->body->result;
     }
+
+    public function listAccountMembers(string $accountId, int $page = 1, int $perPage = 20): \stdClass
+    {
+        $query = [
+            'page'     => $page,
+            'per_page' => $perPage,
+        ];
+
+        $zone       = $this->adapter->get('accounts/' . $accountId . '/members', $query);
+        $this->body = json_decode($zone->getBody());
+
+        return (object)[
+            'result'      => $this->body->result,
+            'result_info' => $this->body->result_info,
+        ];
+    }
 }
