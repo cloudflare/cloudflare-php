@@ -15,7 +15,7 @@ class ZoneSubscriptionsTest extends TestCase
         $mock->expects($this->once())
             ->method('get')
             ->with(
-                $this->equalTo('zones/023e105f4ecef8ad9ca31a8372d0c353/subscriptions'),
+                $this->equalTo('zones/023e105f4ecef8ad9ca31a8372d0c353/subscriptions')
             );
 
         $zoneSubscriptions = new ZoneSubscriptions($mock);
