@@ -27,22 +27,19 @@ class Zones implements API
      *
      * @param string $name
      * @param bool $jumpStart
-     * @param string $organizationID
+     * @param string $accountId
      * @return \stdClass
      */
-    public function addZone(string $name, bool $jumpStart = false, string $organizationID = '', string $accountId = ''): \stdClass
+    public function addZone(string $name, bool $jumpStart = false, string $accountId = ''): \stdClass
     {
         $options = [
             'name' => $name,
             'jump_start' => $jumpStart
         ];
 
-        if (!empty($organizationID)) {
-            $options['organization'] = ['id' => $organizationID];
-        }
-
         if (!empty($accountId)) {
-            $options['account'] = ['id' => $accountId];
+            $options['organization'] = ['id' => $accountId];
+            $options['account']      = ['id' => $accountId];
         }
 
         $user = $this->adapter->post('zones', $options);
