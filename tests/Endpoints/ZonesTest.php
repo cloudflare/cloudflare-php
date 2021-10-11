@@ -78,7 +78,7 @@ class ZonesTest extends TestCase
             );
 
         $zones = new \Cloudflare\API\Endpoints\Zones($mock);
-        $result = $zones->addZone('example.com', false, '', '023e105f4ecef8ad9ca31a8372d0c353');
+        $result = $zones->addZone('example.com', false, '023e105f4ecef8ad9ca31a8372d0c353');
 
         $this->assertObjectHasAttribute('id', $result);
         $this->assertEquals('023e105f4ecef8ad9ca31a8372d0c353', $result->account->id);
