@@ -30,8 +30,8 @@ class ZoneSubscriptions implements API
             ];
         }
 
-        $account    = $this->adapter->post('zones/' . $zoneId . '/subscription', $options);
-        $this->body = json_decode($account->getBody());
+        $subscription = $this->adapter->post('zones/' . $zoneId . '/subscription', $options);
+        $this->body   = json_decode($subscription->getBody());
 
         return $this->body->result;
     }
