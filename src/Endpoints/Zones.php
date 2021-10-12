@@ -38,8 +38,9 @@ class Zones implements API
         ];
 
         if (!empty($accountId)) {
-            $options['organization'] = ['id' => $accountId];
-            $options['account']      = ['id' => $accountId];
+            $options['account'] = [
+                'id' => $accountId,
+            ];
         }
 
         $user = $this->adapter->post('zones', $options);

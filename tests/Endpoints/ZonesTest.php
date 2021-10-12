@@ -40,9 +40,6 @@ class ZonesTest extends TestCase
                 $this->equalTo([
                     'name' => 'example.com',
                     'jump_start' => true,
-                    'organization' => [
-                        'id' => '01a7362d577a6c3019a474fd6f485823'
-                    ],
                     'account'      => [
                         'id' => '01a7362d577a6c3019a474fd6f485823',
                     ],
@@ -68,9 +65,6 @@ class ZonesTest extends TestCase
                 $this->equalTo([
                     'name'       => 'example.com',
                     'jump_start' => false,
-                    'organization'    => [
-                        'id' => '023e105f4ecef8ad9ca31a8372d0c353',
-                    ],
                     'account'    => [
                         'id' => '023e105f4ecef8ad9ca31a8372d0c353',
                     ],
