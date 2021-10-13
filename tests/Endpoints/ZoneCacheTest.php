@@ -50,6 +50,34 @@ class ZoneCacheTest extends TestCase
         $this->assertEquals('023e105f4ecef8ad9ca31a8372d0c353', $zones->getBody()->result->id);
     }
 
+    public function testCachePurgePrefix()
+    {
+        $response = $this->getPsr7JsonResponseForFixture('Endpoints/cachePurgePrefix.json');
+
+        $mock = $this->getMockBuilder(\Cloudflare\API\Adapter\Adapter::class)->getMock();
+        $mock->method('post')->willReturn($response);
+
+        $mock->expects($this->once())
+            ->method('post')
+            ->with(
+                $this->equalTo('zones/c2547eb745079dac9320b638f5e225cf483cc5cfdda41/purge_cache'),
+                $this->equalTo(
+                    [
+                        'files' => [],
+                        'tags' => [],
+                        'hosts' => [],
+                        'prefixes' => ['dash.cloudflare.com/example']
+                    ]
+                )
+            );
+
+        $zones = new \Cloudflare\API\Endpoints\Zones($mock);
+        $result = $zones->cachePurge('c2547eb745079dac9320b638f5e225cf483cc5cfdda41', [], [], [], ['dash.cloudflare.com/example']);
+
+        $this->assertTrue($result);
+        $this->assertEquals('023e105f4ecef8ad9ca31a8372d0c353', $zones->getBody()->result->id);
+    }
+
     public function testCachePurge()
     {
         $response = $this->getPsr7JsonResponseForFixture('Endpoints/cachePurge.json');
