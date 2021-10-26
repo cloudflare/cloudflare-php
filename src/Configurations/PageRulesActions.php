@@ -128,7 +128,7 @@ class PageRulesActions implements Configurations
 
     public function setEmailObfuscation(bool $active)
     {
-        $this->addConfigurationOption('disable_security', [
+        $this->addConfigurationOption('email_obfuscation', [
             'value' => $this->getBoolAsOnOrOff($active)
         ]);
     }
