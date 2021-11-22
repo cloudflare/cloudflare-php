@@ -66,4 +66,19 @@ class ZoneSettingsTest extends TestCase
 
         $this->assertTrue($result);
     }
+
+    public function testUpdateChangeCiphersSetting()
+    {
+        $response = $this->getPsr7JsonResponseForFixture('Endpoints/updateCiphersSetting.json');
+
+        $mock = $this->getMockBuilder(Adapter::class)->getMock();
+        $mock->method('patch')->willReturn($response);
+
+        $mock->expects($this->once())->method('patch');
+
+        $zones = new ZoneSettings($mock);
+        $result = $zones->updateCiphersSetting('023e105f4ecef8ad9ca31a8372d0c353', ["ECDHE-RSA-AES128-GCM-SHA256","AES128-SHA"]);
+
+        $this->assertTrue($result);
+    }
 }
