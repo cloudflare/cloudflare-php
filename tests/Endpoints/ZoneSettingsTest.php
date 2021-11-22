@@ -67,7 +67,22 @@ class ZoneSettingsTest extends TestCase
         $this->assertTrue($result);
     }
 
-    public function testUpdateChangeCiphersSetting()
+    public function testGetCiphersSetting()
+    {
+        $response = $this->getPsr7JsonResponseForFixture('Endpoints/getCiphersSetting.json');
+
+        $mock = $this->getMockBuilder(Adapter::class)->getMock();
+        $mock->method('patch')->willReturn($response);
+
+        $mock->expects($this->once())->method('get');
+
+        $zones = new ZoneSettings($mock);
+        $result = $zones->getCiphersSetting('023e105f4ecef8ad9ca31a8372d0c353');
+
+        $this->assertSame([], $result);
+    }
+
+    public function testUpdateCiphersSetting()
     {
         $response = $this->getPsr7JsonResponseForFixture('Endpoints/updateCiphersSetting.json');
 
