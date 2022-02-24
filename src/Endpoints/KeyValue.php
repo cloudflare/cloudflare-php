@@ -28,12 +28,68 @@ class KeyValue implements API
             'cursor' => $cursor,
             'prefix' => $prefix
         ];
-        $roles      = $this->adapter->get($uri, $query);
-        $this->body = json_decode($roles->getBody());
+        $body = $this->request('get', $uri, $query);
 
         return (object)[
-            'result'      => $this->body->result,
-            'result_info' => $this->body->result_info,
+            'result'      => $body->result,
+            'result_info' => $body->result_info,
         ];
+    }
+
+    public function getKeyValue(string $accountId, string $namespaceId, string $key): ?string
+    {
+        $uri = sprintf('accounts/%s/storage/kv/namespaces/%s/values/%s', $accountId, $namespaceId, $key);
+        $body = $this->request('get', $uri);
+
+        return $body->result;
+    }
+
+    public function getKeyMetadata(string $accountId, string $namespaceId, string $key): array
+    {
+        $uri = sprintf('accounts/%s/storage/kv/namespaces/%s/metadata/%s', $accountId, $namespaceId, $key);
+        $body = $this->request('get', $uri);
+
+        return $body->result;
+    }
+
+    public function setKeyValue(string $accountId, string $namespaceId, string $key, string $value, array $metadata = [], int $expiration = null, int $expirationTtl = null): string
+    {
+        $uri = sprintf('accounts/%s/storage/kv/namespaces/%s/values/%s', $accountId, $namespaceId, $key);
+        $query = [
+            'expiration' => $expiration,
+            'expiration_ttl' => $expirationTtl,
+        ];
+
+        if (empty($metadata)) {
+            $headers['Content-Type'] = 'text/plain';
+            $data = ['data' => $value];
+        } else {
+            $headers['Content-Type'] = 'multipart/form-data';
+            $data = ['value' => $value, 'metadata' => $metadata];
+        }
+
+        $body = $this->request('put', $uri, $query, $data, $headers);
+
+        return $body->success;
+    }
+
+    protected function request(string $method, string $uri, array $query = [], array $data = [], array $headers = [])
+    {
+        $method = strtolower($method);
+        if (!empty($query)) {
+            $uri .= '?' . http_build_query($query);
+        }
+        $response      = $this->adapter->{$method}($uri, $data);
+        $body =  json_decode($response->getBody());
+
+        if (!isset($body->success) || $body->success !== true) {
+            if (!empty($body->errors)) {
+                throw new KeyValueException($body->errors[0]->message, $body->errors[0]->code);
+            }
+
+            throw new KeyValueException('unknown error');
+        }
+
+        return $body;
     }
 }
