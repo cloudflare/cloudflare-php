@@ -12,7 +12,7 @@ class ZoneLockdownTest extends TestCase
     {
         $response = $this->getPsr7JsonResponseForFixture('Endpoints/listLockdowns.json');
 
-        $mock = $this->getMockBuilder(\Cloudflare\API\Adapter\Adapter::class)->getMock();
+        $mock = $this->getMockBuilder(\Cloudflare\API\Adapter\Adapter::class)->disableOriginalConstructor()->getMock();
         $mock->method('get')->willReturn($response);
 
         $mock->expects($this->once())
@@ -43,7 +43,7 @@ class ZoneLockdownTest extends TestCase
 
         $response = $this->getPsr7JsonResponseForFixture('Endpoints/addLockdown.json');
 
-        $mock = $this->getMockBuilder(\Cloudflare\API\Adapter\Adapter::class)->getMock();
+        $mock = $this->getMockBuilder(\Cloudflare\API\Adapter\Adapter::class)->disableOriginalConstructor()->getMock();
         $mock->method('post')->willReturn($response);
 
         $mock->expects($this->once())
@@ -73,7 +73,7 @@ class ZoneLockdownTest extends TestCase
     {
         $response = $this->getPsr7JsonResponseForFixture('Endpoints/getRecordDetails.json');
 
-        $mock = $this->getMockBuilder(\Cloudflare\API\Adapter\Adapter::class)->getMock();
+        $mock = $this->getMockBuilder(\Cloudflare\API\Adapter\Adapter::class)->disableOriginalConstructor()->getMock();
         $mock->method('get')->willReturn($response);
 
         $mock->expects($this->once())
@@ -96,7 +96,7 @@ class ZoneLockdownTest extends TestCase
 
         $response = $this->getPsr7JsonResponseForFixture('Endpoints/updateLockdown.json');
 
-        $mock = $this->getMockBuilder(\Cloudflare\API\Adapter\Adapter::class)->getMock();
+        $mock = $this->getMockBuilder(\Cloudflare\API\Adapter\Adapter::class)->disableOriginalConstructor()->getMock();
         $mock->method('put')->willReturn($response);
 
         $mock->expects($this->once())
@@ -129,7 +129,7 @@ class ZoneLockdownTest extends TestCase
 
         $response = $this->getPsr7JsonResponseForFixture('Endpoints/deleteLockdown.json');
 
-        $mock = $this->getMockBuilder(\Cloudflare\API\Adapter\Adapter::class)->getMock();
+        $mock = $this->getMockBuilder(\Cloudflare\API\Adapter\Adapter::class)->disableOriginalConstructor()->getMock();
         $mock->method('delete')->willReturn($response);
 
         $mock->expects($this->once())

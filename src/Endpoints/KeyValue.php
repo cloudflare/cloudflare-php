@@ -44,7 +44,7 @@ class KeyValue implements API
         return $body->result;
     }
 
-    public function getKeyMetadata(string $accountId, string $namespaceId, string $key): array
+    public function getKeyMetadata(string $accountId, string $namespaceId, string $key): ?stdClass
     {
         $uri = sprintf('accounts/%s/storage/kv/namespaces/%s/metadata/%s', $accountId, $namespaceId, $key);
         $body = $this->request('get', $uri);

@@ -6,7 +6,7 @@ class ZoneCacheTest extends TestCase
     {
         $response = $this->getPsr7JsonResponseForFixture('Endpoints/cachePurgeEverything.json');
 
-        $mock = $this->getMockBuilder(\Cloudflare\API\Adapter\Adapter::class)->getMock();
+        $mock = $this->getMockBuilder(\Cloudflare\API\Adapter\Adapter::class)->disableOriginalConstructor()->getMock();
         $mock->method('post')->willReturn($response);
 
         $mock->expects($this->once())
@@ -27,7 +27,7 @@ class ZoneCacheTest extends TestCase
     {
         $response = $this->getPsr7JsonResponseForFixture('Endpoints/cachePurgeHost.json');
 
-        $mock = $this->getMockBuilder(\Cloudflare\API\Adapter\Adapter::class)->getMock();
+        $mock = $this->getMockBuilder(\Cloudflare\API\Adapter\Adapter::class)->disableOriginalConstructor()->getMock();
         $mock->method('post')->willReturn($response);
 
         $mock->expects($this->once())
@@ -54,7 +54,7 @@ class ZoneCacheTest extends TestCase
     {
         $response = $this->getPsr7JsonResponseForFixture('Endpoints/cachePurge.json');
 
-        $mock = $this->getMockBuilder(\Cloudflare\API\Adapter\Adapter::class)->getMock();
+        $mock = $this->getMockBuilder(\Cloudflare\API\Adapter\Adapter::class)->disableOriginalConstructor()->getMock();
         $mock->method('post')->willReturn($response);
 
         $mock->expects($this->once())

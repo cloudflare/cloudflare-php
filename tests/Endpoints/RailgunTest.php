@@ -16,7 +16,7 @@ class RailgunTest extends TestCase
 
         $response = $this->getPsr7JsonResponseForFixture('Endpoints/createRailgun.json');
 
-        $mock = $this->getMockBuilder(\Cloudflare\API\Adapter\Adapter::class)->getMock();
+        $mock = $this->getMockBuilder(\Cloudflare\API\Adapter\Adapter::class)->disableOriginalConstructor()->getMock();
         $mock->method('post')->willReturn($response);
 
         $mock->expects($this->once())
@@ -41,7 +41,7 @@ class RailgunTest extends TestCase
     {
         $response = $this->getPsr7JsonResponseForFixture('Endpoints/listRailguns.json');
 
-        $mock = $this->getMockBuilder(\Cloudflare\API\Adapter\Adapter::class)->getMock();
+        $mock = $this->getMockBuilder(\Cloudflare\API\Adapter\Adapter::class)->disableOriginalConstructor()->getMock();
         $mock->method('get')->willReturn($response);
 
         $mock->expects($this->once())
@@ -67,7 +67,7 @@ class RailgunTest extends TestCase
     {
         $response = $this->getPsr7JsonResponseForFixture('Endpoints/getRailgun.json');
 
-        $mock = $this->getMockBuilder(\Cloudflare\API\Adapter\Adapter::class)->getMock();
+        $mock = $this->getMockBuilder(\Cloudflare\API\Adapter\Adapter::class)->disableOriginalConstructor()->getMock();
         $mock->method('get')->willReturn($response);
 
         $mock->expects($this->once())
@@ -87,7 +87,7 @@ class RailgunTest extends TestCase
     {
         $response = $this->getPsr7JsonResponseForFixture('Endpoints/listRailgunZones.json');
 
-        $mock = $this->getMockBuilder(\Cloudflare\API\Adapter\Adapter::class)->getMock();
+        $mock = $this->getMockBuilder(\Cloudflare\API\Adapter\Adapter::class)->disableOriginalConstructor()->getMock();
         $mock->method('get')->willReturn($response);
 
         $mock->expects($this->once())
@@ -108,7 +108,7 @@ class RailgunTest extends TestCase
     {
         $response = $this->getPsr7JsonResponseForFixture('Endpoints/updateRailgun.json');
 
-        $mock = $this->getMockBuilder(\Cloudflare\API\Adapter\Adapter::class)->getMock();
+        $mock = $this->getMockBuilder(\Cloudflare\API\Adapter\Adapter::class)->disableOriginalConstructor()->getMock();
         $mock->method('patch')->willReturn($response);
 
         $details = [
@@ -133,7 +133,7 @@ class RailgunTest extends TestCase
     {
         $response = $this->getPsr7JsonResponseForFixture('Endpoints/deleteRailgun.json');
 
-        $mock = $this->getMockBuilder(\Cloudflare\API\Adapter\Adapter::class)->getMock();
+        $mock = $this->getMockBuilder(\Cloudflare\API\Adapter\Adapter::class)->disableOriginalConstructor()->getMock();
         $mock->method('delete')->willReturn($response);
 
         $mock->expects($this->once())

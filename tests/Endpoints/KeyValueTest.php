@@ -19,7 +19,7 @@ class KeyValueTest extends TestCase
     {
         $response = $this->getPsr7JsonResponseForFixture('Endpoints/listKeys.json');
 
-        $adapter = $this->getMockBuilder(Adapter::class)->getMock();
+        $adapter = $this->getMockBuilder(Adapter::class)->disableOriginalConstructor()->getMock();
         $adapter->method('get')->willReturn($response);
 
         $adapter->expects($this->once())
@@ -38,8 +38,9 @@ class KeyValueTest extends TestCase
 
     public function testGetKeyValue()
     {
-        $adapter = $this->getMockBuilder(Adapter::class)->getMock();
-        $adapter->method('get')->willReturn(self::TEST_KEY_VALUE);
+        $response = $this->getPsr7JsonResponseForFixture('Endpoints/getKeyValue.json');
+        $adapter = $this->getMockBuilder(Adapter::class)->disableOriginalConstructor()->getMock();
+        $adapter->method('get')->willReturn($response);
 
         $adapter->expects($this->once())
             ->method('get')
@@ -53,8 +54,9 @@ class KeyValueTest extends TestCase
 
     public function testGetKeyMetadata()
     {
-        $adapter = $this->getMockBuilder(Adapter::class)->getMock();
-        $adapter->method('get')->willReturn(self::TEST_KEY_METADATA);
+        $response = $this->getPsr7JsonResponseForFixture('Endpoints/getKeyMetadata.json');
+        $adapter = $this->getMockBuilder(Adapter::class)->disableOriginalConstructor()->getMock();
+        $adapter->method('get')->willReturn($response);
 
         $adapter->expects($this->once())
             ->method('get')
@@ -63,14 +65,14 @@ class KeyValueTest extends TestCase
         $roles  = new KeyValue($adapter);
         $result = $roles->getKeyMetadata(self::TEST_ACCOUNT_ID, self::TEST_KV_NAMESPACE_ID, self::TEST_KEY_NAME);
 
-        $this->assertEquals(self::TEST_KEY_METADATA, $result);
+        $this->assertEquals((object) self::TEST_KEY_METADATA, $result);
     }
 
     public function testSetKeyValue()
     {
         $response = $this->getPsr7JsonResponseForFixture('Endpoints/setKeyValue.json');
 
-        $adapter = $this->getMockBuilder(Adapter::class)->getMock();
+        $adapter = $this->getMockBuilder(Adapter::class)->disableOriginalConstructor()->getMock();
         $adapter->method('put')->willReturn($response);
 
         $adapter->expects($this->once())
