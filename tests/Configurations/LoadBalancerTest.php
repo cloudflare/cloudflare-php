@@ -11,7 +11,7 @@ use Cloudflare\API\Configurations\LoadBalancer;
 class LoadBalancerTest extends TestCase
 {
     /**
-     * @dataProvider testArgumentsDataProvider
+     * @dataProvider argumentsDataProvider
      */
     public function testArguments($setFunction, $arguments, $getFunction, $invalid)
     {
@@ -30,7 +30,7 @@ class LoadBalancerTest extends TestCase
         }
     }
 
-    public function testArgumentsDataProvider()
+    public function argumentsDataProvider()
     {
         return [
             'steeringPolicy arguments valid' => [

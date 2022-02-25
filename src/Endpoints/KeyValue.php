@@ -52,7 +52,7 @@ class KeyValue implements API
         return $body->result;
     }
 
-    public function setKeyValue(string $accountId, string $namespaceId, string $key, string $value, array $metadata = [], int $expiration = null, int $expirationTtl = null): string
+    public function setKeyValue(string $accountId, string $namespaceId, string $key, string $value, array $metadata = [], int $expiration = null, int $expirationTtl = null): bool
     {
         $uri = sprintf('accounts/%s/storage/kv/namespaces/%s/values/%s', $accountId, $namespaceId, $key);
         $query = [
@@ -69,6 +69,44 @@ class KeyValue implements API
         }
 
         $body = $this->request('put', $uri, $query, $data, $headers);
+
+        return $body->success;
+    }
+
+    public function setMultipleKeysValues(string $accountId, string $namespaceId, array $data, array $metadata = [], int $expiration = null, int $expirationTtl = null): bool
+    {
+        $uri = sprintf('accounts/%s/storage/kv/namespaces/%s/bulk', $accountId, $namespaceId);
+        $bulkData = [];
+
+        foreach($data as $key => $value) {
+            $bulkData[] = [
+                'key' => $key,
+                'value' => $value,
+                'expiration' => $expiration,
+                'expiration_ttl' => $expirationTtl,
+                'metadata' => $metadata
+            ];
+        }
+
+        $body = $this->request('put', $uri, [], $bulkData, ['Content-Type' => 'application/json']);
+
+        return $body->success;
+    }
+
+    public function deleteKey(string $accountId, string $namespaceId, string $key): bool
+    {
+        $uri = sprintf('accounts/%s/storage/kv/namespaces/%s/values/%s', $accountId, $namespaceId, $key);
+
+        $body = $this->request('delete', $uri);
+
+        return $body->success;
+    }
+
+    public function deleteMultipleKeys(string $accountId, string $namespaceId, array $keys): bool
+    {
+        $uri = sprintf('accounts/%s/storage/kv/namespaces/%s/bulk', $accountId, $namespaceId);
+
+        $body = $this->request('delete', $uri, [], $keys, ['Content-Type' => 'application/json']);
 
         return $body->success;
     }

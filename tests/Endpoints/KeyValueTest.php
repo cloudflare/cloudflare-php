@@ -26,8 +26,8 @@ class KeyValueTest extends TestCase
             ->method('get')
             ->with($this->stringStartsWith(sprintf('accounts/%s/storage/kv/namespaces/%s', self::TEST_ACCOUNT_ID, self::TEST_KV_NAMESPACE_ID)));
 
-        $roles  = new KeyValue($adapter);
-        $result = $roles->listKeys(self::TEST_ACCOUNT_ID, self::TEST_KV_NAMESPACE_ID);
+        $keyValue  = new KeyValue($adapter);
+        $result = $keyValue->listKeys(self::TEST_ACCOUNT_ID, self::TEST_KV_NAMESPACE_ID);
 
         $this->assertObjectHasAttribute('result', $result);
         $this->assertObjectHasAttribute('result_info', $result);
@@ -46,8 +46,8 @@ class KeyValueTest extends TestCase
             ->method('get')
             ->with($this->stringStartsWith(sprintf('accounts/%s/storage/kv/namespaces/%s/values', self::TEST_ACCOUNT_ID, self::TEST_KV_NAMESPACE_ID)));
 
-        $roles  = new KeyValue($adapter);
-        $result = $roles->getKeyValue(self::TEST_ACCOUNT_ID, self::TEST_KV_NAMESPACE_ID, self::TEST_KEY_NAME);
+        $keyValue  = new KeyValue($adapter);
+        $result = $keyValue->getKeyValue(self::TEST_ACCOUNT_ID, self::TEST_KV_NAMESPACE_ID, self::TEST_KEY_NAME);
 
         $this->assertEquals(self::TEST_KEY_VALUE, $result);
     }
@@ -62,8 +62,8 @@ class KeyValueTest extends TestCase
             ->method('get')
             ->with($this->stringStartsWith(sprintf('accounts/%s/storage/kv/namespaces/%s/metadata/%s', self::TEST_ACCOUNT_ID, self::TEST_KV_NAMESPACE_ID, self::TEST_KEY_NAME)));
 
-        $roles  = new KeyValue($adapter);
-        $result = $roles->getKeyMetadata(self::TEST_ACCOUNT_ID, self::TEST_KV_NAMESPACE_ID, self::TEST_KEY_NAME);
+        $keyValue  = new KeyValue($adapter);
+        $result = $keyValue->getKeyMetadata(self::TEST_ACCOUNT_ID, self::TEST_KV_NAMESPACE_ID, self::TEST_KEY_NAME);
 
         $this->assertEquals((object) self::TEST_KEY_METADATA, $result);
     }
@@ -76,27 +76,61 @@ class KeyValueTest extends TestCase
         $adapter->method('put')->willReturn($response);
 
         $adapter->expects($this->once())
-            ->method('get')
+            ->method('put')
             ->with($this->stringStartsWith(sprintf('accounts/%s/storage/kv/namespaces/%s/values/%s', self::TEST_ACCOUNT_ID, self::TEST_KV_NAMESPACE_ID, self::TEST_KEY_NAME)));
 
-        $roles  = new KeyValue($adapter);
-        $result = $roles->setKeyValue(self::TEST_ACCOUNT_ID, self::TEST_KV_NAMESPACE_ID, self::TEST_KEY_NAME, self::TEST_KEY_VALUE);
+        $keyValue  = new KeyValue($adapter);
+        $result = $keyValue->setKeyValue(self::TEST_ACCOUNT_ID, self::TEST_KV_NAMESPACE_ID, self::TEST_KEY_NAME, self::TEST_KEY_VALUE);
 
         $this->assertEquals(true, $result);
     }
 
     public function testSetMultipleKeysValues()
     {
-        $this->assertTrue(false, "todo");
+        $response = $this->getPsr7JsonResponseForFixture('Endpoints/setMultipleKeysValues.json');
+
+        $adapter = $this->getMockBuilder(Adapter::class)->disableOriginalConstructor()->getMock();
+        $adapter->method('put')->willReturn($response);
+
+        $adapter->expects($this->once())
+            ->method('put')
+            ->with($this->stringStartsWith(sprintf('accounts/%s/storage/kv/namespaces/%s/bulk', self::TEST_ACCOUNT_ID, self::TEST_KV_NAMESPACE_ID)));
+
+        $keyValue  = new KeyValue($adapter);
+        $result = $keyValue->setMultipleKeysValues(self::TEST_ACCOUNT_ID, self::TEST_KV_NAMESPACE_ID, [self::TEST_KEY_NAME => self::TEST_KEY_VALUE]);
+
+        $this->assertEquals(true, $result);
     }
 
     public function testDeleteKey()
     {
-        $this->assertTrue(false, "todo");
+        $response = $this->getPsr7JsonResponseForFixture('Endpoints/deleteKey.json');
+        $adapter = $this->getMockBuilder(Adapter::class)->disableOriginalConstructor()->getMock();
+        $adapter->method('delete')->willReturn($response);
+
+        $adapter->expects($this->once())
+            ->method('delete')
+            ->with($this->stringStartsWith(sprintf('accounts/%s/storage/kv/namespaces/%s/values/%s', self::TEST_ACCOUNT_ID, self::TEST_KV_NAMESPACE_ID, self::TEST_KEY_NAME)));
+
+        $keyValue  = new KeyValue($adapter);
+        $result = $keyValue->deleteKey(self::TEST_ACCOUNT_ID, self::TEST_KV_NAMESPACE_ID, self::TEST_KEY_NAME);
+
+        $this->assertEquals(true, $result);
     }
 
-    public function testDeleteKeys()
+    public function testDeleteMultipleKeys()
     {
-        $this->assertTrue(false, "todo");
+        $response = $this->getPsr7JsonResponseForFixture('Endpoints/deleteKey.json');
+        $adapter = $this->getMockBuilder(Adapter::class)->disableOriginalConstructor()->getMock();
+        $adapter->method('delete')->willReturn($response);
+
+        $adapter->expects($this->once())
+            ->method('delete')
+            ->with($this->stringStartsWith(sprintf('accounts/%s/storage/kv/namespaces/%s/bulk', self::TEST_ACCOUNT_ID, self::TEST_KV_NAMESPACE_ID)));
+
+        $keyValue  = new KeyValue($adapter);
+        $result = $keyValue->deleteMultipleKeys(self::TEST_ACCOUNT_ID, self::TEST_KV_NAMESPACE_ID, [self::TEST_KEY_NAME]);
+
+        $this->assertEquals(true, $result);
     }
 }
