@@ -34,6 +34,38 @@ class Accounts implements API
         return $this->body->result;
     }
 
+    public function updateAccount(
+        string $accountID,
+        string $name = null,
+        bool $enforceTwofactor = null,
+        bool $useAccountCustomNsByDefault = null
+    ): bool {
+        $data = [
+            'id' => $accountID
+        ];
+
+        if ($name !== null) {
+            $data['name'] = $name;
+        }
+
+        if ($enforceTwofactor !== null) {
+            $data['settings']['enforce_twofactor'] = $enforceTwofactor;
+        }
+
+        if ($useAccountCustomNsByDefault !== null) {
+            $data['settings']['use_account_custom_ns_by_default'] = $useAccountCustomNsByDefault;
+        }
+
+        $query = $this->adapter->put('accounts/' . $accountID, $data);
+        $this->body = json_decode($query->getBody());
+
+        if (isset($this->body->result->id)) {
+            return true;
+        }
+
+        return false;
+    }
+
     public function listAccounts(
         int $page = 1,
         int $perPage = 20,

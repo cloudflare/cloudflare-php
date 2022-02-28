@@ -83,4 +83,34 @@ class AccountsTest extends TestCase
         $accounts->addAccount('Foo Bar', 'enterprise');
         $this->assertEquals('2bab6ace8c72ed3f09b9eca6db1396bb', $accounts->getBody()->result->id);
     }
+
+    public function testUpdateAccount()
+    {
+        $response = $this->getPsr7JsonResponseForFixture('Endpoints/updateAccount.json');
+
+        $mock = $this->getMockBuilder(\Cloudflare\API\Adapter\Adapter::class)->getMock();
+        $mock->method('put')->willReturn($response);
+
+        $data = [
+            'id' => '01a7362d577a6c3019a474fd6f485823',
+            'name' => 'Demo Account',
+            'settings' => [
+                'enforce_twofactor' => false,
+                'use_account_custom_ns_by_default' => false,
+            ],
+        ];
+
+        $mock->expects($this->once())
+            ->method('put')
+            ->with(
+                $this->equalTo('accounts/01a7362d577a6c3019a474fd6f485823'),
+                $this->equalTo($data)
+            );
+
+        $accounts = new \Cloudflare\API\Endpoints\Accounts($mock);
+        $result = $accounts->updateAccount('01a7362d577a6c3019a474fd6f485823', 'Demo Account', false, false);
+
+        $this->assertTrue($result);
+        $this->assertEquals('01a7362d577a6c3019a474fd6f485823', $accounts->getBody()->result->id);
+    }
 }
