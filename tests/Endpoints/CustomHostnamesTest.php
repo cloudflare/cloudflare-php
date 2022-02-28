@@ -6,6 +6,7 @@
  * Time: 22:23
  */
 
+use Cloudflare\API\Adapter\Adapter;
 use Cloudflare\API\Endpoints\CustomHostnames;
 
 class CustomHostnamesTest extends TestCase
@@ -16,7 +17,7 @@ class CustomHostnamesTest extends TestCase
 
         $customSsl = $this->getCustomSsl();
 
-        $mock = $this->getMockBuilder(\Cloudflare\API\Adapter\Adapter::class)->disableOriginalConstructor()->getMock();
+        $mock = $this->getMockBuilder(Adapter::class)->disableOriginalConstructor()->getMock();
         $mock->method('post')->willReturn($response);
 
         $mock->expects($this->once())
@@ -67,7 +68,7 @@ class CustomHostnamesTest extends TestCase
     {
         $response = $this->getPsr7JsonResponseForFixture('Endpoints/listHostnames.json');
 
-        $mock = $this->getMockBuilder(\Cloudflare\API\Adapter\Adapter::class)->disableOriginalConstructor()->getMock();
+        $mock = $this->getMockBuilder(Adapter::class)->disableOriginalConstructor()->getMock();
         $mock->method('get')->willReturn($response);
 
         $mock->expects($this->once())
@@ -85,7 +86,7 @@ class CustomHostnamesTest extends TestCase
                 ])
             );
 
-        $zones = new \Cloudflare\API\Endpoints\CustomHostnames($mock);
+        $zones = new CustomHostnames($mock);
         $result = $zones->listHostnames('023e105f4ecef8ad9ca31a8372d0c353', 'app.example.com', '0d89c70d-ad9f-4843-b99f-6cc0252067e9', 1, 20, 'ssl', 'desc', 0);
 
         $this->assertObjectHasAttribute('result', $result);
@@ -100,7 +101,7 @@ class CustomHostnamesTest extends TestCase
     {
         $response = $this->getPsr7JsonResponseForFixture('Endpoints/getHostname.json');
 
-        $mock = $this->getMockBuilder(\Cloudflare\API\Adapter\Adapter::class)->disableOriginalConstructor()->getMock();
+        $mock = $this->getMockBuilder(Adapter::class)->disableOriginalConstructor()->getMock();
         $mock->method('get')->willReturn($response);
 
         $mock->expects($this->once())
@@ -109,7 +110,7 @@ class CustomHostnamesTest extends TestCase
                 $this->equalTo('zones/023e105f4ecef8ad9ca31a8372d0c353/custom_hostnames/0d89c70d-ad9f-4843-b99f-6cc0252067e9')
             );
 
-        $zones = new \Cloudflare\API\Endpoints\CustomHostnames($mock);
+        $zones = new CustomHostnames($mock);
         $result = $zones->getHostname('023e105f4ecef8ad9ca31a8372d0c353', '0d89c70d-ad9f-4843-b99f-6cc0252067e9', '0d89c70d-ad9f-4843-b99f-6cc0252067e9');
 
         $this->assertObjectHasAttribute('id', $result);
@@ -123,7 +124,7 @@ class CustomHostnamesTest extends TestCase
 
         $customSsl = $this->getCustomSsl();
 
-        $mock = $this->getMockBuilder(\Cloudflare\API\Adapter\Adapter::class)->disableOriginalConstructor()->getMock();
+        $mock = $this->getMockBuilder(Adapter::class)->disableOriginalConstructor()->getMock();
         $mock->method('patch')->willReturn($response);
 
         $mock->expects($this->once())
@@ -149,7 +150,7 @@ class CustomHostnamesTest extends TestCase
                 ])
             );
 
-        $zones = new \Cloudflare\API\Endpoints\CustomHostnames($mock);
+        $zones = new CustomHostnames($mock);
         $sslSettings = [
             'http2' => 'on',
             'http3' => 'on',
@@ -180,7 +181,7 @@ class CustomHostnamesTest extends TestCase
     {
         $response = $this->getPsr7JsonResponseForFixture('Endpoints/deleteHostname.json');
 
-        $mock = $this->getMockBuilder(\Cloudflare\API\Adapter\Adapter::class)->disableOriginalConstructor()->getMock();
+        $mock = $this->getMockBuilder(Adapter::class)->disableOriginalConstructor()->getMock();
         $mock->method('delete')->willReturn($response);
 
         $mock->expects($this->once())
@@ -189,7 +190,7 @@ class CustomHostnamesTest extends TestCase
                 $this->equalTo('zones/023e105f4ecef8ad9ca31a8372d0c353/custom_hostnames/0d89c70d-ad9f-4843-b99f-6cc0252067e9')
             );
 
-        $zones = new \Cloudflare\API\Endpoints\CustomHostnames($mock);
+        $zones = new CustomHostnames($mock);
         $result = $zones->deleteHostname('023e105f4ecef8ad9ca31a8372d0c353', '0d89c70d-ad9f-4843-b99f-6cc0252067e9');
 
         $this->assertEquals('0d89c70d-ad9f-4843-b99f-6cc0252067e9', $result->id);
@@ -200,7 +201,7 @@ class CustomHostnamesTest extends TestCase
     {
         $response = $this->getPsr7JsonResponseForFixture('Endpoints/getCustomHostnameFallbackOrigin.json');
 
-        $mock = $this->getMockBuilder(\Cloudflare\API\Adapter\Adapter::class)->disableOriginalConstructor()->getMock();
+        $mock = $this->getMockBuilder(Adapter::class)->disableOriginalConstructor()->getMock();
         $mock->method('get')->willReturn($response);
 
         $mock->expects($this->once())
@@ -209,7 +210,7 @@ class CustomHostnamesTest extends TestCase
                 $this->equalTo('zones/023e105f4ecef8ad9ca31a8372d0c353/custom_hostnames/fallback_origin')
             );
 
-        $zones = new \Cloudflare\API\Endpoints\CustomHostnames($mock);
+        $zones = new CustomHostnames($mock);
         $result = $zones->getFallbackOrigin('023e105f4ecef8ad9ca31a8372d0c353');
 
         $this->assertObjectHasAttribute('origin', $result);

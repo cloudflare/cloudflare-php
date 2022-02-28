@@ -10,6 +10,7 @@ namespace Cloudflare\API\Endpoints;
 
 use Cloudflare\API\Adapter\Adapter;
 use Cloudflare\API\Traits\BodyAccessorTrait;
+use stdClass;
 
 class DNS implements API
 {
@@ -85,7 +86,7 @@ class DNS implements API
         string $order = '',
         string $direction = '',
         string $match = 'all'
-    ): \stdClass {
+    ): stdClass {
         $query = [
             'page' => $page,
             'per_page' => $perPage,
@@ -118,7 +119,7 @@ class DNS implements API
         return (object)['result' => $this->body->result, 'result_info' => $this->body->result_info];
     }
 
-    public function getRecordDetails(string $zoneID, string $recordID): \stdClass
+    public function getRecordDetails(string $zoneID, string $recordID): stdClass
     {
         $user = $this->adapter->get('zones/' . $zoneID . '/dns_records/' . $recordID);
         $this->body = json_decode($user->getBody());
@@ -134,7 +135,7 @@ class DNS implements API
         return false;
     }
 
-    public function updateRecordDetails(string $zoneID, string $recordID, array $details): \stdClass
+    public function updateRecordDetails(string $zoneID, string $recordID, array $details): stdClass
     {
         $response = $this->adapter->put('zones/' . $zoneID . '/dns_records/' . $recordID, $details);
         $this->body = json_decode($response->getBody());

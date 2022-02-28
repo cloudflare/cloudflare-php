@@ -2,6 +2,7 @@
 
 use Cloudflare\API\Adapter\Adapter;
 use Cloudflare\API\Endpoints\Pools;
+use Cloudflare\API\Configurations\Pool;
 
 /**
  * @author Martijn Smidt <martijn@squeezely.tech>
@@ -22,7 +23,7 @@ class PoolsTest extends TestCase
             ]
         ];
 
-        $poolConfiguration = new \Cloudflare\API\Configurations\Pool('primary-dc-1', $origins);
+        $poolConfiguration = new Pool('primary-dc-1', $origins);
 
         $response = $this->getPsr7JsonResponseForFixture('Endpoints/createPool.json');
 
@@ -90,7 +91,7 @@ class PoolsTest extends TestCase
             ]
         ];
 
-        $poolConfiguration = new \Cloudflare\API\Configurations\Pool('primary-dc-1', $origins);
+        $poolConfiguration = new Pool('primary-dc-1', $origins);
 
         $response = $this->getPsr7JsonResponseForFixture('Endpoints/updatePool.json');
 

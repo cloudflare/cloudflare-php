@@ -30,7 +30,7 @@ class PoolTest extends TestCase
         }
     }
 
-    public function argumentsDataProvider()
+    public function argumentsDataProvider(): array
     {
         return [
             'origins arguments valid' => [

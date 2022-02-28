@@ -1,5 +1,8 @@
 <?php
 
+use Cloudflare\API\Adapter\Adapter;
+use Cloudflare\API\Endpoints\DNSAnalytics;
+
 /**
  * Created by Visual Studio Code.
  * User: elliot.alderson
@@ -15,7 +18,7 @@ class DNSAnalyticsTest extends TestCase
         );
 
         $mock = $this->getMockBuilder(
-            \Cloudflare\API\Adapter\Adapter::class
+            Adapter::class
         )->disableOriginalConstructor()->getMock();
         $mock->method('get')->willReturn($response);
 
@@ -28,7 +31,7 @@ class DNSAnalyticsTest extends TestCase
                 )
             );
 
-        $analytics = new \Cloudflare\API\Endpoints\DNSAnalytics($mock);
+        $analytics = new DNSAnalytics($mock);
         $since = '2020-02-01T00:00:00Z';
         $until = '2020-02-28T23:59:59Z';
         $filters = 'responseCode==NOERROR AND queryType==A';
@@ -55,7 +58,7 @@ class DNSAnalyticsTest extends TestCase
         );
 
         $mock = $this->getMockBuilder(
-            \Cloudflare\API\Adapter\Adapter::class
+            Adapter::class
         )->disableOriginalConstructor()->getMock();
         $mock->method('get')->willReturn($response);
 
@@ -68,7 +71,7 @@ class DNSAnalyticsTest extends TestCase
                 )
             );
 
-        $analytics = new \Cloudflare\API\Endpoints\DNSAnalytics($mock);
+        $analytics = new DNSAnalytics($mock);
         $since = '2020-02-01T00:00:00Z';
         $until = '2020-02-28T23:59:59Z';
         $filters = 'responseCode==NOERROR AND queryType==A';

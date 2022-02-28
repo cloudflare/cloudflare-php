@@ -30,7 +30,7 @@ class LoadBalancerTest extends TestCase
         }
     }
 
-    public function argumentsDataProvider()
+    public function argumentsDataProvider(): array
     {
         return [
             'steeringPolicy arguments valid' => [
