@@ -110,7 +110,7 @@ class AccountsTest extends TestCase
         $accounts = new \Cloudflare\API\Endpoints\Accounts($mock);
         $result = $accounts->updateAccount('01a7362d577a6c3019a474fd6f485823', 'Demo Account', false, false);
 
-        $this->assertTrue($result);
+        $this->assertEquals('01a7362d577a6c3019a474fd6f485823', $result->id);
         $this->assertEquals('01a7362d577a6c3019a474fd6f485823', $accounts->getBody()->result->id);
     }
 }

@@ -39,7 +39,7 @@ class Accounts implements API
         string $name = null,
         bool $enforceTwofactor = null,
         bool $useAccountCustomNsByDefault = null
-    ): bool {
+    ): \stdClass {
         $data = [
             'id' => $accountID
         ];
@@ -59,11 +59,7 @@ class Accounts implements API
         $query = $this->adapter->put('accounts/' . $accountID, $data);
         $this->body = json_decode($query->getBody());
 
-        if (isset($this->body->result->id)) {
-            return true;
-        }
-
-        return false;
+        return $this->body->result;
     }
 
     public function listAccounts(
