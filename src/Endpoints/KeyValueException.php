@@ -56,5 +56,4 @@ class KeyValueException extends EndpointException
 
         parent::__construct($message, $code, $previous);
     }
-
 }
