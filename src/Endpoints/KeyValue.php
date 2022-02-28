@@ -39,17 +39,13 @@ class KeyValue implements API
     public function getKeyValue(string $accountId, string $namespaceId, string $key): ?string
     {
         $uri = sprintf('accounts/%s/storage/kv/namespaces/%s/values/%s', $accountId, $namespaceId, $key);
-        $body = $this->request('get', $uri);
-
-        return $body->result;
+        return $this->request('get', $uri)->result;
     }
 
     public function getKeyMetadata(string $accountId, string $namespaceId, string $key): ?stdClass
     {
         $uri = sprintf('accounts/%s/storage/kv/namespaces/%s/metadata/%s', $accountId, $namespaceId, $key);
-        $body = $this->request('get', $uri);
-
-        return $body->result;
+        return $this->request('get', $uri)->result;
     }
 
     public function setKeyValue(string $accountId, string $namespaceId, string $key, string $value, array $metadata = [], int $expiration = null, int $expirationTtl = null): bool
@@ -60,17 +56,15 @@ class KeyValue implements API
             'expiration_ttl' => $expirationTtl,
         ];
 
-        if (empty($metadata)) {
-            $headers['Content-Type'] = 'text/plain';
-            $data = ['data' => $value];
-        } else {
-            $headers['Content-Type'] = 'multipart/form-data';
+        $data = ['data' => $value];
+        $headers = ['Content-Type' => 'text/plain'];
+
+        if (!empty($metadata)) {
             $data = ['value' => $value, 'metadata' => $metadata];
+            $headers = ['Content-Type' => 'multipart/form-data'];
         }
 
-        $body = $this->request('put', $uri, $query, $data, $headers);
-
-        return $body->success;
+        return $this->request('put', $uri, $query, $data, $headers)->success;
     }
 
     public function setMultipleKeysValues(string $accountId, string $namespaceId, array $data, array $metadata = [], int $expiration = null, int $expirationTtl = null): bool
@@ -88,18 +82,14 @@ class KeyValue implements API
             ];
         }
 
-        $body = $this->request('put', $uri, [], $bulkData, ['Content-Type' => 'application/json']);
-
-        return $body->success;
+        return $this->request('put', $uri, [], $bulkData, ['Content-Type' => 'application/json'])->success;
     }
 
     public function deleteKey(string $accountId, string $namespaceId, string $key): bool
     {
         $uri = sprintf('accounts/%s/storage/kv/namespaces/%s/values/%s', $accountId, $namespaceId, $key);
 
-        $body = $this->request('delete', $uri);
-
-        return $body->success;
+        return $this->request('delete', $uri)->success;
     }
 
     public function deleteMultipleKeys(string $accountId, string $namespaceId, array $keys): bool
@@ -117,8 +107,8 @@ class KeyValue implements API
         if (!empty($query)) {
             $uri .= '?' . http_build_query($query);
         }
-        $response      = $this->adapter->{$method}($uri, $data);
-        $body =  json_decode($response->getBody());
+        $response      = $this->adapter->{$method}($uri, $data, $headers);
+        $body =  json_decode($response->getBody(), false);
 
         if (!isset($body->success) || $body->success !== true) {
             if (!empty($body->errors)) {
