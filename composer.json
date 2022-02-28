@@ -1,5 +1,5 @@
 {
-  "name": "cloudflare/sdk",
+  "name": "smartframe-technologies/cloudflare-php",
   "description": "PHP binding for v4 of the Cloudflare Client API.",
   "type": "library",
   "require": {
