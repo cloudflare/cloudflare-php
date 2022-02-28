@@ -9,11 +9,11 @@ use TestCase;
 
 class KeyValueTest extends TestCase
 {
-    public const TEST_ACCOUNT_ID = 'eea5a600713bf7bdbba01b5108f6cf36';
-    public const TEST_KV_NAMESPACE_ID = '96069a97c55cecb83b9a7a6225b1c44a';
-    public const TEST_KEY_NAME = 'My-Test-Key';
-    public const TEST_KEY_VALUE = 'My-Test-Key-Value';
-    public const TEST_KEY_METADATA = ['test' => 'metadata'];
+    const TEST_ACCOUNT_ID = 'eea5a600713bf7bdbba01b5108f6cf36';
+    const TEST_KV_NAMESPACE_ID = '96069a97c55cecb83b9a7a6225b1c44a';
+    const TEST_KEY_NAME = 'My-Test-Key';
+    const TEST_KEY_VALUE = 'My-Test-Key-Value';
+    const TEST_KEY_METADATA = ['test' => 'metadata'];
 
     public function testListKeys()
     {
