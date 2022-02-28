@@ -8,7 +8,7 @@ class GuzzleTest extends TestCase
 {
     private $client;
 
-    public function setUp(): void
+    public function setUp():
     {
         $auth = $this->getMockBuilder(Auth::class)
             ->setMethods(['getHeaders'])

@@ -172,6 +172,8 @@ class WAFTest extends TestCase
         $this->assertEquals('de677e5818985db1285d0e80225f06e5', $result->result[0]->id);
         $this->assertEquals(1, $result->result_info->page);
         $this->assertEquals('de677e5818985db1285d0e80225f06e5', $waf->getBody()->result[0]->id);
+
+        return [];
     }
 
     public function testgetGroupInfo()

@@ -11,7 +11,7 @@ use Cloudflare\API\Auth\None;
 
 class NoneTest extends TestCase
 {
-    public function testGetHeaders(): void
+    public function testGetHeaders():
     {
         $auth    = new None();
         $headers = $auth->getHeaders();
