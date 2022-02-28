@@ -36,13 +36,13 @@ class KeyValue implements API
         ];
     }
 
-    public function getKeyValue(string $accountId, string $namespaceId, string $key)
+    public function getKeyValue(string $accountId, string $namespaceId, string $key): ?string
     {
         $uri = sprintf('accounts/%s/storage/kv/namespaces/%s/values/%s', $accountId, $namespaceId, $key);
         return $this->request('get', $uri)->result;
     }
 
-    public function getKeyMetadata(string $accountId, string $namespaceId, string $key)
+    public function getKeyMetadata(string $accountId, string $namespaceId, string $key): ?stdClass
     {
         $uri = sprintf('accounts/%s/storage/kv/namespaces/%s/metadata/%s', $accountId, $namespaceId, $key);
         return $this->request('get', $uri)->result;
