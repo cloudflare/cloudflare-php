@@ -36,19 +36,21 @@ class KeyValue implements API
         ];
     }
 
-    public function getKeyValue(string $accountId, string $namespaceId, string $key): ?string
+    public function getKeyValue(string $accountId, string $namespaceId, string $key)
     {
         $uri = sprintf('accounts/%s/storage/kv/namespaces/%s/values/%s', $accountId, $namespaceId, $key);
-        return $this->request('get', $uri)->result;
+        return $this->request('get', $uri);
     }
 
     public function getKeyMetadata(string $accountId, string $namespaceId, string $key): ?stdClass
     {
         $uri = sprintf('accounts/%s/storage/kv/namespaces/%s/metadata/%s', $accountId, $namespaceId, $key);
-        return $this->request('get', $uri)->result;
+        $body = $this->request('get', $uri);
+
+        return $body->result;
     }
 
-    public function setKeyValue(string $accountId, string $namespaceId, string $key, string $value, array $metadata = [], int $expiration = null, int $expirationTtl = null): bool
+    public function setKeyValue(string $accountId, string $namespaceId, string $key, $value, array $metadata = [], int $expiration = null, int $expirationTtl = null): bool
     {
         $uri = sprintf('accounts/%s/storage/kv/namespaces/%s/values/%s', $accountId, $namespaceId, $key);
         $query = [
@@ -56,15 +58,17 @@ class KeyValue implements API
             'expiration_ttl' => $expirationTtl,
         ];
 
-        $data = ['data' => $value];
-        $headers = ['Content-Type' => 'text/plain'];
-
-        if (!empty($metadata)) {
+        if (empty($metadata)) {
+            $headers['Content-Type'] = 'text/plain';
+            $data = $value;
+        } else {
+            $headers['Content-Type'] = 'multipart/form-data';
             $data = ['value' => $value, 'metadata' => $metadata];
-            $headers = ['Content-Type' => 'multipart/form-data'];
         }
 
-        return $this->request('put', $uri, $query, $data, $headers)->success;
+        $body = $this->request('put', $uri, $query, $data, $headers);
+
+        return $body->success;
     }
 
     public function setMultipleKeysValues(string $accountId, string $namespaceId, array $data, array $metadata = [], int $expiration = null, int $expirationTtl = null): bool
@@ -72,7 +76,7 @@ class KeyValue implements API
         $uri = sprintf('accounts/%s/storage/kv/namespaces/%s/bulk', $accountId, $namespaceId);
         $bulkData = [];
 
-        foreach ($data as $key => $value) {
+        foreach($data as $key => $value) {
             $bulkData[] = [
                 'key' => $key,
                 'value' => $value,
@@ -82,14 +86,18 @@ class KeyValue implements API
             ];
         }
 
-        return $this->request('put', $uri, [], $bulkData, ['Content-Type' => 'application/json'])->success;
+        $body = $this->request('put', $uri, [], $bulkData, ['Content-Type' => 'application/json']);
+
+        return $body->success;
     }
 
     public function deleteKey(string $accountId, string $namespaceId, string $key): bool
     {
         $uri = sprintf('accounts/%s/storage/kv/namespaces/%s/values/%s', $accountId, $namespaceId, $key);
 
-        return $this->request('delete', $uri)->success;
+        $body = $this->request('delete', $uri);
+
+        return $body->success;
     }
 
     public function deleteMultipleKeys(string $accountId, string $namespaceId, array $keys): bool
@@ -101,21 +109,23 @@ class KeyValue implements API
         return $body->success;
     }
 
-    protected function request(string $method, string $uri, array $query = [], array $data = [], array $headers = [])
+    protected function request(string $method, string $uri, array $query = [], $data = [], array $headers = [])
     {
         $method = strtolower($method);
         if (!empty($query)) {
             $uri .= '?' . http_build_query($query);
         }
-        $response      = $this->adapter->{$method}($uri, $data, $headers);
-        $body =  json_decode($response->getBody(), false);
+        $response      = $this->adapter->{$method}($uri, $data);
+        $body =  json_decode($response->getBody());
 
-        if (!isset($body->success) || $body->success !== true) {
+        if ($body === null) {
+            $body = (string) $response->getBody();
+        } elseif (isset($body->success) && $body->success !== true) {
             if (!empty($body->errors)) {
                 throw new KeyValueException($body->errors[0]->message, $body->errors[0]->code);
             }
 
-            throw new KeyValueException('unknown error');
+            throw new KeyValueException('unknown error: ' . $response->getBody());
         }
 
         return $body;

@@ -5,6 +5,7 @@ namespace Endpoints;
 use Cloudflare\API\Adapter\Adapter;
 use Cloudflare\API\Endpoints\AccountRoles;
 use Cloudflare\API\Endpoints\KeyValue;
+use GuzzleHttp\Psr7\Response;
 use TestCase;
 
 class KeyValueTest extends TestCase
@@ -38,9 +39,9 @@ class KeyValueTest extends TestCase
 
     public function testGetKeyValue()
     {
-        $response = $this->getPsr7JsonResponseForFixture('Endpoints/getKeyValue.json');
+        $stream = $this->getPsr7StreamForFixture('Endpoints/getKeyValue.txt');
         $adapter = $this->getMockBuilder(Adapter::class)->disableOriginalConstructor()->getMock();
-        $adapter->method('get')->willReturn($response);
+        $adapter->method('get')->willReturn(new Response(200, ['Content-Type' => 'application/json'], $stream));
 
         $adapter->expects($this->once())
             ->method('get')
