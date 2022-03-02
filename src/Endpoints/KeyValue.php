@@ -76,7 +76,7 @@ class KeyValue implements API
         $uri = sprintf('accounts/%s/storage/kv/namespaces/%s/bulk', $accountId, $namespaceId);
         $bulkData = [];
 
-        foreach($data as $key => $value) {
+        foreach ($data as $key => $value) {
             $bulkData[] = [
                 'key' => $key,
                 'value' => $value,
