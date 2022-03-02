@@ -23,10 +23,10 @@ class Guzzle implements Adapter
         $headers = $auth->getHeaders();
 
         $this->client = new Client([
-                                       'base_uri' => $baseURI,
-                                       'headers' => $headers,
-                                       'Accept' => 'application/json'
-                                   ]);
+            'base_uri' => $baseURI,
+            'headers' => $headers,
+            'Accept' => 'application/json'
+        ]);
     }
 
 
