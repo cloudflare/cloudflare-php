@@ -6,6 +6,7 @@ use Cloudflare\API\Auth\Auth;
 use GuzzleHttp\Client;
 use GuzzleHttp\Exception\RequestException;
 use Psr\Http\Message\ResponseInterface;
+use InvalidArgumentException;
 
 class Guzzle implements Adapter
 {
@@ -76,7 +77,7 @@ class Guzzle implements Adapter
     public function request(string $method, string $uri, $data = null, array $headers = [])
     {
         if (!in_array($method, ['get', 'post', 'put', 'patch', 'delete'])) {
-            throw new \InvalidArgumentException('Request method must be get, post, put, patch, or delete');
+            throw new InvalidArgumentException('Request method must be get, post, put, patch, or delete');
         }
 
         try {

@@ -58,10 +58,10 @@ class KeyValue implements API
             'expiration_ttl' => $expirationTtl,
         ];
 
-        if (empty($metadata)) {
-            $headers['Content-Type'] = 'text/plain';
-            $data = $value;
-        } else {
+        $headers = ['Content-Type' => 'text/plain'];
+        $data = $value;
+
+        if (!empty($metadata)) {
             $headers['Content-Type'] = 'multipart/form-data';
             $data = ['value' => $value, 'metadata' => $metadata];
         }
@@ -115,7 +115,7 @@ class KeyValue implements API
         if (!empty($query)) {
             $uri .= '?' . http_build_query($query);
         }
-        $response      = $this->adapter->{$method}($uri, $data);
+        $response      = $this->adapter->{$method}($uri, $data, $headers);
         $body =  json_decode($response->getBody());
 
         if ($body === null) {
