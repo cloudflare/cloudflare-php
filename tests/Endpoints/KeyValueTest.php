@@ -36,13 +36,11 @@ class KeyValueTest extends TestCase
         $this->assertEquals(self::TEST_KEY_NAME, $result->result[0]->name);
         $this->assertEquals(1, $result->result_info->count);
     }
-
     public function testGetKeyValue()
     {
         $stream = $this->getPsr7StreamForFixture('Endpoints/getKeyValue.txt');
         $adapter = $this->getMockBuilder(Adapter::class)->disableOriginalConstructor()->getMock();
         $adapter->method('get')->willReturn(new Response(200, ['Content-Type' => 'application/json'], $stream));
-
         $adapter->expects($this->once())
             ->method('get')
             ->with($this->stringStartsWith(sprintf('accounts/%s/storage/kv/namespaces/%s/values', self::TEST_ACCOUNT_ID, self::TEST_KV_NAMESPACE_ID)));
