@@ -9,6 +9,7 @@ namespace Cloudflare\API\Endpoints;
 
 use Cloudflare\API\Adapter\Adapter;
 use Cloudflare\API\Traits\BodyAccessorTrait;
+use stdClass;
 
 class User implements API
 {
@@ -21,7 +22,7 @@ class User implements API
         $this->adapter = $adapter;
     }
 
-    public function getUserDetails(): \stdClass
+    public function getUserDetails(): stdClass
     {
         $user = $this->adapter->get('user');
         $this->body = json_decode($user->getBody());
@@ -38,7 +39,7 @@ class User implements API
         return $this->getUserDetails()->email;
     }
 
-    public function updateUserDetails(array $details): \stdClass
+    public function updateUserDetails(array $details): stdClass
     {
         $response = $this->adapter->patch('user', $details);
         $this->body = json_decode($response->getBody());

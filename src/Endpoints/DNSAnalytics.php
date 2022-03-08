@@ -11,6 +11,7 @@ namespace Cloudflare\API\Endpoints;
 use Cloudflare\API\Adapter\Adapter;
 use Cloudflare\API\Traits\BodyAccessorTrait;
 use Cloudflare\API\Configurations\DNSAnalytics as Configs;
+use stdClass;
 
 class DNSAnalytics implements API
 {
@@ -45,7 +46,7 @@ class DNSAnalytics implements API
         string $since = '',
         string $until = '',
         int $limit = 100
-    ): \stdClass {
+    ): stdClass {
         if (count($dimensions) === 0) {
             throw new EndpointException(
                 'At least one dimension is required for getting a report.'
@@ -122,7 +123,7 @@ class DNSAnalytics implements API
         string $until = '',
         int $limit = 100,
         string $timeDelta = ''
-    ): \stdClass {
+    ): stdClass {
         $options = new Configs();
         $options->setDimensions($dimensions);
         $options->setMetrics($metrics);

@@ -1,17 +1,17 @@
 {
-  "name": "cloudflare/sdk",
+  "name": "smartframe-technologies/cloudflare-php",
   "description": "PHP binding for v4 of the Cloudflare Client API.",
   "type": "library",
   "require": {
-    "guzzlehttp/guzzle": "^7.0.1",
-    "php": ">=7.2.5",
+    "guzzlehttp/guzzle": "^6.3 || ^7.0.1",
+    "php": ">=7.3",
     "psr/http-message": "~1.0",
     "ext-json": "*"
   },
   "require-dev": {
-    "phpunit/phpunit": "^5.7",
-    "phpmd/phpmd" : "@stable",
-    "friendsofphp/php-cs-fixer": "^2.6"
+    "friendsofphp/php-cs-fixer": "^2.6",
+    "phpmd/phpmd": "^2.11.1",
+    "phpunit/phpunit": "^9.5.16"
   },
   "license": "BSD-3-Clause",
   "authors": [
