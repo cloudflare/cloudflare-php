@@ -100,14 +100,14 @@ class Certificates implements API
             return $body->result;
         }
         return false;
-    }  
+    }
     
     /**
      * Update the certificate transparency monitoring configuration for the zone.
      *
      * @param string $zoneID The ID of the zone
      * @param bool $enabled Enabling of CT monitoring for the zone.
-     * @param array $emails List of notification email address for this zone. 
+     * @param array $emails List of notification email address for this zone.
      * @return bool
      */
     public function updateCertificateTransparencyMonitoring(string $zoneID, bool $enabled = null, array $emails = [])
