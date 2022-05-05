@@ -1,0 +1,13 @@
+{
+  "result": {
+    "id": "2bab6ace8c72ed3f09b9eca6db1396bb",
+    "name": "Foo Bar",
+    "type": "enterprise",
+    "settings": {
+      "enforce_twofactor": false
+    }
+  },
+  "success": true,
+  "errors": [],
+  "messages": []
+}

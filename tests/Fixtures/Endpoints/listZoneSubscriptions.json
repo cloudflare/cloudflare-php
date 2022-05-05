@@ -1,0 +1,42 @@
+{
+  "success": true,
+  "errors": [],
+  "messages": [],
+  "result": [
+    {
+      "app": {
+        "install_id": null
+      },
+      "id": "506e3185e9c882d175a2d0cb0093d9f2",
+      "state": "Paid",
+      "price": 20,
+      "currency": "USD",
+      "component_values": [
+        {
+          "name": "page_rules",
+          "value": 20,
+          "default": 5,
+          "price": 5
+        }
+      ],
+      "zone": {
+        "id": "023e105f4ecef8ad9ca31a8372d0c353",
+        "name": "example.com"
+      },
+      "frequency": "monthly",
+      "rate_plan": {
+        "id": "free",
+        "public_name": "Business Plan",
+        "currency": "USD",
+        "scope": "zone",
+        "sets": [
+          {}
+        ],
+        "is_contract": false,
+        "externally_managed": false
+      },
+      "current_period_end": "2014-03-31T12:20:00Z",
+      "current_period_start": "2014-05-11T12:20:00Z"
+    }
+  ]
+}

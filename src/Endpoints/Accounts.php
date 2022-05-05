@@ -21,6 +21,19 @@ class Accounts implements API
         $this->adapter = $adapter;
     }
 
+    public function addAccount(string $name, string $type = 'standard'): \stdClass
+    {
+        $options = [
+            'name' => $name,
+            'type' => $type,
+        ];
+
+        $account = $this->adapter->post('accounts', $options);
+        $this->body = json_decode($account->getBody());
+
+        return $this->body->result;
+    }
+
     public function listAccounts(
         int $page = 1,
         int $perPage = 20,
