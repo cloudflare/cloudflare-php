@@ -24,11 +24,10 @@ class LogpushJobs implements API
         string $zoneID,
         string $dataset = null
     ): \stdClass {
+        $endpoint = 'zones/' . $zoneID . '/logpush/jobs';
+
         if ($dataset) {
             $endpoint = 'zones/' . $zoneID . '/logpush/datasets/' . $dataset .'/jobs';
-        }
-        else {
-            $endpoint = 'zones/' . $zoneID . '/logpush/jobs';
         }
 
         $jobs = $this->adapter->get($endpoint);
@@ -114,7 +113,7 @@ class LogpushJobs implements API
         string $destinationConf,
         string $ownershipChallenge,
         string $name = '',
-        bool $enabled = false,
+        bool $status = null,
         string $dataset = '',
         string $logpullOptions = '',
         string $frequency = ''
@@ -123,7 +122,7 @@ class LogpushJobs implements API
         $options->setDestinationConf($destinationConf);
         $options->setOwnershipChallenge($ownershipChallenge);
         $options->setName($name);
-        $options->enable($enabled);
+        $status == true ? $options->setEnabled() : $options->setDisabled();
         $options->setDataset($dataset);
         $options->setLogpullOptions($logpullOptions);
         $options->setFrequency($frequency);
@@ -155,14 +154,14 @@ class LogpushJobs implements API
         int $jobId,
         string $destinationConf = '',
         string $ownershipChallenge = '',
-        bool $enabled = false,
+        bool $status = null,
         string $logpullOptions = '',
         string $frequency = ''
     ):  \stdClass {
         $options = new Configs();
         $options->setDestinationConf($destinationConf);
         $options->setOwnershipChallenge($ownershipChallenge);
-        $options->enable($enabled);
+        $status == true ? $options->setEnabled() : $options->setDisabled();
         $options->setLogpullOptions($logpullOptions);
         $options->setFrequency($frequency);
 
@@ -178,7 +177,7 @@ class LogpushJobs implements API
     public function deleteLogpushJob(
         string $zoneID,
         int $jobId
-    ):  bool  {
+    ):  bool {
         $endpoint = 'zones/' . $zoneID . '/logpush/jobs/' . $jobId;
 
         $job = $this->adapter->delete($endpoint);
@@ -211,5 +210,4 @@ class LogpushJobs implements API
 
         return false;
     }
-
 }

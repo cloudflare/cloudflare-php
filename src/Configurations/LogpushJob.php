@@ -40,9 +40,14 @@ class LogpushJob implements Configurations
         }
     }
 
-    public function enable(bool $enable)
+    public function setEnabled()
     {
-        $this->configs['enabled'] = $enable;
+        $this->configs['enabled'] = true;
+    }
+
+    public function setDisabled()
+    {
+        $this->configs['enabled'] = false;
     }
 
     public function setDataset(string $dataset)
