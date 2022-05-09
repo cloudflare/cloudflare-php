@@ -158,4 +158,45 @@ class SSLTest extends TestCase
 
         $this->assertTrue($result);
     }
+
+    public function testListCertificatePacks()
+    {
+        $response = $this->getPsr7JsonResponseForFixture('Endpoints/listCertificatePacks.json');
+
+        $mock = $this->getMockBuilder(\Cloudflare\API\Adapter\Adapter::class)->getMock();
+        $mock->method('get')->willReturn($response);
+
+        $mock->expects($this->once())
+            ->method('get')
+            ->with(
+                $this->equalTo('zones/023e105f4ecef8ad9ca31a8372d0c353/ssl/certificate_packs'),
+                $this->equalTo([
+                    'status' => 'all'
+                ])
+            );
+
+        $sslMock = new Cloudflare\API\Endpoints\SSL($mock);
+        $result = $sslMock->listCertificatePacks('023e105f4ecef8ad9ca31a8372d0c353', 'all');
+
+        $this->assertEquals('3822ff90-ea29-44df-9e55-21300bb9419b', $result[0]->id);
+    }
+
+    public function testGetCertificatePack()
+    {
+        $response = $this->getPsr7JsonResponseForFixture('Endpoints/getCertificatePack.json');
+
+        $mock = $this->getMockBuilder(\Cloudflare\API\Adapter\Adapter::class)->getMock();
+        $mock->method('get')->willReturn($response);
+
+        $mock->expects($this->once())
+            ->method('get')
+            ->with(
+                $this->equalTo('zones/023e105f4ecef8ad9ca31a8372d0c353/ssl/certificate_packs/3822ff90-ea29-44df-9e55-21300bb9419b')
+            );
+
+        $sslMock = new Cloudflare\API\Endpoints\SSL($mock);
+        $result = $sslMock->getCertificatePack('023e105f4ecef8ad9ca31a8372d0c353', '3822ff90-ea29-44df-9e55-21300bb9419b');
+
+        $this->assertEquals('3822ff90-ea29-44df-9e55-21300bb9419b', $result->id);
+    }
 }
