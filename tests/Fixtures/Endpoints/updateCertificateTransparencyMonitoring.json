@@ -1,0 +1,11 @@
+{
+    "result": {
+        "enabled": true,
+        "emails": [
+            "email@example.com"
+        ]
+    },
+    "success": true,
+    "errors": null,
+    "messages": null
+}

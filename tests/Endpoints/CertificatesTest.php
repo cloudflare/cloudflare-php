@@ -117,4 +117,50 @@ class CertificatesTest extends TestCase
 
         $this->assertTrue($result);
     }
+
+    public function testGetCertificateTransparencyMonitoring()
+    {
+        $response = $this->getPsr7JsonResponseForFixture('Endpoints/getCertificateTransparencyMonitoring.json');
+
+        $mock = $this->getMockBuilder(\Cloudflare\API\Adapter\Adapter::class)->getMock();
+        $mock->method('get')->willReturn($response);
+
+        $mock->expects($this->once())
+            ->method('get')
+            ->with(
+                $this->equalTo('zones/023e105f4ecef8ad9ca31a8372d0c353/ct/alerting')
+            );
+
+        $certEndpoint = new Certificates($mock);
+        $result = $certEndpoint->getCertificateTransparencyMonitoring('023e105f4ecef8ad9ca31a8372d0c353');
+
+        $this->assertEquals('email@example.com', $result->emails[0]);
+    }
+
+    public function testUpdateCertificateTransparencyMonitoring()
+    {
+        $response = $this->getPsr7JsonResponseForFixture('Endpoints/updateCertificateTransparencyMonitoring.json');
+
+        $mock = $this->getMockBuilder(\Cloudflare\API\Adapter\Adapter::class)->getMock();
+        $mock->method('patch')->willReturn($response);
+
+        $mock->expects($this->once())
+            ->method('patch')
+            ->with(
+                $this->equalTo('zones/023e105f4ecef8ad9ca31a8372d0c353/ct/alerting'),
+                $this->equalTo([
+                    'enabled' => true,
+                    'emails' => ['email@example.com']
+                ])
+            );
+
+        $certEndpoint = new Certificates($mock);
+        $result = $certEndpoint->updateCertificateTransparencyMonitoring(
+            '023e105f4ecef8ad9ca31a8372d0c353',
+            true,
+            ['email@example.com']
+        );
+
+        $this->assertTrue($result);
+    }
 }
