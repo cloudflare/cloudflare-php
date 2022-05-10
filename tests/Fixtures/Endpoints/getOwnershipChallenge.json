@@ -1,0 +1,10 @@
+{
+  "success": true,
+  "errors": [],
+  "messages": [],
+  "result": {
+    "filename": "logs/challenge-filename.txt",
+    "valid": true,
+    "message": ""
+  }
+}

@@ -184,11 +184,7 @@ class LogpushJobs implements API
 
         $body = json_decode($job->getBody());
 
-        if (is_null($body->result)) {
-            return true;
-        }
-
-        return false;
+        return $body->success;
     }
 
     public function checkDestinationExists(
