@@ -16,7 +16,7 @@ class LogpushJobsTest extends TestCase
         $mock->expects($this->once())
             ->method('get')
             ->with(
-                $this->equalTo('zones/023e105f4ecef8ad9ca31a8372d0c353/logpush/jobs'),
+                $this->equalTo('zones/023e105f4ecef8ad9ca31a8372d0c353/logpush/jobs')
             );
 
         $logpushMock = new LogpushJobs($mock);
@@ -287,7 +287,7 @@ class LogpushJobsTest extends TestCase
         $arguments = $config->getArray();
         $result = $logpushMock->checkDestinationExists(
             '023e105f4ecef8ad9ca31a8372d0c353',
-            $arguments['destination_conf'],
+            $arguments['destination_conf']
         );
 
         $this->assertFalse($result);
