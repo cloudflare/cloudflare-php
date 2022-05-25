@@ -21,8 +21,8 @@ class AccountsTest extends TestCase
             ->with(
                 $this->equalTo('accounts'),
                 $this->equalTo([
-                    'page' => 1,
-                    'per_page' => 20,
+                    'page'      => 1,
+                    'per_page'  => 20,
                     'direction' => 'desc',
                 ])
             );
@@ -82,5 +82,22 @@ class AccountsTest extends TestCase
 
         $accounts->addAccount('Foo Bar', 'enterprise');
         $this->assertEquals('2bab6ace8c72ed3f09b9eca6db1396bb', $accounts->getBody()->result->id);
+    }
+
+    public function testDeleteAccount()
+    {
+        $response = $this->getPsr7JsonResponseForFixture('Endpoints/deleteAccount.json');
+
+        $mock = $this->getMockBuilder(\Cloudflare\API\Adapter\Adapter::class)->getMock();
+        $mock->method('delete')->willReturn($response);
+        $mock->expects($this->once())
+            ->method('delete')
+            ->with(
+                $this->equalTo('accounts/91b86b19a774dab78915108354eef39b')
+            );
+
+        $account = new Accounts($mock);
+        $result = $account->deleteAccount('91b86b19a774dab78915108354eef39b');
+        $this->assertEquals('91b86b19a774dab78915108354eef39b', $result->result->id);
     }
 }
