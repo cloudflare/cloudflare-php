@@ -22,7 +22,8 @@ class APIKey implements Auth
     {
         return [
             'X-Auth-Email'   => $this->email,
-            'X-Auth-Key' => $this->apiKey
+            'X-Auth-Key' => $this->apiKey,
+            'Authorization' => $this->apiKey
         ];
     }
 }
