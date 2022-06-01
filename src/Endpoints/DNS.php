@@ -153,4 +153,11 @@ class DNS implements API
 
         return false;
     }
+
+    public function scanRecords(string $zoneID): \stdClass
+    {
+        $response = $this->adapter->post('zones/' . $zoneID . '/dns_records/scan');
+        $this->body = json_decode($response->getBody());
+        return $this->body;
+    }
 }
