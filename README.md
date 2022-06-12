@@ -34,6 +34,11 @@ Note that this repository is currently under development, additional classes and
 
 ## Getting Started
 
+If you wish to use Guzzle as your Http Client, you may be required to install it via composer, or you can code you own adapter for any Http Client you may use in your project.
+```bash
+composer require guzzlehttp/guzzle ^7.0
+```
+
 ```php
 $key     = new Cloudflare\API\Auth\APIKey('user@example.com', 'apiKey');
 $adapter = new Cloudflare\API\Adapter\Guzzle($key);

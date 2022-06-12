@@ -16,6 +16,10 @@ class Guzzle implements Adapter
      */
     public function __construct(Auth $auth, string $baseURI = null)
     {
+        if (false === class_exists(Client::class)) {
+            throw new \RuntimeException('Guzzle is not installed, you can install it running `composer require guzzlehttp/guzzle ^7.0`, or use you own adapter.');
+        }
+
         if ($baseURI === null) {
             $baseURI = 'https://api.cloudflare.com/client/v4/';
         }
