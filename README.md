@@ -34,10 +34,8 @@ Note that this repository is currently under development, additional classes and
 
 ## Getting Started
 
-If you wish to use Guzzle as your Http Client, you may be required to install it via composer, or you can code you own adapter for any Http Client you may use in your project.
-```bash
-composer require guzzlehttp/guzzle ^7.0
-```
+The Cloudflare PHP SDK requires a HTTP Client adapter to works with.
+You can either use the Guzzle adapter shipped with the library and by installing Guzzle (`composer require guzzlehttp/guzzle:^7.0`), or implement your own Adapter by implementing the `Cloudflare\API\Adapter\Adapter` interface.
 
 ```php
 $key     = new Cloudflare\API\Auth\APIKey('user@example.com', 'apiKey');

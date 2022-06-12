@@ -17,7 +17,7 @@ class Guzzle implements Adapter
     public function __construct(Auth $auth, string $baseURI = null)
     {
         if (false === class_exists(Client::class)) {
-            throw new \RuntimeException('Guzzle is not installed, you can install it running `composer require guzzlehttp/guzzle ^7.0`, or use you own adapter.');
+            throw new \RuntimeException('The Guzzle adapter requires to have Guzzle installed, you can install it by running "composer require guzzlehttp/guzzle:^7.0".');
         }
 
         if ($baseURI === null) {
