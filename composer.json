@@ -3,7 +3,7 @@
   "description": "PHP binding for v4 of the Cloudflare Client API.",
   "type": "library",
   "require": {
-    "guzzlehttp/guzzle": "^7.0.1",
+    "guzzlehttp/guzzle": "^7.0.1 || ^6.0.0",
     "php": ">=7.2.5",
     "psr/http-message": "~1.0",
     "ext-json": "*"
