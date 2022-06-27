@@ -188,4 +188,35 @@ class DNSTest extends TestCase
             $this->assertEquals($result->result->{ $property }, $value);
         }
     }
+
+    public function testImportRecordsFromBindFile()
+    {
+        $response = $this->getPsr7JsonResponseForFixture('Endpoints/importRecordsFromBindFile.json');
+
+        $mock = $this->getMockBuilder(\Cloudflare\API\Adapter\Adapter::class)->getMock();
+        $mock->method('post')->willReturn($response);
+
+        $stream = \GuzzleHttp\Psr7\stream_for('string data');
+        $options = [
+            'multipart' => [
+                [
+                    'name'     => 'file',
+                    'contents' => 'string data',
+                    'filename' => '@bind_config.txt',
+                ]
+            ]
+        ];
+        $mock->expects($this->once())
+            ->method('post')
+            ->with(
+                $this->equalTo('zones/023e105f4ecef8ad9ca31a8372d0c353/dns_records/import'),
+                $this->equalTo($options)
+            );
+
+        $dns = new \Cloudflare\API\Endpoints\DNS($mock);
+        $result = $dns->importRecordsFromBindFile('023e105f4ecef8ad9ca31a8372d0c353', $stream);
+
+        $this->assertEquals(5, $result->recs_added);
+        $this->assertEquals(5, $result->total_records_parsed);
+    }
 }

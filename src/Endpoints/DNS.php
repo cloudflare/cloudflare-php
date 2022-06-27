@@ -10,6 +10,7 @@ namespace Cloudflare\API\Endpoints;
 
 use Cloudflare\API\Adapter\Adapter;
 use Cloudflare\API\Traits\BodyAccessorTrait;
+use Psr\Http\Message\StreamInterface;
 
 class DNS implements API
 {
@@ -46,8 +47,8 @@ class DNS implements API
         array $data = []
     ): bool {
         $options = [
-            'type' => $type,
-            'name' => $name,
+            'type'    => $type,
+            'name'    => $name,
             'content' => $content,
             'proxied' => $proxied
         ];
@@ -59,7 +60,7 @@ class DNS implements API
         if (is_numeric($priority)) {
             $options['priority'] = (int)$priority;
         }
-        
+
         if (!empty($data)) {
             $options['data'] = $data;
         }
@@ -87,9 +88,9 @@ class DNS implements API
         string $match = 'all'
     ): \stdClass {
         $query = [
-            'page' => $page,
+            'page'     => $page,
             'per_page' => $perPage,
-            'match' => $match
+            'match'    => $match
         ];
 
         if (!empty($type)) {
@@ -152,5 +153,31 @@ class DNS implements API
         }
 
         return false;
+    }
+
+    /**
+     * @param string $cloudflare_zone_id
+     * @param StreamInterface $bind_file_stream
+     * @return \stdClass
+     */
+    public function importRecordsFromBindFile(
+        string $cloudflare_zone_id,
+        StreamInterface $bind_file_stream
+    ): \stdClass {
+        $options = [
+            'multipart' => [
+                [
+                    'name'     => 'file',
+                    'contents' => $bind_file_stream->getContents(),
+                    'filename' => '@bind_config.txt',
+                ]
+            ]
+        ];
+
+        $response = $this->adapter->post('zones/' . $cloudflare_zone_id . '/dns_records/import', $options);
+
+        $this->body = json_decode($response->getBody());
+
+        return $this->body->result;
     }
 }
