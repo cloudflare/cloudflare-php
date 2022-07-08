@@ -178,6 +178,9 @@ class DNS implements API
 
         $this->body = json_decode($response->getBody());
 
-        return $this->body->result;
+        return (object)[
+            'result'   => $this->body->result,
+            'messages' => $this->body->messages,
+        ];
     }
 }
