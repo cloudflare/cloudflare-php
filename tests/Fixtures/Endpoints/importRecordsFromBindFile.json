@@ -1,0 +1,14 @@
+{
+  "success": true,
+  "errors": [],
+  "messages": [],
+  "result": {
+    "recs_added": 5,
+    "total_records_parsed": 5
+  },
+  "timing": {
+    "start_time": "2014-03-01T12:20:00Z",
+    "end_time": "2014-03-01T12:20:01Z",
+    "process_time": 1
+  }
+}
