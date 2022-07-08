@@ -216,7 +216,8 @@ class DNSTest extends TestCase
         $dns = new \Cloudflare\API\Endpoints\DNS($mock);
         $result = $dns->importRecordsFromBindFile('023e105f4ecef8ad9ca31a8372d0c353', $stream);
 
-        $this->assertEquals(5, $result->recs_added);
-        $this->assertEquals(5, $result->total_records_parsed);
+        $this->assertEquals(5, $result->result->recs_added);
+        $this->assertEquals(5, $result->result->total_records_parsed);
+        $this->assertEquals([], $result->messages);
     }
 }
