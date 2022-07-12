@@ -241,7 +241,6 @@ class ZonesTest extends TestCase
                 ])
             );
 
-
         $zones = new \Cloudflare\API\Endpoints\Zones($mock);
         $result = $zones->editZone($zoneId, $nameServers, $planId, $type);
 
