@@ -227,8 +227,11 @@ class ZonesTest extends TestCase
 
         $zoneId = '023e105f4ecef8ad9ca31a8372d0c353';
         $nameServers = ['tony.ns.cloudflare.com', 'woz.ns.cloudflare.com'];
-        $planId = 'e592fd9519420ba7405e1307bff33214';
         $type = 'full';
+        $planId = 'e592fd9519420ba7405e1307bff33214';
+
+        $plan = new \stdClass;
+        $plan->id = $planId;
 
         $mock->expects($this->once())
             ->method('patch')
@@ -236,7 +239,7 @@ class ZonesTest extends TestCase
                 $this->equalTo('zones/' . $zoneId),
                 $this->equalTo([
                     'vanity_name_servers' => $nameServers,
-                    'plan' => $planId,
+                    'plan' => $plan,
                     'type' => $type
                 ])
             );

@@ -288,7 +288,8 @@ class Zones implements API
 
         if (!empty($planId)) {
             $plan = new stdClass;
-            $options['plan'] = $plan->id = $planId;
+            $plan->id = $planId;
+            $options['plan'] = $plan;
         }
 
         if (!empty($type)) {
