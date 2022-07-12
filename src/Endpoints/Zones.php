@@ -10,7 +10,6 @@ namespace Cloudflare\API\Endpoints;
 
 use Cloudflare\API\Adapter\Adapter;
 use Cloudflare\API\Traits\BodyAccessorTrait;
-use stdClass;
 
 class Zones implements API
 {
@@ -287,7 +286,7 @@ class Zones implements API
         }
 
         if (!empty($planId)) {
-            $plan = new stdClass;
+            $plan = new \stdClass;
             $plan->id = $planId;
             $options['plan'] = $plan;
         }
