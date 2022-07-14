@@ -80,14 +80,31 @@ class Guzzle implements Adapter
         }
 
         try {
-            $response = $this->client->$method($uri, [
-                'headers' => $headers,
-                ($method === 'get' ? 'query' : 'json') => $data,
-            ]);
+            $methodData = $this->getMethodData($method, $data);
+            $response = $this->client->$method($uri, ['headers' => $headers] + $methodData);
         } catch (RequestException $err) {
             throw ResponseException::fromRequestException($err);
         }
 
         return $response;
+    }
+
+    /**
+     * Gets the data for the request as per the method.
+     * @param string $method
+     * @param array $data
+     * @return array|array[]
+     */
+    public function getMethodData(string $method, array $data): array
+    {
+        if ($method === 'get') {
+            return ['query' => $data];
+        }
+
+        if (array_key_exists('multipart', $data)) {
+            return $data;
+        }
+
+        return ['json' => $data];
     }
 }
