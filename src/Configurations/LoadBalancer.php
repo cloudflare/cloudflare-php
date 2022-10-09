@@ -40,12 +40,12 @@ class LoadBalancer implements Configurations
 
     public function setFallbackPool(string $fallbackPool)
     {
-        $this->configs['fallback_pools'] = $fallbackPool;
+        $this->configs['fallback_pool'] = $fallbackPool;
     }
 
     public function getFallbackPool():string
     {
-        return $this->configs['fallback_pools'] ?? '';
+        return $this->configs['fallback_pool'] ?? '';
     }
 
     public function setSteeringPolicy(string $steeringPolicy = '')
