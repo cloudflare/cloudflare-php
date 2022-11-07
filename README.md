@@ -29,6 +29,7 @@ Each API call is provided via a similarly named function within various classes 
 - [x] Crypto
 - [x] Load Balancers
 - [x] Firewall Settings
+- [x] [Images](https://www.cloudflare.com/products/cloudflare-images/)
 
 Note that this repository is currently under development, additional classes and endpoints being actively added.
 
@@ -40,6 +41,16 @@ $adapter = new Cloudflare\API\Adapter\Guzzle($key);
 $user    = new Cloudflare\API\Endpoints\User($adapter);
 
 echo $user->getUserID();
+```
+
+## Getting started with images
+
+```php
+$key     = new Cloudflare\API\Auth\APIToken('apiToken');
+$adapter = new Cloudflare\API\Adapter\Guzzle($key);
+$images    = new Cloudflare\API\Endpoints\Images($adapter);
+
+var_dump($images->listImages('accountId'));
 ```
 
 ## Contributions
