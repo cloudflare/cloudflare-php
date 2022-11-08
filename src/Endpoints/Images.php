@@ -36,6 +36,7 @@ class Images implements API
         string $accountId,
         string $fileOrUrl,
         string $id = '',
+        string $filename = '',
         bool $requireSignedURLs = false,
         array $metadata = []
     ): \stdClass {
@@ -51,7 +52,7 @@ class Images implements API
                 [
                     'name' => 'file',
                     'contents' => file_get_contents($fileOrUrl),
-                    'filename' => basename($fileOrUrl),
+                    'filename' => !empty($filename) ? $filename : basename($fileOrUrl),
                 ]
             ];
         }
