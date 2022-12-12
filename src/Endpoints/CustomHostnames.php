@@ -35,6 +35,7 @@ class CustomHostnames implements API
      * @param bool   $wildcard
      * @param string $bundleMethod
      * @param array $customSsl
+     * @param string $sslCertificateAuthority
      * @return \stdClass
      */
     public function addHostname(
@@ -46,7 +47,8 @@ class CustomHostnames implements API
         string $customOriginServer = '',
         bool $wildcard = false,
         string $bundleMethod = '',
-        array $customSsl = []
+        array $customSsl = [],
+        string $sslCertificateAuthority = 'lets_encrypt'
     ): \stdClass {
         $options = [
             'hostname' => $hostname,
@@ -72,6 +74,10 @@ class CustomHostnames implements API
 
         if (!empty($customSsl['certificate'])) {
             $options['ssl']['custom_certificate'] = $customSsl['certificate'];
+        }
+
+        if (!empty($sslCertificateAuthority)) {
+            $options['ssl']['certificate_authority'] = $sslCertificateAuthority;
         }
 
         $zone = $this->adapter->post('zones/'.$zoneID.'/custom_hostnames', $options);
@@ -155,6 +161,7 @@ class CustomHostnames implements API
      * @param bool|null $wildcard
      * @param string    $bundleMethod
      * @param array    $customSsl
+     * @param string $sslCertificateAuthority
      * @return \stdClass
      */
     public function updateHostname(
@@ -166,7 +173,8 @@ class CustomHostnames implements API
         string $customOriginServer = '',
         bool $wildcard = null,
         string $bundleMethod = '',
-        array $customSsl = []
+        array $customSsl = [],
+        string $sslCertificateAuthority = 'lets_encrypt'
     ): \stdClass {
         $query = [];
         $options = [];
@@ -197,6 +205,10 @@ class CustomHostnames implements API
 
         if (!empty($customSsl['certificate'])) {
             $query['custom_certificate'] = $customSsl['certificate'];
+        }
+
+        if (!empty($sslCertificateAuthority)) {
+            $query['certificate_authority'] = $sslCertificateAuthority;
         }
 
         if (!empty($query)) {
