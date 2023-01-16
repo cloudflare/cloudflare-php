@@ -81,33 +81,6 @@ class ZonesTest extends TestCase
         $this->assertEquals('023e105f4ecef8ad9ca31a8372d0c353', $result->account->id);
     }
 
-    public function testAddZoneWithAccountId()
-    {
-        $response = $this->getPsr7JsonResponseForFixture('Endpoints/addZone.json');
-
-        $mock = $this->getMockBuilder(\Cloudflare\API\Adapter\Adapter::class)->getMock();
-        $mock->method('post')->willReturn($response);
-
-        $mock->expects($this->once())
-            ->method('post')
-            ->with(
-                $this->equalTo('zones'),
-                $this->equalTo([
-                    'name'       => 'example.com',
-                    'jump_start' => false,
-                    'account'    => [
-                        'id' => '023e105f4ecef8ad9ca31a8372d0c353',
-                    ],
-                ])
-            );
-
-        $zones = new \Cloudflare\API\Endpoints\Zones($mock);
-        $result = $zones->addZone('example.com', false, '023e105f4ecef8ad9ca31a8372d0c353');
-
-        $this->assertObjectHasAttribute('id', $result);
-        $this->assertEquals('023e105f4ecef8ad9ca31a8372d0c353', $result->account->id);
-    }
-
     public function testActivationTest()
     {
         $response = $this->getPsr7JsonResponseForFixture('Endpoints/activationTest.json');

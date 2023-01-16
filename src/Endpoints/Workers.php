@@ -32,5 +32,4 @@ class Workers implements API
 
         return $this->body->result;
     }
-
 }
