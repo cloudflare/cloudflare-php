@@ -1,5 +1,7 @@
 <?php
 
+use Cloudflare\API\Configurations\ZoneLockdown;
+
 /**
  * Created by PhpStorm.
  * User: junade
@@ -10,7 +12,7 @@ class ConfigurationsZoneLockdownTest extends TestCase
 {
     public function testGetArray()
     {
-        $configuration = new \Cloudflare\API\Configurations\ZoneLockdown();
+        $configuration = new ZoneLockdown();
         $configuration->addIP('1.2.3.4');
 
         $array = $configuration->getArray();

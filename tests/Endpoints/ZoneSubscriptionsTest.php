@@ -9,7 +9,7 @@ class ZoneSubscriptionsTest extends TestCase
     {
         $response = $this->getPsr7JsonResponseForFixture('Endpoints/listZoneSubscriptions.json');
 
-        $mock = $this->getMockBuilder(Adapter::class)->getMock();
+        $mock = $this->getMockBuilder(Adapter::class)->disableOriginalConstructor()->getMock();
         $mock->method('get')->willReturn($response);
 
         $mock->expects($this->once())
@@ -30,7 +30,7 @@ class ZoneSubscriptionsTest extends TestCase
         $postResponse = $this->getPsr7JsonResponseForFixture('Endpoints/createZoneSubscription.json');
         $getResponse = $this->getPsr7JsonResponseForFixture('Endpoints/listEmptyZoneSubscriptions.json');
 
-        $mock = $this->getMockBuilder(Adapter::class)->getMock();
+        $mock = $this->getMockBuilder(Adapter::class)->disableOriginalConstructor()->getMock();
         $mock->method('post')->willReturn($postResponse);
         $mock->method('get')->willReturn($getResponse);
 
@@ -57,7 +57,7 @@ class ZoneSubscriptionsTest extends TestCase
         $postResponse = $this->getPsr7JsonResponseForFixture('Endpoints/createZoneSubscription.json');
         $getResponse = $this->getPsr7JsonResponseForFixture('Endpoints/listZoneSubscriptions.json');
 
-        $mock = $this->getMockBuilder(Adapter::class)->getMock();
+        $mock = $this->getMockBuilder(Adapter::class)->disableOriginalConstructor()->getMock();
         $mock->method('put')->willReturn($postResponse);
         $mock->method('get')->willReturn($getResponse);
 

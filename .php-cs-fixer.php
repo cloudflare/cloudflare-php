@@ -5,9 +5,9 @@ $finder = PhpCsFixer\Finder::create()
     ->in(__DIR__ . '/tests')
 ;
 
-return PhpCsFixer\Config::create()
-    ->setUsingCache(false)
-    ->setRules([
+$config = new PhpCsFixer\Config();
+$config->setUsingCache(false);
+return $config->setRules([
         '@PSR2' => true,
         'array_syntax' => ['syntax' => 'short'],
     ])
