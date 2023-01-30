@@ -43,4 +43,9 @@ class FirewallRuleOptions implements Configurations
     {
         $this->configs['action'] = 'log';
     }
+
+    public function setActionManagedChallenge()
+    {
+        $this->configs['action'] = 'managed_challenge';
+    }
 }
