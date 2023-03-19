@@ -1,12 +1,6 @@
 <?php
 
-/**
- * User: junade
- * Date: 13/01/2017
- * Time: 23:35
- */
-
-use GuzzleHttp\Psr7\Response;
+use Cloudflare\API\Adapter\ResponseException;
 
 class GuzzleTest extends TestCase
 {
@@ -89,48 +83,15 @@ class GuzzleTest extends TestCase
         $this->assertEquals('Testing a DELETE request.', $body->json->{'X-Delete-Test'});
     }
 
-    public function testErrors()
-    {
-        $class = new ReflectionClass(\Cloudflare\API\Adapter\Guzzle::class);
-        $method = $class->getMethod('checkError');
-        $method->setAccessible(true);
-
-        $body =
-            '{
-                "result": null,
-                "success": false,
-                "errors": [{"code":1003,"message":"Invalid or missing zone id."}],
-                "messages": []
-             }'
-        ;
-        $response = new Response(200, [], $body);
-
-        $this->expectException(\Cloudflare\API\Adapter\ResponseException::class);
-        $method->invokeArgs($this->client, [$response]);
-
-        $body =
-            '{
-                "result": null,
-                "success": false,
-                "errors": [],
-                "messages": []
-             }'
-        ;
-        $response = new Response(200, [], $body);
-
-        $this->expectException(\Cloudflare\API\Adapter\ResponseException::class);
-        $method->invokeArgs($this->client, [$response]);
-
-        $body = 'this isnt json.';
-        $response = new Response(200, [], $body);
-
-        $this->expectException(\Cloudflare\API\Adapter\JSONException::class);
-        $method->invokeArgs($this->client, [$response]);
-    }
-
     public function testNotFound()
     {
-        $this->expectException(\GuzzleHttp\Exception\RequestException::class);
+        $this->expectException(ResponseException::class);
         $this->client->get('https://httpbin.org/status/404');
+    }
+
+    public function testServerError()
+    {
+        $this->expectException(ResponseException::class);
+        $this->client->get('https://httpbin.org/status/500');
     }
 }

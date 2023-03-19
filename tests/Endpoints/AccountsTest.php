@@ -1,4 +1,7 @@
 <?php
+
+use Cloudflare\API\Endpoints\Accounts;
+
 /**
  * User: kanasite
  * Date: 01/28/2019
@@ -24,7 +27,7 @@ class AccountsTest extends TestCase
                 ])
             );
 
-        $accounts = new \Cloudflare\API\Endpoints\Accounts($mock);
+        $accounts = new Accounts($mock);
         $result = $accounts->listAccounts(1, 20, 'desc');
 
         $this->assertObjectHasAttribute('result', $result);
@@ -33,5 +36,51 @@ class AccountsTest extends TestCase
         $this->assertEquals('023e105f4ecef8ad9ca31a8372d0c353', $result->result[0]->id);
         $this->assertEquals(1, $result->result_info->page);
         $this->assertEquals('023e105f4ecef8ad9ca31a8372d0c353', $accounts->getBody()->result[0]->id);
+    }
+
+    public function testAddAccountWithDefaultType()
+    {
+        $response = $this->getPsr7JsonResponseForFixture('Endpoints/createStandardAccount.json');
+
+        $mock = $this->getMockBuilder(\Cloudflare\API\Adapter\Adapter::class)->getMock();
+        $mock->method('post')->willReturn($response);
+
+        $mock->expects($this->once())
+            ->method('post')
+            ->with(
+                $this->equalTo('accounts'),
+                $this->equalTo([
+                    'name' => 'Foo Bar',
+                    'type' => 'standard',
+                ])
+            );
+
+        $accounts = new Accounts($mock);
+
+        $accounts->addAccount('Foo Bar');
+        $this->assertEquals('2bab6ace8c72ed3f09b9eca6db1396bb', $accounts->getBody()->result->id);
+    }
+
+    public function testAddAccountWithCustomType()
+    {
+        $response = $this->getPsr7JsonResponseForFixture('Endpoints/createEnterpriseAccount.json');
+
+        $mock = $this->getMockBuilder(\Cloudflare\API\Adapter\Adapter::class)->getMock();
+        $mock->method('post')->willReturn($response);
+
+        $mock->expects($this->once())
+            ->method('post')
+            ->with(
+                $this->equalTo('accounts'),
+                $this->equalTo([
+                    'name' => 'Foo Bar',
+                    'type' => 'enterprise',
+                ])
+            );
+
+        $accounts = new Accounts($mock);
+
+        $accounts->addAccount('Foo Bar', 'enterprise');
+        $this->assertEquals('2bab6ace8c72ed3f09b9eca6db1396bb', $accounts->getBody()->result->id);
     }
 }
