@@ -2,6 +2,7 @@
   "name": "cloudflare/sdk",
   "description": "PHP binding for v4 of the Cloudflare Client API.",
   "type": "library",
+  "abandoned": true,
   "require": {
     "guzzlehttp/guzzle": "^7.0.1",
     "php": ">=7.2.5",
