@@ -104,7 +104,9 @@ class CustomHostnames implements API
         int $perPage = 20,
         string $order = '',
         string $direction = '',
-        int $ssl = 0
+        int $ssl = 0,
+        string $hostname_status = '',
+        string $ssl_status = ''
     ): \stdClass {
         $query = [
             'page' => $page,
@@ -126,6 +128,14 @@ class CustomHostnames implements API
 
         if (!empty($direction)) {
             $query['direction'] = $direction;
+        }
+
+        if (!empty($hostname_status)) {
+            $query['hostname_status'] = $hostname_status;
+        }
+
+        if (!empty($ssl_status)) {
+            $query['ssl_status'] = $ssl_status;
         }
 
         $zone = $this->adapter->get('zones/'.$zoneID.'/custom_hostnames', $query);
