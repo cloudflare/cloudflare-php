@@ -1,0 +1,28 @@
+{
+  "result": {
+    "images": [
+      {
+        "id": "KAQA3231344",
+        "filename": "D_NQ_NP_656209-KAQA3231344_092019-O.webp",
+        "meta": [],
+        "uploaded": "2022-11-06T05:25:47.011Z",
+        "requireSignedURLs": false,
+        "variants": [
+          "https:\/\/imagedelivery.net\/65a4sd64564asd56a4d654\/KAQA3231344.webp\/public"
+        ]
+      },
+      {
+        "id": "0dcd32af9f7b2e4cc7ce9f48a9a5e\/products\/test-sdk.jpg",
+        "filename": "D_NQ_NP_2X_895679-AD5654SDAS.webp",
+        "uploaded": "2022-11-06T05:49:20.738Z",
+        "requireSignedURLs": false,
+        "variants": [
+          "https:\/\/imagedelivery.net\/65a4sd64564asd56a4d654\/0dcd32af9f7b2e4cc7ce9f48a9a5e\/products\/test-sdk.jpg\/public"
+        ]
+      }
+    ]
+  },
+  "success": true,
+  "errors": [],
+  "messages": []
+}

@@ -41,9 +41,9 @@ class Guzzle implements Adapter
     /**
      * @inheritDoc
      */
-    public function post(string $uri, array $data = [], array $headers = []): ResponseInterface
+    public function post(string $uri, array $data = [], array $headers = [], bool $upload = false): ResponseInterface
     {
-        return $this->request('post', $uri, $data, $headers);
+        return $this->request('post', $uri, $data, $headers, $upload);
     }
 
     /**
@@ -73,7 +73,7 @@ class Guzzle implements Adapter
     /**
      * @SuppressWarnings(PHPMD.StaticAccess)
      */
-    public function request(string $method, string $uri, array $data = [], array $headers = [])
+    public function request(string $method, string $uri, array $data = [], array $headers = [], bool $upload = false)
     {
         if (!in_array($method, ['get', 'post', 'put', 'patch', 'delete'])) {
             throw new \InvalidArgumentException('Request method must be get, post, put, patch, or delete');
@@ -82,7 +82,7 @@ class Guzzle implements Adapter
         try {
             $response = $this->client->$method($uri, [
                 'headers' => $headers,
-                ($method === 'get' ? 'query' : 'json') => $data,
+                ($method === 'get' ? 'query' : ($upload ? 'multipart' : 'json')) => $data,
             ]);
         } catch (RequestException $err) {
             throw ResponseException::fromRequestException($err);
