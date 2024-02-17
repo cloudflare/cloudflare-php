@@ -42,7 +42,7 @@ class CustomHostnames implements API
         string $hostname,
         string $sslMethod = 'http',
         string $sslType = 'dv',
-        array $sslSettings = [],
+        array|null $sslSettings = null,
         string $customOriginServer = '',
         bool $wildcard = false,
         string $bundleMethod = '',
