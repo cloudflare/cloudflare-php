@@ -11,7 +11,7 @@ use Cloudflare\API\Configurations\Pool;
 class PoolTest extends TestCase
 {
     /**
-     * @dataProvider testArgumentsDataProvider
+     * @dataProvider dataProviderTestArguments
      */
     public function testArguments($setFunction, $arguments, $getFunction, $invalid)
     {
@@ -30,7 +30,7 @@ class PoolTest extends TestCase
         }
     }
 
-    public function testArgumentsDataProvider()
+    public function dataProviderTestArguments()
     {
         return [
             'origins arguments valid' => [

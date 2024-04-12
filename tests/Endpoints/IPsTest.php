@@ -27,9 +27,9 @@ class IPsTest extends TestCase
 
         $ipsMock = new IPs($mock);
         $ips = $ipsMock->listIPs();
-        $this->assertObjectHasAttribute('ipv4_cidrs', $ips);
-        $this->assertObjectHasAttribute('ipv6_cidrs', $ips);
-        $this->assertObjectHasAttribute('ipv4_cidrs', $ipsMock->getBody()->result);
-        $this->assertObjectHasAttribute('ipv6_cidrs', $ipsMock->getBody()->result);
+        $this->assertObjectHasProperty('ipv4_cidrs', $ips);
+        $this->assertObjectHasProperty('ipv6_cidrs', $ips);
+        $this->assertObjectHasProperty('ipv4_cidrs', $ipsMock->getBody()->result);
+        $this->assertObjectHasProperty('ipv6_cidrs', $ipsMock->getBody()->result);
     }
 }

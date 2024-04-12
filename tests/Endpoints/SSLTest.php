@@ -40,7 +40,7 @@ class SSLTest extends TestCase
         $sslMock = new SSL($mock);
         $result = $sslMock->getSSLVerificationStatus('c2547eb745079dac9320b638f5e225cf483cc5cfdda41');
 
-        $this->assertObjectHasAttribute('result', $result);
+        $this->assertObjectHasProperty('result', $result);
         $this->assertEquals('active', $result->result[0]->certificate_status);
     }
 

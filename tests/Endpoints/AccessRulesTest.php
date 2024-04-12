@@ -27,8 +27,8 @@ class AccessRulesTest extends TestCase
         $zones = new AccessRules($mock);
         $result = $zones->listRules('023e105f4ecef8ad9ca31a8372d0c353');
 
-        $this->assertObjectHasAttribute('result', $result);
-        $this->assertObjectHasAttribute('result_info', $result);
+        $this->assertObjectHasProperty('result', $result);
+        $this->assertObjectHasProperty('result_info', $result);
 
         $this->assertEquals('92f17202ed8bd63d69a66b86a49a8f6b', $result->result[0]->id);
         $this->assertEquals(1, $result->result_info->page);
