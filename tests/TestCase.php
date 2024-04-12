@@ -12,7 +12,9 @@ abstract class TestCase extends BaseTestCase
      * Returns a PSR7 Stream for a given fixture.
      *
      * @param  string     $fixture The fixture to create the stream for.
+     *
      * @return Psr7\Stream
+     * @SuppressWarnings(PHPMD.StaticAccess)
      */
     protected function getPsr7StreamForFixture($fixture): Psr7\Stream
     {
