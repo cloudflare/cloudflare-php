@@ -1,0 +1,5 @@
+$key     = new Cloudflare\API\Auth\APIKey('user@example.com', 'apiKey');
+$adapter = new Cloudflare\API\Adapter\Guzzle($key);
+$user    = new Cloudflare\API\Endpoints\User($adapter);
+
+echo $user->getUserID();
