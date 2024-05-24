@@ -1,0 +1,65 @@
+# Site settings
+title: Development containers
+description: >
+  Development containers documentation and specification page.
+
+# baseurl: / # the subpath of your site, e.g. /blog/
+url: https://devcontainers.github.io # the base hostname & protocol for your site
+git_address: https://github.com/devcontainers/devcontainers.github.io
+git_edit_address: https://github.com/devcontainers/devcontainers.github.io/settings/pages/blob/gh-pages
+theme_color: 2753E3
+
+# Build settings
+markdown: kramdown
+highlighter: rouge
+
+plugins:
+  - github-pages
+  - jemoji
+  - jekyll-feed
+
+
+exclude:
+  - Gemfile
+  - Gemfile.lock
+  - .idea/
+  - .gitignore
+  - README.md
+  - resources
+
+timezone: Europe/Zurich
+
+defaults:
+- scope:
+    path: _posts
+    type: posts
+  values:
+    layout: post
+    sectionid: guide
+
+- scope:
+    path: _docs
+    type: docs
+  values:
+    layout: docs
+    sectionid: docs
+    seo:
+      type: "WebPage"
+
+- scope:
+    path: _implementors
+    type: implementors
+  values:
+    layout: implementors
+    sectionid: implementors
+
+collections:
+  docs:
+    permalink: /:collection/:path/
+    output: true
+  posts:
+    permalink: /guide/:title
+    output: true
+  implementors:
+    permalink: /:collection/:path/
+    output: true
