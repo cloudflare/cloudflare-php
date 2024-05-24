@@ -1,0 +1,4 @@
+curl --request GET \
+  --url https://api.cloudflare.com/client/v4/accounts/account_id/devices/dex_tests \
+  --header 'Content-Type: application/json' \
+  --header 'X-Auth-Email: '
