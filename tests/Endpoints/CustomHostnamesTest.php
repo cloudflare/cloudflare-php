@@ -89,8 +89,8 @@ class CustomHostnamesTest extends TestCase
         $zones = new CustomHostnames($mock);
         $result = $zones->listHostnames('023e105f4ecef8ad9ca31a8372d0c353', 'app.example.com', '0d89c70d-ad9f-4843-b99f-6cc0252067e9', 1, 20, 'ssl', 'desc', 0);
 
-        $this->assertObjectHasAttribute('result', $result);
-        $this->assertObjectHasAttribute('result_info', $result);
+        $this->assertObjectHasProperty('result', $result);
+        $this->assertObjectHasProperty('result_info', $result);
 
         $this->assertEquals('0d89c70d-ad9f-4843-b99f-6cc0252067e9', $result->result[0]->id);
         $this->assertEquals(1, $result->result_info->page);
@@ -113,8 +113,8 @@ class CustomHostnamesTest extends TestCase
         $zones = new CustomHostnames($mock);
         $result = $zones->getHostname('023e105f4ecef8ad9ca31a8372d0c353', '0d89c70d-ad9f-4843-b99f-6cc0252067e9', '0d89c70d-ad9f-4843-b99f-6cc0252067e9');
 
-        $this->assertObjectHasAttribute('id', $result);
-        $this->assertObjectHasAttribute('hostname', $result);
+        $this->assertObjectHasProperty('id', $result);
+        $this->assertObjectHasProperty('hostname', $result);
         $this->assertEquals('0d89c70d-ad9f-4843-b99f-6cc0252067e9', $zones->getBody()->result->id);
     }
 
@@ -172,8 +172,8 @@ class CustomHostnamesTest extends TestCase
             ]
         );
 
-        $this->assertObjectHasAttribute('id', $result);
-        $this->assertObjectHasAttribute('hostname', $result);
+        $this->assertObjectHasProperty('id', $result);
+        $this->assertObjectHasProperty('hostname', $result);
         $this->assertEquals('0d89c70d-ad9f-4843-b99f-6cc0252067e9', $zones->getBody()->result->id);
     }
 
@@ -213,8 +213,8 @@ class CustomHostnamesTest extends TestCase
         $zones = new CustomHostnames($mock);
         $result = $zones->getFallbackOrigin('023e105f4ecef8ad9ca31a8372d0c353');
 
-        $this->assertObjectHasAttribute('origin', $result);
-        $this->assertObjectHasAttribute('status', $result);
+        $this->assertObjectHasProperty('origin', $result);
+        $this->assertObjectHasProperty('status', $result);
     }
 
     private function getCustomSsl(): array

@@ -33,14 +33,16 @@ class WorkersRoute implements API
         return $this->body->result;
     }
 
-    public function getRoute(string $zoneID, string $routeID) {
+    public function getRoute(string $zoneID, string $routeID)
+    {
         $workerRoutes = $this->adapter->get('zones/' . $zoneID . '/workers/routes/' . $routeID);
         $this->body = json_decode($workerRoutes->getBody());
 
         return $this->body->result;
     }
 
-    public function createRoute(string $zoneID, string $pattern, ?string $script = null) {
+    public function createRoute(string $zoneID, string $pattern, ?string $script = null)
+    {
         $options = [
             'pattern' => $pattern
         ];
@@ -60,7 +62,8 @@ class WorkersRoute implements API
         return false;
     }
 
-    public function updateRoute(string $zoneID, string $routeID, string $pattern, ?string $script = null) {
+    public function updateRoute(string $zoneID, string $routeID, string $pattern, ?string $script = null)
+    {
         $options = [
             'pattern' => $pattern
         ];
@@ -80,7 +83,8 @@ class WorkersRoute implements API
         return false;
     }
 
-    public function deleteRoute(string $zoneID, string $routeID) {
+    public function deleteRoute(string $zoneID, string $routeID)
+    {
         $workerRoutes = $this->adapter->delete('zones/' . $zoneID . '/workers/routes/' . $routeID);
         $this->body = json_decode($workerRoutes->getBody());
 

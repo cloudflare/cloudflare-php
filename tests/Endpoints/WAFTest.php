@@ -35,8 +35,8 @@ class WAFTest extends TestCase
         $waf = new WAF($mock);
         $result = $waf->getPackages('023e105f4ecef8ad9ca31a8372d0c353', 1, 20, 'status', 'desc');
 
-        $this->assertObjectHasAttribute('result', $result);
-        $this->assertObjectHasAttribute('result_info', $result);
+        $this->assertObjectHasProperty('result', $result);
+        $this->assertObjectHasProperty('result_info', $result);
 
         $this->assertEquals('a25a9a7e9c00afc1fb2e0245519d725b', $result->result[0]->id);
         $this->assertEquals(1, $result->result_info->page);
@@ -86,8 +86,8 @@ class WAFTest extends TestCase
         $waf = new WAF($mock);
         $result = $waf->getRules('023e105f4ecef8ad9ca31a8372d0c353', 'a25a9a7e9c00afc1fb2e0245519d725b', 1, 20, 'status', 'desc');
 
-        $this->assertObjectHasAttribute('result', $result);
-        $this->assertObjectHasAttribute('result_info', $result);
+        $this->assertObjectHasProperty('result', $result);
+        $this->assertObjectHasProperty('result_info', $result);
 
         $this->assertEquals('92f17202ed8bd63d69a66b86a49a8f6b', $result->result[0]->id);
         $this->assertEquals(1, $result->result_info->page);
@@ -166,8 +166,8 @@ class WAFTest extends TestCase
         $waf = new WAF($mock);
         $result = $waf->getGroups('023e105f4ecef8ad9ca31a8372d0c353', 'a25a9a7e9c00afc1fb2e0245519d725b', 1, 20, 'status', 'desc');
 
-        $this->assertObjectHasAttribute('result', $result);
-        $this->assertObjectHasAttribute('result_info', $result);
+        $this->assertObjectHasProperty('result', $result);
+        $this->assertObjectHasProperty('result_info', $result);
 
         $this->assertEquals('de677e5818985db1285d0e80225f06e5', $result->result[0]->id);
         $this->assertEquals(1, $result->result_info->page);

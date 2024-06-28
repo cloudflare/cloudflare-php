@@ -27,7 +27,7 @@ class CertificatesTest extends TestCase
         $certEndpoint = new Certificates($mock);
         $result = $certEndpoint->listCertificates('023e105f4ecef8ad9ca31a8372d0c353');
 
-        $this->assertObjectHasAttribute('result', $result);
+        $this->assertObjectHasProperty('result', $result);
 
         $cert = $result->result[0];
         $this->assertEquals('328578533902268680212849205732770752308931942346', $cert->id);
@@ -59,7 +59,7 @@ class CertificatesTest extends TestCase
             '023e105f4ecef8ad9ca31a8372d0c353'
         );
 
-        $this->assertObjectHasAttribute('result', $response);
+        $this->assertObjectHasProperty('result', $response);
         $cert = $response->result;
         $this->assertEquals('6666699999996666699999999966666666', $cert->id);
         $this->assertEquals('origin-ecc', $cert->request_type);

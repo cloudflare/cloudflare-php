@@ -20,9 +20,9 @@ class UserTest extends TestCase
         $user = new User($mock);
         $details = $user->getUserDetails();
 
-        $this->assertObjectHasAttribute('id', $details);
+        $this->assertObjectHasProperty('id', $details);
         $this->assertEquals('7c5dae5552338874e5053f2534d2767a', $details->id);
-        $this->assertObjectHasAttribute('email', $details);
+        $this->assertObjectHasProperty('email', $details);
         $this->assertEquals('user@example.com', $details->email);
         $this->assertEquals('7c5dae5552338874e5053f2534d2767a', $user->getBody()->result->id);
     }

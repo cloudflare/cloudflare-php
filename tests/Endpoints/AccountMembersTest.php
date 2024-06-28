@@ -50,7 +50,7 @@ class AccountMembersTest extends TestCase
         $accountMembers = new AccountMembers($mock);
         $result = $accountMembers->listAccountMembers('023e105f4ecef8ad9ca31a8372d0c353', 1, 20);
 
-        $this->assertObjectHasAttribute('result', $result);
+        $this->assertObjectHasProperty('result', $result);
 
         $this->assertEquals('4536bcfad5faccb111b47003c79917fa', $result->result[0]->id);
         $this->assertEquals(1, $result->result_info->count);
