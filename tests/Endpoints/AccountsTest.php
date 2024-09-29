@@ -1,5 +1,6 @@
 <?php
 
+use Cloudflare\API\Adapter\Adapter;
 use Cloudflare\API\Endpoints\Accounts;
 
 /**
@@ -13,7 +14,7 @@ class AccountsTest extends TestCase
     {
         $response = $this->getPsr7JsonResponseForFixture('Endpoints/listAccounts.json');
 
-        $mock = $this->getMockBuilder(\Cloudflare\API\Adapter\Adapter::class)->getMock();
+        $mock = $this->getMockBuilder(Adapter::class)->disableOriginalConstructor()->getMock();
         $mock->method('get')->willReturn($response);
 
         $mock->expects($this->once())
@@ -30,8 +31,8 @@ class AccountsTest extends TestCase
         $accounts = new Accounts($mock);
         $result = $accounts->listAccounts(1, 20, 'desc');
 
-        $this->assertObjectHasAttribute('result', $result);
-        $this->assertObjectHasAttribute('result_info', $result);
+        $this->assertObjectHasProperty('result', $result);
+        $this->assertObjectHasProperty('result_info', $result);
 
         $this->assertEquals('023e105f4ecef8ad9ca31a8372d0c353', $result->result[0]->id);
         $this->assertEquals(1, $result->result_info->page);
@@ -42,7 +43,7 @@ class AccountsTest extends TestCase
     {
         $response = $this->getPsr7JsonResponseForFixture('Endpoints/createStandardAccount.json');
 
-        $mock = $this->getMockBuilder(\Cloudflare\API\Adapter\Adapter::class)->getMock();
+        $mock = $this->getMockBuilder(Adapter::class)->disableOriginalConstructor()->getMock();
         $mock->method('post')->willReturn($response);
 
         $mock->expects($this->once())
@@ -65,7 +66,7 @@ class AccountsTest extends TestCase
     {
         $response = $this->getPsr7JsonResponseForFixture('Endpoints/createEnterpriseAccount.json');
 
-        $mock = $this->getMockBuilder(\Cloudflare\API\Adapter\Adapter::class)->getMock();
+        $mock = $this->getMockBuilder(Adapter::class)->disableOriginalConstructor()->getMock();
         $mock->method('post')->willReturn($response);
 
         $mock->expects($this->once())

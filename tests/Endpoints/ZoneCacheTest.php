@@ -1,12 +1,15 @@
 <?php
 
+use Cloudflare\API\Adapter\Adapter;
+use Cloudflare\API\Endpoints\Zones;
+
 class ZoneCacheTest extends TestCase
 {
     public function testCachePurgeEverything()
     {
         $response = $this->getPsr7JsonResponseForFixture('Endpoints/cachePurgeEverything.json');
 
-        $mock = $this->getMockBuilder(\Cloudflare\API\Adapter\Adapter::class)->getMock();
+        $mock = $this->getMockBuilder(Adapter::class)->disableOriginalConstructor()->getMock();
         $mock->method('post')->willReturn($response);
 
         $mock->expects($this->once())
@@ -16,7 +19,7 @@ class ZoneCacheTest extends TestCase
                 $this->equalTo(['purge_everything' => true])
             );
 
-        $zones = new \Cloudflare\API\Endpoints\Zones($mock);
+        $zones = new Zones($mock);
         $result = $zones->cachePurgeEverything('c2547eb745079dac9320b638f5e225cf483cc5cfdda41');
 
         $this->assertTrue($result);
@@ -27,7 +30,7 @@ class ZoneCacheTest extends TestCase
     {
         $response = $this->getPsr7JsonResponseForFixture('Endpoints/cachePurgeHost.json');
 
-        $mock = $this->getMockBuilder(\Cloudflare\API\Adapter\Adapter::class)->getMock();
+        $mock = $this->getMockBuilder(Adapter::class)->disableOriginalConstructor()->getMock();
         $mock->method('post')->willReturn($response);
 
         $mock->expects($this->once())
@@ -43,7 +46,7 @@ class ZoneCacheTest extends TestCase
                 )
             );
 
-        $zones = new \Cloudflare\API\Endpoints\Zones($mock);
+        $zones = new Zones($mock);
         $result = $zones->cachePurge('c2547eb745079dac9320b638f5e225cf483cc5cfdda41', [], [], ['dash.cloudflare.com']);
 
         $this->assertTrue($result);
@@ -54,7 +57,7 @@ class ZoneCacheTest extends TestCase
     {
         $response = $this->getPsr7JsonResponseForFixture('Endpoints/cachePurge.json');
 
-        $mock = $this->getMockBuilder(\Cloudflare\API\Adapter\Adapter::class)->getMock();
+        $mock = $this->getMockBuilder(Adapter::class)->disableOriginalConstructor()->getMock();
         $mock->method('post')->willReturn($response);
 
         $mock->expects($this->once())
@@ -67,7 +70,7 @@ class ZoneCacheTest extends TestCase
                 ])
             );
 
-        $zones = new \Cloudflare\API\Endpoints\Zones($mock);
+        $zones = new Zones($mock);
         $result = $zones->cachePurge('c2547eb745079dac9320b638f5e225cf483cc5cfdda41', [
             'https://example.com/file.jpg',
         ]);
