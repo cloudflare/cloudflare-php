@@ -35,6 +35,7 @@ class CustomHostnames implements API
      * @param bool   $wildcard
      * @param string $bundleMethod
      * @param array $customSsl
+     * @param string $sslCertificateAuthority
      * @return \stdClass
      */
     public function addHostname(
@@ -46,7 +47,8 @@ class CustomHostnames implements API
         string $customOriginServer = '',
         bool $wildcard = false,
         string $bundleMethod = '',
-        array $customSsl = []
+        array $customSsl = [],
+        string $sslCertificateAuthority = 'lets_encrypt'
     ): \stdClass {
         $options = [
             'hostname' => $hostname,
@@ -74,6 +76,10 @@ class CustomHostnames implements API
             $options['ssl']['custom_certificate'] = $customSsl['certificate'];
         }
 
+        if (!empty($sslCertificateAuthority)) {
+            $options['ssl']['certificate_authority'] = $sslCertificateAuthority;
+        }
+
         $zone = $this->adapter->post('zones/'.$zoneID.'/custom_hostnames', $options);
         $this->body = json_decode($zone->getBody());
         return $this->body->result;
@@ -98,7 +104,9 @@ class CustomHostnames implements API
         int $perPage = 20,
         string $order = '',
         string $direction = '',
-        int $ssl = 0
+        int $ssl = 0,
+        string $hostname_status = '',
+        string $ssl_status = ''
     ): \stdClass {
         $query = [
             'page' => $page,
@@ -120,6 +128,14 @@ class CustomHostnames implements API
 
         if (!empty($direction)) {
             $query['direction'] = $direction;
+        }
+
+        if (!empty($hostname_status)) {
+            $query['hostname_status'] = $hostname_status;
+        }
+
+        if (!empty($ssl_status)) {
+            $query['ssl_status'] = $ssl_status;
         }
 
         $zone = $this->adapter->get('zones/'.$zoneID.'/custom_hostnames', $query);
@@ -155,6 +171,7 @@ class CustomHostnames implements API
      * @param bool|null $wildcard
      * @param string    $bundleMethod
      * @param array    $customSsl
+     * @param string $sslCertificateAuthority
      * @return \stdClass
      */
     public function updateHostname(
@@ -166,7 +183,8 @@ class CustomHostnames implements API
         string $customOriginServer = '',
         bool $wildcard = null,
         string $bundleMethod = '',
-        array $customSsl = []
+        array $customSsl = [],
+        string $sslCertificateAuthority = 'lets_encrypt'
     ): \stdClass {
         $query = [];
         $options = [];
@@ -197,6 +215,10 @@ class CustomHostnames implements API
 
         if (!empty($customSsl['certificate'])) {
             $query['custom_certificate'] = $customSsl['certificate'];
+        }
+
+        if (!empty($sslCertificateAuthority)) {
+            $query['certificate_authority'] = $sslCertificateAuthority;
         }
 
         if (!empty($query)) {

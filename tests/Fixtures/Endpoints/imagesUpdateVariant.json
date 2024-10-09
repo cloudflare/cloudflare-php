@@ -1,0 +1,17 @@
+{
+  "result": {
+    "variant": {
+      "id": "myVariant",
+      "options": {
+        "fit": "pad",
+        "metadata": "none",
+        "width": 900,
+        "height": 900
+      },
+      "neverRequireSignedURLs": true
+    }
+  },
+  "success": true,
+  "errors": [],
+  "messages": []
+}
