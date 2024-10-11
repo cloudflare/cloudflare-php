@@ -54,6 +54,16 @@ class Accounts implements API
         return (object)['result' => $this->body->result, 'result_info' => $this->body->result_info];
     }
 
+    public function deleteAccount(string $account_id): \stdClass
+    {
+        $identifier = $account_id;
+
+        $user = $this->adapter->delete('accounts/' . $identifier);
+        $this->body = json_decode($user->getBody());
+
+        return (object)['result' => $this->body->result];
+    }
+
     public function getDomains(string $accountID): array
     {
         $response = $this->adapter->get('accounts/' . $accountID . '/registrar/domains');
