@@ -273,4 +273,30 @@ class Zones implements API
 
         return false;
     }
+
+    /**
+     * Edit zone
+     */
+    public function editZone(string $zoneID, array $vanityNameServers = null, string $planId = null, string $type = null): \stdClass
+    {
+        $options = [];
+
+        if (!empty($vanityNameServers)) {
+            $options['vanity_name_servers'] = $vanityNameServers;
+        }
+
+        if (!empty($planId)) {
+            $plan = new \stdClass;
+            $plan->id = $planId;
+            $options['plan'] = $plan;
+        }
+
+        if (!empty($type)) {
+            $options['type'] = $type;
+        }
+
+        $user = $this->adapter->patch('zones/' . $zoneID, $options);
+        $this->body = json_decode($user->getBody());
+        return $this->body->result;
+    }
 }

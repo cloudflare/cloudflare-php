@@ -217,4 +217,39 @@ class ZonesTest extends TestCase
         $this->assertTrue($result);
         $this->assertEquals('development_mode', $zones->getBody()->result->id);
     }
+
+    public function testEditZone()
+    {
+        $response = $this->getPsr7JsonResponseForFixture('Endpoints/editZone.json');
+
+        $mock = $this->getMockBuilder(\Cloudflare\API\Adapter\Adapter::class)->getMock();
+        $mock->method('patch')->willReturn($response);
+
+        $zoneId = '023e105f4ecef8ad9ca31a8372d0c353';
+        $nameServers = ['tony.ns.cloudflare.com', 'woz.ns.cloudflare.com'];
+        $type = 'full';
+        $planId = 'e592fd9519420ba7405e1307bff33214';
+
+        $plan = new \stdClass;
+        $plan->id = $planId;
+
+        $mock->expects($this->once())
+            ->method('patch')
+            ->with(
+                $this->equalTo('zones/' . $zoneId),
+                $this->equalTo([
+                    'vanity_name_servers' => $nameServers,
+                    'plan' => $plan,
+                    'type' => $type
+                ])
+            );
+
+        $zones = new \Cloudflare\API\Endpoints\Zones($mock);
+        $result = $zones->editZone($zoneId, $nameServers, $planId, $type);
+
+        $this->assertObjectHasAttribute('id', $result);
+        $this->assertEquals($nameServers, $result->name_servers);
+        $this->assertEquals($planId, $result->plan->id);
+        $this->assertEquals($type, $result->type);
+    }
 }
