@@ -128,10 +128,12 @@ class DNS implements API
     public function getRecordID(string $zoneID, string $type = '', string $name = ''): string
     {
         $records = $this->listRecords($zoneID, $type, $name);
-        if (isset($records->result[0]->id)) {
-            return $records->result[0]->id;
+
+        if (count($records->result) < 1) {
+            throw new EndpointException('Could not find records with specified type and or name.');
         }
-        return false;
+
+        return $records->result[0]->id;
     }
 
     public function updateRecordDetails(string $zoneID, string $recordID, array $details): \stdClass
