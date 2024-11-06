@@ -34,6 +34,9 @@ Note that this repository is currently under development, additional classes and
 
 ## Getting Started
 
+The Cloudflare PHP SDK requires a HTTP Client adapter to works with.
+You can either use the Guzzle adapter shipped with the library and by installing Guzzle (`composer require guzzlehttp/guzzle:^7.0`), or implement your own Adapter by implementing the `Cloudflare\API\Adapter\Adapter` interface.
+
 ```php
 $key     = new Cloudflare\API\Auth\APIKey('user@example.com', 'apiKey');
 $adapter = new Cloudflare\API\Adapter\Guzzle($key);
