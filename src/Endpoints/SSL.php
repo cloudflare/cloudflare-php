@@ -180,4 +180,50 @@ class SSL implements API
         }
         return false;
     }
+
+    /**
+     * List certificate packs
+     *
+     * @param string $zoneID The ID of the zone
+     * @param string|null $status Use "all" to include certificate packs of all statuses and not only active ones
+     * @return array
+     * @throws EndpointException
+     */
+    public function listCertificatePacks(string $zoneID, string $status = null): array
+    {
+        if ($status != null && !in_array($status, ['all'])) {
+            throw new EndpointException('Certificate packs can only be listed by status of all.');
+        }
+
+        $return = $this->adapter->get(
+            'zones/' . $zoneID . '/ssl/certificate_packs',
+            [
+                'status' => $status,
+            ]
+        );
+        $body = json_decode($return->getBody());
+        if (isset($body->result)) {
+            return $body->result;
+        }
+        return false;
+    }
+
+    /**
+     * Get a specific certificate pack
+     *
+     * @param string $zoneID The ID of the zone
+     * @param string $certPackUUID The certificate pack UUID
+     * @return \stdClass
+     * @throws EndpointException
+     */
+    public function getCertificatePack(string $zoneID, string $certPackUUID): \stdClass
+    {
+        $return = $this->adapter->get(
+            'zones/' . $zoneID . '/ssl/certificate_packs/' . $certPackUUID
+        );
+        $body = json_decode($return->getBody());
+        if (isset($body->result)) {
+            return $body->result;
+        }
+    }
 }
