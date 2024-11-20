@@ -1,0 +1,18 @@
+{
+  "success": true,
+  "errors": [
+    {}
+  ],
+  "messages": [
+    {}
+  ],
+  "result": {
+    "id": "01a7362d577a6c3019a474fd6f485823",
+    "name": "Demo Account",
+    "settings": {
+      "enforce_twofactor": false,
+      "use_account_custom_ns_by_default": false
+    },
+    "created_on": "2014-03-01T12:21:02.0000Z"
+  }
+}
