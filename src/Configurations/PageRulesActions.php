@@ -300,6 +300,17 @@ class PageRulesActions implements Configurations
             'value' => $this->getBoolAsOnOrOff($active)
         ]);
     }
+    
+    public function setPolish(string $value)
+    {
+        if (!in_array($value, ['off', 'lossless', 'lossy'])) {
+            throw new ConfigurationsException('Can only be set to off, lossless, lossy.');
+        }
+
+        $this->addConfigurationOption('polish', [
+            'value' => $value
+        ]);
+    }
 
     public function getArray(): array
     {
