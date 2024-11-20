@@ -12,7 +12,7 @@ class AccountRolesTest extends TestCase
     {
         $response = $this->getPsr7JsonResponseForFixture('Endpoints/listAccountRoles.json');
 
-        $adapter = $this->getMockBuilder(Adapter::class)->getMock();
+        $adapter = $this->getMockBuilder(Adapter::class)->disableOriginalConstructor()->getMock();
         $adapter->method('get')->willReturn($response);
 
         $adapter->expects($this->once())

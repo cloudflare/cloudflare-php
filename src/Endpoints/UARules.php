@@ -11,6 +11,7 @@ namespace Cloudflare\API\Endpoints;
 use Cloudflare\API\Configurations\Configurations;
 use Cloudflare\API\Adapter\Adapter;
 use Cloudflare\API\Traits\BodyAccessorTrait;
+use stdClass;
 
 class UARules implements API
 {
@@ -27,7 +28,7 @@ class UARules implements API
         string $zoneID,
         int $page = 1,
         int $perPage = 20
-    ): \stdClass {
+    ): stdClass {
         $query = [
             'page' => $page,
             'per_page' => $perPage
@@ -70,7 +71,7 @@ class UARules implements API
         return false;
     }
 
-    public function getRuleDetails(string $zoneID, string $blockID): \stdClass
+    public function getRuleDetails(string $zoneID, string $blockID): stdClass
     {
         $user = $this->adapter->get('zones/' . $zoneID . '/firewall/ua_rules/' . $blockID);
         $this->body = json_decode($user->getBody());

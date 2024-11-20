@@ -10,6 +10,7 @@ namespace Cloudflare\API\Endpoints;
 
 use Cloudflare\API\Adapter\Adapter;
 use Cloudflare\API\Traits\BodyAccessorTrait;
+use stdClass;
 
 class Zones implements API
 {
@@ -28,9 +29,9 @@ class Zones implements API
      * @param string $name
      * @param bool $jumpStart
      * @param string $accountId
-     * @return \stdClass
+     * @return stdClass
      */
-    public function addZone(string $name, bool $jumpStart = false, string $accountId = ''): \stdClass
+    public function addZone(string $name, bool $jumpStart = false, string $accountId = ''): stdClass
     {
         $options = [
             'name' => $name,
@@ -86,7 +87,7 @@ class Zones implements API
 
     public function getZoneById(
         string $zoneId
-    ): \stdClass {
+    ): stdClass {
         $user = $this->adapter->get('zones/' . $zoneId);
         $this->body = json_decode($user->getBody());
 
@@ -101,7 +102,7 @@ class Zones implements API
         string $order = '',
         string $direction = '',
         string $match = 'all'
-    ): \stdClass {
+    ): stdClass {
         $query = [
             'page' => $page,
             'per_page' => $perPage,
@@ -148,9 +149,9 @@ class Zones implements API
      * @param string $since
      * @param string $until
      * @param bool $continuous
-     * @return \stdClass
+     * @return stdClass
      */
-    public function getAnalyticsDashboard(string $zoneID, string $since = '-10080', string $until = '0', bool $continuous = true): \stdClass
+    public function getAnalyticsDashboard(string $zoneID, string $since = '-10080', string $until = '0', bool $continuous = true): stdClass
     {
         $response = $this->adapter->get('zones/' . $zoneID . '/analytics/dashboard', ['since' => $since, 'until' => $until, 'continuous' => var_export($continuous, true)]);
 
