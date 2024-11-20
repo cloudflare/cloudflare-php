@@ -83,4 +83,46 @@ class Certificates implements API
 
         return false;
     }
+
+    /**
+     * Get the certificate transparency monitoring configuration for the zone.
+     *
+     * @param string $zoneID
+     * @return mixed
+     */
+    public function getCertificateTransparencyMonitoring(string $zoneID)
+    {
+        $return = $this->adapter->get(
+            'zones/' . $zoneID . '/ct/alerting'
+        );
+        $body = json_decode($return->getBody());
+        if (isset($body->result)) {
+            return $body->result;
+        }
+        return false;
+    }
+    
+    /**
+     * Update the certificate transparency monitoring configuration for the zone.
+     *
+     * @param string $zoneID The ID of the zone
+     * @param bool $enabled Enabling of CT monitoring for the zone.
+     * @param array $emails List of notification email address for this zone.
+     * @return bool
+     */
+    public function updateCertificateTransparencyMonitoring(string $zoneID, bool $enabled = null, array $emails = [])
+    {
+        $return = $this->adapter->patch(
+            'zones/' . $zoneID . '/ct/alerting',
+            [
+                'enabled' => $enabled == true ? true : false,
+                'emails' => $emails
+            ]
+        );
+        $body = json_decode($return->getBody());
+        if (isset($body->success) && $body->success == true) {
+            return true;
+        }
+        return false;
+    }
 }
