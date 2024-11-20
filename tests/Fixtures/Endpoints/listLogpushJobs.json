@@ -1,0 +1,19 @@
+{
+  "success": true,
+  "errors": [],
+  "messages": [],
+  "result": [
+    {
+      "id": 1,
+      "enabled": false,
+      "name": "example.com",
+      "dataset": "http_requests",
+      "logpull_options": "fields=RayID,ClientIP,EdgeStartTimestamp&timestamps=rfc3339",
+      "destination_conf": "s3://mybucket/logs?region=us-west-2",
+      "last_complete": null,
+      "last_error": null,
+      "error_message": null,
+      "frequency": "high"
+    }
+  ]
+}
