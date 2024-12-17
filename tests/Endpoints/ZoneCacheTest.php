@@ -147,7 +147,7 @@ class ZoneCacheTest extends TestCase
             ->method('get')
             ->willReturn($envResp)
             ->with(
-                $this->equalTo('zones/c2547eb745079dac9320b638f5e225cf483cc5cfdda41/environments'),
+                $this->equalTo('zones/c2547eb745079dac9320b638f5e225cf483cc5cfdda41/environments')
             );
 
         $mock->expects($this->exactly(4))
