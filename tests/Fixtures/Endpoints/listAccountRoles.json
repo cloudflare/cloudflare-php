@@ -1,0 +1,69 @@
+{
+  "success": true,
+  "errors": [],
+  "messages": [],
+  "result": [
+    {
+      "id": "3536bcfad5faccb999b47003c79917fb",
+      "name": "Account Administrator",
+      "description": "Administrative access to the entire Account",
+      "permissions": {
+        "analytics": {
+          "read": true,
+          "write": true
+        },
+        "billing": {
+          "read": true,
+          "write": true
+        },
+        "cache_purge": {
+          "read": true,
+          "write": true
+        },
+        "dns": {
+          "read": true,
+          "write": true
+        },
+        "dns_records": {
+          "read": true,
+          "write": true
+        },
+        "lb": {
+          "read": true,
+          "write": true
+        },
+        "logs": {
+          "read": true,
+          "write": true
+        },
+        "organization": {
+          "read": true,
+          "write": true
+        },
+        "ssl": {
+          "read": true,
+          "write": true
+        },
+        "waf": {
+          "read": true,
+          "write": true
+        },
+        "zones": {
+          "read": true,
+          "write": true
+        },
+        "zone_settings": {
+          "read": true,
+          "write": true
+        }
+      }
+    }
+  ],
+  "result_info": {
+    "page": 1,
+    "per_page": 1,
+    "total_pages": 1,
+    "count": 1,
+    "total_count": 1
+  }
+}
