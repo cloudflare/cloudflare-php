@@ -217,6 +217,8 @@ class Zones implements API
      * Purge Everything
      * @param string $zoneID
      * @return bool
+     *
+     * @SuppressWarnings(PHPMD)
      */
     public function cachePurgeEverything(string $zoneID, bool $includeEnvironments = false): bool
     {
@@ -238,6 +240,9 @@ class Zones implements API
         return false;
     }
 
+    /*
+     *  @SuppressWarnings(PHPMD)
+     **/
     public function cachePurge(string $zoneID, array $files = null, array $tags = null, array $hosts = null, bool $includeEnvironments = false): bool
     {
         if ($files === null && $tags === null && $hosts === null) {
