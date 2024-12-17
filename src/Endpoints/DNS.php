@@ -153,4 +153,40 @@ class DNS implements API
 
         return false;
     }
+
+
+    /**
+     * @SuppressWarnings(PHPMD.BooleanArgumentFlag)
+     *
+     * @param string $zoneID
+     * @param array $deletes
+     * @param array $patches
+     * @param array $posts
+     * @param array $puts
+     * @param bool $proxied
+     * @param string $priority
+     * @param array $data
+     * @return bool
+     */
+    public function batchRecords(
+        string $zoneID,
+        array $deletes = [],
+        array $patches = [],
+        array $posts = [],
+        array $puts = []
+    ): bool {
+        $options = [
+            'deletes' => $deletes,
+            'patches' => $patches,
+            'posts' => $posts,
+            'puts' => $puts,
+        ];
+
+
+        $user = $this->adapter->post('zones/' . $zoneID . '/dns_records/batch', $options);
+
+        return $user->getStatusCode() === 200;
+
+    }
+
 }
