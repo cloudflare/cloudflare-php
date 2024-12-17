@@ -174,7 +174,7 @@ class DNS implements API
         array $patches = [],
         array $posts = [],
         array $puts = []
-    ): array {
+    ): bool {
         $options = [
             'deletes' => $deletes,
             'patches' => $patches,
@@ -185,10 +185,8 @@ class DNS implements API
 
         $user = $this->adapter->post('zones/' . $zoneID . '/dns_records/batch', $options);
 
-        $this->body = json_decode($user->getBody());
+        return $user->getStatusCode() === 200;
 
-        
-        return $this-body;
     }
 
 }
