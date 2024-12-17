@@ -1,4 +1,5 @@
 <?php
+
 /**
  * Created by PhpStorm.
  * User: junade
@@ -217,8 +218,15 @@ class Zones implements API
      * @param string $zoneID
      * @return bool
      */
-    public function cachePurgeEverything(string $zoneID): bool
+    public function cachePurgeEverything(string $zoneID, bool $includeEnvironments = false): bool
     {
+        if ($includeEnvironments) {
+            $env = $this->adapter->get("zones/$zoneID/environments");
+            $envs = json_decode($env->getBody(), true);
+            foreach ($envs["result"]["environments"] as $env) {
+                $this->adapter->post("zones/$zoneID/environments/{$env["ref"]}/purge_cache", ['purge_everything' => true]);
+            }
+        }
         $user = $this->adapter->post('zones/' . $zoneID . '/purge_cache', ['purge_everything' => true]);
 
         $this->body = json_decode($user->getBody());
@@ -230,7 +238,7 @@ class Zones implements API
         return false;
     }
 
-    public function cachePurge(string $zoneID, array $files = null, array $tags = null, array $hosts = null): bool
+    public function cachePurge(string $zoneID, array $files = null, array $tags = null, array $hosts = null, bool $includeEnvironments = false): bool
     {
         if ($files === null && $tags === null && $hosts === null) {
             throw new EndpointException('No files, tags or hosts to purge.');
@@ -247,6 +255,14 @@ class Zones implements API
 
         if (!is_null($hosts)) {
             $options['hosts'] = $hosts;
+        }
+
+        if ($includeEnvironments) {
+            $env = $this->adapter->get("zones/$zoneID/environments");
+            $envs = json_decode($env->getBody(), true);
+            foreach ($envs["result"]["environments"] as $env) {
+                $this->adapter->post("zones/$zoneID/environments/{$env["ref"]}/purge_cache", $options);
+            }
         }
 
         $user = $this->adapter->post('zones/' . $zoneID . '/purge_cache', $options);
