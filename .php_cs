@@ -10,6 +10,7 @@ return PhpCsFixer\Config::create()
     ->setRules([
         '@PSR2' => true,
         'array_syntax' => ['syntax' => 'short'],
+        'nullable_type_declaration_for_default_null_value' => true,
     ])
     ->setFinder($finder)
 ;

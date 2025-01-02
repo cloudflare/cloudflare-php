@@ -14,7 +14,7 @@ class Guzzle implements Adapter
     /**
      * @inheritDoc
      */
-    public function __construct(Auth $auth, string $baseURI = null)
+    public function __construct(Auth $auth, ?string $baseURI = null)
     {
         if ($baseURI === null) {
             $baseURI = 'https://api.cloudflare.com/client/v4/';
