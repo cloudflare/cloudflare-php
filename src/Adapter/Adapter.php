@@ -45,7 +45,7 @@ interface Adapter
      *
      * @return mixed
      */
-    public function post(string $uri, array $data = [], array $headers = []): ResponseInterface;
+    public function post(string $uri, $data = null, array $headers = []): ResponseInterface;
 
     /**
      * @param string $uri
@@ -54,7 +54,7 @@ interface Adapter
      *
      * @return mixed
      */
-    public function put(string $uri, array $data = [], array $headers = []): ResponseInterface;
+    public function put(string $uri, $data = null, array $headers = []): ResponseInterface;
 
     /**
      * @param string $uri
@@ -63,7 +63,7 @@ interface Adapter
      *
      * @return mixed
      */
-    public function patch(string $uri, array $data = [], array $headers = []): ResponseInterface;
+    public function patch(string $uri, $data = null, array $headers = []): ResponseInterface;
 
     /**
      * @param string $uri

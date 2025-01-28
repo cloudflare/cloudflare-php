@@ -8,6 +8,8 @@
 
 namespace Cloudflare\API\Endpoints;
 
-class EndpointException extends \Exception
+use Exception;
+
+class EndpointException extends Exception
 {
 }

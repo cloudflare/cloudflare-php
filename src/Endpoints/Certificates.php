@@ -5,6 +5,7 @@ namespace Cloudflare\API\Endpoints;
 use Cloudflare\API\Adapter\Adapter;
 use Cloudflare\API\Configurations\Certificate as CertificateConfig;
 use Cloudflare\API\Traits\BodyAccessorTrait;
+use stdClass;
 
 class Certificates implements API
 {
@@ -23,7 +24,7 @@ class Certificates implements API
      * @param string $zoneID
      * @return array
      */
-    public function listCertificates(string $zoneID): \stdClass
+    public function listCertificates(string $zoneID): stdClass
     {
         $certificates = $this->adapter->get('certificates', ['zone_id' => $zoneID]);
         $this->body = json_decode($certificates->getBody());

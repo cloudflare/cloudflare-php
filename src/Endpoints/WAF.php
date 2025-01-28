@@ -10,6 +10,7 @@ namespace Cloudflare\API\Endpoints;
 
 use Cloudflare\API\Adapter\Adapter;
 use Cloudflare\API\Traits\BodyAccessorTrait;
+use stdClass;
 
 class WAF implements API
 {
@@ -29,7 +30,7 @@ class WAF implements API
         string $order = '',
         string $direction = '',
         string $match = 'all'
-    ): \stdClass {
+    ): stdClass {
         $query = [
             'page' => $page,
             'per_page' => $perPage,
@@ -54,7 +55,7 @@ class WAF implements API
     public function getPackageInfo(
         string $zoneID,
         string $packageID
-    ): \stdClass {
+    ): stdClass {
         $user = $this->adapter->get('zones/' . $zoneID . '/firewall/waf/packages/' . $packageID);
         $this->body = json_decode($user->getBody());
 
@@ -69,7 +70,7 @@ class WAF implements API
         string $order = '',
         string $direction = '',
         string $match = 'all'
-    ): \stdClass {
+    ): stdClass {
         $query = [
             'page' => $page,
             'per_page' => $perPage,
@@ -93,7 +94,7 @@ class WAF implements API
         string $zoneID,
         string $packageID,
         string $ruleID
-    ): \stdClass {
+    ): stdClass {
         $user = $this->adapter->get('zones/' . $zoneID . '/firewall/waf/packages/' . $packageID . '/rules/' . $ruleID);
         $this->body = json_decode($user->getBody());
 
@@ -105,7 +106,7 @@ class WAF implements API
         string $packageID,
         string $ruleID,
         string $status
-    ): \stdClass {
+    ): stdClass {
         $query = [
             'mode' => $status,
         ];
@@ -127,7 +128,7 @@ class WAF implements API
         string $order = '',
         string $direction = '',
         string $match = 'all'
-    ): \stdClass {
+    ): stdClass {
         $query = [
             'page' => $page,
             'per_page' => $perPage,
@@ -155,7 +156,7 @@ class WAF implements API
         string $zoneID,
         string $packageID,
         string $groupID
-    ): \stdClass {
+    ): stdClass {
         $user = $this->adapter->get('zones/' . $zoneID . '/firewall/waf/packages/' . $packageID . '/groups/' . $groupID);
         $this->body = json_decode($user->getBody());
 
@@ -167,7 +168,7 @@ class WAF implements API
         string $packageID,
         string $groupID,
         string $status
-    ): \stdClass {
+    ): stdClass {
         $query = [
             'mode' => $status
         ];

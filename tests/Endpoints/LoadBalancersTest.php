@@ -24,7 +24,7 @@ class LoadBalancersTest extends TestCase
 
         $response = $this->getPsr7JsonResponseForFixture('Endpoints/createLoadBalancer.json');
 
-        $mock = $this->getMockBuilder(Adapter::class)->getMock();
+        $mock = $this->getMockBuilder(Adapter::class)->disableOriginalConstructor()->getMock();
         $mock->method('post')->willReturn($response);
 
         $mock->expects($this->once())
@@ -45,7 +45,7 @@ class LoadBalancersTest extends TestCase
     {
         $response = $this->getPsr7JsonResponseForFixture('Endpoints/listLoadBalancers.json');
 
-        $mock = $this->getMockBuilder(Adapter::class)->getMock();
+        $mock = $this->getMockBuilder(Adapter::class)->disableOriginalConstructor()->getMock();
         $mock->method('get')->willReturn($response);
 
         $mock->expects($this->once())
@@ -63,7 +63,7 @@ class LoadBalancersTest extends TestCase
     {
         $response = $this->getPsr7JsonResponseForFixture('Endpoints/getLoadBalancerDetails.json');
 
-        $mock = $this->getMockBuilder(Adapter::class)->getMock();
+        $mock = $this->getMockBuilder(Adapter::class)->disableOriginalConstructor()->getMock();
         $mock->method('get')->willReturn($response);
 
         $mock->expects($this->once())
@@ -89,7 +89,7 @@ class LoadBalancersTest extends TestCase
 
         $response = $this->getPsr7JsonResponseForFixture('Endpoints/updateLoadBalancer.json');
 
-        $mock = $this->getMockBuilder(Adapter::class)->getMock();
+        $mock = $this->getMockBuilder(Adapter::class)->disableOriginalConstructor()->getMock();
         $mock->method('put')->willReturn($response);
 
         $mock->expects($this->once())
@@ -110,7 +110,7 @@ class LoadBalancersTest extends TestCase
     {
         $response = $this->getPsr7JsonResponseForFixture('Endpoints/deleteLoadBalancer.json');
 
-        $mock = $this->getMockBuilder(Adapter::class)->getMock();
+        $mock = $this->getMockBuilder(Adapter::class)->disableOriginalConstructor()->getMock();
         $mock->method('delete')->willReturn($response);
 
         $mock->expects($this->once())

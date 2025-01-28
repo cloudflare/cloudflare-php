@@ -10,6 +10,7 @@ namespace Cloudflare\API\Endpoints;
 
 use Cloudflare\API\Adapter\Adapter;
 use Cloudflare\API\Traits\BodyAccessorTrait;
+use stdClass;
 
 class Railgun implements API
 {
@@ -24,7 +25,7 @@ class Railgun implements API
 
     public function create(
         string $name
-    ): \stdClass {
+    ): stdClass {
         $query = [
             'name' => $name,
         ];
@@ -39,7 +40,7 @@ class Railgun implements API
         int $page = 1,
         int $perPage = 20,
         string $direction = ''
-    ): \stdClass {
+    ): stdClass {
         $query = [
             'page' => $page,
             'per_page' => $perPage
@@ -57,7 +58,7 @@ class Railgun implements API
 
     public function get(
         string $railgunID
-    ): \stdClass {
+    ): stdClass {
         $user = $this->adapter->get('railguns/' . $railgunID);
         $this->body = json_decode($user->getBody());
 
@@ -66,7 +67,7 @@ class Railgun implements API
 
     public function getZones(
         string $railgunID
-    ): \stdClass {
+    ): stdClass {
         $user = $this->adapter->get('railguns/' . $railgunID . '/zones');
         $this->body = json_decode($user->getBody());
 
@@ -76,7 +77,7 @@ class Railgun implements API
     public function update(
         string $railgunID,
         bool $status
-    ): \stdClass {
+    ): stdClass {
         $query = [
             'enabled' => $status
         ];

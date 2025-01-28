@@ -6,6 +6,7 @@ use Cloudflare\API\Auth\Auth;
 use GuzzleHttp\Client;
 use GuzzleHttp\Exception\RequestException;
 use Psr\Http\Message\ResponseInterface;
+use InvalidArgumentException;
 
 class Guzzle implements Adapter
 {
@@ -41,7 +42,7 @@ class Guzzle implements Adapter
     /**
      * @inheritDoc
      */
-    public function post(string $uri, array $data = [], array $headers = []): ResponseInterface
+    public function post(string $uri, $data = null, array $headers = []): ResponseInterface
     {
         return $this->request('post', $uri, $data, $headers);
     }
@@ -49,7 +50,7 @@ class Guzzle implements Adapter
     /**
      * @inheritDoc
      */
-    public function put(string $uri, array $data = [], array $headers = []): ResponseInterface
+    public function put(string $uri, $data = null, array $headers = []): ResponseInterface
     {
         return $this->request('put', $uri, $data, $headers);
     }
@@ -57,7 +58,7 @@ class Guzzle implements Adapter
     /**
      * @inheritDoc
      */
-    public function patch(string $uri, array $data = [], array $headers = []): ResponseInterface
+    public function patch(string $uri, $data = null, array $headers = []): ResponseInterface
     {
         return $this->request('patch', $uri, $data, $headers);
     }
@@ -73,10 +74,10 @@ class Guzzle implements Adapter
     /**
      * @SuppressWarnings(PHPMD.StaticAccess)
      */
-    public function request(string $method, string $uri, array $data = [], array $headers = [])
+    public function request(string $method, string $uri, $data = null, array $headers = [])
     {
         if (!in_array($method, ['get', 'post', 'put', 'patch', 'delete'])) {
-            throw new \InvalidArgumentException('Request method must be get, post, put, patch, or delete');
+            throw new InvalidArgumentException('Request method must be get, post, put, patch, or delete');
         }
 
         try {

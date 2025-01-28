@@ -8,6 +8,8 @@
 
 namespace Cloudflare\API\Adapter;
 
-class JSONException extends \Exception
+use Exception;
+
+class JSONException extends Exception
 {
 }

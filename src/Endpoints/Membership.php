@@ -4,6 +4,7 @@ namespace Cloudflare\API\Endpoints;
 
 use Cloudflare\API\Adapter\Adapter;
 use Cloudflare\API\Traits\BodyAccessorTrait;
+use stdClass;
 
 /* A list of memberships of accounts this user can access */
 
@@ -26,7 +27,7 @@ class Membership implements API
         int $perPage = 20,
         string $order = '',
         string $direction = ''
-    ): \stdClass {
+    ): stdClass {
         $query = [
             'page' => $page,
             'per_page' => $perPage
@@ -54,14 +55,14 @@ class Membership implements API
         return (object)['result' => $this->body->result, 'result_info' => $this->body->result_info];
     }
 
-    public function getMembershipDetails(string $membershipId): \stdClass
+    public function getMembershipDetails(string $membershipId): stdClass
     {
         $membership = $this->adapter->get(sprintf('memberships/%s', $membershipId));
         $this->body = json_decode($membership->getBody());
         return $this->body->result;
     }
 
-    public function updateMembershipStatus(string $membershipId, string $status): \stdClass
+    public function updateMembershipStatus(string $membershipId, string $status): stdClass
     {
         $response = $this->adapter->put(sprintf('memberships/%s', $membershipId), ['status' => $status]);
         $this->body = json_decode($response->getBody());

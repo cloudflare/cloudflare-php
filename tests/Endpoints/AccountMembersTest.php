@@ -9,7 +9,7 @@ class AccountMembersTest extends TestCase
     {
         $response = $this->getPsr7JsonResponseForFixture('Endpoints/createAccountMember.json');
 
-        $mock = $this->getMockBuilder(Adapter::class)->getMock();
+        $mock = $this->getMockBuilder(Adapter::class)->disableOriginalConstructor()->getMock();
         $mock->method('post')->willReturn($response);
 
         $mock->expects($this->once())
@@ -34,7 +34,7 @@ class AccountMembersTest extends TestCase
     {
         $response = $this->getPsr7JsonResponseForFixture('Endpoints/listAccountMembers.json');
 
-        $mock = $this->getMockBuilder(Adapter::class)->getMock();
+        $mock = $this->getMockBuilder(Adapter::class)->disableOriginalConstructor()->getMock();
         $mock->method('get')->willReturn($response);
 
         $mock->expects($this->once())

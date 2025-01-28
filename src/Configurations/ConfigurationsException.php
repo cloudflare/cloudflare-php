@@ -8,6 +8,8 @@
 
 namespace Cloudflare\API\Configurations;
 
-class ConfigurationsException extends \Exception
+use Exception;
+
+class ConfigurationsException extends Exception
 {
 }
