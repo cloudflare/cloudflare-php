@@ -1,4 +1,5 @@
 <?php
+
 /**
  * Created by PhpStorm.
  * User: junade
@@ -59,7 +60,7 @@ class DNS implements API
         if (is_numeric($priority)) {
             $options['priority'] = (int)$priority;
         }
-        
+
         if (!empty($data)) {
             $options['data'] = $data;
         }
@@ -81,7 +82,7 @@ class DNS implements API
         string $name = '',
         string $content = '',
         int $page = 1,
-        int $perPage = 20,
+        int $perPage = 500,
         string $order = '',
         string $direction = '',
         string $match = 'all'
@@ -152,5 +153,12 @@ class DNS implements API
         }
 
         return false;
+    }
+
+    public function batchRequest(string $zoneID, array $requests): \stdClass
+    {
+        $response = $this->adapter->post('zones/' . $zoneID . '/dns_records/batch', $requests);
+        $this->body = json_decode($response->getBody());
+        return $this->body;
     }
 }
