@@ -16,7 +16,7 @@ class DNSAnalyticsTest extends TestCase
 
         $mock = $this->getMockBuilder(
             \Cloudflare\API\Adapter\Adapter::class
-        )->getMock();
+        )->disableOriginalConstructor()->getMock();
         $mock->method('get')->willReturn($response);
 
         $mock
@@ -56,7 +56,7 @@ class DNSAnalyticsTest extends TestCase
 
         $mock = $this->getMockBuilder(
             \Cloudflare\API\Adapter\Adapter::class
-        )->getMock();
+        )->disableOriginalConstructor()->getMock();
         $mock->method('get')->willReturn($response);
 
         $mock

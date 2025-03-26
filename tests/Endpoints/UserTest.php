@@ -11,7 +11,7 @@ class UserTest extends TestCase
     {
         $response = $this->getPsr7JsonResponseForFixture('Endpoints/getUserDetails.json');
 
-        $mock = $this->getMockBuilder(\Cloudflare\API\Adapter\Adapter::class)->getMock();
+        $mock = $this->getMockBuilder(\Cloudflare\API\Adapter\Adapter::class)->disableOriginalConstructor()->getMock();
         $mock->method('get')->willReturn($response);
 
         $user = new \Cloudflare\API\Endpoints\User($mock);
@@ -28,7 +28,7 @@ class UserTest extends TestCase
     {
         $response = $this->getPsr7JsonResponseForFixture('Endpoints/getUserId.json');
 
-        $mock = $this->getMockBuilder(\Cloudflare\API\Adapter\Adapter::class)->getMock();
+        $mock = $this->getMockBuilder(\Cloudflare\API\Adapter\Adapter::class)->disableOriginalConstructor()->getMock();
         $mock->method('get')->willReturn($response);
 
         $user = new \Cloudflare\API\Endpoints\User($mock);
@@ -40,7 +40,7 @@ class UserTest extends TestCase
     {
         $response = $this->getPsr7JsonResponseForFixture('Endpoints/getUserEmail.json');
 
-        $mock = $this->getMockBuilder(\Cloudflare\API\Adapter\Adapter::class)->getMock();
+        $mock = $this->getMockBuilder(\Cloudflare\API\Adapter\Adapter::class)->disableOriginalConstructor()->getMock();
         $mock->method('get')->willReturn($response);
 
         $mock->expects($this->once())->method('get');
@@ -54,7 +54,7 @@ class UserTest extends TestCase
     {
         $response = $this->getPsr7JsonResponseForFixture('Endpoints/updateUserDetails.json');
 
-        $mock = $this->getMockBuilder(\Cloudflare\API\Adapter\Adapter::class)->getMock();
+        $mock = $this->getMockBuilder(\Cloudflare\API\Adapter\Adapter::class)->disableOriginalConstructor()->getMock();
         $mock->method('patch')->willReturn($response);
 
         $mock->expects($this->once())
