@@ -6,7 +6,7 @@ class AccessRulesTest extends TestCase
     {
         $response = $this->getPsr7JsonResponseForFixture('Endpoints/listAccessRules.json');
 
-        $mock = $this->getMockBuilder(\Cloudflare\API\Adapter\Adapter::class)->disableOriginalConstructor()->disableOriginalConstructor()->getMock();
+        $mock = $this->getMockBuilder(\Cloudflare\API\Adapter\Adapter::class)->disableOriginalConstructor()->getMock();
         $mock->method('get')->willReturn($response);
 
         $mock->expects($this->once())
