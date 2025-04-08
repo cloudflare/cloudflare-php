@@ -1,0 +1,40 @@
+{
+  "result": {
+    "environments": [
+      {
+        "name": "Production",
+        "ref": "first",
+        "version": 0,
+        "expression": "expression_1",
+        "locked_on_deployment": false,
+        "position": {
+          "before": "second"
+        }
+      },
+      {
+        "name": "Staging",
+        "ref": "second",
+        "version": 0,
+        "expression": "expression_2",
+        "locked_on_deployment": false,
+        "position": {
+          "before": "third",
+          "after": "first"
+        }
+      },
+      {
+        "name": "Development",
+        "ref": "third",
+        "version": 0,
+        "expression": "expression_3",
+        "locked_on_deployment": false,
+        "position": {
+          "after": "second"
+        }
+      }
+    ]
+  },
+  "success": true,
+  "errors": [],
+  "messages": []
+}
