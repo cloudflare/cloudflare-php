@@ -48,7 +48,7 @@ class CustomHostnames implements API
         bool $wildcard = false,
         string $bundleMethod = '',
         array $customSsl = [],
-        string $sslCertificateAuthority = 'lets_encrypt'
+        string $sslCertificateAuthority = ''
     ): \stdClass {
         $options = [
             'hostname' => $hostname,
@@ -184,7 +184,7 @@ class CustomHostnames implements API
         bool $wildcard = null,
         string $bundleMethod = '',
         array $customSsl = [],
-        string $sslCertificateAuthority = 'lets_encrypt'
+        string $sslCertificateAuthority = ''
     ): \stdClass {
         $query = [];
         $options = [];
