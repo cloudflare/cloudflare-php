@@ -7,8 +7,8 @@ fix:
 
 lint:
 	php vendor/bin/php-cs-fixer fix --config=.php-cs-fixer.php --dry-run
-	php vendor/bin/phpmd src/ text cleancode,codesize,controversial,design,naming,unusedcode
-	php vendor/bin/phpmd tests/ text cleancode,codesize,controversial,design,naming,unusedcode
+	php vendor/bin/phpmd src/ text phpmd.xml
+	php vendor/bin/phpmd tests/ text phpmd.xml
 
 test:
 	php vendor/bin/phpunit --configuration phpunit.xml

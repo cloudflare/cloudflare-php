@@ -14,7 +14,6 @@ class DNSAnalyticsTest extends TestCase
             'Endpoints/getDNSAnalyticsReportTable.json'
         );
 
-        $authMock = $this->createMock(\Cloudflare\API\Auth\Auth::class);
         $mock = $this->createMock(\Cloudflare\API\Adapter\Adapter::class);
         $mock->method('get')->willReturn($response);
 
@@ -53,7 +52,6 @@ class DNSAnalyticsTest extends TestCase
             'Endpoints/getDNSAnalyticsReportByTime.json'
         );
 
-        $authMock = $this->createMock(\Cloudflare\API\Auth\Auth::class);
         $mock = $this->createMock(\Cloudflare\API\Adapter\Adapter::class);
         $mock->method('get')->willReturn($response);
 
