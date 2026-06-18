@@ -10,30 +10,31 @@ jobs:
   build:
 
     runs-on: ubuntu-latest
-    strategy:
-      fail-fast: false
-      matrix:
-        php-versions: ['7.0', '7.1', '7.2', '7.3', '7.4']
+    env:
+      LOWEST: '0'
+      PHP_VERSION: '8.3'
 
     steps:
     - uses: actions/checkout@v2
 
     - uses: shivammathur/setup-php@v2
       with:
-        php-version: ${{ matrix.php-versions }}
+        php-version: ${{ env.PHP_VERSION }}
 
     - name: Cache Composer dependencies
       uses: actions/cache@v2
       with:
         path: /tmp/composer-cache
-        key: ${{ runner.os }}-php${{ matrix.php-versions }}-${{ hashFiles('**/composer.lock') }}
+        key: ${{ runner.os }}-php${{ env.PHP_VERSION }}-lowest${{ env.LOWEST }}-{{ hashFiles('**/composer.lock') }}
 
     - name: Install dependencies
       uses: php-actions/composer@v5
+      env:
+        COMPOSER_PREFER_LOWEST: ${{ env.LOWEST }}
       with:
         command: install
-        args: --prefer-dist --no-progress --no-suggest --verbose
-        php_version: ${{ matrix.php-versions }}
+        args: --prefer-dist --no-progress --prefer-stable --no-suggest --verbose
+        php_version: ${{ env.PHP_VERSION }}
         version: 1
 
     - name: Run lint

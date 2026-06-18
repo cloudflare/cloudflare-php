@@ -6,8 +6,9 @@ class GuzzleTest extends TestCase
 {
     private $client;
 
-    public function setUp()
+    protected function setUp(): void
     {
+        parent::setUp();
         $auth = $this->getMockBuilder(\Cloudflare\API\Auth\Auth::class)
             ->setMethods(['getHeaders'])
             ->getMock();

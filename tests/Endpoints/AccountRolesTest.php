@@ -12,7 +12,10 @@ class AccountRolesTest extends TestCase
     {
         $response = $this->getPsr7JsonResponseForFixture('Endpoints/listAccountRoles.json');
 
-        $adapter = $this->getMockBuilder(Adapter::class)->getMock();
+        $authMock = $this->createMock(\Cloudflare\API\Auth\Auth::class);
+        $adapter = $this->getMockBuilder(Adapter::class)
+            ->setConstructorArgs([$authMock, 'https://example.com'])
+            ->getMock();
         $adapter->method('get')->willReturn($response);
 
         $adapter->expects($this->once())
@@ -22,8 +25,8 @@ class AccountRolesTest extends TestCase
         $roles  = new AccountRoles($adapter);
         $result = $roles->listAccountRoles('023e105f4ecef8ad9ca31a8372d0c353');
 
-        $this->assertObjectHasAttribute('result', $result);
-        $this->assertObjectHasAttribute('result_info', $result);
+        $this->assertObjectHasProperty('result', $result);
+        $this->assertObjectHasProperty('result_info', $result);
 
         $this->assertEquals('3536bcfad5faccb999b47003c79917fb', $result->result[0]->id);
         $this->assertEquals(1, $result->result_info->page);

@@ -12,7 +12,7 @@ class UARulesTest extends TestCase
     {
         $response = $this->getPsr7JsonResponseForFixture('Endpoints/listRules.json');
 
-        $mock = $this->getMockBuilder(\Cloudflare\API\Adapter\Adapter::class)->getMock();
+        $mock = $this->createMock(\Cloudflare\API\Adapter\Adapter::class);
         $mock->method('get')->willReturn($response);
 
         $mock->expects($this->once())
@@ -28,8 +28,8 @@ class UARulesTest extends TestCase
         $zones = new \Cloudflare\API\Endpoints\UARules($mock);
         $result = $zones->listRules('023e105f4ecef8ad9ca31a8372d0c353');
 
-        $this->assertObjectHasAttribute('result', $result);
-        $this->assertObjectHasAttribute('result_info', $result);
+        $this->assertObjectHasProperty('result', $result);
+        $this->assertObjectHasProperty('result_info', $result);
 
         $this->assertEquals('372e67954025e0ba6aaa6d586b9e0b59', $result->result[0]->id);
         $this->assertEquals(1, $result->result_info->page);
@@ -43,7 +43,7 @@ class UARulesTest extends TestCase
 
         $response = $this->getPsr7JsonResponseForFixture('Endpoints/createRule.json');
 
-        $mock = $this->getMockBuilder(\Cloudflare\API\Adapter\Adapter::class)->getMock();
+        $mock = $this->createMock(\Cloudflare\API\Adapter\Adapter::class);
         $mock->method('post')->willReturn($response);
 
         $mock->expects($this->once())
@@ -73,7 +73,7 @@ class UARulesTest extends TestCase
     {
         $response = $this->getPsr7JsonResponseForFixture('Endpoints/getRuleDetails.json');
 
-        $mock = $this->getMockBuilder(\Cloudflare\API\Adapter\Adapter::class)->getMock();
+        $mock = $this->createMock(\Cloudflare\API\Adapter\Adapter::class);
         $mock->method('get')->willReturn($response);
 
         $mock->expects($this->once())
@@ -96,7 +96,7 @@ class UARulesTest extends TestCase
 
         $response = $this->getPsr7JsonResponseForFixture('Endpoints/updateRule.json');
 
-        $mock = $this->getMockBuilder(\Cloudflare\API\Adapter\Adapter::class)->getMock();
+        $mock = $this->createMock(\Cloudflare\API\Adapter\Adapter::class);
         $mock->method('put')->willReturn($response);
 
         $mock->expects($this->once())
@@ -126,7 +126,7 @@ class UARulesTest extends TestCase
     {
         $response = $this->getPsr7JsonResponseForFixture('Endpoints/deleteRule.json');
 
-        $mock = $this->getMockBuilder(\Cloudflare\API\Adapter\Adapter::class)->getMock();
+        $mock = $this->createMock(\Cloudflare\API\Adapter\Adapter::class);
         $mock->method('delete')->willReturn($response);
 
         $mock->expects($this->once())

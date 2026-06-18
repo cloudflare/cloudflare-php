@@ -12,7 +12,7 @@ class IPsTest extends TestCase
     {
         $response = $this->getPsr7JsonResponseForFixture('Endpoints/listIPs.json');
 
-        $mock = $this->getMockBuilder(\Cloudflare\API\Adapter\Adapter::class)->getMock();
+        $mock = $this->createMock(\Cloudflare\API\Adapter\Adapter::class);
         $mock->method('get')->willReturn($response);
 
         $mock->expects($this->once())
@@ -23,9 +23,9 @@ class IPsTest extends TestCase
 
         $ipsMock = new \Cloudflare\API\Endpoints\IPs($mock);
         $ips = $ipsMock->listIPs();
-        $this->assertObjectHasAttribute('ipv4_cidrs', $ips);
-        $this->assertObjectHasAttribute('ipv6_cidrs', $ips);
-        $this->assertObjectHasAttribute('ipv4_cidrs', $ipsMock->getBody()->result);
-        $this->assertObjectHasAttribute('ipv6_cidrs', $ipsMock->getBody()->result);
+        $this->assertObjectHasProperty('ipv4_cidrs', $ips);
+        $this->assertObjectHasProperty('ipv6_cidrs', $ips);
+        $this->assertObjectHasProperty('ipv4_cidrs', $ipsMock->getBody()->result);
+        $this->assertObjectHasProperty('ipv6_cidrs', $ipsMock->getBody()->result);
     }
 }

@@ -13,7 +13,7 @@ class TLSTest extends TestCase
     {
         $response = $this->getPsr7JsonResponseForFixture('Endpoints/getTLSClientAuth.json');
 
-        $mock = $this->getMockBuilder(\Cloudflare\API\Adapter\Adapter::class)->getMock();
+        $mock = $this->createMock(\Cloudflare\API\Adapter\Adapter::class);
         $mock->method('get')->willReturn($response);
 
         $mock->expects($this->once())
@@ -32,7 +32,7 @@ class TLSTest extends TestCase
     {
         $response = $this->getPsr7JsonResponseForFixture('Endpoints/enableTLS13.json');
 
-        $mock = $this->getMockBuilder(\Cloudflare\API\Adapter\Adapter::class)->getMock();
+        $mock = $this->createMock(\Cloudflare\API\Adapter\Adapter::class);
         $mock->method('patch')->willReturn($response);
 
         $mock->expects($this->once())
@@ -52,7 +52,7 @@ class TLSTest extends TestCase
     {
         $response = $this->getPsr7JsonResponseForFixture('Endpoints/disableTLS13.json');
 
-        $mock = $this->getMockBuilder(\Cloudflare\API\Adapter\Adapter::class)->getMock();
+        $mock = $this->createMock(\Cloudflare\API\Adapter\Adapter::class);
         $mock->method('patch')->willReturn($response);
 
         $mock->expects($this->once())
@@ -72,7 +72,7 @@ class TLSTest extends TestCase
     {
         $response = $this->getPsr7JsonResponseForFixture('Endpoints/changeMinimumTLSVersion.json');
 
-        $mock = $this->getMockBuilder(\Cloudflare\API\Adapter\Adapter::class)->getMock();
+        $mock = $this->createMock(\Cloudflare\API\Adapter\Adapter::class);
         $mock->method('patch')->willReturn($response);
 
         $mock->expects($this->once())
@@ -92,7 +92,7 @@ class TLSTest extends TestCase
     {
         $response = $this->getPsr7JsonResponseForFixture('Endpoints/updateTLSClientAuth.json');
 
-        $mock = $this->getMockBuilder(\Cloudflare\API\Adapter\Adapter::class)->getMock();
+        $mock = $this->createMock(\Cloudflare\API\Adapter\Adapter::class);
         $mock->method('patch')->willReturn($response);
 
         $mock->expects($this->once())
