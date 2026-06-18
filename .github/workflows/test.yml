@@ -14,30 +14,29 @@ jobs:
       fail-fast: false
       matrix:
         lowest: ['0', '1']
-        php-versions: ['7.3', '7.4', '8.0', '8.1', '8.2', '8.3', '8.4']
+        php-versions: ['8.1', '8.2', '8.3', '8.4']
 
     steps:
-    - uses: actions/checkout@v2
+    - uses: actions/checkout@v4
 
     - uses: shivammathur/setup-php@v2
       with:
         php-version: ${{ matrix.php-versions }}
 
     - name: Cache Composer dependencies
-      uses: actions/cache@v2
+      uses: actions/cache@v4
       with:
         path: /tmp/composer-cache
-        key: ${{ runner.os }}-php${{ matrix.php-versions }}-lowest${{ matrix.lowest }}-${{ hashFiles('**/composer.lock') }}
+        key: ${{ runner.os }}-php${{ matrix.php-versions }}-lowest${{ matrix.lowest }}-${{ hashFiles('**/composer.json') }}
 
     - name: Install dependencies
-      uses: php-actions/composer@v5
+      uses: php-actions/composer@v6
       env:
         COMPOSER_PREFER_LOWEST: ${{ matrix.lowest }}
       with:
         command: install
-        args: --prefer-dist --no-progress --prefer-stable --no-suggest --verbose
+        args: --prefer-dist --no-progress --prefer-stable --verbose
         php_version: ${{ matrix.php-versions }}
-        version: 1
 
     - name: Run tests
       run: make test

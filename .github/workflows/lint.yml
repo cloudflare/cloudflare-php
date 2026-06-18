@@ -11,31 +11,27 @@ jobs:
 
     runs-on: ubuntu-latest
     env:
-      LOWEST: '0'
       PHP_VERSION: '8.3'
 
     steps:
-    - uses: actions/checkout@v2
+    - uses: actions/checkout@v4
 
     - uses: shivammathur/setup-php@v2
       with:
         php-version: ${{ env.PHP_VERSION }}
 
     - name: Cache Composer dependencies
-      uses: actions/cache@v2
+      uses: actions/cache@v4
       with:
         path: /tmp/composer-cache
-        key: ${{ runner.os }}-php${{ env.PHP_VERSION }}-lowest${{ env.LOWEST }}-{{ hashFiles('**/composer.lock') }}
+        key: ${{ runner.os }}-php${{ env.PHP_VERSION }}-${{ hashFiles('**/composer.json') }}
 
     - name: Install dependencies
-      uses: php-actions/composer@v5
-      env:
-        COMPOSER_PREFER_LOWEST: ${{ env.LOWEST }}
+      uses: php-actions/composer@v6
       with:
         command: install
-        args: --prefer-dist --no-progress --prefer-stable --no-suggest --verbose
+        args: --prefer-dist --no-progress --prefer-stable --verbose
         php_version: ${{ env.PHP_VERSION }}
-        version: 1
 
     - name: Run lint
       run: make lint
