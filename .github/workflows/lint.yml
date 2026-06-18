@@ -30,7 +30,7 @@ jobs:
       uses: php-actions/composer@v6
       with:
         command: install
-        args: --prefer-dist --no-progress --prefer-stable --verbose
+        args: --prefer-dist --no-progress --verbose
         php_version: ${{ env.PHP_VERSION }}
 
     - name: Run lint

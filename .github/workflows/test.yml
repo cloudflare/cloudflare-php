@@ -35,7 +35,7 @@ jobs:
         COMPOSER_PREFER_LOWEST: ${{ matrix.lowest }}
       with:
         command: install
-        args: --prefer-dist --no-progress --prefer-stable --verbose
+        args: --prefer-dist --no-progress --verbose
         php_version: ${{ matrix.php-versions }}
 
     - name: Run tests
