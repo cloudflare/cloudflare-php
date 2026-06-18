@@ -1,28 +1,33 @@
-# Cloudflare SDK (v4 API Binding for PHP 7)
+# Cloudflare SDK (v4 API Binding for PHP)
 
-[![Build Status](https://travis-ci.org/cloudflare/cloudflare-php.svg?branch=master)](https://travis-ci.org/cloudflare/cloudflare-php)
+> **Note:** This is a community-maintained PHP SDK covering a subset of the
+> Cloudflare API. A comprehensive, auto-generated PHP SDK is planned for the
+> future. In the meantime, for full API coverage consider using the
+> [Cloudflare API](https://developers.cloudflare.com/api/) directly.
+
+## Requirements
+
+- PHP 8.1 or later
 
 ## Installation
 
-The recommended way to install this package is via the Packagist Dependency Manager ([cloudflare/sdk](https://packagist.org/packages/cloudflare/sdk)).
+Install via Composer ([cloudflare/sdk](https://packagist.org/packages/cloudflare/sdk)):
 
 ```
 composer require cloudflare/sdk
 ```
 
-You can get specific usage examples on the Cloudflare Knowledge Base under: [Cloudflare PHP API Binding](https://support.cloudflare.com/hc/en-us/articles/115001661191)
-
 ## Cloudflare API version 4
 
-The Cloudflare API can be found [here](https://api.cloudflare.com/).
+The Cloudflare API can be found [here](https://developers.cloudflare.com/api/).
 Each API call is provided via a similarly named function within various classes in the **Cloudflare\API\Endpoints** namespace:
 
 - [x] [DNS Records](https://www.cloudflare.com/dns/)
-- [x] [DNS Analytics](https://api.cloudflare.com/#dns-analytics-table)
+- [x] DNS Analytics
 - [x] Zones
 - [x] User Administration (partial)
 - [x] [Cloudflare IPs](https://www.cloudflare.com/ips/)
-- [x] [Page Rules](https://support.cloudflare.com/hc/en-us/articles/200168306-Is-there-a-tutorial-for-Page-Rules-)
+- [x] Page Rules
 - [x] [Web Application Firewall (WAF)](https://www.cloudflare.com/waf/)
 - [ ] Virtual DNS Management
 - [x] Custom hostnames
@@ -35,8 +40,6 @@ Each API call is provided via a similarly named function within various classes 
 - [x] Crypto
 - [x] Load Balancers
 - [x] Firewall Settings
-
-Note that this repository is currently under development, additional classes and endpoints being actively added.
 
 ## Getting Started
 
