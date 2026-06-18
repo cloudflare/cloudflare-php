@@ -243,7 +243,7 @@ class Zones implements API
     /**
      * @SuppressWarnings(PHPMD)
      */
-    public function cachePurge(string $zoneID, array $files = null, array $tags = null, array $hosts = null, bool $includeEnvironments = false): bool
+    public function cachePurge(string $zoneID, ?array $files = null, ?array $tags = null, ?array $hosts = null, bool $includeEnvironments = false): bool
     {
         if ($files === null && $tags === null && $hosts === null) {
             throw new EndpointException('No files, tags or hosts to purge.');
