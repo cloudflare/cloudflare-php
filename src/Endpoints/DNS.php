@@ -75,16 +75,33 @@ class DNS implements API
         return false;
     }
 
+    /**
+     * Get a List of Records that matches the specified filters
+     * @param string $zoneID
+     * @param string $type
+     * @param string $name Only one name is allowed as of 2025-02-21 | For filtering, use parameter $nameFilterMode
+     * @param string $content Only one content value is allowed as of 2025-02-21 | For filtering, use parameter $contentFilterMode
+     * @param int $page
+     * @param int $perPage
+     * @param string $order
+     * @param string $direction
+     * @param string $match
+     * @param string $nameFilterMode Can be either of: contains | starts_with | ends_with
+     * @param string $contentFilterMode Can be either of: contains | starts_with | ends_with
+     * @return \stdClass
+     */
     public function listRecords(
         string $zoneID,
         string $type = '',
         string $name = '',
         string $content = '',
-        int $page = 1,
-        int $perPage = 20,
+        int    $page = 1,
+        int    $perPage = 20,
         string $order = '',
         string $direction = '',
-        string $match = 'all'
+        string $match = 'all',
+        string $nameFilterMode = '',
+        string $contentFilterMode = ''
     ): \stdClass {
         $query = [
             'page' => $page,
@@ -96,11 +113,15 @@ class DNS implements API
             $query['type'] = $type;
         }
 
-        if (!empty($name)) {
+        if (!empty($name) && !empty($nameFilterMode)) {
+            $query["name.$nameFilterMode"] = $name;
+        } elseif (!empty($name)) {
             $query['name'] = $name;
         }
 
-        if (!empty($content)) {
+        if (!empty($content) && !empty($contentFilterMode)) {
+            $query["content.$contentFilterMode"] = $content;
+        } elseif (!empty($content)) {
             $query['content'] = $content;
         }
 
