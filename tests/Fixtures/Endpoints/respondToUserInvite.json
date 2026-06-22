@@ -1,0 +1,26 @@
+{
+  "success": true,
+  "errors": [],
+  "messages": [],
+  "result": {
+    "id": "4f5f0c14a2a41d5063dd301b2f829f04",
+    "invited_member_id": "5a7805061c76ada191ed06f989cc3dac",
+    "invited_member_email": "user@example.com",
+    "organization_id": "5a7805061c76ada191ed06f989cc3dac",
+    "organization_name": "Cloudflare, Inc.",
+    "roles": [
+      {
+        "id": "3536bcfad5faccb999b47003c79917fb",
+        "name": "Organization Admin",
+        "description": "Administrative access to the entire Organization",
+        "permissions": [
+          "#zones:read"
+        ]
+      }
+    ],
+    "invited_by": "user@example.com",
+    "invited_on": "2014-01-01T05:20:00Z",
+    "expires_on": "2014-01-01T05:20:00Z",
+    "status": "accepted"
+  }
+}
