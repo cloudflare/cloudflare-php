@@ -170,10 +170,12 @@ class PageRulesActions implements Configurations
 
     public function setMinification(bool $html, bool $css, bool $javascript)
     {
-        $this->addConfigurationOption('minification', [
-            'html' => $this->getBoolAsOnOrOff($html),
-            'css' => $this->getBoolAsOnOrOff($css),
-            'js' => $this->getBoolAsOnOrOff($javascript),
+        $this->addConfigurationOption('minify', [
+            'value' => [
+                'html' => $this->getBoolAsOnOrOff($html),
+                'css' => $this->getBoolAsOnOrOff($css),
+                'js' => $this->getBoolAsOnOrOff($javascript),
+            ],
         ]);
     }
 
