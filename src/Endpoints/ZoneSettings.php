@@ -120,6 +120,37 @@ class ZoneSettings implements API
         return false;
     }
 
+    public function getCiphersSetting($zoneID)
+    {
+        $return = $this->adapter->get(
+            'zones/' . $zoneID . '/settings/ciphers'
+        );
+        $body   = json_decode($return->getBody());
+
+        if ($body->success) {
+            return $body->result->value;
+        }
+
+        return false;
+    }
+
+    public function updateCiphersSetting($zoneID, $value)
+    {
+        $return = $this->adapter->patch(
+            'zones/' . $zoneID . '/settings/ciphers',
+            [
+                'value' => $value
+            ]
+        );
+        $body   = json_decode($return->getBody());
+
+        if ($body->success) {
+            return true;
+        }
+
+        return false;
+    }
+
     public function updateBrowserCacheTtlSetting($zoneID, $value)
     {
         $return = $this->adapter->patch(
