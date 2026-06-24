@@ -74,6 +74,10 @@ class CustomHostnames implements API
             $options['ssl']['custom_certificate'] = $customSsl['certificate'];
         }
 
+        if (!empty($customSsl['certificate_authority'])) {
+            $options['ssl']['custom_certificate'] = $customSsl['certificate_authority'];
+        }
+
         $zone = $this->adapter->post('zones/'.$zoneID.'/custom_hostnames', $options);
         $this->body = json_decode($zone->getBody());
         return $this->body->result;
@@ -197,6 +201,10 @@ class CustomHostnames implements API
 
         if (!empty($customSsl['certificate'])) {
             $query['custom_certificate'] = $customSsl['certificate'];
+        }
+
+        if (!empty($customSsl['certificate_authority'])) {
+            $query['custom_certificate'] = $customSsl['certificate_authority'];
         }
 
         if (!empty($query)) {
