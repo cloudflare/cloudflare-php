@@ -1,0 +1,29 @@
+{
+  "result": {
+    "variants": {
+      "public": {
+        "id": "public",
+        "options": {
+          "fit": "scale-down",
+          "height": 768,
+          "metadata": "none",
+          "width": 1366
+        },
+        "neverRequireSignedURLs": false
+      },
+      "myVariant": {
+        "id": "myVariant",
+        "options": {
+          "fit": "scale-down",
+          "metadata": "none",
+          "width": 1000,
+          "height": 1000
+        },
+        "neverRequireSignedURLs": false
+      }
+    }
+  },
+  "success": true,
+  "errors": [],
+  "messages": []
+}

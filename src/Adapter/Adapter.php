@@ -45,7 +45,7 @@ interface Adapter
      *
      * @return mixed
      */
-    public function post(string $uri, array $data = [], array $headers = []): ResponseInterface;
+    public function post(string $uri, array $data = [], array $headers = [], bool $upload = false): ResponseInterface;
 
     /**
      * @param string $uri

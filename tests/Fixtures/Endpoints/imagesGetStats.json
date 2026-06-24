@@ -1,0 +1,11 @@
+{
+  "result": {
+    "count": {
+      "current": 7,
+      "allowed": 100000
+    }
+  },
+  "success": true,
+  "errors": [],
+  "messages": []
+}
