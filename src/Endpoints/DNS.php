@@ -74,6 +74,36 @@ class DNS implements API
 
         return false;
     }
+    
+    /**
+     * @SuppressWarnings(PHPMD.BooleanArgumentFlag)
+     *
+     * @param string $zoneID
+     * @param array $data
+     * @return bool
+     */
+    public function addRecordSRV(
+        string $zoneID,
+        array $data = []
+    ): bool {
+        $options = [
+            'type' => 'SRV'
+        ];
+        
+        if (!empty($data)) {
+            $options['data'] = $data;
+        }
+
+        $user = $this->adapter->post('zones/' . $zoneID . '/dns_records', $options);
+
+        $this->body = json_decode($user->getBody());
+
+        if (isset($this->body->result->id)) {
+            return true;
+        }
+
+        return false;
+    }
 
     public function listRecords(
         string $zoneID,
