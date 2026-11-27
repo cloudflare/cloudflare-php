@@ -1,0 +1,15 @@
+{
+  "success": true,
+  "errors": [],
+  "messages": [],
+  "result": {
+    "id": "2c0fc9fa937b11eaa1b71c4d701ab86e",
+    "created_on": "2020-01-01T08:00:00Z",
+    "kind": "ip",
+    "modified_on": "2020-01-01T08:00:00Z",
+    "name": "list1",
+    "num_items": 0,
+    "num_referencing_filters": 0,
+    "description": "This is a note"
+  }
+}

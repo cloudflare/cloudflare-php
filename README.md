@@ -40,6 +40,7 @@ Each API call is provided via a similarly named function within various classes 
 - [x] Crypto
 - [x] Load Balancers
 - [x] Firewall Settings
+- [x] Lists (IP, hostname, ASN and redirect lists used in rules)
 
 ## Getting Started
 
