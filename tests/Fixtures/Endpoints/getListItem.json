@@ -1,0 +1,12 @@
+{
+  "success": true,
+  "errors": [],
+  "messages": [],
+  "result": {
+    "id": "34b12448945f11eaa1b71c4d701ab86e",
+    "ip": "10.0.0.1",
+    "comment": "Private IP address",
+    "created_on": "2020-01-01T08:00:00Z",
+    "modified_on": "2020-01-10T14:00:00Z"
+  }
+}

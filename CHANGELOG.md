@@ -1,5 +1,13 @@
 # Changelog
 
+## Unreleased
+
+### Changes
+
+- Add a `Lists` endpoint for account-level lists used in rule expressions:
+  list, create, update and delete lists; list, add, replace and delete list
+  items; and get the status of a bulk operation.
+
 ## 2.0.0
 
 ### Breaking Changes
